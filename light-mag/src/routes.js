@@ -5,6 +5,7 @@ import about from '@/views/about.vue';
 import contact from '@/views/contact.vue';
 import categories from '@/views/categories.vue';
 import article from '@/views/article.vue';
+import Loger from '@/views/Loger.vue';
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,11 @@ export default new VueRouter({
 			name: "categories",
 			component: categories,
 			props: route => ({num: parseInt(route.query.page)})
+		},
+		{
+			path: "/login",
+			name: "Login",
+			component: Loger
 		},
 		{
 			path: "/about",

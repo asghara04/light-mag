@@ -1,0 +1,25 @@
+div#Loger{
+	margin: 1% 0 0 0;
+	display: flex;
+	justify-content: center;
+	width: auto;
+	align-items: center;
+	flex-direction: column;
+	background-color: darkcyan;
+	border-radius: 12px;
+}
+span.login-page-header{
+	display: flex;
+	justify-content: center;
+}
+span.login-page-header img{
+	flex: 0.2;
+	flex-shrink: 0;
+}
+span.login-page-header h1{
+	flex: 0.8;
+	font-size: 34px;
+}
+div#loginWays{
+	text-align: center;
+}
