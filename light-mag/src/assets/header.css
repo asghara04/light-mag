@@ -1,0 +1,11 @@
+#top-header{
+	padding: 1.5% 3%;
+	background-color: #ced7db;
+}
+header h1 a{
+	color: #1d1d1d;
+}
+header h2{
+	color: #1d1d1d;
+	font-size: 24px;
+}

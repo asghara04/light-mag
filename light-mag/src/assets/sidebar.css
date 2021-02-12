@@ -1,0 +1,20 @@
+#page{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+.right{
+	flex-basis: 78%;
+	padding: 0.5%;
+}
+aside{
+	flex-basis: 20%;
+	background-color: #ededed;
+	padding: 1%;
+}
+aside .down-name{
+	text-align: center;
+}
+aside .down-name a{
+	color: #212121;
+}

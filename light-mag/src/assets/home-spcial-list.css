@@ -1,0 +1,15 @@
+.spcial-list{
+	background-color: #ededed;
+}
+.spcial-list .article{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin: 0 0 1% 0;
+}
+.spcial-list .article a{
+	flex: 0.29;
+}
+.spcial-list .article div{
+	flex: 0.69;
+}

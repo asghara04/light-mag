@@ -1,0 +1,38 @@
+.menuul{
+	background-color: #0092c4;
+	white-space: nowrap;
+	overflow: auto;
+}
+.uli{
+	display: inline-block;
+	padding: 0.8% 1.5%;
+}
+.uli img{
+	float: left;
+}
+.uli a{
+	color: #ededed;
+}
+.uli:hover{
+	background-color: cyan;
+}
+.itemul{
+	position: absolute;
+	margin: 0.8% 0 0 0;
+	display: none;
+	background-color: lightcyan;
+}
+.uli:hover .itemul{
+	display: block;
+}
+.iuli{
+	width: 120px;
+	padding: 10px;
+	float: none;
+	display: list-item;
+	position: relative;
+	background-color: blue;
+}
+.iuli:hover{
+	background-color: cyan;
+}

@@ -1,0 +1,20 @@
+article.all-page{
+	padding: 2%;
+}
+article.all-page .art-h{
+	text-align: center;
+	padding: 1% 0;
+}
+article.all-page .art-h a{
+	color: #000000;
+}
+.art-pic{
+	text-align: center;
+}
+.art-pic img{
+	max-width: 100%;
+}
+.body{
+	text-align: justify;
+	padding: 0.5% 1.5%;
+}

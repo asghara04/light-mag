@@ -1,0 +1,96 @@
+div#topslider{
+	display: flex;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+	overflow-y: hidden;
+}	
+article.topslide{
+	flex: 0 0 auto;
+	flex-basis: 25%;
+	margin: 20px 10px;
+	background-color: #ededed;
+	text-align: center;
+}
+article.topslide a img{
+	width: 100%;
+	height: 255px;
+}
+.centered-top-slide{
+	margin: .7% 3% 0 3%;
+}
+@media(max-width: 1200px){
+	article.topslide{
+		flex-basis: 30%;
+	}
+	article.topslide a img{
+		height: 245px;
+	}
+	article.topslide a h3{
+		font-size: 22px;
+	}
+}
+@media(max-width: 975px){
+	article.topslide{
+		flex-basis: 34%;
+	}
+	article.topslide a img{
+		height: 220px;
+	}
+	article.topslide a h3{
+		font-size: 20px;
+	}
+}
+@media(max-width: 775px){
+	article.topslide{
+		flex-basis: 40%;
+	}
+	article.topslide a img{
+		height: 213px;
+	}
+	article.topslide a h3{
+		font-size: 19px;
+	}
+}
+@media(max-width: 650px){
+	article.topslide{
+		flex-basis: 47%;
+	}
+	article.topslide a img{
+		height: 203px;
+	}
+}
+@media(max-width: 500px){
+	article.topslide{
+		flex-basis: 55%;
+	}
+	article.topslide a img{
+		height: 195px;
+	}
+}
+@media(max-width: 450px){
+	article.topslide{
+		flex-basis: 62%;
+	}
+	article.topslide a img{
+		height: 188px
+	}
+	article.topslide a h3{
+		font-size: 17.5px;
+	}
+}
+@media(max-width: 320px){
+	article.topslide{
+		flex-basis: 80%;
+	}
+	article.topslide a img{
+		height: 182px;
+	}
+}
+@media(max-width: 276px){
+	article.topslide{
+		flex-basis: 90%;
+	}
+	article.topslide a img{
+		height: 176px;
+	}
+}
