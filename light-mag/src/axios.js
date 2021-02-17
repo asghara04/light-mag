@@ -1,45 +1,38 @@
 import axios from 'axios';
-import store from './store';
-
-const base_url = "http://127.0.0.1:8000/";
-
-const axiosBase = axios.create({
-	baseURL: base_url,
-	headers: {contentType: 'application/json'}
-})
-
-
+import store from './store.js';
+const base_url = '127.0.0.0.1:8080';
 
 const getAPI = axios.create({
 	baseURL: base_url
 })
 getAPI.interceptors.response.use(undefined, function (err){
-	//if error response status is 401, it means the request was invalid due to expired access token
-	if (err.config && err.response && err.response.status === 401){
-		store.dispatch("refreshToken")// attempt to obtain new access token by runing refreshToken action
-		.then(access => {
-			//if successfully resend the request to get the data from server
+	if(err.config&&err.response&&err.response.data===401){
+		store.dispatch("refreshToken")
+		.then(access=>{
 			axios.request({
 				baseURL: base_url,
-				method: "get",
-				headers: {Authorization: `JWT ${access}`},//new access token in header now
+				method: 'get',
+				headers: {Authorization: `{JWT ${access}}`},
 				url: 'users/mapi/v1'
 			})
-			.then(response => {
-				console.log("getting the mods done successfully.")
-				store.state.APIData = response.data
+			.then(res => {
+				console.log("login was successfully");
+				store.state.APIData = res.data;
 			})
 			.catch(err => {
-				console.log("ERR")
+				console.log("ERR!");
 				return Promise.reject(err)
 			})
 		})
-		.catch(err => {
+		.catch(err=>{
 			return Promise.reject(err)
 		})
-
 	}
 })
 
+const axiosBase = axios.create({
+	baseURL: base_url,
+	headers: {contentType: "application/json"}
+})
 
-export {axiosBase, getAPI}
+export {getAPI, axiosBase}
