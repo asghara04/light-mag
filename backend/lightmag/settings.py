@@ -50,10 +50,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_WHITELIST = (
-    "http://127.0.0.1:8080",
-    "http://localhost:8080"
-)
+CORS_ALLOWED_ORIGINS = [
+    "http://light-mag.ir:8080",
+    "http://admin.light-mag.ir",
+    "http://192.168.1.102:8080"
+]
 
 ROOT_URLCONF = 'lightmag.urls'
 
@@ -95,8 +96,16 @@ REST_FRAMEWORK = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'lightmagdb',
+        'USER': 'asghara04',
+        'PASSWORD': 'asghara04 a20041383',
+        'HOST': '127.0.0.1',
+        'PORT': "3306",
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+            'use_unicode': True
+        }
     }
 }
 

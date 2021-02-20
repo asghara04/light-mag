@@ -1,6 +1,14 @@
 .data-field{
 	width: 98%;
-	padding: 0.2%;
-	margin: 1%;
+	padding:  .3% 2% 3% 2%;
 	display: block;
+	font-size: 18px;
+}
+.sub-button{
+	margin: 6% auto;
+	padding: 3.5% 10%;
+	font-size: 20px;
+	border: none;
+	border-radius: 5px;
+	background-color: #004c8d;
 }

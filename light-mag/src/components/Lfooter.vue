@@ -3,9 +3,9 @@
 		<div v-if="pub">
 			<router-link to="/about">درباره</router-link> - 
 			<router-link to="/contact">ارتباط</router-link>
-			<p>develped by asghar ale 2021</p>
+			<p>توسعه دهنده و برنامه نویس <strong>اصغر اله</strong></p>
 		</div>
-		<p>&#169; copyright 2021</p>
+		<p>&#169; <strong>مجله نور</strong> 2021</p>
 	</div>
 </template>
 

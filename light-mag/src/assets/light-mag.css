@@ -32,6 +32,7 @@ img{
 .text-icon{
 	display: flex;
 	align-items: center;
+	justify-content: center;
 }
 .li-icon{
 	vertical-align: middle;
@@ -55,4 +56,12 @@ img{
 }
 .page-content{
 	background-color: #ededed;
+}
+.center-parent{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.center-parent .centered{
+	margin: auto;
 }

@@ -1,13 +1,21 @@
 <template>
-	<topnav/><router-view/><Lfooter/>
+	<topnav/>
+	<router-view/>
+	<Lfooter/>
 </template>
+
 <script>
-import topnav from '@/components/topnav.vue';import Lfooter from '@/components/Lfooter.vue';
+import topnav from '@/components/topnav.vue';
+import Lfooter from '@/components/Lfooter.vue';
 export default {
 	name: 'App',
 	components: {
 		topnav,
-		Lfooter}
+		Lfooter
+	}
 };
-</script><style>@import 'assets/light-mag.css';
+</script>
+
+<style>
+	@import 'assets/light-mag.css';
 </style>

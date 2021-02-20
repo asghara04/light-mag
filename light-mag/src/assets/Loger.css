@@ -1,25 +1,38 @@
-div#Loger{
-	margin: 1% 0 0 0;
-	display: flex;
-	justify-content: center;
-	width: auto;
-	align-items: center;
-	flex-direction: column;
-	background-color: darkcyan;
-	border-radius: 12px;
+div#Loger div.centered{
+	background-color: #ededed;
+	border-radius: 10px;
+	margin: 1% 0;
+	padding: 1%;
 }
-span.login-page-header{
-	display: flex;
-	justify-content: center;
+form#login-form *{
+	display: block;
 }
-span.login-page-header img{
-	flex: 0.2;
-	flex-shrink: 0;
+form#login-form input{
+	border: none;
+	border-bottom: 2px solid #333333;
+	background: transparent;
 }
-span.login-page-header h1{
-	flex: 0.8;
-	font-size: 34px;
-}
-div#loginWays{
+div#Loger div.centered h2, div#login-or{
 	text-align: center;
+}
+div#login-or p{
+	position: relative;
+	z-index: 1;
+	overflow: hidden;
+	text-align: center;
+	margin: 0 0 4% 0;
+}
+div#login-or p:before, div#login-or p:after{
+	position: absolute;
+	top: 50%;
+	overflow: hidden;
+	width: 48%;
+	height: 1px;
+	margin: 0 2%;
+	content: '\a0';
+	background-color: #555555;
+}
+div#login-or p:before{
+	margin: 0 -50% 0 0;
+	text-align: left;
 }
