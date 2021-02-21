@@ -1,6 +1,6 @@
 <template>
 	<div id="Lfooter" class="ed-color">
-		<div v-if="pub">
+		<div v-if="wich!=='admin'">
 			<router-link to="/about">درباره</router-link> - 
 			<router-link to="/contact">ارتباط</router-link>
 			<p>توسعه دهنده و برنامه نویس <strong>اصغر اله</strong></p>
@@ -12,11 +12,7 @@
 <script>
 	export default{
 		name: "Lfooter",
-		data(){
-			return{
-				pub: true
-			}
-		}
+		props:["wich"]
 	};
 </script>
 

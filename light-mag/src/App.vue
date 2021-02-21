@@ -1,7 +1,7 @@
 <template>
-	<topnav/>
+	<topnav :wich="wich()"/>
 	<router-view :key="$route.path"/>
-	<Lfooter/>
+	<Lfooter :wich="wich()"/>
 </template>
 
 <script>
@@ -12,6 +12,11 @@ export default {
 	components: {
 		topnav,
 		Lfooter
+	},
+	methods:{
+		wich(){
+			return window.location.host.split('.')[0]
+		}
 	}
 };
 </script>

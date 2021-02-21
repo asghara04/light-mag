@@ -1,5 +1,5 @@
 <template>
-	<nav v-if="!user" id="topnav" :class="{'smallopenul':showmenu&&smallscreen}">
+	<nav v-if="wich!=='admin'&&!user" id="topnav" :class="{'smallopenul':showmenu&&smallscreen}">
 		<img v-if="smallscreen" src="../assets/imgs/menu.svg" class="imgbutton" id="menu-icon" @click="menu()">
 		<h1><router-link to="/" class="text-icon ed-color" name="مجله نور"><img src="../assets/imgs/light.svg">مجله نور</router-link></h1>
 
@@ -10,6 +10,7 @@
 				<li>hellll</li>
 				<li v-for="cat in categories" :key="cat.id">{{cat.name}}</li>
 			</span>
+			<li v-if="user"><a href="https://admin.light-mag.ir">پنل</a></li>
 		</ul>
 		<div v-if="smallscreen" @click="exit()" id="topsmalluloverlay"></div>
 
@@ -19,11 +20,10 @@
 			<button type="submit" class="search-button"><img src="../assets/imgs/search.svg"></button>	
 		</form>
 	</nav>
-	<nav v-else>
-		welcome
+	<nav v-else id="topnav">
+		hi
 	</nav>
 </template>
-
 <script>
 	import {getAPI} from '@/axios.js';
 
@@ -33,6 +33,7 @@
 			this.resize()
 			window.addEventListener("resize", this.resize);
 		},
+		props:["wich"],
 		data(){
 			return{
 				user: false,
@@ -84,7 +85,6 @@
 		},
 	};
 </script>
-
 <style scoped>
 	@import '../assets/topnav.css';
 </style>
