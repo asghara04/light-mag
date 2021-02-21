@@ -44,12 +44,12 @@ const store = createStore({
 		},
 		loginUser(context, credentials){
 			return new Promise((resolve, reject)=> {
-				axiosBase.post("users/auth/obtain_token/login", {
+				axiosBase.post("users/auth/obtain_token/", {
 					email: credentials.email,
 					password: credentials.password
 				})
 				.then(response => {
-					context.commit("updateLcalStorage", {access: response.data.token, refresh: resolve.data.token})
+					context.commit("updateLocalStorage", {access: response.data.token, refresh: response.data.token})
 					resolve(response)
 				})
 				.catch(err => {
@@ -77,7 +77,6 @@ const store = createStore({
 			}
 		}
 	}
-
 })
 
 export default store

@@ -32,7 +32,7 @@ getAPI.interceptors.response.use(undefined, function (err){
 
 const axiosBase = axios.create({
 	baseURL: base_url,
-	headers: {contentType: "application/json"}
+	headers: {'content-type': 'application/json'}
 })
 
 export {getAPI, axiosBase}

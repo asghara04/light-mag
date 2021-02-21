@@ -1,6 +1,6 @@
 <template>
 	<topnav/>
-	<router-view/>
+	<router-view :key="$route.path"/>
 	<Lfooter/>
 </template>
 

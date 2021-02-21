@@ -65,3 +65,11 @@ img{
 .center-parent .centered{
 	margin: auto;
 }
+.link-like{
+	color: #2060fd;
+}
+.link-like:hover{
+	color: #004c8d;
+	text-decoration: underline;
+	cursor: pointer;
+}

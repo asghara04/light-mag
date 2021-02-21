@@ -1,6 +1,6 @@
 from pathlib import Path
 import os
-
+from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -9,13 +9,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6#jg4p^g+qz1&))127sa!m^7s@^88qiw15i66ycpenn!_4&30q'
+SECRET_KEY = '   8#ues\'|k%}6ZkR9vKUob>MJ_(UPP/f].X&r4bN=#I5tZ{zn2FY\'@F3_B8:"<4A#2#0@pRi?Fw2TLvP5@IQoal?q"Z}ccaff2w\'!+Sr";9|&rn>xT==}$=/LfWVW3c\'G?&,qD:TY>Fq[8/z0b[(uQ\   OgD.|!a,pQ2yckRShF=T^$?IB7Dp3`:R4\'~_:]U?0y+K#ZDSx>]0kP{F/=h6Xlu4)?\';2$P-W0xXaY8X&bl`8(kLQ@=1m~8aOFeZA17pHfzO+&8!~Oc(RLf$eZ*etET>rp~2H!(!#qUM\@}_m%  =*[=)9N&&#o^K(q|l{Ww   yy$BGjlUhNcQjdc1v"#Wd]FuG33T$poE&}D'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -52,7 +51,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://light-mag.ir:8080",
-    "http://admin.light-mag.ir",
+    "http://admin.light-mag.ir:8080",
     "http://192.168.1.102:8080"
 ]
 
@@ -150,3 +149,10 @@ MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+JWT_AUTH = {
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_EXPIRATION_DELTA': timedelta(hours=1),
+    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=2),
+}

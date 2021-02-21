@@ -4,30 +4,30 @@ const routes = [
 	{
 		path: '/',
 		name: "Home",
-		component: import("@/views/Home.vue"),
+		component: () => import("@/views/Home.vue"),
 		props: route => ({num: parseInt(route.query.page)})
 	},
 	{
 		path: "/article/:address",
 		name: 'article',
 		props: true,
-		component: import("@/views/article.vue")
+		component: () => import("@/views/article.vue")
 	},
 	{
 		path: "/categories",
 		name: "categories",
-		component: import("@/views/categories.vue"),
+		component: () => import("@/views/categories.vue"),
 		props: route => ({num: parseInt(route.query.page)})
 	},
 	{
 		path: "/about",
 		name: "about",
-		component: import("@/views/about.vue")
+		component: () => import("@/views/about.vue")
 	},
 	{
 		path: "/contact",
 		name: "contact",
-		component: import("@/views/contact.vue")
+		component: () => import("@/views/contact.vue")
 	},
 ]
 

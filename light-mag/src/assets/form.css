@@ -2,7 +2,7 @@
 	width: 98%;
 	padding:  .3% 2% 3% 2%;
 	display: block;
-	font-size: 18px;
+	font-size: 17px;
 }
 .sub-button{
 	margin: 6% auto;
@@ -11,4 +11,5 @@
 	border: none;
 	border-radius: 5px;
 	background-color: #004c8d;
+	color: #ededed;
 }

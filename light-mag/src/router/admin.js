@@ -4,8 +4,13 @@ const routes = [
 	{
 		path: "/login",
 		name: "Login",
-		component: import("@/views/Loger.vue")
+		component: () => import("@/views/Loger.vue")
 	},
+	{
+		path: "/LM-admin",
+		name: "admin-panel",
+		component: () => import("@/views/lm-admin.vue")
+	}
 ]
 
 const arouter = createRouter({
