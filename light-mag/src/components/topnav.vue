@@ -10,7 +10,7 @@
 				<li>hellll</li>
 				<li v-for="cat in categories" :key="cat.id">{{cat.name}}</li>
 			</span>
-			<li v-if="user"><a href="https://admin.light-mag.ir">پنل</a></li>
+			<li v-if="user"><a href="https://admin.light-mag.ir" target="_blank">پنل</a></li>
 		</ul>
 		<div v-if="smallscreen" @click="exit()" id="topsmalluloverlay"></div>
 
@@ -20,9 +20,91 @@
 			<button type="submit" class="search-button"><img src="../assets/imgs/search.svg"></button>	
 		</form>
 	</nav>
-	<nav v-else id="topnav">
-		hi
-	</nav>
+	<header id="lm-header" v-else :class="{'close':showmenu}">
+		<nav id="topnav">
+			<img class="imgbutton lm-menu" id="menu-icon" src="../assets/imgs/menu.svg" @click="menu()" alt="منو">
+			<div id="topdiv">
+				<h3><router-link to="/" class="text-icon ed-color" name="مجله نور"><img src="../assets/imgs/light.svg">مجله نور</router-link></h3>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+				<p>آپشن</p>
+			</div>
+		</nav>
+		<aside id="highsidebar">
+			<router-link :to="{name: 'admin-panel'}" class="text-icon link-like"><img src="../assets/imgs/dashboard.svg">داشبورد</router-link>
+			<router-link to="/LM-admin/categories" class="text-icon link-like"><img src="../assets/imgs/cats.svg">موضوعات</router-link>
+			<router-link to="/LM-admin/articles" class="text-icon link-like"><img src="../assets/imgs/article.svg">نوشته ها</router-link>
+			<router-link to="/LM-admin/comments" class="text-icon link-like"><img src="../assets/imgs/comment.svg">کامنت ها</router-link>
+			<router-link to="/LM-admin/tags" class="text-icon link-like"><img src="../assets/imgs/tag.svg">تگ ها</router-link>
+			<router-link to='/LM-admin/users' class="text-icon link-like"><img src="../assets/imgs/group.svg">کاربران</router-link>
+			<a class="text-icon link-like" target="_blank" href="https://light-mag.ir/games"><img src="../assets/imgs/game.svg">گیم ها</a>
+			<router-link to='/LM-admin/settings' class="text-icon link-like"><img src="../assets/imgs/settings.svg">تنظیمات</router-link>
+			<a href="https://light-mag.ir" class="text-icon link-like" target="_blank">نمایش اپ</a>			<router-link :to="{name: 'admin-panel'}" class="text-icon link-like"><img src="../assets/imgs/dashboard.svg">داشبورد</router-link>
+			<router-link to="/LM-admin/categories" class="text-icon link-like"><img src="../assets/imgs/cats.svg">موضوعات</router-link>
+			<router-link to="/LM-admin/articles" class="text-icon link-like"><img src="../assets/imgs/article.svg">نوشته ها</router-link>
+			<router-link to="/LM-admin/comments" class="text-icon link-like"><img src="../assets/imgs/comment.svg">کامنت ها</router-link>
+			<router-link to="/LM-admin/tags" class="text-icon link-like"><img src="../assets/imgs/tag.svg">تگ ها</router-link>
+			<router-link to='/LM-admin/users' class="text-icon link-like"><img src="../assets/imgs/group.svg">کاربران</router-link>
+			<a class="text-icon link-like" target="_blank" href="https://light-mag.ir/games"><img src="../assets/imgs/game.svg">گیم ها</a>
+			<router-link to='/LM-admin/settings' class="text-icon link-like"><img src="../assets/imgs/settings.svg">تنظیمات</router-link>
+			<a href="https://light-mag.ir" class="text-icon link-like" target="_blank">نمایش اپ</a>			<router-link :to="{name: 'admin-panel'}" class="text-icon link-like"><img src="../assets/imgs/dashboard.svg">داشبورد</router-link>
+			<router-link to="/LM-admin/categories" class="text-icon link-like"><img src="../assets/imgs/cats.svg">موضوعات</router-link>
+			<router-link to="/LM-admin/articles" class="text-icon link-like"><img src="../assets/imgs/article.svg">نوشته ها</router-link>
+			<router-link to="/LM-admin/comments" class="text-icon link-like"><img src="../assets/imgs/comment.svg">کامنت ها</router-link>
+			<router-link to="/LM-admin/tags" class="text-icon link-like"><img src="../assets/imgs/tag.svg">تگ ها</router-link>
+			<router-link to='/LM-admin/users' class="text-icon link-like"><img src="../assets/imgs/group.svg">کاربران</router-link>
+			<a class="text-icon link-like" target="_blank" href="https://light-mag.ir/games"><img src="../assets/imgs/game.svg">گیم ها</a>
+			<router-link to='/LM-admin/settings' class="text-icon link-like"><img src="../assets/imgs/settings.svg">تنظیمات</router-link>
+			<a href="https://light-mag.ir" class="text-icon link-like" target="_blank">نمایش اپ</a>			<router-link :to="{name: 'admin-panel'}" class="text-icon link-like"><img src="../assets/imgs/dashboard.svg">داشبورد</router-link>
+			<router-link to="/LM-admin/categories" class="text-icon link-like"><img src="../assets/imgs/cats.svg">موضوعات</router-link>
+			<router-link to="/LM-admin/articles" class="text-icon link-like"><img src="../assets/imgs/article.svg">نوشته ها</router-link>
+			<router-link to="/LM-admin/comments" class="text-icon link-like"><img src="../assets/imgs/comment.svg">کامنت ها</router-link>
+			<router-link to="/LM-admin/tags" class="text-icon link-like"><img src="../assets/imgs/tag.svg">تگ ها</router-link>
+			<router-link to='/LM-admin/users' class="text-icon link-like"><img src="../assets/imgs/group.svg">کاربران</router-link>
+			<a class="text-icon link-like" target="_blank" href="https://light-mag.ir/games"><img src="../assets/imgs/game.svg">گیم ها</a>
+			<router-link to='/LM-admin/settings' class="text-icon link-like"><img src="../assets/imgs/settings.svg">تنظیمات</router-link>
+			<a href="https://light-mag.ir" class="text-icon link-like" target="_blank">نمایش اپ</a>
+		</aside>
+	</header>
 </template>
 <script>
 	import {getAPI} from '@/axios.js';
@@ -36,7 +118,7 @@
 		props:["wich"],
 		data(){
 			return{
-				user: false,
+				user: this.$store.getters.logedIn,
 				smallscreen: false,
 				avragescreen: false,
 				showmenu: false,
@@ -87,4 +169,5 @@
 </script>
 <style scoped>
 	@import '../assets/topnav.css';
+	@import '../assets/sidebar.css';
 </style>

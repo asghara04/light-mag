@@ -7,14 +7,43 @@
 	flex-basis: 78%;
 	padding: 0.5%;
 }
-aside{
+aside#sidebar{
 	flex-basis: 20%;
 	background-color: #ededed;
 	padding: 1%;
 }
-aside .down-name{
+aside#sidebar .down-name{
 	text-align: center;
 }
-aside .down-name a{
+aside#sidebar .down-name a{
 	color: #212121;
+}
+aside#highsidebar{
+	position: fixed;
+	background-color: #131313;
+	right: 0;
+	color: #ededed;
+	white-space: nowrap;
+	transition: 0.2s;
+	overflow: auto;
+	height: 100%;
+	width: 18%;
+	text-align: center;
+}
+aside#highsidebar *{
+	padding: 2% 0;
+}
+aside#highsidebar .router-link-exact-active{
+	border: 4px solid #004c8d;
+	border-top: none;
+	border-bottom: 2px solid #004c8d;
+}
+header#lm-header.close aside#highsidebar{
+	right: -14%;
+	transition: 0.4s;
+}
+header#lm-header.close aside#highsidebar img{
+	position: fixed;
+	right: 0;
+	margin: 70% 0;
 }

@@ -20,6 +20,11 @@ const routes = [
 		props: route => ({num: parseInt(route.query.page)})
 	},
 	{
+		path: "/games",
+		name: "games",
+		component: () => import("@/views/games.vue")
+	},
+	{
 		path: "/about",
 		name: "about",
 		component: () => import("@/views/about.vue")

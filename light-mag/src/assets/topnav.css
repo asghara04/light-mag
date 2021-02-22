@@ -3,9 +3,10 @@
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
-	padding: 0.2% 1%;
+	padding: 0 0.5%;
 	position: sticky;
 	top: 0;
+	z-index: 2;
 	align-items: center;
 }
 #topul{
@@ -43,6 +44,22 @@
 	border-radius: 5px 0 0 5px;
 	padding: 0 8px;
 	height: 100%;
+}
+div#topdiv{
+	white-space: nowrap;
+	flex: 0.95;
+	overflow: auto;
+}
+div#topdiv > *{
+	display: inline-block;
+	vertical-align: middle;
+	padding: 0 1%;
+	color: #ededed;
+}
+header#lm-header{
+	position: sticky;
+	top: 0;
+	right: 0;
 }
 @media(max-width: 775px){
 	#topul li{
