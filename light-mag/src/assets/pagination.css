@@ -1,5 +1,6 @@
 div.pagination-com{
 	text-align: center;
+	margin: 1.5% 0 0 0;
 }
 div.pagination-com *{
 	background-color: #ededed;

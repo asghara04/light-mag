@@ -13,7 +13,7 @@
 body{
 	direction: rtl;
 	font-family: "ISR";
-	background-color: lightgray;
+	background-color: #d1def2;
 	font-size: 20px;
 }
 a{
@@ -50,9 +50,8 @@ img{
 	cursor: pointer;
 	background: transparent;
 }
-.fixed{
-	position: fixed;
-	overflow-y: hidden;
+.freeze{
+	overflow: hidden;
 }
 .page-content{
 	background-color: #ededed;
