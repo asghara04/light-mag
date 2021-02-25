@@ -27,7 +27,6 @@ aside#highsidebar{
 	transition: 0.2s;
 	overflow: auto;
 	height: 100%;
-	width: 18%;
 	text-align: center;
 }
 aside#highsidebar *{
@@ -40,34 +39,37 @@ aside#highsidebar .router-link-exact-active{
 aside#highsidebar a span{
 	flex: 0.4;
 }
-/*div#app.sidenav-close *{
-	margin: 0 5% 0 0;
+@media(min-width: 775px){
+	aside#highsidebar{
+		width: 18%;
+	}
+	div#app.sidenav-large > *{
+		margin: 0 18% 0 0;
+	}
+	div#app.sidenav-medium > *{
+		margin: 0 5% 0 0;
+	}
+	aside#highsidebar.side-close a span{
+		display: none;
+	}
+	aside#highsidebar.side-close{
+		width: 5%;
+	}
 }
-div#app.sidenav-open *{
-	margin: 0 18% 0 0;
+@media(max-width: 775px){
+	aside#highsidebar{
+		right: -100%;
+	}
+	aside#highsidebar{
+		width: 70%;
+	}
+	aside#highsidebar.sideopen{
+		right: 0!important;
+	}
 }
 div#app > nav#topnav, aside#highsidebar{
-	margin: 0 0!important;
-	background-color: red;
-}*/
-div#app.sidenav-close > *{
-	margin: 0 5% 0 0;
-}
-div#app.sidenav-close > nav#topnav, aside#highsidebar{
-	margin: 0 -5% 0 0;
-}
-aside#highsidebar.side-close{
-	width: 5%;
+	margin: 0 0 0 0!important;
 }
 aside#highsidebar.side-close a{
 	margin: 10% 0;
-}
-aside#highsidebar.side-close a span{
-	display: none;
-}
-div.sidenav-close{
-	margin: 0 4% 0 0;
-}
-div.sidenav-open{
-	margin: 0 18% 0 0;
 }
