@@ -1,5 +1,6 @@
 <template>
-	<topnav :wich="wich()"/>
+	<topnav v-if="wich!=='admin'&&!this.$store.getters.logedIn"/>
+	<lmnav v-else/>
 	<router-view :key="$route.path"/>
 	<Lfooter :wich="wich()"/>
 </template>
@@ -7,11 +8,13 @@
 <script>
 import topnav from '@/components/topnav.vue';
 import Lfooter from '@/components/Lfooter.vue';
+import lmnav from "@/components/lm-nav.vue";
 export default {
 	name: 'App',
 	components: {
 		topnav,
-		Lfooter
+		Lfooter,
+		lmnav
 	},
 	methods:{
 		wich(){

@@ -1,0 +1,56 @@
+nav#topnav.lm-nav{
+	height: 48px;
+}
+aside#highsidebar{
+	position: fixed;
+	background-color: #131313;
+	right: 0;
+	color: #ededed;
+	white-space: nowrap;
+	transition: 0.2s;
+	overflow: auto;
+	height: 100%;
+	text-align: center;
+}
+aside#highsidebar *{
+	padding: 1% 0;
+}
+aside#highsidebar .router-link-exact-active{
+	border-right: 5px solid #004c8d;
+	border-bottom: 2px solid #004c8d;
+}
+@media(min-width: 775px){
+	aside#highsidebar.open-side{
+		width: 18%;
+	}
+	div#app.sidenav-large > *{
+		margin: 0 18% 0 0;
+	}
+	div#app.sidenav-medium > *{
+		margin: 0 5% 0 0;
+	}
+	aside#highsidebar.close-side{
+		width: 5%;
+	}
+	aside#highsidebar.close-side > a > span{
+		display: none;
+	}
+	aside#highsidebar.close-side > *{
+		margin: 20% 0;
+	}
+}
+@media(max-width: 775px){
+	aside#highsidebar{
+		right: -100%;
+		width: 70%;
+	}
+	div#app{
+		margin: 0 0 0 0!important;
+	}
+	aside#highsidebar.open{
+		right: 0;
+	}
+}
+div#app > nav#topnav, aside#highsidebar{
+	margin: 0 0 0 0!important;
+}

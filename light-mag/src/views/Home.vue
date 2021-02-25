@@ -13,51 +13,6 @@
 							<p>{{article.description}} - <router-link :to="'/article/'+article.slug">ادامه...</router-link></p>
 						</div>
 					</article>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>iiiiiiiiiiiiiiiooooooooooooooooooooooooooooooooohi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
-					<h1>hi</h1>
 				</div>
 				<pagination path="/" :all="APIData.count" :size="10"/>
 			</div>

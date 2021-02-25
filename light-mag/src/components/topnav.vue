@@ -1,5 +1,5 @@
 <template>
-	<nav v-if="simple" id="topnav" :class="{'smallopenul':showmenu&&smallscreen}">
+	<nav id="topnav" :class="{'smallopenul':showmenu&&smallscreen}">
 		<img v-if="smallscreen" src="../assets/imgs/menu.svg" class="imgbutton" id="menu-icon" @click="menu()">
 		<h1><router-link to="/" class="text-icon ed-color" name="مجله نور"><img src="../assets/imgs/light.svg">مجله نور</router-link></h1>
 		<ul id="topul">
@@ -10,86 +10,17 @@
 				<li v-for="cat in categories" :key="cat.id">{{cat.name}}</li>
 			</span>
 			<li v-if="user"><a href="https://admin.light-mag.ir" target="_blank">پنل</a></li>
+			<img class="imgbutton" src="../assets/imgs/previous.svg" alt="بعد" onclick="window.history.back()">
+			<img class="imgbutton" src="../assets/imgs/next.svg" onclick="window.history.forward()" alt='قبل'>
 		</ul>
 		<div v-if="smallscreen" @click="exit()" id="topsmalluloverlay"></div>
 
-		<img v-if="avragescreen||smallscreen" class="imgbutton" src="../assets/imgs/search.svg" @click="search()">
+		<img v-if="avragescreen||smallscreen" class="imgbutton" src="../assets/imgs/search.svg" @click.prevent="search()">
 		<form :class="{'block':showsearch}" id="search-form">
 			<input type="search" required="" maxlength="100" placeholder="جستوجو..." name="search" class="search-field">
 			<button type="submit" class="search-button"><img src="../assets/imgs/search.svg"></button>	
 		</form>
 	</nav>
-	<nav v-else  id="topnav">
-		<img class="imgbutton lm-menu" id="menu-icon" src="../assets/imgs/menu.svg" @click="menu()" alt="منو">
-		<div id="topdiv">
-			<h3><router-link to="/" class="text-icon ed-color" name="مجله نور"><img src="../assets/imgs/light.svg">مجله نور</router-link></h3>
-			<p>option</p>
-			<p>option</p>
-			<p>option</p>
-			<p>option</p>
-			<p>option</p>
-			<p>option</p>
-			<p>option</p>
-			<p>option</p>
-			<p>option</p>
-			<p>option</p>
-			<p>option</p>
-			<p>option</p>
-			<p>option</p>
-			<p>option</p>
-		</div>
-	</nav>
-	<aside v-if="!simple" :class="{'side-close':!showmenu&&simplesize,'sideopen':showmenu&&!simplesize}" id="highsidebar">
-		<router-link :to="{name: 'admin-panel'}" class="text-icon link-like"><img src="../assets/imgs/dashboard.svg"><span>داشبورد</span></router-link>
-		<router-link to="/LM-admin/categories" class="text-icon link-like"><img src="../assets/imgs/cats.svg"><span>موضوعات</span></router-link>
-		<router-link to="/LM-admin/articles" class="text-icon link-like"><img src="../assets/imgs/article.svg"><span>نوشته ها</span></router-link>
-		<router-link to="/LM-admin/comments" class="text-icon link-like"><img src="../assets/imgs/comment.svg"><span>کامنت ها</span></router-link>
-		<router-link to="/LM-admin/tags" class="text-icon link-like"><img src="../assets/imgs/tag.svg"><span>تگ ها</span></router-link>
-		<router-link to='/LM-admin/users' class="text-icon link-like"><img src="../assets/imgs/group.svg"><span>کاربران</span></router-link>
-		<a class="text-icon link-like" target="_blank" href="https://light-mag.ir/games"><img src="../assets/imgs/game.svg"><span>گیم ها</span></a>
-		<router-link to='/LM-admin/settings' class="text-icon link-like"><img src="../assets/imgs/settings.svg"><span>تنظیمات</span></router-link>
-		<a href="https://light-mag.ir" class="text-icon link-like" target="_blank"><img src="../assets/imgs/webpage.svg"><span>نمایش اپ</span></a>			<router-link :to="{name: 'admin-panel'}" class="text-icon link-like"><img src="../assets/imgs/dashboard.svg"><span>داشبورد</span></router-link>
-		<router-link to="/LM-admin/categories" class="text-icon link-like"><img src="../assets/imgs/cats.svg"><span>موضوعات</span></router-link>
-		<router-link to="/LM-admin/articles" class="text-icon link-like"><img src="../assets/imgs/article.svg"><span>نوشته ها</span></router-link>
-		<router-link to="/LM-admin/comments" class="text-icon link-like"><img src="../assets/imgs/comment.svg"><span>کامنت ها</span></router-link>
-		<router-link to="/LM-admin/tags" class="text-icon link-like"><img src="../assets/imgs/tag.svg"><span>تگ ها</span></router-link>
-		<router-link to='/LM-admin/users' class="text-icon link-like"><img src="../assets/imgs/group.svg"><span>کاربران</span></router-link>
-		<a class="text-icon link-like" target="_blank" href="https://light-mag.ir/games"><img src="../assets/imgs/game.svg"><span>گیم ها</span></a>
-		<router-link to='/LM-admin/settings' class="text-icon link-like"><img src="../assets/imgs/settings.svg"><span>تنظیمات</span></router-link>
-		<a href="https://light-mag.ir" class="text-icon link-like" target="_blank"><img src="../assets/imgs/webpage.svg"><span>نمایش اپ</span></a>			<router-link :to="{name: 'admin-panel'}" class="text-icon link-like"><img src="../assets/imgs/dashboard.svg"><span>داشبورد</span></router-link>
-		<router-link to="/LM-admin/categories" class="text-icon link-like"><img src="../assets/imgs/cats.svg"><span>موضوعات</span></router-link>
-		<router-link to="/LM-admin/articles" class="text-icon link-like"><img src="../assets/imgs/article.svg"><span>نوشته ها</span></router-link>
-		<router-link to="/LM-admin/comments" class="text-icon link-like"><img src="../assets/imgs/comment.svg"><span>کامنت ها</span></router-link>
-		<router-link to="/LM-admin/tags" class="text-icon link-like"><img src="../assets/imgs/tag.svg"><span>تگ ها</span></router-link>
-		<router-link to='/LM-admin/users' class="text-icon link-like"><img src="../assets/imgs/group.svg"><span>کاربران</span></router-link>
-		<a class="text-icon link-like" target="_blank" href="https://light-mag.ir/games"><img src="../assets/imgs/game.svg"><span>گیم ها</span></a>
-		<router-link to='/LM-admin/settings' class="text-icon link-like"><img src="../assets/imgs/settings.svg"><span>تنظیمات</span></router-link>
-		<a href="https://light-mag.ir" class="text-icon link-like" target="_blank"><img src="../assets/imgs/webpage.svg"><span>نمایش اپ</span></a>			<router-link :to="{name: 'admin-panel'}" class="text-icon link-like"><img src="../assets/imgs/dashboard.svg"><span>داشبورد</span></router-link>
-		<router-link to="/LM-admin/categories" class="text-icon link-like"><img src="../assets/imgs/cats.svg"><span>موضوعات</span></router-link>
-		<router-link to="/LM-admin/articles" class="text-icon link-like"><img src="../assets/imgs/article.svg"><span>نوشته ها</span></router-link>
-		<router-link to="/LM-admin/comments" class="text-icon link-like"><img src="../assets/imgs/comment.svg"><span>کامنت ها</span></router-link>
-		<router-link to="/LM-admin/tags" class="text-icon link-like"><img src="../assets/imgs/tag.svg"><span>تگ ها</span></router-link>
-		<router-link to='/LM-admin/users' class="text-icon link-like"><img src="../assets/imgs/group.svg"><span>کاربران</span></router-link>
-		<a class="text-icon link-like" target="_blank" href="https://light-mag.ir/games"><img src="../assets/imgs/game.svg"><span>گیم ها</span></a>
-		<router-link to='/LM-admin/settings' class="text-icon link-like"><img src="../assets/imgs/settings.svg"><span>تنظیمات</span></router-link>
-		<a href="https://light-mag.ir" class="text-icon link-like" target="_blank"><img src="../assets/imgs/webpage.svg"><span>نمایش اپ</span></a>		<router-link :to="{name: 'admin-panel'}" class="text-icon link-like"><img src="../assets/imgs/dashboard.svg"><span>داشبورد</span></router-link>
-		<router-link to="/LM-admin/categories" class="text-icon link-like"><img src="../assets/imgs/cats.svg"><span>موضوعات</span></router-link>
-		<router-link to="/LM-admin/articles" class="text-icon link-like"><img src="../assets/imgs/article.svg"><span>نوشته ها</span></router-link>
-		<router-link to="/LM-admin/comments" class="text-icon link-like"><img src="../assets/imgs/comment.svg"><span>کامنت ها</span></router-link>
-		<router-link to="/LM-admin/tags" class="text-icon link-like"><img src="../assets/imgs/tag.svg"><span>تگ ها</span></router-link>
-		<router-link to='/LM-admin/users' class="text-icon link-like"><img src="../assets/imgs/group.svg"><span>کاربران</span></router-link>
-		<a class="text-icon link-like" target="_blank" href="https://light-mag.ir/games"><img src="../assets/imgs/game.svg"><span>گیم ها</span></a>
-		<router-link to='/LM-admin/settings' class="text-icon link-like"><img src="../assets/imgs/settings.svg"><span>تنظیمات</span></router-link>
-		<a href="https://light-mag.ir" class="text-icon link-like" target="_blank"><img src="../assets/imgs/webpage.svg"><span>نمایش اپ</span></a>			<router-link :to="{name: 'admin-panel'}" class="text-icon link-like"><img src="../assets/imgs/dashboard.svg"><span>داشبورد</span></router-link>
-		<router-link to="/LM-admin/categories" class="text-icon link-like"><img src="../assets/imgs/cats.svg"><span>موضوعات</span></router-link>
-		<router-link to="/LM-admin/articles" class="text-icon link-like"><img src="../assets/imgs/article.svg"><span>نوشته ها</span></router-link>
-		<router-link to="/LM-admin/comments" class="text-icon link-like"><img src="../assets/imgs/comment.svg"><span>کامنت ها</span></router-link>
-		<router-link to="/LM-admin/tags" class="text-icon link-like"><img src="../assets/imgs/tag.svg"><span>تگ ها</span></router-link>
-		<router-link to='/LM-admin/users' class="text-icon link-like"><img src="../assets/imgs/group.svg"><span>کاربران</span></router-link>
-		<a class="text-icon link-like" target="_blank" href="https://light-mag.ir/games"><img src="../assets/imgs/game.svg"><span>گیم ها</span></a>
-		<router-link to='/LM-admin/settings' class="text-icon link-like"><img src="../assets/imgs/settings.svg"><span>تنظیمات</span></router-link>
-		<a href="https://light-mag.ir" class="text-icon link-like" target="_blank"><img src="../assets/imgs/webpage.svg"><span>نمایش اپ</span></a>			<router-link :to="{name: 'admin-panel'}" class="text-icon link-like"><img src="../assets/imgs/dashboard.svg"><span>داشبورد</span></router-link>
-	</aside>
 </template>
 <script>
 	import {getAPI} from '@/axios.js';
@@ -103,32 +34,19 @@
 		data(){
 			return{
 				user: this.$store.getters.logedIn,
-				simple: this.wich!=='admin'&&!this.user,
 				smallscreen: false,
 				avragescreen: false,
 				showmenu: false,
 				showsearch: false,
 				categories: null,
-				simplesize: false
 			}
 		},
 		methods:{
 			resize(){
-				if(!this.simple&&window.innerWidth>1050&&document.getElementById('app').className!=="sidenav-medium"){
-					this.showmenu = true
-					document.getElementById("app").className = "sidenav-large";
-				}
-				else if(!this.simple&&window.innerWidth<1050&&window.innerWidth>1050){
-					this.showmenu = false;
-					document.getElementById("app").className = "sidenav-medium";
-				}
-				else if(window.innerWidth > 775){
+				if(window.innerWidth > 775){
 					this.smallscreen = false;
 					this.avragescreen = false;
 					document.body.classList.remove("freeze");
-				}else if(!this.simple){
-					this.showmenu = true;
-					document.getElementById("app").className = '';
 				}else if(window.innerWidth > 475){
 					this.smallscreen = false;
 					this.avragescreen = true;
@@ -139,33 +57,19 @@
 				}
 			},
 			menu(){
-				if(!this.showmenu){
+				this.showmenu = !this.showmenu;
+				if(this.showmenu){
 					this.showsearch = false;
-					this.showmenu = true;
-					document.body.classList.remove("freeze");
-					if(!this.simple&&window.innerWidth>775){
-						document.getElementById("app").className = "sidenav-large";
-					}else if(!this.simple){
-						document.getElementById('app').className = "sideopen";
-						document.body.classList.add("freeze");
-					}
-				}else{
-					this.showmenu = false
 					document.body.classList.add("freeze");
-					if(!this.simple&&window.innerWidth>775){
-						document.body.classList.remove("freeze")
-					}else if(!this.simple){
-						document.body.classList.remove("freeze")
-					}
+				}else{
+					document.body.classList.remove("freeze");
 				}
 			},
 			search(){
-				if(!this.showsearch){
-					this.showmenu = false
-					this.showsearch = true
-					document.getElementById('search-form')['search'].focus()
-				}else{
-					this.showsearch = false
+				this.showsearch = !this.showsearch;
+				if(this.showsearch){
+					this.showmenu = false;
+					document.getElementById('search-form')['search'].focus();
 				}
 			},
 			exit(){
