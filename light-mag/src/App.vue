@@ -1,6 +1,6 @@
 <template>
-	<topnav v-if="wich!=='admin'&&!this.$store.getters.logedIn"/>
-	<lmnav v-else/>
+	<topnav v-if="wich()!=='admin'"/>
+	<lmnav v-if="wich()==='admin'&&this.$store.getters.logedIn"/>
 	<router-view :key="$route.path"/>
 	<Lfooter :wich="wich()"/>
 </template>

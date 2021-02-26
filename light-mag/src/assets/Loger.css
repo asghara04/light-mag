@@ -2,6 +2,7 @@ div#Loger div.centered{
 	background-color: #ededed;
 	border-radius: 10px;
 	margin: 1% 0;
+	box-shadow: 0 0 22px #121212;
 	padding: 1%;
 }
 form#login-form *{
@@ -35,4 +36,12 @@ div#login-or p:before, div#login-or p:after{
 div#login-or p:before{
 	margin: 0 -50% 0 0;
 	text-align: left;
+}
+@media(max-width: 200px){
+	div#Loger div.centered a h1{
+		font-size: 28px;
+	}
+	div#Loger div.centered h2{
+		font-size: 24px;
+	}
 }

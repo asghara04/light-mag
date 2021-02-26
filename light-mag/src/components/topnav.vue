@@ -9,9 +9,8 @@
 				<li>hellll</li>
 				<li v-for="cat in categories" :key="cat.id">{{cat.name}}</li>
 			</span>
+			<li><router-link to="/games" class="li-icon ed-color"><img src="../assets/imgs/game.svg">گیم ها</router-link></li>
 			<li v-if="user"><a href="https://admin.light-mag.ir" target="_blank">پنل</a></li>
-			<img class="imgbutton" src="../assets/imgs/previous.svg" alt="بعد" onclick="window.history.back()">
-			<img class="imgbutton" src="../assets/imgs/next.svg" onclick="window.history.forward()" alt='قبل'>
 		</ul>
 		<div v-if="smallscreen" @click="exit()" id="topsmalluloverlay"></div>
 

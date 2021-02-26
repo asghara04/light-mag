@@ -1,13 +1,13 @@
 div.pagination-com{
 	text-align: center;
-	margin: 1.5% 0 0 0;
+	margin: 1.5% 0 1.5% 0;
 }
 div.pagination-com *{
 	background-color: #ededed;
 	display: inline-block;
 	padding: 0.6% 1.5%;
 }
-div.pagination-com .router-link-exact-active{
+div.pagination-com .page-active{
 	color: #004c8d;
 	border: 3px solid #004c8d;
 	font-size: 22px;

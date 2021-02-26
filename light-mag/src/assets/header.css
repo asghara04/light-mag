@@ -1,6 +1,9 @@
-#top-header{
+div#top-header{
 	padding: 1.5% 3%;
+	display: flex;
 	background-color: #ced7db;
+	align-items: center;
+	justify-content: space-between;
 }
 header h1 a{
 	color: #1d1d1d;
@@ -8,4 +11,35 @@ header h1 a{
 header h2{
 	color: #1d1d1d;
 	font-size: 24px;
+}
+@media(min-width: 775px){
+	div#top-header div#lightmag-head{
+		flex: 0.45;
+	}
+	div#top-header div.add{
+		flex: 0.45;
+	}
+}
+@media(max-width: 775px){
+	div#top-header{
+		display: block;
+		text-align: center;
+	}
+	div#top-header div.add{
+		margin: 3% 0 0 0;
+	}
+	header > div#top-header h1{
+		font-size: 30px;
+	}
+	header > div#top-header h2{
+		font-size: 22px;
+	}
+}
+@media(max-width: 475px){
+	header > div#top-header h1{
+		font-size: 28px;
+	}
+	header > div#top-header h2{
+		font-size: 20px;
+	}
 }

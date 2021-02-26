@@ -74,3 +74,9 @@ class MArticleView(APIView):
 		art = self.get_art(pk)
 		art.delete()
 		return Response(status=status.HTTP_204_NO_CONTENT)
+
+class CatArticlesView(APIView):
+	def get(self, request, pk):
+		arts = Article.published.filter(category=pk)
+		serializer = MinArticleSerializer(arts, many=True, context={"request":request})
+		return Response(serializer.data, status=status.HTTP_200_OK)

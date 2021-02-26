@@ -1,11 +1,18 @@
 .menuul{
-	background-color: #0092c4;
+	background-color: #0D47A1;
 	white-space: nowrap;
 	overflow: auto;
 }
 .uli{
 	display: inline-block;
-	padding: 0.8% 1.5%;
+	padding: 0.8% 1.8%;
+}
+@media(max-width: 475px){
+	.uli{
+		padding: 1.3% 1.8%;
+		margin: 0 1.8%;
+		font-size: 18px;
+	}
 }
 .uli img{
 	float: left;
@@ -14,7 +21,7 @@
 	color: #ededed;
 }
 .uli:hover{
-	background-color: cyan;
+	background-color: #1976D2;
 }
 .itemul{
 	position: absolute;

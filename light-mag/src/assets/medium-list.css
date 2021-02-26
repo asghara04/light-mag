@@ -8,10 +8,10 @@
 article.art{
 	flex-basis: 23.5%;
 	transition: .3s;
-	margin: 2% 0 2% 0;
+	margin: 2% 0;
 }
 article.art:hover{
-	transform: scale(1.03);
+	transform: scale(1.075);
 }
 article.art img{
 	height: 70%;
@@ -33,6 +33,9 @@ article.art h2{
 	article.art{
 		flex-basis: 45%;
 	}
+	article.art:hover{
+		transform: scale(1.05);
+	}
 	article.art h2{
 		font-size: 23px;
 	}
@@ -45,5 +48,8 @@ article.art h2{
 @media(max-width: 350px){
 	article.art{
 		flex-basis: 96%;
+	}
+	article.art{
+		transform: scale(1.02);
 	}
 }

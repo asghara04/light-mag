@@ -1,8 +1,26 @@
 <template>
 	<nav id="topnav" class="lm-nav">
 		<img src="../assets/imgs/menu.svg" class="imgbutton lm-menu" id="menu-icon" @click="menu()" alt="منو">
-		<div id="topdiv">
+		<div id="topdiv" class="allflex">
 			<h3><router-link to="/" class="text-icon ed-color" name="مجله نور"><img src="../assets/imgs/light.svg">مجله نور</router-link></h3>
+			<p>آپشن</p>
+			<p>آپشن</p>
+			<p>آپشن</p>
+			<p>آپشن</p>
+			<p>آپشن</p>
+			<p>آپشن</p>
+			<p>آپشن</p>
+			<p>آپشن</p>
+			<p>آپشن</p>
+			<p>آپشن</p>
+			<p>آپشن</p>
+			<p>آپشن</p>
+			<p>آپشن</p>
+			<p>آپشن</p>
+			<p>آپشن</p>
+			<p>آپشن</p>
+			<p>آپشن</p>
+			<p>آپشن</p>
 			<img class="imgbutton" src="../assets/imgs/previous.svg" alt="بعد" onclick="window.history.back()">
 			<img class="imgbutton" src="../assets/imgs/next.svg" onclick="window.history.forward()" alt='قبل'>
 		</div>

@@ -1,14 +1,14 @@
 <template>
 	<div class="pagination-com">
-		<a v-if="current>2" :href="path+'?page='+(current-1)" rel="مجله نور">1</a>
+		<router-link v-if="current>2" target="_blank" :to="{query: {page: 1}}" rel="مجله نور صفحه 1">1</router-link>
 		<p v-if="current>3">...</p>
-		<a v-if="current>1" :href="path+'?page='+(current-1)" rel="مجله نور">{{current-1}}</a>
+		<router-link v-if="current>1" target="_blank" :to="{query: {page: current-1}}" :rel="'مجله نور صفحه '+(current-1)">{{current-1}}</router-link>
 
-		<p class="router-link-exact-active">{{current}}</p>
+		<p class="page-active">{{current}}</p>
 
-		<a v-if="current<parseInt((all+size-1)/size)" :href="path+'?page='+(current+1)" rel="مجله نور">{{current+1}}</a>
+		<router-link target="_blank" v-if="current<parseInt((all+size-1)/size)" :to="{query: {page: current+1}}" :rel="'مجله نور صفحه '+(current+1)">{{current+1}}</router-link>
 		<p v-if="current+2<parseInt((all+size-1)/size)">...</p>
-		<a v-if="current+1<parseInt((all+size-1)/size)" :href="path+'?page='+parseInt((all+size-1)/size)" rel="مجله نور">{{parseInt((all+size-1)/size)}}</a>
+		<router-link v-if="current+1<parseInt((all+size-1)/size)" :to="{query: {page: parseInt((all+size-1)/size)}}" :rel="'مجله نور صفحه '+parseInt((all+size-1)/size)" target="_blank">{{parseInt((all+size-1)/size)}}</router-link>
 	</div>
 </template>
 <script>

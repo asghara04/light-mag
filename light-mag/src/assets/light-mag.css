@@ -27,7 +27,7 @@ img{
 	max-width: 100%;
 }
 .page{
-	padding: 1%;
+	padding: 0.8% 0.2%;
 }
 .text-icon{
 	display: flex;
@@ -42,6 +42,9 @@ img{
 }
 .ed-color{
 	color: #ededed;
+}
+.oc-color{
+	color: #0c0c0c;
 }
 .block{
 	display: block!important;

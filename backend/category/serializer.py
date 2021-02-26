@@ -4,7 +4,6 @@ from image.serializer import ImageSerializer
 from django.shortcuts import get_object_or_404
 
 
-
 class SubCatSerializer(serializers.Serializer):
 	id = serializers.IntegerField(read_only=True)
 	category = serializers.StringRelatedField()
@@ -24,8 +23,6 @@ class SubCatSerializer(serializers.Serializer):
 		instance.slug = validated_data.get("slug", instance.slug)
 		instance.save()
 		return instance
-
-
 
 
 class CategorySerializer(serializers.Serializer):

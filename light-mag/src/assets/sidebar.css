@@ -1,14 +1,4 @@
-#page{
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-start;
-}
-.right{
-	flex-basis: 78%;
-	padding: 0.5%;
-}
 aside#sidebar{
-	flex-basis: 20%;
 	background-color: #ededed;
 	padding: 1%;
 }
@@ -17,4 +7,28 @@ aside#sidebar .down-name{
 }
 aside#sidebar .down-name a{
 	color: #212121;
+}
+@media(min-width: 950px){
+	#page{
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+	}
+	.right{
+		flex-basis: 78%;
+		padding: 0 1%;
+	}
+	aside#sidebar{
+		flex-basis: 20%;
+	}
+}
+@media(max-width: 950px){
+	#page{
+		padding: 1%;
+	}
+}
+@media(max-width: 325px){
+	#page{
+		padding: 2%;
+	}
 }
