@@ -2,7 +2,7 @@
 	<nav id="topnav" class="lm-nav">
 		<img src="../assets/imgs/menu.svg" class="imgbutton lm-menu" id="menu-icon" @click="menu()" alt="منو">
 		<div id="topdiv" class="allflex">
-			<h3><router-link to="/" class="text-icon ed-color" name="مجله نور"><img src="../../public/light.svg">مجله نور</router-link></h3>
+			<h3><router-link to="/" class="text-icon ed-color" name="مجله نور"><img src="../assets/imgs/light.svg">مجله نور</router-link></h3>
 			<img class="imgbutton" src="../assets/imgs/previous.svg" alt="بعد" onclick="window.history.back()">
 			<img class="imgbutton" src="../assets/imgs/next.svg" onclick="window.history.forward()" alt='قبل'>
 		</div>
@@ -31,7 +31,7 @@
 			const largescreen = ref(window.innerWidth>775);
 			const smallscreen = ref(window.innerWidth<=775);
 
-			window.addEventListener('resize', function(){
+			function resize(){
 				if(window.innerWidth>1050){
 					showmenu.value = true;
 					smallscreen.value = false;
@@ -48,7 +48,9 @@
 					document.getElementById("app").classList = '';
 					showmenu.value = false;
 				}				
-			})
+			}
+			resize()
+			window.addEventListener('resize', resize);
 
 			function menu(){
 				showmenu.value = !showmenu.value;

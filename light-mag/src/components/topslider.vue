@@ -18,24 +18,21 @@
 
 <script>
 	import {getAPI} from '@/axios.js';
-
+	import {ref} from 'vue';
 	export default{
 		name: "topslider",
-		data(){
-			return{
-				arts: null
+		setup(){
+			const arts = ref(null);
+
+			function get_arts(){
+				getAPI.get('articles/api/v1/')
+				.then(res=> arts.value = res.data)
+				.catch(err=> console.log(err))
 			}
-		},
-		created(){
-			// it shuld get the reaches commented posts on a other endpoint
-			getAPI.get("articles/api/v1/")
-			.then(response => {
-				this.arts = response.data
-			})
-			.catch(err => {
-				console.log(err)
-			})
-		},
+			get_arts()
+
+			return{arts}
+		}
 	};
 </script>
 

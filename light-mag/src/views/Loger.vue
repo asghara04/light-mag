@@ -1,7 +1,7 @@
 <template>
 	<div id="Loger" class="center-parent">
 		<div class="centered">
-			<a href="https://light-mag.ir" class="text-icon oc-color"><img src="../../public/light.svg" alt="مجله نور"><h1>مجله نور</h1></a>
+			<a href="https://light-mag.ir" class="text-icon oc-color"><img src="../assets/imgs/light.svg	" alt="مجله نور"><h1>مجله نور</h1></a>
 			<h2>ورود</h2>
 			<form id="login-form" @submit.prevent="login">
 				<label for="email">ایمیل</label>

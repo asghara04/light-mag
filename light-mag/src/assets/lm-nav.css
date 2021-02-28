@@ -19,6 +19,9 @@ aside#highsidebar .router-link-exact-active{
 	border-right: 5px solid #004c8d;
 	border-bottom: 2px solid #004c8d;
 }
+aside#highsidebar a.link-like.text-icon span{
+	flex: 0.5;
+}
 @media(min-width: 775px){
 	aside#highsidebar.open-side{
 		width: 18%;
@@ -49,6 +52,14 @@ aside#highsidebar .router-link-exact-active{
 	}
 	aside#highsidebar.open{
 		right: 0;
+	}
+	aside#highsidebar a.link-like.text-icon span{
+		flex: 0.3;
+	}
+}
+@media(max-width: 340px){
+	aside#highsidebar a.link-like.text-icon span{
+		flex: 0.6;
 	}
 }
 div#app > nav#topnav, aside#highsidebar{

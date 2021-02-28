@@ -41,14 +41,16 @@
 			}
 			get_cats()
 
-			window.addEventListener("resize",function(){
-				alert(window.innerWidth)
+			function resize(){
 				if(window.innerWidth<950){
 					littlescr.value = true
 				}else{
 					littlescr.value = false
 				}				
-			})
+			}
+			resize()
+
+			window.addEventListener("resize", resize)
 
 			return {littlescr, cats}
 		}

@@ -1,7 +1,7 @@
 <template>
 	<nav id="topnav" :class="{'smallopenul':showmenu&&smallscreen}">
 		<img v-if="smallscreen" src="../assets/imgs/menu.svg" class="imgbutton" id="menu-icon" @click="menu()">
-		<h1><router-link to="/" class="text-icon ed-color" name="مجله نور"><img src="../../public/light.svg">مجله نور</router-link></h1>
+		<h1><router-link to="/" class="text-icon ed-color" name="مجله نور"><img src="../assets/imgs/light.svg">مجله نور</router-link></h1>
 		<ul id="topul">
 			<li><router-link to="/" name="مجله نور" class="li-icon ed-color"><img src="../assets/imgs/home.svg">صفحه اصلی</router-link></li>
 			<li><router-link to="/categories" class="li-icon ed-color"  name="مجله نور"><img src="../assets/imgs/cats.svg">موضوعات</router-link></li>
@@ -23,65 +23,65 @@
 </template>
 <script>
 	import {getAPI} from '@/axios.js';
+	import {ref} from 'vue';
+	import {useStore} from 'vuex';
 	export default{
 		name: "topnav",
-		created(){
-			this.resize()
-			window.addEventListener("resize", this.resize);
-		},
 		props:["wich"],
-		data(){
-			return{
-				user: this.$store.getters.logedIn,
-				smallscreen: false,
-				avragescreen: false,
-				showmenu: false,
-				showsearch: false,
-				categories: null,
-			}
-		},
-		methods:{
-			resize(){
+		setup(){
+			const store = useStore();
+			const user = store.getters.logedIn||false;
+			const smallscreen = ref(window.innerWidth<475||false);
+			const avragescreen = ref((window.innerWidth>475&&window.innerWidth<775)||false);
+			const showmenu = ref(false);
+			const showsearch = ref(false);
+			const categories = ref(null);
+			function resize(){
 				if(window.innerWidth > 775){
-					this.smallscreen = false;
-					this.avragescreen = false;
+					smallscreen.value = false;
+					avragescreen.value = false;
 					document.body.classList.remove("freeze");
 				}else if(window.innerWidth > 475){
-					this.smallscreen = false;
-					this.avragescreen = true;
+					smallscreen.value = false;
+					avragescreen.value = true;
 					document.body.classList.remove("freeze");
 				}else{
-					this.smallscreen = true;
-					this.cats();
+					smallscreen.value = true;
+					get_cats();
 				}
-			},
-			menu(){
-				this.showmenu = !this.showmenu;
-				if(this.showmenu){
-					this.showsearch = false;
+			}
+			resize();
+			window.addEventListener("resize", resize);
+
+			function get_cats(){
+				getAPI.get("categories/all/api/v1/")
+				.then(res => categories.value = res.data)
+				.catch(err => console.log(err))
+			}
+			function menu(){
+				showmenu.value = !showmenu.value;
+				if(showmenu.value){
+					showsearch.value = false;
 					document.body.classList.add("freeze");
 				}else{
 					document.body.classList.remove("freeze");
 				}
-			},
-			search(){
-				this.showsearch = !this.showsearch;
-				if(this.showsearch){
-					this.showmenu = false;
+			}
+			function search(){
+				showsearch.value = !showsearch.value;
+				if(showsearch.value){
+					showmenu.value = false;
 					document.getElementById('search-form')['search'].focus();
 				}
-			},
-			exit(){
-				this.showmenu = false
-				this.showsearch = false
-				document.body.classList.remove("freeze")
-			},
-			cats(){
-				getAPI("categories/all/api/v1/")
-				.then(res => this.categories = res.data)
-				.catch(err => console.log(err))
 			}
-		},
+			function exit(){
+				showmenu.value = false;
+				showsearch.value = false;
+				document.body.classList.remove('freeze');
+			}
+
+			return{user, showmenu, showsearch, categories, menu, search, exit}
+		}
 	};
 </script>
 <style scoped>
