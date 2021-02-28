@@ -2,7 +2,7 @@
 	<div id="home">
 		<Lheader/>
 		<topslider/>
-		<div id="page" class="page">
+		<div id="page" class="page" v-if="APIData">
 			<div class="right">
 				<div class="spcial-list">
 					<article v-for="article in APIData.results" v-bind:key="article.id" class="article">
@@ -20,15 +20,15 @@
 		</div>
 	</div>
 </template>
-
 <script>
 	import Lheader from '@/components/Lheader.vue';
 	import sidebar from '@/components/sidebar.vue';
 	import topslider from '@/components/topslider.vue';
 	import {getAPI} from '@/axios.js';
-	import {mapState} from 'vuex';
 	import pagination from '@/components/pagination.vue';
-
+	import {ref,computed} from 'vue';
+	import {useStore} from 'vuex';
+	import {useRoute} from 'vue-router';
 	export default{
 		name: "Home",
 		components:{
@@ -38,25 +38,24 @@
 			pagination
 		},
 		props:{"num": Number},
-		data(){
-			return{
-				page: this.num||parseInt("1"),
+		setup(props){
+			const page = ref(props.num||1);
+			const route = useRoute();
+			route.query.page = page.value;
+			const store = useStore();
+			const APIData = computed(()=>store.state.APIData);
+
+			function get_arts(){
+				getAPI.get("articles/api/v1/?page="+page.value)
+				.then(res => store.state.APIData = res.data)
+				.catch(err => console.log(err))
 			}
-		},
-		computed: mapState(['APIData']),
-		created(){
-			this.$route.query.page = this.page;
-			getAPI.get("articles/api/v1/?page="+this.page)
-			.then(response => {
-				this.$store.state.APIData = response.data;
-			})
-			.catch(err => {
-				console.log(err);
-			})
-		},
+			get_arts();
+
+			return{APIData}
+		}
 	};
 </script>
-
 <style>
 	@import '../assets/home-spcial-list.css';
 </style>

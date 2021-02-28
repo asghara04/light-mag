@@ -1,7 +1,7 @@
 <template>
 	<nav id="topnav" :class="{'smallopenul':showmenu&&smallscreen}">
 		<img v-if="smallscreen" src="../assets/imgs/menu.svg" class="imgbutton" id="menu-icon" @click="menu()">
-		<h1><router-link to="/" class="text-icon ed-color" name="مجله نور"><img src="../assets/imgs/light.svg">مجله نور</router-link></h1>
+		<h1><router-link to="/" class="text-icon ed-color" name="مجله نور"><img src="../../public/light.svg">مجله نور</router-link></h1>
 		<ul id="topul">
 			<li><router-link to="/" name="مجله نور" class="li-icon ed-color"><img src="../assets/imgs/home.svg">صفحه اصلی</router-link></li>
 			<li><router-link to="/categories" class="li-icon ed-color"  name="مجله نور"><img src="../assets/imgs/cats.svg">موضوعات</router-link></li>

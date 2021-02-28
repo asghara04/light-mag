@@ -1,5 +1,9 @@
 div.spcial-list article.article{
 	background-color: #ededed;
+	transition: .2s;
+}
+div.spcial-list article.article:hover{
+	transform: scale(1.02);
 }
 @media(min-width: 650px){
 	div.spcial-list article.article{

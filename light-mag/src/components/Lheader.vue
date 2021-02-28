@@ -8,7 +8,7 @@
 			<div class="add"></div>
 		</div>
 
-		<nav if="cats">
+		<nav v-if="cats">
 			<ul class="menuul">
 				<img class="imgbutton li-icon" src="../assets/imgs/previous.svg" alt="بعد" onclick="window.history.back()">
 				<li v-for="cat in cats" :key="cat.id" class="uli">
@@ -27,34 +27,30 @@
 
 <script>
 	import {getAPI} from '@/axios.js';
-
+	import {ref} from 'vue';
 	export default{
 		name: "LHeader",
-		data(){
-			return{
-				cats: null,
-				littlescr: false
+		setup(){
+			const cats = ref(null);
+			const littlescr = ref(false);
+
+			function get_cats(){
+				getAPI.get("categories/all/api/v1/")
+				.then(res => cats.value = res.data)
+				.catch(err => console.log(err))
 			}
-		},
-		created(){
-			getAPI.get("categories/all/api/v1/")
-			.then(response => {
-				this.cats = response.data
-			})
-			.catch(err => {
-				console.log(err)
+			get_cats()
+
+			window.addEventListener("resize",function(){
+				alert(window.innerWidth)
+				if(window.innerWidth<950){
+					littlescr.value = true
+				}else{
+					littlescr.value = false
+				}				
 			})
 
-			window.addEventListener("resize", this.resize);
-		},
-		methods:{
-			resize(){
-				if(window.innerWidth<950){
-					this.littlescr = true
-				}else{
-					this.littlescr = false
-				}
-			}
+			return {littlescr, cats}
 		}
 	};
 </script>

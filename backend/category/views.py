@@ -57,8 +57,13 @@ class CategoryView(APIView):
 
 
 
-class SubCatsCatView(APIView):
+class SubCatsCatView(APIView, PaginationMixin):
+	pagination_class = PageNumberPagination()
 	def get(self, request, pk):
 		subcats = SubCat.objects.filter(category=pk)
-		serializer = SubCatSerializer(subcats, many=True, context={"request":request})
+		page = self.paginate_queryset(subcats)
+		if page is not None:
+			serializer = self.get_paginated_response(SubCatSerializer(page, many=True, context={"request":request}).data)
+		else:
+			serializer = SubCatSerializer(subcats, many=True, context={"request":request})
 		return Response(data=serializer.data, status=status.HTTP_200_OK)

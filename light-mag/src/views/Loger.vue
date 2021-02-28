@@ -1,7 +1,7 @@
 <template>
 	<div id="Loger" class="center-parent">
 		<div class="centered">
-			<a href="https://light-mag.ir" class="text-icon oc-color"><img src="../assets/imgs/light.svg" alt="مجله نور"><h1>مجله نور</h1></a>
+			<a href="https://light-mag.ir" class="text-icon oc-color"><img src="../../public/light.svg" alt="مجله نور"><h1>مجله نور</h1></a>
 			<h2>ورود</h2>
 			<form id="login-form" @submit.prevent="login">
 				<label for="email">ایمیل</label>
@@ -20,26 +20,36 @@
 	</div>
 </template>
 <script>
+	import {ref} from 'vue';
+	import {useStore} from 'vuex';
+	import {useRouter} from 'vue-router';
 	export default{
 		name: "Loger",
-		data(){
-			return{
-				email: '',
-				password: ''
+		setup(){
+			const email = ref(null);
+			const password = ref(null);
+			const store = useStore();
+			const router = useRouter();
+			const passfieldtype = ref(true);
+
+			function showpass(){
+				passfieldtype.value = !passfieldtype.value;
+				const passfield = document.getElementById("login-form")["password"]
+				if(passfieldtype.value){
+					passfield.type = "password";
+				}else{
+					passfield.type = "text";
+				}
 			}
-		},
-		methods:{
-			showpass(){
-				document.getElementById("login-form")["password"].type = "text";
-			},
-			login(){
-				this.$store.dispatch('loginUser', {
-					email: this.email,
-					password: this.password
+			
+			function login(){
+				store.dispatch("loginUser", {
+					email: email.value,
+					password: password.value
 				})
 				.then(() => {
-					if(this.$store.getters.logedIn){
-						this.$router.push({name: 'admin-panel'})
+					if(store.getters.logedIn){
+						router.push({name: "admin-panel"})
 					}
 				})
 				.catch(err => {
@@ -47,7 +57,8 @@
 					console.log(err)
 				})
 			}
-		}
+			return {email, password, showpass, login};
+		},
 	};
 </script>
 <style>

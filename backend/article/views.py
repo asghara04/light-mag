@@ -75,8 +75,13 @@ class MArticleView(APIView):
 		art.delete()
 		return Response(status=status.HTTP_204_NO_CONTENT)
 
-class CatArticlesView(APIView):
+class CatArticlesView(APIView, PaginationMixin):
+	pagination_class = PageNumberPagination()
 	def get(self, request, pk):
 		arts = Article.published.filter(category=pk)
-		serializer = MinArticleSerializer(arts, many=True, context={"request":request})
+		page = self.paginate_queryset(arts)
+		if page is not None:
+			serializer = self.get_paginated_response(MinArticleSerializer(page, many=True, context={"return":request}).data)
+		else:
+			serializer = MinArticleSerializer(arts, many=True, context={"request":request})
 		return Response(serializer.data, status=status.HTTP_200_OK)

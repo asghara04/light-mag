@@ -1,12 +1,14 @@
-article.all-page{
+div#page.page article.page-content.right{
 	padding: 2%;
 }
-article.all-page .art-h{
-	text-align: center;
+div#page.page article.page-content.right .art-h{
 	padding: 1% 0;
 }
-article.all-page .art-h a{
+div#page.page article.page-content.right .art-h a{
 	color: #000000;
+}
+div#page.page article.page-content.right .art-h{
+	text-align: center;
 }
 .art-pic{
 	text-align: center;

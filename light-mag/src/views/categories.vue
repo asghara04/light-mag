@@ -1,21 +1,22 @@
 <template>
 	<div v-if="APIData" id="categories">
 		<Lheader/>
-		<div class="medium-list page">
+		<div class="medium-list page"><!-- router-link instance div -->
 			<article v-for="cat in APIData.results" :key="cat.id" class="art">
 				<h2>{{cat.name}}</h2>
 				<img :src="cat.image.image" :name="cat.image.name" :alt="cat.image.alt">
 			</article>
-		</div>
+		</div><!-- router-link instance div -->
 		<pagination path="/categories" :all="APIData.count" :size="10"/>
 	</div>
 </template>
-
 <script>
 	import Lheader from '@/components/Lheader.vue';
-	import {mapState} from 'vuex';
 	import {getAPI} from '@/axios.js';
 	import pagination from '@/components/pagination.vue';
+	import {ref,computed} from 'vue';
+	import {useRoute} from 'vue-router';
+	import {useStore} from 'vuex';
 
 	export default{
 		name: "categories",
@@ -23,26 +24,25 @@
 			Lheader,
 			pagination
 		},
-		computed: mapState(["APIData"]),
 		props:{"num": Number},
-		data(){
-			return{
-				page: this.num||parseInt("1")
+		setup(props){
+			const page = ref(props.num||1);
+			const route = useRoute();
+			route.query.param = page.value;
+			const store = useStore();
+			const APIData = computed(()=>store.state.APIData)
+
+			function get_cats(){
+				getAPI.get("categories/api/v1/?page="+page.value)
+				.then(res => store.state.APIData = res.data)
+				.catch(err => console.log(err))
 			}
-		},
-		created(){
-			this.$route.query.page = this.page
-			getAPI.get("categories/api/v1/?page="+this.page)
-			.then(res => {
-				this.$store.state.APIData = res.data
-			})
-			.catch(err => {
-				console.log(err)
-			})
+			get_cats();
+
+			return{APIData}
 		}
 	};
 </script>
-
 <style>
 	@import '../assets/medium-list.css';
 </style>

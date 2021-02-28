@@ -16,9 +16,9 @@
 
 			<div id="comments">
 				<!-- other comments -->
+					<h3>کامنت جدید:</h3>
 					<form @submit.prevent="commentsub(APIData.id)">
-						<label for="message">نظر:</label>
-						<textarea class="data-field" name="message" required="" @focus="focused" maxlength="250" v-model="message"></textarea>
+						<textarea class="data-field" name="message" placeholder="نظر..." required="" @focus="focused" maxlength="250" v-model="message"></textarea>
 						<input v-if="focus" type="text" name="name" placeholder="نام..." required="" class="data-field" maxlength="30" v-model="name">
 						<input v-if="focus" type="email" name="email" required="" maxlength="30" class="data-field" placeholder="ایمیل..." v-model="email">
 						<label v-if="focus" for="personal">ارسال خصوصی:</label>
@@ -32,14 +32,14 @@
 		<sidebar/>
 	</div>
 </template>
-
 <script>
 	import Lheader from '@/components/Lheader.vue';
 	import topslider from '@/components/topslider.vue';
 	import {getAPI} from '@/axios.js';
-	import {mapState} from 'vuex';
 	import sidebar from '@/components/sidebar.vue';
-
+	import {ref,computed,watch} from 'vue';
+	import {useStore} from 'vuex';
+	import {useRoute} from 'vue-router';
 	export default{
 		name: "article",
 		components:{
@@ -48,49 +48,59 @@
 			topslider
 		},
 		props:["address"],
-		computed: mapState(["APIData"]),
-		created(){
-			getAPI.get("articles/api/v1/"+this.address)
-			.then(res => {
-				this.$store.state.APIData = res.data
-			})
-			.catch(err => {
-				console.log(err)
-			})
-		},
-		data(){
-			return{
-				focus: false,
-				name: null,
-				email: null,
-				message: null,
-				personal: false
+		setup(props){
+			const store = useStore();
+			const APIData = computed(()=>store.state.APIData);
+			const route = useRoute();
+
+			function get_art(slug){
+				getAPI.get("articles/api/v1/"+slug)
+				.then(res => store.state.APIData = res.data)
+				.catch(err => console.log(err))
 			}
-		},
-		methods:{
-			focused(){
-				this.focus = true
-			},
-			commentsub(apiid){
-				getAPI.post("comments/api/v1/"+apiid+'/', {
-					name: this.name,
-					email: this.email,
-					message: this.message,
-					personal: this.personal
-				})
-				.then(res => {
-					console.log(res.data.message)
-					alert("نظر شما با موفقیت ثبت شد.")
-				})
-				.catch(err => {
-					alert("مشکلی رخ داد! صفحه را ریلود کنید ولی کامنتتان ثبت نشده است.")
-					console.log(err)
-				})
+			get_art(props.address)
+
+			const focus = ref(false);
+			const name = ref(null);
+			const email = ref(null);
+			const message = ref(null);
+			const personal = ref(false);
+
+			function focused(){
+				focus.value = !focus.value;
 			}
+			function commentsub(artid){
+				if(name.value&&email.value&&message.value){
+					getAPI.post("comments/api/v1/"+artid+'/', {
+						name: name.value,
+						email: email.value,
+						message: message.value,
+						personal: personal.value
+					})
+					.then(() => {
+						alert("نظرتون با موفقیت ثبت شد.\nپس از تایید نمایش داده میشود.");
+						name.value = '';
+						email.value = '';
+						message.value = '';
+						personal.value = false;
+					})
+					.catch(err => {console.log(err);alert("خطایی رخ داد! لطفا دوباره امتحان کنید یا به ادمین اطلاع دهید.")})
+				}else{
+					alert("لطفا فیلد های مورد نظر را پر کنید.")
+				}
+			}
+
+			watch(
+				() => route.params.address,
+				newAddress => {
+					get_art(newAddress)
+				}
+			)
+
+			return{APIData, focus, name, email, message, personal, focused, commentsub}
 		}
 	};
 </script>
-
 <style>
 	@import '../assets/article.css';
 	@import '../assets/form.css';
