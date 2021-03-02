@@ -4,6 +4,7 @@ aside#sidebar{
 }
 aside#sidebar .down-name{
 	text-align: center;
+	margin: 2% 0 0 0;
 }
 aside#sidebar .down-name a{
 	color: #212121;

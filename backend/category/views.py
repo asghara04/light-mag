@@ -57,7 +57,7 @@ class CategoryView(APIView):
 
 
 
-class SubCatsCatView(APIView, PaginationMixin):
+class SubsCatCatView(APIView, PaginationMixin):
 	pagination_class = PageNumberPagination()
 	def get(self, request, pk):
 		subcats = SubCat.objects.filter(category=pk)
@@ -67,3 +67,21 @@ class SubCatsCatView(APIView, PaginationMixin):
 		else:
 			serializer = SubCatSerializer(subcats, many=True, context={"request":request})
 		return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+	# post
+
+
+class SubCatView(APIView):
+	def getter(self, slug):
+		try:
+			return SubCat.objects.get(slug=slug)
+		except:
+			raise Http404
+
+	def get(self, request, slug):
+		subcat = self.getter(slug)
+		serializer = SubCatSerializer(subcat, context={"request":request})
+		return Response(serializer.data, status=status.HTTP_200_OK)
+
+	# put/patch
+	# delete

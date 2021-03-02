@@ -127,3 +127,13 @@ div#topdiv > *{
 		top: 39px;
 	}
 }
+@media(max-width: 160px){
+	nav#topnav{
+		flex-wrap: nowrap;
+		overflow-y: hidden;
+		overflow-x: scroll;
+	}
+	nav#topnav > *{
+		flex: 0 0 auto;
+	}
+}

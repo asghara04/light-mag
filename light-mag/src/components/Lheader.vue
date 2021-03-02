@@ -2,7 +2,7 @@
 	<header>
 		<div id="top-header">
 			<div id="lightmag-head">
-				<h1><router-link to='/'>مجله نور</router-link></h1>
+				<h1><router-link :to="{name: 'Home'}">مجله نور</router-link></h1>
 				<h2>لایت مگ, مجله ای برای تازش با نور!</h2>
 			</div>
 			<div class="add"></div>
@@ -12,7 +12,7 @@
 			<ul class="menuul">
 				<img class="imgbutton li-icon" src="../assets/imgs/previous.svg" alt="بعد" onclick="window.history.back()">
 				<li v-for="cat in cats" :key="cat.id" class="uli">
-					<a href="#">{{cat.name}}</a>
+					<router-link :to="{name: 'category', params:{slug: cat.slug}}">{{cat.name}}</router-link>
 					<img v-if='cat.subcats==true&&!littlescr' src="../assets/imgs/down.svg">
 					<ul v-if="cat.subcats==true&&!littlescr" class="itemul">
 						<li v-for="subcat in cat.subcats" :key="subcat.id" class="iuli"><a href="#">{{subcat.name}}</a></li>

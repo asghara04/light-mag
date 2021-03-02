@@ -1,0 +1,15 @@
+div.img-sider{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	flex-wrap: nowrap;
+	overflow-y: hidden;
+	overflow-x: auto;
+}
+div.img-sider > img.side-img{
+	max-width: 45%;
+	max-height: 45%;
+}
+div.img-sider > *{
+	flex: 0 0 auto;
+}

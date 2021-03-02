@@ -81,7 +81,19 @@ class CatArticlesView(APIView, PaginationMixin):
 		arts = Article.published.filter(category=pk)
 		page = self.paginate_queryset(arts)
 		if page is not None:
-			serializer = self.get_paginated_response(MinArticleSerializer(page, many=True, context={"return":request}).data)
+			serializer = self.get_paginated_response(MinArticleSerializer(page, many=True, context={"request":request}).data)
 		else:
 			serializer = MinArticleSerializer(arts, many=True, context={"request":request})
+		return Response(serializer.data, status=status.HTTP_200_OK)
+
+class SubCatArticlesView(APIView, PaginationMixin):
+	pagination_class = PageNumberPagination()
+	def get(self, request, pk):
+		arts = Article.published.filter(subcat=pk)
+		page = self.paginate_queryset(arts)
+		if page is not None:
+			serializer = self.get_paginated_response(MinArticleSerializer(page, many=True, context={"request":request}).data)
+		else:
+			serializer = MinArticleSerializer(arts, many=True, context={"request":request})
+
 		return Response(serializer.data, status=status.HTTP_200_OK)

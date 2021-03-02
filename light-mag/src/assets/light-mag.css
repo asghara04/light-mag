@@ -75,3 +75,11 @@ img{
 	text-decoration: underline;
 	cursor: pointer;
 }
+.like-h2{
+	font-size: 32px;
+	margin: 1% 0;
+	display: inline-block;
+}
+.like-h2:hover{
+	text-decoration: underline;
+}

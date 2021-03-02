@@ -3,9 +3,9 @@
 	<topslider/>
 	<div id="page" class="page">
 		<article class="right page-content" v-if="APIData">
-			<p>
-				<router-link to="/" name="مجله نور">صفحه اصلی</router-link> > <span v-if="APIData.category"><router-link :to="'/categories/'+APIData.category.slug" :name="APIData.category">{{APIData.category.name}}</router-link> > </span><span v-if="APIData.subcat"><span v-if="!APIData.category">{{APIData.subcat.category}} > </span><router-link :to="'/'">{{APIData.subcat.name}}</router-link> > </span><router-link :to="'/article/'+APIData.slug">{{APIData.title}}</router-link>
-			</p>
+			<span>
+				<router-link to="/" name="مجله نور">صفحه اصلی</router-link> > <span v-if="APIData.category"><router-link :to="'/categories/'+APIData.category.slug" :name="APIData.category">{{APIData.category.name}}</router-link> > </span><span v-if="APIData.subcat"><span v-if="!APIData.category">{{APIData.subcat.category}} > </span><router-link :to="'/categories/'+APIData.category.slug+'/'+APIData.subcat.slug">{{APIData.subcat.name}}</router-link> > </span><router-link :to="'/article/'+APIData.slug">{{APIData.title}}</router-link>
+			</span>
 			<h1 class="art-h"><router-link :to="'/article/'+APIData.slug">{{APIData.title}}</router-link></h1>
 			<div v-if="APIData.image" class="art-pic">
 				<img :src="APIData.image.image" :name="APIData.image.name" :alt="APIData.image.alt">
@@ -47,7 +47,7 @@
 			sidebar,
 			topslider
 		},
-		props:["address"],
+		props:["slug"],
 		setup(props){
 			const store = useStore();
 			const APIData = computed(()=>store.state.APIData);
@@ -58,7 +58,7 @@
 				.then(res => store.state.APIData = res.data)
 				.catch(err => console.log(err))
 			}
-			get_art(props.address)
+			get_art(props.slug)
 
 			const focus = ref(false);
 			const name = ref(null);
@@ -67,7 +67,9 @@
 			const personal = ref(false);
 
 			function focused(){
-				focus.value = !focus.value;
+				if(!focus.value){
+					focus.value = true;					
+				}
 			}
 			function commentsub(artid){
 				if(name.value&&email.value&&message.value){
@@ -91,9 +93,9 @@
 			}
 
 			watch(
-				() => route.params.address,
-				newAddress => {
-					get_art(newAddress)
+				() => route.params.slug,
+				newSlug => {
+					get_art(newSlug)
 				}
 			)
 

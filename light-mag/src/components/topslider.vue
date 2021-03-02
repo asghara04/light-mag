@@ -4,7 +4,7 @@
 		a short hight manual slider in all page who remainds popular articles! 4- and sort by the 6 reachest comments
 		-->
 		<article v-for="art in arts.results" :key="art.id" class="topslide">
-			<router-link :name="art.title" :rel="art.title" :to="{name: 'article',params: {address: art.slug}}">
+			<router-link :name="art.title" :rel="art.title" :to="{name: 'article',params: {slug: art.slug}}">
 				<img v-if="art.image" :rel="art.image.name" :src="art.image.image" :name="art.image.name" :alt="art.image.alt">
 				<h3 class="centered-top-slide">{{art.title}}</h3>
 			</router-link>

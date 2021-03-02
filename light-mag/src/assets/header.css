@@ -37,9 +37,9 @@ header h2{
 }
 @media(max-width: 475px){
 	header > div#top-header h1{
-		font-size: 28px;
+		font-size: 27px;
 	}
 	header > div#top-header h2{
-		font-size: 20px;
+		font-size: 17px;
 	}
 }

@@ -8,7 +8,7 @@ const routes = [
 		props: route => ({num: parseInt(route.query.page)})
 	},
 	{
-		path: "/article/:address",
+		path: "/article/:slug",
 		name: 'article',
 		props: true,
 		component: () => import("@/views/article.vue")
@@ -17,7 +17,21 @@ const routes = [
 		path: "/categories",
 		name: "categories",
 		component: () => import("@/views/categories.vue"),
-		props: route => ({num: parseInt(route.query.page)})
+		props: route => ({num: parseInt(route.query.page)}),
+	},
+	{
+		path: "/categories/:slug",
+		name: "category",
+		component: ()=> import("@/views/category.vue"),
+		props: true,
+		children:[
+			{
+				path: ":name",
+				name: "subcat",
+				props: true,
+				component: () => import("@/views/subcat.vue")
+			}
+		]
 	},
 	{
 		path: "/games",
@@ -34,6 +48,11 @@ const routes = [
 		name: "contact",
 		component: () => import("@/views/contact.vue")
 	},
+	{
+		path: "/*",
+		name: "not found",
+		component: () => import("@/views/404.vue")
+	}
 ]
 
 const router = createRouter({

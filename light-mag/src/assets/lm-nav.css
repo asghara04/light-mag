@@ -11,6 +11,7 @@ aside#highsidebar{
 	overflow: auto;
 	height: 100%;
 	text-align: center;
+	z-index: 3;
 }
 aside#highsidebar *{
 	padding: 1% 0;

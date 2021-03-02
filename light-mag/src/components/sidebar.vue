@@ -2,7 +2,7 @@
 	<aside id="sidebar">
 		<p>کل نوشته ها: </p>
 		<hr>
-		<h3 class="down-name"><router-link name='لایت مگ' to="/">مجله نور</router-link></h3>
+		<h3 class="down-name"><router-link class="text-icon" name='لایت مگ' to="/"><img src="../assets/imgs/light.svg" alt="LM" name="مجله نور">مجله نور</router-link></h3>
 	</aside>
 </template>
 

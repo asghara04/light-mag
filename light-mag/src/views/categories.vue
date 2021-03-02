@@ -1,12 +1,14 @@
 <template>
 	<div v-if="APIData" id="categories">
 		<Lheader/>
-		<div class="medium-list page"><!-- router-link instance div -->
+		<div class="medium-list page">
 			<article v-for="cat in APIData.results" :key="cat.id" class="art">
-				<h2>{{cat.name}}</h2>
-				<img :src="cat.image.image" :name="cat.image.name" :alt="cat.image.alt">
+				<router-link :to="'/categories/'+cat.slug">
+					<h2>{{cat.name}}</h2>
+					<img :src="cat.image.image" :name="cat.image.name" :alt="cat.image.alt">
+				</router-link>
 			</article>
-		</div><!-- router-link instance div -->
+		</div>
 		<pagination path="/categories" :all="APIData.count" :size="10"/>
 	</div>
 </template>

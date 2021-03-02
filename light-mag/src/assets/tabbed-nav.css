@@ -1,0 +1,24 @@
+div#tabbed-nav{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+div#tabbed-nav button.tab-head{
+	background: transparent!important;
+	border: none!important;
+	flex: auto;
+	font-size: 18px;
+	cursor: pointer;
+	border-radius: 12px 12px 0 0;
+	padding: 0.7% 1%;
+	transition: 0.2s;
+}
+div#tabbed-nav button.tab-head.active{
+	background-color: #b6e3ff!important;
+	border-bottom: 5px solid #4d82cb!important;
+	transition: 0.1s!important;
+}
+div#tabbed-nav button.tab-head:hover{
+	background-color: #b6e3ff!important;
+}
