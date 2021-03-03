@@ -2,7 +2,7 @@
 	<div v-if="APIData" id="categories">
 		<Lheader/>
 		<div class="medium-list page">
-			<article v-for="cat in APIData.results" :key="cat.id" class="art">
+			<article v-for="cat in APIData.results" :key="cat.id" :title="cat.name" class="art">
 				<router-link :to="'/categories/'+cat.slug">
 					<h2>{{cat.name}}</h2>
 					<img :src="cat.image.image" :name="cat.image.name" :alt="cat.image.alt">

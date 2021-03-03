@@ -38,7 +38,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
 	email = models.EmailField(max_length=30, unique=True)
-	username = models.CharField(max_length=30, unique=True)
+	username = models.SlugField(max_length=30, unique=True)
 	name = models.CharField(max_length=35)
 	prof_picture = models.ForeignKey(Image, on_delete=models.SET_NULL, null=True)#may i have to make it blank
 	join_date = models.DateField(auto_now_add=True)

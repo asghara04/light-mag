@@ -45,8 +45,8 @@
 			const store = useStore();
 			const APIData = computed(()=>store.state.APIData);
 
-			function get_arts(){
-				getAPI.get("articles/api/v1/?page="+page.value)
+			async function get_arts(){
+				await getAPI.get("articles/api/v1/?page="+page.value)
 				.then(res => store.state.APIData = res.data)
 				.catch(err => console.log(err))
 			}

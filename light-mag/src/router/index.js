@@ -8,10 +8,15 @@ const routes = [
 		props: route => ({num: parseInt(route.query.page)})
 	},
 	{
-		path: "/article/:slug",
+		path: "/article/:artslug",
 		name: 'article',
 		props: true,
 		component: () => import("@/views/article.vue")
+	},
+	{
+		path: "/games",
+		name: "games",
+		component: () => import("@/views/games.vue")
 	},
 	{
 		path: "/categories",
@@ -20,13 +25,13 @@ const routes = [
 		props: route => ({num: parseInt(route.query.page)}),
 	},
 	{
-		path: "/categories/:slug",
+		path: "/categories/:catslug",
 		name: "category",
 		component: ()=> import("@/views/category.vue"),
 		props: true,
 		children:[
 			{
-				path: ":name",
+				path: ":subcatname",
 				name: "subcat",
 				props: true,
 				component: () => import("@/views/subcat.vue")
@@ -34,9 +39,16 @@ const routes = [
 		]
 	},
 	{
-		path: "/games",
-		name: "games",
-		component: () => import("@/views/games.vue")
+		path: "/user/:username/",
+		name: 'user',
+		props: true,
+		children:[
+			{
+				path: 'profile',
+				name: 'userprofile',
+				component: ()=> import('@/views/userprofile.vue')
+			}
+		]
 	},
 	{
 		path: "/about",

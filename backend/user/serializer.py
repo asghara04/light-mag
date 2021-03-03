@@ -10,7 +10,7 @@ from category.models import Category
 
 class UserSerializer(serializers.Serializer):
 	id = serializers.IntegerField(read_only=True)
-	username = serializers.CharField(read_only=True, max_length=30)
+	username = serializers.SlugField(read_only=True, max_length=30)
 	name = serializers.CharField(read_only=True, max_length=35 )
 	prof_picture = ImageSerializer(read_only=True)
 	pubmail = serializers.EmailField(read_only=True, max_length=30)
@@ -28,7 +28,7 @@ class MUserSerializer(serializers.Serializer):
 	id = serializers.IntegerField(read_only=True)
 	email = serializers.EmailField(max_length=30)
 	password = serializers.CharField(write_only=True)
-	username = serializers.CharField(max_length=30)
+	username = serializers.SlugField(max_length=30)
 	name = serializers.CharField(max_length=35)
 	prof_picture = ImageSerializer(allow_null=True)
 	join_date = serializers.DateField(read_only=True)
@@ -76,6 +76,6 @@ class MUserSerializer(serializers.Serializer):
 	
 
 class MinUserSerializer(serializers.Serializer):
-	username = serializers.CharField(max_length=30, read_only=True)
+	username = serializers.SlugField(max_length=30, read_only=True)
 	name = serializers.CharField(max_length=35, read_only=True)
 	prof_picture = ImageSerializer(read_only=True)

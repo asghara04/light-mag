@@ -1,6 +1,7 @@
 <template>
-	<Lheader/>
-	<topslider/>
+	<div>
+	<Lheader></Lheader>
+	<topslider></topslider>
 	<div id="page" class="page">
 		<article class="right page-content" v-if="APIData">
 			<span>
@@ -29,8 +30,9 @@
 			</div>
 			<!-- related article like a card slider or like movie websites top -->
 		</article>
-		<sidebar/>
+		<sidebar></sidebar>
 	</div>
+</div>
 </template>
 <script>
 	import Lheader from '@/components/Lheader.vue';
@@ -41,13 +43,13 @@
 	import {useStore} from 'vuex';
 	import {useRoute} from 'vue-router';
 	export default{
-		name: "article",
+		name: "Article",
 		components:{
 			Lheader,
 			sidebar,
 			topslider
 		},
-		props:["slug"],
+		props:["artslug"],
 		setup(props){
 			const store = useStore();
 			const APIData = computed(()=>store.state.APIData);
@@ -58,7 +60,7 @@
 				.then(res => store.state.APIData = res.data)
 				.catch(err => console.log(err))
 			}
-			get_art(props.slug)
+			get_art(props.artslug)
 
 			const focus = ref(false);
 			const name = ref(null);
@@ -93,9 +95,11 @@
 			}
 
 			watch(
-				() => route.params.slug,
+				() => route.params.artslug,
 				newSlug => {
-					get_art(newSlug)
+					if(route.name==="article"){
+						get_art(newSlug)
+					}
 				}
 			)
 

@@ -16,7 +16,9 @@ class UserView(APIView):
 
 	def get(self, request, uname):
 		user = self.get_user(uname)
+		print(user)
 		serializer = UserSerializer(uname, context={"request":request})
+		print(serializer.data)
 		return Response(serializer.data, status=status.HTTP_200_OK)
 
 

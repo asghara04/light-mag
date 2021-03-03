@@ -6,10 +6,10 @@ div.img-sider{
 	overflow-y: hidden;
 	overflow-x: auto;
 }
-div.img-sider > img.side-img{
+div.img-sider a{
 	max-width: 45%;
 	max-height: 45%;
 }
-div.img-sider > *{
+div.img-sider *{
 	flex: 0 0 auto;
 }

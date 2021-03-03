@@ -72,14 +72,14 @@ class SubsCatCatView(APIView, PaginationMixin):
 
 
 class SubCatView(APIView):
-	def getter(self, slug):
+	def getter(self, cat, sub):
 		try:
-			return SubCat.objects.get(slug=slug)
+			return SubCat.objects.get(category=cat, slug=sub)
 		except:
 			raise Http404
 
-	def get(self, request, slug):
-		subcat = self.getter(slug)
+	def get(self, request, cat, sub):
+		subcat = self.getter(cat, sub)
 		serializer = SubCatSerializer(subcat, context={"request":request})
 		return Response(serializer.data, status=status.HTTP_200_OK)
 

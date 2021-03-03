@@ -1,10 +1,10 @@
-div#tabbed-nav{
+div#tabbednav{
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
 	flex-wrap: nowrap;
 }
-div#tabbed-nav button.tab-head{
+div#tabbednav button.tab-head{
 	background: transparent!important;
 	border: none!important;
 	flex: auto;
@@ -12,13 +12,12 @@ div#tabbed-nav button.tab-head{
 	cursor: pointer;
 	border-radius: 12px 12px 0 0;
 	padding: 0.7% 1%;
-	transition: 0.2s;
+	transition: 2s;
 }
-div#tabbed-nav button.tab-head.active{
+div#tabbednav button.tab-head.active{
 	background-color: #b6e3ff!important;
-	border-bottom: 5px solid #4d82cb!important;
-	transition: 0.1s!important;
+	border-bottom: 4px solid #4d82cb!important;
 }
-div#tabbed-nav button.tab-head:hover{
+div#tabbednav button.tab-head:hover{
 	background-color: #b6e3ff!important;
 }
