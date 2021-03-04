@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from django.http import Http404
 from .models import Category, SubCat
-from .serializer import CategorySerializer, SubCatSerializer
+from .serializer import AllCategorySerializer, CategorySerializer, SubCatSerializer
 from rest_framework.pagination import PageNumberPagination
 from lightmag.pagination import PaginationMixin
 
@@ -11,7 +11,7 @@ from lightmag.pagination import PaginationMixin
 class AllCatsView(APIView):
 	def get(self, request):
 		cats = Category.objects.all()
-		serializer = CategorySerializer(cats, many=True, context={"request":request})
+		serializer = AllCategorySerializer(cats, many=True, context={"request":request})
 		return Response(serializer.data, status=status.HTTP_200_OK)
 
 

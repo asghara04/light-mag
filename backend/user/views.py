@@ -16,9 +16,7 @@ class UserView(APIView):
 
 	def get(self, request, uname):
 		user = self.get_user(uname)
-		print(user)
-		serializer = UserSerializer(uname, context={"request":request})
-		print(serializer.data)
+		serializer = UserSerializer(user, context={"request":request})
 		return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -33,7 +31,7 @@ class MUsersView(APIView):
 		if serializer.is_valid():
 			serializer.save()
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
-		return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 

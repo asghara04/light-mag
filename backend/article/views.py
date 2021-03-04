@@ -7,6 +7,7 @@ from .serializer import ArticleSerializer, MArticleSerializer, MinArticleSeriali
 from rest_framework.permissions import IsAdminUser
 from rest_framework.pagination import PageNumberPagination
 from lightmag.pagination import PaginationMixin
+from rest_framework.renderers import JSONRenderer
 
 class ArticlesView(APIView, PaginationMixin):
 	pagination_class = PageNumberPagination()
@@ -20,6 +21,16 @@ class ArticlesView(APIView, PaginationMixin):
 			serializer = MinArticleSerializer(arts, many=True, context={"request":request})
 
 		return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+class ArticlesCountView(APIView):
+	renderder_classes = (JSONRenderer,)
+	def get(self, request, format=None):
+		art_count = Article.published.all().count()
+		content = {'count': art_count}
+		return Response(content, status=status.HTTP_200_OK)
+
 
 
 class ArticleView(APIView):

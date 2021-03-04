@@ -1,0 +1,6 @@
+.dashed{
+	padding: 1%;
+	border-radius: 2px;
+	margin: 1%;
+	border: 2px dashed #000000;
+}

@@ -1,4 +1,5 @@
-<template>
+
+<!-- <template>
 	<div class="pagination-com">
 		<router-link v-if="current>2" class="link-like" target="_blank" :to="{query: {page: 1}}" rel="مجله نور صفحه 1">1</router-link>
 		<p v-if="current>3">...</p>
@@ -17,7 +18,6 @@
 	export default{
 		name: "pagination",
 		props:{
-			path: String,
 			all: Number,
 			size: Number
 		},
@@ -31,4 +31,4 @@
 </script>
 <style>
 	@import '../assets/pagination.css';
-</style>
+</style> -->

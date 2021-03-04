@@ -1,6 +1,47 @@
 <template>
+	<!-- <h1>{{page||1}}</h1> -->
+	<!-- <pagination :key="page" :current="current" all="APIData.count" size="10"/> -->
+</template>
+<script>
+	// import {getAPI} from '@/axios.js';
+	// import {ref} from 'vue';
+	// import {useRoute} from 'vue-router';
+	// import pagination from '@/components/pagination.vue';
+	export default{
+		name: 'Home',
+		// props: ["page"],
+		setup(props){
+		},
+		components: {
+			pagination
+		}
+	};
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <template>
 	<div id="home">
-		<Lheader/>
 		<topslider/>
 		<div id="page" class="page" v-if="APIData">
 			<div class="right">
@@ -14,14 +55,13 @@
 						</div>
 					</article>
 				</div>
-				<pagination path="/" :all="APIData.count" :size="10"/>
+				<pagination :key="APIData.count" :all="APIData.count" :size="10"/>
 			</div>
 			<sidebar/>
 		</div>
 	</div>
 </template>
 <script>
-	import Lheader from '@/components/Lheader.vue';
 	import sidebar from '@/components/sidebar.vue';
 	import topslider from '@/components/topslider.vue';
 	import {getAPI} from '@/axios.js';
@@ -32,7 +72,6 @@
 	export default{
 		name: "Home",
 		components:{
-			Lheader,
 			sidebar,
 			topslider,
 			pagination
@@ -41,6 +80,7 @@
 		setup(props){
 			const page = ref(props.num||1);
 			const route = useRoute();
+
 			route.query.page = page.value;
 			const store = useStore();
 			const APIData = computed(()=>store.state.APIData);
@@ -58,4 +98,4 @@
 </script>
 <style>
 	@import '../assets/home-spcial-list.css';
-</style>
+</style> -->

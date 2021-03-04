@@ -10,17 +10,17 @@ from category.models import Category
 
 class UserSerializer(serializers.Serializer):
 	id = serializers.IntegerField(read_only=True)
-	username = serializers.SlugField(read_only=True, max_length=30)
-	name = serializers.CharField(read_only=True, max_length=35 )
-	prof_picture = ImageSerializer(read_only=True)
-	pubmail = serializers.EmailField(read_only=True, max_length=30)
-	bio = serializers.CharField(read_only=True, max_length=400)
-	about = serializers.CharField(read_only=True, max_length=400)
-	favorite_cat = CategorySerializer(read_only=True)
-	instagram_link = serializers.URLField(read_only=True, max_length=35)
-	facebook_link = serializers.URLField(read_only=True, max_length=35)
-	github_link = serializers.URLField(read_only=True, max_length=35)
-	birthday = serializers.DateField(read_only=True)
+	username = serializers.CharField(max_length=30)
+	name = serializers.CharField(max_length=35 )
+	prof_picture = ImageSerializer()
+	pubmail = serializers.EmailField(max_length=30)
+	bio = serializers.CharField(max_length=400)
+	about = serializers.CharField(max_length=400)
+	favorite_cat = CategorySerializer()
+	instagram_link = serializers.URLField(max_length=35)
+	facebook_link = serializers.URLField(max_length=35)
+	github_link = serializers.URLField(max_length=35)
+	birthday = serializers.DateField()
 
 
 

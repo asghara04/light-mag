@@ -1,5 +1,18 @@
 .menuul{
 	background-color: #0D47A1;
+	/*
+	#0e50ba
+	5b7bed
+	002989
+	0c51c1
+
+	4792c1
+	006590
+	7cc2f4
+	39759b
+	00496d
+	6ba3cc
+	*/
 	white-space: nowrap;
 	overflow: auto;
 }
@@ -27,7 +40,7 @@
 	position: absolute;
 	margin: 0.8% 0 0 0;
 	display: none;
-	background-color: lightcyan;
+	background-color: #003eba;
 }
 .uli:hover .itemul{
 	display: block;
@@ -38,8 +51,7 @@
 	float: none;
 	display: list-item;
 	position: relative;
-	background-color: blue;
 }
 .iuli:hover{
-	background-color: cyan;
+	background-color: #0035a4;
 }

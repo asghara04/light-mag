@@ -1,9 +1,11 @@
 <template>
-	<Lheader/>
 	<topslider/>
 	<div v-if="APIData.image&&APIData.slug==this.$route.params.catslug" id="page" class="page">
 		<div class="right page-content">
 			<router-view :key="this.$route.params.subcatname" :id="APIData.id"/>
+			<span>
+				<router-link to="/" rel="مجله نور">صفحه اصلی</router-link> > <router-link :to="{name: 'category', params: {catslug: APIData.slug}}">{{APIData.name}}</router-link>
+			</span>
 			<article class="page-halfer">
 				<div class="half img-sider">
 					<router-link :to="{name: 'category', params: {catslug: APIData.slug}}" :rel="APIData.name">
@@ -19,7 +21,6 @@
 	</div>
 </template>
 <script>
-	import Lheader from '@/components/Lheader.vue';
 	import topslider from '@/components/topslider.vue';
 	import sidebar from '@/components/sidebar.vue';
 	import tabbednav from '@/components/tabbednav.vue';
@@ -31,7 +32,6 @@
 		name: "Category",
 		props: ["catslug"],
 		components:{
-			Lheader,
 			topslider,
 			sidebar,
 			tabbednav

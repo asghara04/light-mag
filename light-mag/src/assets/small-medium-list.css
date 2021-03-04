@@ -1,0 +1,26 @@
+div.small-medium-list{
+	display: flex;
+	justify-content: space-around;
+	text-align: center;
+	flex-direction: row;
+	flex-flow: wrap;
+	transition: 0.2s;
+}
+div.small-medium-list > .item:hover{
+	transform: scale(1.01);
+}
+@media(min-width: 600px){
+	div.small-medium-list > .item{
+		flex-basis: 13%;
+	}
+}
+@media(max-width: 600px){
+	div.small-medium-list > .item{
+		flex-basis: 22%;
+	}
+}
+@media(max-width: 300px){
+	div.small-medium-list > .item{
+		flex-basis: 34%;
+	}
+}

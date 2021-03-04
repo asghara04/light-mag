@@ -1,5 +1,8 @@
 <template>
 	<div v-if="subcat">
+		<span>
+			<router-link to='/' rel="مجله نور">صفحه اصلی</router-link> > <router-link :to="{name: 'category', params:{catslug: catslug}}">{{subcat.category}}</router-link> > <router-link :to="{name: 'subcat', params: {catslug: catslug, subcatname: subcat.slug}}">{{subcat.name}}</router-link>
+		</span>
 		<article class="page-halfer">
 			<div class="half img-sider">
 				<router-link :to="{name: 'subcat', params: {catslug: catslug, subcatname: subcat.slug}}" :rel="subcat.name"><img :src="subcat.image.image" :alt="subcat.image.alt" :name="subcat.image.name" class="side-img"></router-link>

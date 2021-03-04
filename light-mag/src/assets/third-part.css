@@ -1,0 +1,11 @@
+div.third-part{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+div.third-part div.third-one{
+	flex-basis: 31%;
+}
+div.third-part div.third-two{
+	flex-basis: 68%;
+}

@@ -1,6 +1,5 @@
-<template>
+<!-- <template>
 	<div v-if="APIData" id="categories">
-		<Lheader/>
 		<div class="medium-list page">
 			<article v-for="cat in APIData.results" :key="cat.id" :title="cat.name" class="art">
 				<router-link :to="'/categories/'+cat.slug">
@@ -13,7 +12,6 @@
 	</div>
 </template>
 <script>
-	import Lheader from '@/components/Lheader.vue';
 	import {getAPI} from '@/axios.js';
 	import pagination from '@/components/pagination.vue';
 	import {ref,computed} from 'vue';
@@ -23,7 +21,6 @@
 	export default{
 		name: "categories",
 		components:{
-			Lheader,
 			pagination
 		},
 		props:{"num": Number},
@@ -47,4 +44,4 @@
 </script>
 <style>
 	@import '../assets/medium-list.css';
-</style>
+</style> -->

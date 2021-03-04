@@ -40,6 +40,9 @@ img{
 .li-icon img{
 	float: right;
 }
+.blue-text{
+	color: #004c8d;
+}
 .ed-color{
 	color: #ededed;
 }
@@ -79,6 +82,17 @@ img{
 	font-size: 32px;
 	margin: 1% 0;
 	display: inline-block;
+}
+@media(max-width: 850px){
+	.like-h2{
+		font-size: 28px;
+	}
+}
+@media(max-width: 575px){
+	.like-h2{
+		font-size: 22px;
+		margin: 0;
+	}
 }
 .like-h2:hover{
 	text-decoration: underline;

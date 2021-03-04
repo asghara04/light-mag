@@ -5,7 +5,7 @@ const routes = [
 		path: '/',
 		name: "Home",
 		component: () => import("@/views/Home.vue"),
-		props: route => ({num: parseInt(route.query.page)})
+		props: route => ({page: parseInt(route.query.page)})
 	},
 	{
 		path: "/article/:artslug",
@@ -22,7 +22,7 @@ const routes = [
 		path: "/categories",
 		name: "categories",
 		component: () => import("@/views/categories.vue"),
-		props: route => ({num: parseInt(route.query.page)}),
+		props: route => ({page: parseInt(route.query.page)}),
 	},
 	{
 		path: "/categories/:catslug",
@@ -39,16 +39,10 @@ const routes = [
 		]
 	},
 	{
-		path: "/user/:username/",
-		name: 'user',
+		path: "/user/:username/profile",
+		name: 'userprofile',
 		props: true,
-		children:[
-			{
-				path: 'profile',
-				name: 'userprofile',
-				component: ()=> import('@/views/userprofile.vue')
-			}
-		]
+		component: ()=> import('@/views/userprofile.vue')
 	},
 	{
 		path: "/about",

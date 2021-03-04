@@ -1,19 +1,21 @@
 <template>
 	<topnav v-if="wich()!=='admin'"/>
+	<Lheader v-if="wich()!=='admin'"/>
 	<lmnav v-if="wich()==='admin'&&this.$store.getters.logedIn"/>
 	<router-view/>
 	<Lfooter :wich="wich()"/>
 </template>
-
 <script>
 import topnav from '@/components/topnav.vue';
 import Lfooter from '@/components/Lfooter.vue';
 import lmnav from "@/components/lm-nav.vue";
+import Lheader from '@/components/Lheader.vue';
 export default {
 	name: 'App',
 	components: {
 		topnav,
 		Lfooter,
+		Lheader,
 		lmnav
 	},
 	methods:{
@@ -23,7 +25,6 @@ export default {
 	}
 };
 </script>
-
 <style>
-	@import 'assets/light-mag.css';
+	@import './assets/light-mag.css';
 </style>

@@ -1,6 +1,5 @@
 <template>
 	<div>
-	<Lheader></Lheader>
 	<topslider></topslider>
 	<div id="page" class="page">
 		<article class="right page-content" v-if="APIData">
@@ -14,6 +13,10 @@
 			<p class="body">
 				{{APIData.body}}
 			</p>
+
+			<hr>
+				<router-link :to="{name: 'userprofile', params: {username: APIData.author.username}}">{{APIData.author.name}}</router-link>
+			<hr>
 
 			<div id="comments">
 				<!-- other comments -->
@@ -35,7 +38,6 @@
 </div>
 </template>
 <script>
-	import Lheader from '@/components/Lheader.vue';
 	import topslider from '@/components/topslider.vue';
 	import {getAPI} from '@/axios.js';
 	import sidebar from '@/components/sidebar.vue';
@@ -45,7 +47,6 @@
 	export default{
 		name: "Article",
 		components:{
-			Lheader,
 			sidebar,
 			topslider
 		},
