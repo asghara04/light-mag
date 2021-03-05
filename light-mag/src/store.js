@@ -29,6 +29,7 @@ const store = createStore({
 	},
 	actions:{
 		RefreshToken(context){
+			alert(1);
 			return new Promise((resolve, reject)=>{
 				axiosBase.post("/users/auth/refresh_token/", {token: context.state.refreshToken})
 				.then(response => {
@@ -37,8 +38,9 @@ const store = createStore({
 					resolve(response)
 				})
 				.catch(err => {
-					console.log("error in refresh token request")
-					reject(err)
+					context.dispatch("logoutUser");
+					console.log("error in refresh token request");
+					reject(err);
 				})
 			})
 		},

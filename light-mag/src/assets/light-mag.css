@@ -9,10 +9,10 @@
 	padding: 0;
 	outline: none;
 	box-sizing: border-box;
+	font-family: "ISR";
 }
 body{
 	direction: rtl;
-	font-family: "ISR";
 	background-color: #d1def2;
 	font-size: 20px;
 }
@@ -96,4 +96,10 @@ img{
 }
 .like-h2:hover{
 	text-decoration: underline;
+}
+.red-text{
+	color: #ff3232;
+}
+.gray-back{
+	background: gray;
 }

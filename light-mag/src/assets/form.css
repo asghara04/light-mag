@@ -1,15 +1,49 @@
-.data-field{
-	width: 98%;
-	padding:  .3% 2% 3% 2%;
-	display: block;
-	font-size: 17px;
+form.form{
+	padding: 1%;
+	background: #dddddd;
+	border-radius: 6px;
 }
-.sub-button{
-	margin: 6% auto;
-	padding: 3.5% 10%;
-	font-size: 20px;
+form.form .data-field{
+	width: 100%;
+	padding:  0.5%;
+	display: block;
+	font-size: 18px;
+	margin: 0 0 2% 0;
+	border: 1px outset #212121;
+	border-radius: 5px;
+}
+form.form p.red-text{
+	font-size: 18px;
+}
+form.form .sub-button{
+	margin: 4% auto 0 auto;
+	display: flex;
+	padding: 0.8% 4%;
+	font-size: 24px;
 	border: none;
 	border-radius: 5px;
 	background-color: #004c8d;
 	color: #ededed;
+}
+@media(max-width: 750px){
+	form.form{
+		padding: 5% 1%;
+	}
+	form.form p.red-text{
+		font-size: 15px;
+	}
+	form.form .data-field{
+		border-radius: 2px;
+		font-size: 16px;
+		padding: 1%;
+		margin: 0 0 6% 0;
+		line-height: 105%;
+	}
+	form.form button.sub-button{
+		font-size: 20px;
+	}
+	form.form button.sub-button{
+		padding: 1% 7%;
+		font-size: 20px;
+	}
 }

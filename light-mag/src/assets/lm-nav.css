@@ -23,12 +23,16 @@ aside#highsidebar .router-link-exact-active{
 aside#highsidebar a.link-like.text-icon span{
 	flex: 0.5;
 }
+div#app.sidenav-medium > *{
+	transition: 0.2s!important;
+}
 @media(min-width: 775px){
 	aside#highsidebar.open-side{
 		width: 18%;
 	}
 	div#app.sidenav-large > *{
 		margin: 0 18% 0 0;
+		transition: 0.2s;
 	}
 	div#app.sidenav-medium > *{
 		margin: 0 5% 0 0;
@@ -49,6 +53,9 @@ aside#highsidebar a.link-like.text-icon span{
 		width: 70%;
 	}
 	div#app{
+		margin: 0 0 0 0!important;
+	}
+	div#app > *{
 		margin: 0 0 0 0!important;
 	}
 	aside#highsidebar.open{

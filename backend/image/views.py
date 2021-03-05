@@ -12,7 +12,7 @@ class ImagesView(APIView):
 	def get(self, request):
 		images = Image.objects.all()
 		serializer = ImageSerializer(images, many=True, context={"request":request})
-		return Response(serializers.data, status=status.HTTP_200_OK)
+		return Response(serializer.data, status=status.HTTP_200_OK)
 	def post(self, request):
 		serialazer = ImageSerializer(data=request.data, context={"request":request})
 		if serializer.is_valid():

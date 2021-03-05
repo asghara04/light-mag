@@ -9,7 +9,7 @@ class CommentSerializer(serializers.Serializer):
 	name = serializers.CharField(max_length=30)
 	email = serializers.EmailField(max_length=30)
 	date = serializers.DateTimeField(read_only=True)
-	message = serializers.CharField(max_length=250)
+	message = serializers.CharField(max_length=350)
 	personal = serializers.BooleanField(default=False)
 
 	def create(self, validated_data):
@@ -22,7 +22,7 @@ class MCommentSerializer(serializers.Serializer):
 	name = serializers.CharField(max_length=30)
 	email = serializers.EmailField(max_length=30)
 	date = serializers.DateTimeField(read_only=True)
-	message = serializers.CharField(max_length=250)
+	message = serializers.CharField(max_length=350)
 	personal = serializers.BooleanField(default=False)
 	status = serializers.BooleanField(default=False)
 	readed = serializers.BooleanField(default=False)

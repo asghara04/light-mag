@@ -6,6 +6,7 @@ from .models import Category, SubCat
 from .serializer import AllCategorySerializer, CategorySerializer, SubCatSerializer
 from rest_framework.pagination import PageNumberPagination
 from lightmag.pagination import PaginationMixin
+from rest_framework.renderers import JSONRenderer
 
 
 class AllCatsView(APIView):
@@ -31,6 +32,14 @@ class CategoriesView(APIView, PaginationMixin):
 			serializer.save()
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CategoriesCountView(APIView):
+	renderer_classes = (JSONRenderer,)
+	def get(self, request, format=None):
+		cats_count = Category.objects.all().count()
+		content = {'count': cats_count}
+		return Response(content, status=status.HTTP_200_OK)
 
 
 class CategoryView(APIView):

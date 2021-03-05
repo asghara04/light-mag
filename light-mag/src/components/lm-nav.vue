@@ -13,6 +13,7 @@
 		<router-link to="/LM-admin/articles" class="text-icon link-like"><img src="../assets/imgs/article.svg"><span>نوشته ها</span></router-link>
 		<router-link to="/LM-admin/comments" class="text-icon link-like"><img src="../assets/imgs/comment.svg"><span>کامنت ها</span></router-link>
 		<router-link to="/LM-admin/tags" class="text-icon link-like"><img src="../assets/imgs/tag.svg"><span>تگ ها</span></router-link>
+		<router-link to="/LM-admin/images" class="text-icon link-like"><img src="../assets/imgs/image.svg"><span>تصاویر</span></router-link>
 		<router-link to='/LM-admin/users' class="text-icon link-like"><img src="../assets/imgs/group.svg"><span>کاربران</span></router-link>
 		<a class="text-icon link-like" target="_blank" href="https://light-mag.ir/games"><img src="../assets/imgs/game.svg"><span>گیم ها</span></a>
 		<router-link to='/LM-admin/settings' class="text-icon link-like"><img src="../assets/imgs/settings.svg"><span>تنظیمات</span></router-link>

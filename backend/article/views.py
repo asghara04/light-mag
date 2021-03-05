@@ -25,7 +25,7 @@ class ArticlesView(APIView, PaginationMixin):
 
 
 class ArticlesCountView(APIView):
-	renderder_classes = (JSONRenderer,)
+	renderer_classes = (JSONRenderer,)
 	def get(self, request, format=None):
 		art_count = Article.published.all().count()
 		content = {'count': art_count}

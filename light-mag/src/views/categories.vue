@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
 	<div v-if="APIData" id="categories">
 		<div class="medium-list page">
 			<article v-for="cat in APIData.results" :key="cat.id" :title="cat.name" class="art">
@@ -8,16 +8,15 @@
 				</router-link>
 			</article>
 		</div>
-		<pagination path="/categories" :all="APIData.count" :size="10"/>
+		<pagination :key="current" :current="current" :all="APIData.count" :size="10"/>
 	</div>
 </template>
 <script>
 	import {getAPI} from '@/axios.js';
 	import pagination from '@/components/pagination.vue';
-	import {ref,computed} from 'vue';
+	import {ref,computed, watch} from 'vue';
 	import {useRoute} from 'vue-router';
 	import {useStore} from 'vuex';
-
 	export default{
 		name: "categories",
 		components:{
@@ -25,23 +24,44 @@
 		},
 		props:{"num": Number},
 		setup(props){
-			const page = ref(props.num||1);
-			const route = useRoute();
-			route.query.param = page.value;
-			const store = useStore();
-			const APIData = computed(()=>store.state.APIData)
+			const current = ref(1);
+			const size = ref(10);
 
-			function get_cats(){
-				getAPI.get("categories/api/v1/?page="+page.value)
+			function set_current(){
+				getAPI.get('categories/all/api/v1/count/')
+				.then(res=> {
+					if((props.page)<=parseInt((res.data.count+size.value-1)/size.value)){
+						current.value = props.page||1;
+					}
+				})
+				.catch(err => console.log(err))
+			}
+			set_current();
+
+			const store = useStore();
+			const APIData = computed(() => store.state.APIData);
+
+			function get_cats(current){
+				getAPI.get("categories/api/v1/?page="+current)
 				.then(res => store.state.APIData = res.data)
 				.catch(err => console.log(err))
 			}
-			get_cats();
+			get_cats(current.value);
 
-			return{APIData}
+
+			const route = useRoute();
+			watch(
+				() => route.query.page,
+				newPage => {
+					set_current();
+					get_cats(newPage);
+				}
+			)
+
+			return{APIData ,current}
 		}
 	};
 </script>
 <style>
 	@import '../assets/medium-list.css';
-</style> -->
+</style>

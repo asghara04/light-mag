@@ -1,46 +1,4 @@
 <template>
-	<!-- <h1>{{page||1}}</h1> -->
-	<!-- <pagination :key="page" :current="current" all="APIData.count" size="10"/> -->
-</template>
-<script>
-	// import {getAPI} from '@/axios.js';
-	// import {ref} from 'vue';
-	// import {useRoute} from 'vue-router';
-	// import pagination from '@/components/pagination.vue';
-	export default{
-		name: 'Home',
-		// props: ["page"],
-		setup(props){
-		},
-		components: {
-			pagination
-		}
-	};
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <template>
 	<div id="home">
 		<topslider/>
 		<div id="page" class="page" v-if="APIData">
@@ -55,47 +13,66 @@
 						</div>
 					</article>
 				</div>
-				<pagination :key="APIData.count" :all="APIData.count" :size="10"/>
+				<pagination :key="current" :current="current" :all="APIData.count" :size="10"/>
 			</div>
 			<sidebar/>
 		</div>
 	</div>
 </template>
 <script>
-	import sidebar from '@/components/sidebar.vue';
-	import topslider from '@/components/topslider.vue';
 	import {getAPI} from '@/axios.js';
-	import pagination from '@/components/pagination.vue';
-	import {ref,computed} from 'vue';
+	import {ref, watch, computed} from 'vue';
 	import {useStore} from 'vuex';
 	import {useRoute} from 'vue-router';
+	import topslider from '@/components/topslider.vue';
+	import sidebar from '@/components/sidebar.vue';
+	import pagination from '@/components/pagination.vue';
 	export default{
-		name: "Home",
-		components:{
-			sidebar,
-			topslider,
-			pagination
-		},
-		props:{"num": Number},
+		name: 'Home',
+		props: ["page"],
 		setup(props){
-			const page = ref(props.num||1);
-			const route = useRoute();
+			const current = ref(1);
+			const size = ref(10);
 
-			route.query.page = page.value;
+			function set_current(){
+				getAPI.get('articles/api/v1/count/')
+				.then(res=> {
+					if((props.page)<=parseInt((res.data.count+size.value-1)/size.value)){
+						current.value = props.page||1;
+					}
+				})
+				.catch(err => console.log(err))
+			}
+			set_current();
+
 			const store = useStore();
-			const APIData = computed(()=>store.state.APIData);
+			const APIData = computed(() => store.state.APIData);
 
-			async function get_arts(){
-				await getAPI.get("articles/api/v1/?page="+page.value)
+			function get_arts(current){
+				getAPI.get("articles/api/v1/?page="+current)
 				.then(res => store.state.APIData = res.data)
 				.catch(err => console.log(err))
 			}
-			get_arts();
+			get_arts(current.value);
 
-			return{APIData}
+			const route = useRoute();
+			watch(
+				() => route.query.page,
+				newPage => {
+					set_current();
+					get_arts(newPage);
+				}
+			)
+
+			return{APIData ,current}
+		},
+		components: {
+			topslider,
+			sidebar,
+			pagination
 		}
 	};
 </script>
 <style>
 	@import '../assets/home-spcial-list.css';
-</style> -->
+</style>

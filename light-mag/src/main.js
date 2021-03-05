@@ -6,11 +6,28 @@ import arouter from '@/router/admin.js';
 const parts = window.location.host.split(".");
 const len = 3;
 function routes(){
-	let routes;
-	if(parts.length===len-1||(parts.length===len&&parts[0]==="www")){
-		routes = router
-	}else if(parts.length===len&&parts[0]==="admin"){
-		routes = arouter
+	let routes = router;
+	if(parts.length<=len-1||(parts.length===len&&parts[0]==="www")){
+		routes = router;
+	}else if(parts.length<=len&&parts[0]==="admin"){
+		routes = arouter;
+		routes.beforeEach((to, from, next) => {
+			if(to.matched.some(record => record.meta.requiresAuth)){
+				if(!store.getters.logedIn){
+					next({name: 'Login'});
+				}else{
+					next();
+				}
+			}else if(to.matched.some(record => record.meta.requiresUnAuth)){
+				if(store.getters.logedIn){
+					next({name: "admin-panel"});
+				}else{
+					next();
+				}
+			}else{
+				next()
+			}
+		})
 	}
 	return routes
 }

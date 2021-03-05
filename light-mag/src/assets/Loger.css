@@ -3,15 +3,64 @@ div#Loger div.centered{
 	border-radius: 10px;
 	margin: 1% 0;
 	box-shadow: 0 0 22px #121212;
-	padding: 1%;
+	padding: 1%!important;
+	max-width: 100%;
 }
 form#login-form *{
 	display: block;
 }
+@media(min-width: 1000px){
+	div#Loger div.centered{
+		width: 25%;
+	}
+}
+@media(max-width: 1000px){
+	div#Loger div.centered{
+		width: 35%;
+	}
+}
+@media(max-width: 750px){
+	div#Loger div.centered{
+		width: 40%;
+		padding: 3%!important;
+	}
+	div#Loger div.centered a{
+		font-size: 18px; 
+	}
+}
+@media(max-width: 650px){
+	div#Loger div.centered{
+		width: 65%;
+	}
+}
+@media(max-width: 450px){
+	div#Loger div.centered{
+		width: 80%;
+	}
+}
+@media(max-width: 350px){
+	div#Loger div.centered{
+		width: 95%;
+	}
+}
 form#login-form input{
 	border: none;
-	border-bottom: 2px solid #333333;
+	border-bottom: 2px solid #333333!important;
 	background: transparent;
+	padding: 0!important;
+}
+form#login-form{
+	background-color: transparent!important; 
+	padding: 0!important;
+	border: none!important;
+}
+form#login-form > button{
+	padding: 2% 10%;
+	margin: 8% auto 4% auto;
+	text-align: center;
+	align-items: center;
+	align-self: center;
+	align-content: center;
 }
 div#Loger div.centered h2, div#login-or{
 	text-align: center;

@@ -20,15 +20,18 @@
 
 			<div id="comments">
 				<!-- other comments -->
-					<h3>کامنت جدید:</h3>
-					<form @submit.prevent="commentsub(APIData.id)">
-						<textarea class="data-field" name="message" placeholder="نظر..." required="" @focus="focused" maxlength="250" v-model="message"></textarea>
-						<input v-if="focus" type="text" name="name" placeholder="نام..." required="" class="data-field" maxlength="30" v-model="name">
-						<input v-if="focus" type="email" name="email" required="" maxlength="30" class="data-field" placeholder="ایمیل..." v-model="email">
+					<p class="like-h2">کامنت جدید:</p>
+					<form class="form" @submit.prevent="commentsub(APIData.id)" method="post">
+						<p v-if="errs.message" class="red-text">* {{errs.message}}</p>
+						<textarea class="data-field" name="message" placeholder="نظر..." @focus="focused" maxlength="350" v-model="message"></textarea>
+						<p v-if="errs.name" class="red-text">* {{errs.name}}</p>
+						<input v-if="focus" type="text" name="name" placeholder="نام..." class="data-field" maxlength="30" v-model="name">
+						<p v-if="errs.email" class="red-text">* {{errs.email}}</p>
+						<input v-if="focus" type="email" name="email" maxlength="30" class="data-field" placeholder="ایمیل..." v-model="email">
 						<label v-if="focus" for="personal">ارسال خصوصی:</label>
 						<input v-if="focus" type="checkbox" name="personal" v-model="personal">
 						<br>
-						<button name="submit">ثبت</button>
+						<button class="sub-button">ثبت</button>
 					</form>
 			</div>
 			<!-- related article like a card slider or like movie websites top -->
@@ -68,6 +71,7 @@
 			const email = ref(null);
 			const message = ref(null);
 			const personal = ref(false);
+			const errs = ref({});
 
 			function focused(){
 				if(!focus.value){
@@ -75,7 +79,23 @@
 				}
 			}
 			function commentsub(artid){
-				if(name.value&&email.value&&message.value){
+				if(!name.value||!email.value||!message.value||!name.value.length<=30||!email.value.length<=30||!message.value.length<=350){
+					if(!name.value){
+						errs.value['name'] = "لطفا نام را وارد کنید.";
+					}else if(name.value.length>30){
+						errs.value['name'] = "نام وارد شده بیش از حداکثرمقدا است.";
+					}
+					if(!email.value){
+						errs.value['email'] = "لطفا ایمیل را وارد کنید."
+					}else if(email.value.length>30){
+						errs.value['email'] = "ایمیل وارد شده بیش از حداکثرمقدا است.";
+					}
+					if(!message.value){
+						errs.value['message'] = "لطفا کامنت را وارد کنید.";
+					}else if(message.value.length>350){
+						errs.value['message'] = "کامنت وارد شده بیش از حداکثرمقدا است.";
+					}
+				}else{
 					getAPI.post("comments/api/v1/"+artid+'/', {
 						name: name.value,
 						email: email.value,
@@ -90,8 +110,6 @@
 						personal.value = false;
 					})
 					.catch(err => {console.log(err);alert("خطایی رخ داد! لطفا دوباره امتحان کنید یا به ادمین اطلاع دهید.")})
-				}else{
-					alert("لطفا فیلد های مورد نظر را پر کنید.")
 				}
 			}
 
@@ -104,7 +122,7 @@
 				}
 			)
 
-			return{APIData, focus, name, email, message, personal, focused, commentsub}
+			return{APIData, focus, name, email, message, personal, focused, commentsub, errs}
 		}
 	};
 </script>

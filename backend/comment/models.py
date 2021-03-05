@@ -25,7 +25,7 @@ class Comment(models.Model):
 	name = models.CharField(max_length=30)
 	email = models.EmailField(max_length=30)
 	date = models.DateTimeField(auto_now_add=True)
-	message = models.TextField(max_length=250)
+	message = models.TextField(max_length=350)
 	personal = models.BooleanField(default=False)
 	status = models.BooleanField(default=False)
 	readed = models.BooleanField(default=False)
