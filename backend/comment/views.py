@@ -19,7 +19,7 @@ class ACommentsView(APIView):
 		serializer = CommentSerializer(data=request.data)
 		if serializer.is_valid():
 			serializer.save()
-			return Response({"message":"your comment successfully saved."}, status=status.HTTP_201_CREATED)
+			return Response({"message":"نظرتون با موفقیت ثبت شد.\nپس از تایید نمایش داده میشود."}, status=status.HTTP_201_CREATED)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

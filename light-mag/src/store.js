@@ -29,7 +29,6 @@ const store = createStore({
 	},
 	actions:{
 		RefreshToken(context){
-			alert(1);
 			return new Promise((resolve, reject)=>{
 				axiosBase.post("/users/auth/refresh_token/", {token: context.state.refreshToken})
 				.then(response => {
@@ -39,7 +38,6 @@ const store = createStore({
 				})
 				.catch(err => {
 					context.dispatch("logoutUser");
-					console.log("error in refresh token request");
 					reject(err);
 				})
 			})
@@ -64,16 +62,18 @@ const store = createStore({
 				return new Promise((resolve, reject)=> {
 					axiosBase.post("rest_auth/mapi/")//bug!'fix it later, its easy.'
 					.then(res=>{
-						localStorage.removeItem('access_token')
-						localStorage.removeItem('refresh_token')
-						context.commit("destroyToken")
-						resolve(res)
+						localStorage.removeItem('access_token');
+						localStorage.removeItem('refresh_token');
+						context.commit("destroyToken");
+						window.location.reload();
+						resolve(res);
 					})
 					.catch(err=>{
-						localStorage.removeItem("access_token")
-						localStorage.removeItem("refresh_token")
-						context.commit("destroyToken")
-						reject(err)
+						localStorage.removeItem("access_token");
+						localStorage.removeItem("refresh_token");
+						context.commit("destroyToken");
+						window.location.reload();
+						reject(err);
 					})
 				})
 			}

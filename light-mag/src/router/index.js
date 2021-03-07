@@ -55,10 +55,10 @@ const routes = [
 		component: () => import("@/views/contact.vue")
 	},
 	{
-		path: "/*",
-		name: "not found",
+		path: "/:pathMatch(.*)*",
+		name: "not_found",
 		component: () => import("@/views/404.vue")
-	}
+	},
 ]
 
 const router = createRouter({

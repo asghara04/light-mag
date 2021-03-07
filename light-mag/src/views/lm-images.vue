@@ -6,11 +6,12 @@
 				<router-link to="/LM-admin/add/image" class="text-icon lm-link lm-blue"><img src="../assets/imgs/add.svg"> جدید</router-link>
 			</div>
 			<hr>
-			refresh<br>
-			count<br>
-			pagination
-			<div v-if="APIData" class="medium-list">
-				<article v-for="(img, i) in APIData" :key="i" class="art">
+			<div class="page-halfer">
+				<p @click.prevent="get_imgs()" class="link-like half">تازه سازی</p>
+				<p class="half">کل: x</p>
+			</div>
+			<div v-if="APIData.results" class="medium-list">
+				<article v-for="(img, i) in APIData.results" :key="i" class="art">
 					<h2>{{img.name}}</h2>
 					<img :src="img.image">
 					<div class="page-halfer">
@@ -19,40 +20,71 @@
 					</div>
 				</article>
 			</div>
+			<pagination :current="current" :all="APIData.count" :size="10"/>
 		</div>
 	</div>
 </template>
 <script>
-	import {computed} from 'vue';
+	import {ref,computed,watch} from 'vue';
 	import {useStore} from 'vuex';
 	import {getAPI} from '@/axios.js';
+	import {useRoute} from 'vue-router';
+	import pagination from '@/components/pagination.vue';
 	export default{
 		name: 'lm-images',
-		setup(){
+		props: ["page"],
+		setup(props){
+			const current = ref(1);
+			const size = ref(10);
 			const store = useStore();
-			const APIData = computed(() => store.state.APIData);
-
-			function get_imgs(){
-				getAPI.get("images/mapi/v1", {headers: {Authorization: `JWT ${store.state.accessToken}`}})
-				.then(res => store.state.APIData = res.data)
-				.catch(err => console.log(err))
+			
+			async function set_current(){
+				try{
+					const res = await getAPI.get("images/mapi/v1/count/", {headers: {Authorization: `JWT ${store.state.accessToken}`}})
+					if((props.page)<=parseInt((res.data.count+size.value-1)/size.value)){
+						current.value = props.page||1;
+					}
+				}catch(err){
+					console.log(err);
+				}
 			}
-			get_imgs();
+			set_current();
+
+			const APIData = computed(() => store.state.APIData);
+			async function get_imgs(current){
+				try{
+					const res = await getAPI.get("images/mapi/v1/?page="+current, {headers: {Authorization: `JWT ${store.state.accessToken}`}})
+					store.state.APIData = res.data;
+				}catch(err){
+					console.log(err);
+					console.log(err.response);
+				}
+			}
+			get_imgs(current.value);
 
 			async function rm(imgid, i){
-				await getAPI.delete("images/mapi/v1/"+imgid, {headers: {Authorization: `JWT ${store.state.accessToken}`}})
-				.then(() => {
-					alert("تصویر "+APIData.value[i].name+" با موفقیت حذف شد.")
+				try{
+					await getAPI.delete("images/mapi/v1/"+imgid, {headers: {Authorization: `JWT ${store.state.accessToken}`}})
+					alert("تصویر "+APIData.value[i].name+" با موفقیت حذف شد.");
 					get_imgs();
-				})
-				.catch(err => {
+				}catch(err){
 					alert("حذف با خطا مواجه شد.");
 					console.log(err);
-				})
+				}
 			}
 
-
-			return{APIData, rm}
+			const route = useRoute();
+			watch(
+				()=> route.query.page,
+				()=> {
+					set_current();
+					get_imgs(current.value);
+				}
+			)
+			return{APIData, rm, get_imgs, current}
+		},
+		components:{
+			pagination
 		}
 	};
 </script>

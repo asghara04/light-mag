@@ -14,7 +14,7 @@
 <script>
 	import {getAPI} from '@/axios.js';
 	import pagination from '@/components/pagination.vue';
-	import {ref,computed, watch} from 'vue';
+	import {ref,computed,watch} from 'vue';
 	import {useRoute} from 'vue-router';
 	import {useStore} from 'vuex';
 	export default{
@@ -22,7 +22,7 @@
 		components:{
 			pagination
 		},
-		props:{"num": Number},
+		props:{"page": Number},
 		setup(props){
 			const current = ref(1);
 			const size = ref(10);
@@ -30,7 +30,7 @@
 			function set_current(){
 				getAPI.get('categories/all/api/v1/count/')
 				.then(res=> {
-					if((props.page)<=parseInt((res.data.count+size.value-1)/size.value)){
+					if(props.page<=parseInt((res.data.count+size.value-1)/size.value)){
 						current.value = props.page||1;
 					}
 				})
@@ -52,9 +52,9 @@
 			const route = useRoute();
 			watch(
 				() => route.query.page,
-				newPage => {
+				() => {
 					set_current();
-					get_cats(newPage);
+					get_cats(current.value);
 				}
 			)
 

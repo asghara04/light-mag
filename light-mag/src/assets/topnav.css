@@ -36,7 +36,7 @@
 	border-radius: 0 5px 5px 0;
 	height: 100%;
 	border: none;
-	font-size: 16px;
+	font-size: 20px;
 }
 .search-button{
 	float: left;
@@ -72,6 +72,9 @@ div#topdiv > *{
 		left: 4px;
 		border-radius: 7px;
 		border: 3px solid #004c8b;
+	}
+	.search-field{
+		font-size: 18px;
 	}
 	#search-form.block{
 		top: 47px;
@@ -125,6 +128,9 @@ div#topdiv > *{
 	}
 	#search-form.block{
 		top: 39px;
+	}
+	.search-field{
+		font-size: 16px;
 	}
 }
 @media(max-width: 160px){

@@ -15,7 +15,7 @@
 			</p>
 
 			<hr>
-				<router-link :to="{name: 'userprofile', params: {username: APIData.author.username}}">{{APIData.author.name}}</router-link>
+				<router-link v-if="APIData.author" :to="{name: 'userprofile', params: {username: APIData.author.username}}">{{APIData.author.name}}</router-link>
 			<hr>
 
 			<div id="comments">
@@ -79,7 +79,7 @@
 				}
 			}
 			function commentsub(artid){
-				if(!name.value||!email.value||!message.value||!name.value.length<=30||!email.value.length<=30||!message.value.length<=350){
+				if(!name.value||!email.value||!message.value||name.value.length>30||email.value.length>30||message.value.length>350){
 					if(!name.value){
 						errs.value['name'] = "لطفا نام را وارد کنید.";
 					}else if(name.value.length>30){
@@ -102,14 +102,18 @@
 						message: message.value,
 						personal: personal.value
 					})
-					.then(() => {
-						alert("نظرتون با موفقیت ثبت شد.\nپس از تایید نمایش داده میشود.");
-						name.value = '';
-						email.value = '';
-						message.value = '';
-						personal.value = false;
+					.then((res)=> {
+						if(res.status===201){
+							alert("نظرتون با موفقیت ثبت شد.\nپس از تایید نمایش داده میشود.");
+							name.value = '';
+							email.value = '';
+							message.value = '';
+							personal.value = false;
+						}else{
+							console.log(res)
+						}
 					})
-					.catch(err => {console.log(err);alert("خطایی رخ داد! لطفا دوباره امتحان کنید یا به ادمین اطلاع دهید.")})
+					.catch((err) => {console.log(err);alert("خطایی رخ داد! لطفا دوباره امتحان کنید.")})
 				}
 			}
 

@@ -58,9 +58,9 @@
 			const route = useRoute();
 			watch(
 				() => route.query.page,
-				newPage => {
+				() => {
 					set_current();
-					get_arts(newPage);
+					get_arts(current.value);
 				}
 			)
 

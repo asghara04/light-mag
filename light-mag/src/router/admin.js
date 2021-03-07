@@ -69,6 +69,7 @@ const routes = [
 		path: "/LM-admin/images",
 		name: 'lm-images',
 		component: () => import("@/views/lm-images.vue"),
+		props: route => ({page: parseInt(route.query.page)}),
 		meta:{
 			requiresAuth: true
 		}
