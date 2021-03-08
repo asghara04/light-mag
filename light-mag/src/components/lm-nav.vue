@@ -9,7 +9,7 @@
 	</nav>
 	<aside id="highsidebar" :class="{'open-side':user&&showmenu&&largescreen,'close-side':user&&!showmenu&&largescreen,'open':user&&showmenu&&smallscreen}">
 		<router-link :to="{name: 'admin-panel'}" class="text-icon link-like"><img src="../assets/imgs/dashboard.svg"><span>داشبورد</span></router-link>
-		<router-link to="/LM-admin/categories" class="text-icon link-like"><img src="../assets/imgs/cats.svg"><span>موضوعات</span></router-link>
+		<router-link to="/LM-admin/categories" class="text-icon link-like"><img src="../assets/imgs/cats.svg"><span>دسته ها</span></router-link>
 		<router-link to="/LM-admin/articles" class="text-icon link-like"><img src="../assets/imgs/article.svg"><span>نوشته ها</span></router-link>
 		<router-link to="/LM-admin/comments" class="text-icon link-like"><img src="../assets/imgs/comment.svg"><span>کامنت ها</span></router-link>
 		<router-link to="/LM-admin/tags" class="text-icon link-like"><img src="../assets/imgs/tag.svg"><span>تگ ها</span></router-link>

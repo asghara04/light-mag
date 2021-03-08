@@ -8,7 +8,7 @@
 			</span>
 			<article class="page-halfer">
 				<div class="half img-sider">
-					<router-link :to="{name: 'category', params: {catslug: APIData.slug}}" :rel="APIData.name">
+					<router-link :to="{name: 'category', params: {catslug: APIData.slug}}" :rel="APIData.name" class="side">
 						<img :src="APIData.image.image" :alt="APIData.image.alt" :name="APIData.image.name" class="side-img">
 					</router-link>
 					<h2><router-link :to="{name: 'category', params:{catslug: APIData.slug}}">{{APIData.name}}</router-link></h2>

@@ -5,17 +5,26 @@ div.spcial-list article.article{
 div.spcial-list article.article:hover{
 	transform: scale(1.02);
 }
+div.spcial-list article.article.yay-sider .sider{
+	text-align: center;
+}
+div.spcial-list article.article.yay-sider .sider img{
+	max-width: 100%;
+	max-height: 100%;
+	min-width: 80%;
+	min-height: 80%;
+}
 @media(min-width: 650px){
-	div.spcial-list article.article{
+	div.spcial-list article.article.yay-sider{
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		margin: 0 0 1% 0;
 	}
-	div.spcial-list article.article a{
+	div.spcial-list article.article.yay-sider .sider{
 		flex: 0.29;
 	}
-	div.spcial-list article.article div{
+	div.spcial-list article.article.yay-sider .high-content{
 		flex: 0.69;
 	}
 }
@@ -32,26 +41,26 @@ div.spcial-list article.article:hover{
 	}
 }
 @media(min-width: 950px){
-	div.spcial-list article.article a{
+	div.spcial-list article.article.yay-sider .sider{
 		flex: 0.29;
 	}
-	div.spcial-list article.article div{
+	div.spcial-list article.article.yay-sider .hight-content{
 		flex: 0.69;
 	}
 }
 @media(max-width: 950px){
-	div.spcial-list article.article a{
+	div.spcial-list article.article.yay-sider .sider{
 		flex: 0.39;
 	}
-	div.spcial-list article.article div{
+	div.spcial-list article.article.yay-sider .high-content{
 		flex: 0.59;
 	}
 }
 @media(max-width: 750px){
-	div.spcial-list article.article a{
+	div.spcial-list article.article.yay-sider .sider{
 		flex: 0.34;
 	}
-	div.spcial-list article.article div{
+	div.spcial-list article.article.yay-sider .high-content{
 		flex: 0.64;
 	}
 	div.spcial-list article.article div h2{

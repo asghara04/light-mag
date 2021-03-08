@@ -1,10 +1,10 @@
 <template>
 	<div v-if="APIData" id="categories">
 		<div class="medium-list page">
-			<article v-for="cat in APIData.results" :key="cat.id" :title="cat.name" class="art">
+			<article v-for="(cat, i) in APIData.results" :key="i" :title="cat.name" class="art">
 				<router-link :to="'/categories/'+cat.slug">
 					<h2>{{cat.name}}</h2>
-					<img :src="cat.image.image" :name="cat.image.name" :alt="cat.image.alt">
+					<img v-if="cat.image" :src="cat.image.image" :name="cat.image.name" :alt="cat.image.alt">
 				</router-link>
 			</article>
 		</div>
@@ -15,7 +15,6 @@
 	import {getAPI} from '@/axios.js';
 	import pagination from '@/components/pagination.vue';
 	import {ref,computed,watch} from 'vue';
-	import {useRoute} from 'vue-router';
 	import {useStore} from 'vuex';
 	export default{
 		name: "categories",
@@ -26,35 +25,34 @@
 		setup(props){
 			const current = ref(1);
 			const size = ref(10);
-
-			function set_current(){
-				getAPI.get('categories/all/api/v1/count/')
-				.then(res=> {
+			async function set_current(){
+				try{
+					const res = await getAPI.get("categories/all/api/v1/count/")
 					if(props.page<=parseInt((res.data.count+size.value-1)/size.value)){
 						current.value = props.page||1;
 					}
-				})
-				.catch(err => console.log(err))
+					get_cats(current.value);
+				}catch(err){
+					console.log(err);
+				}
 			}
 			set_current();
 
 			const store = useStore();
 			const APIData = computed(() => store.state.APIData);
-
-			function get_cats(current){
-				getAPI.get("categories/api/v1/?page="+current)
-				.then(res => store.state.APIData = res.data)
-				.catch(err => console.log(err))
+			async function get_cats(current){
+				try{
+					const res = await getAPI.get("categories/api/v1/?page="+current);
+					store.state.APIData = res.data;
+				}catch(err){
+					console.log(err)
+				}
 			}
-			get_cats(current.value);
 
-
-			const route = useRoute();
 			watch(
-				() => route.query.page,
+				() => props.page,
 				() => {
 					set_current();
-					get_cats(current.value);
 				}
 			)
 

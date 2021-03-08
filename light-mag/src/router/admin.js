@@ -38,6 +38,12 @@ const routes = [
 				name: "lm-add-image",
 				meta:{requiresAuth: true},
 				component: () => import("@/views/lm-add-image.vue")
+			},
+			{
+				path: "category",
+				name: "lm-add-category",
+				meta:{requiresAuth:true},
+				component: ()=>import("@/views/lm-add-category.vue")
 			}
 		]
 	},
@@ -53,6 +59,7 @@ const routes = [
 		path: "/LM-admin/categories",
 		name: "lm-categories",
 		component: () => import("@/views/lm-categories.vue"),
+		props: route => ({page: parseInt(route.query.page)}),
 		meta:{
 			requiresAuth: true
 		}

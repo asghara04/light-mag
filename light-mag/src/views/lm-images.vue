@@ -1,14 +1,14 @@
 <template>
 	<div class="page">
-		<div class="page-content lm-page">
+		<div v-if="APIData" class="page-content lm-page">
 			<div class="lm-page-head">
 				<h2>تصاویر</h2>
 				<router-link to="/LM-admin/add/image" class="text-icon lm-link lm-blue"><img src="../assets/imgs/add.svg"> جدید</router-link>
 			</div>
 			<hr>
 			<div class="page-halfer">
-				<p @click.prevent="get_imgs()" class="link-like half">تازه سازی</p>
-				<p class="half">کل: x</p>
+				<p @click.prevent="get_imgs(current)" class="link-like half">تازه سازی</p>
+				<p class="link-like half">کل: {{APIData.count}}</p>
 			</div>
 			<div v-if="APIData.results" class="medium-list">
 				<article v-for="(img, i) in APIData.results" :key="i" class="art">
@@ -28,7 +28,6 @@
 	import {ref,computed,watch} from 'vue';
 	import {useStore} from 'vuex';
 	import {getAPI} from '@/axios.js';
-	import {useRoute} from 'vue-router';
 	import pagination from '@/components/pagination.vue';
 	export default{
 		name: 'lm-images',
@@ -44,6 +43,7 @@
 					if((props.page)<=parseInt((res.data.count+size.value-1)/size.value)){
 						current.value = props.page||1;
 					}
+					get_imgs(current.value);
 				}catch(err){
 					console.log(err);
 				}
@@ -60,25 +60,23 @@
 					console.log(err.response);
 				}
 			}
-			get_imgs(current.value);
 
 			async function rm(imgid, i){
-				try{
-					await getAPI.delete("images/mapi/v1/"+imgid, {headers: {Authorization: `JWT ${store.state.accessToken}`}})
-					alert("تصویر "+APIData.value[i].name+" با موفقیت حذف شد.");
-					get_imgs();
-				}catch(err){
-					alert("حذف با خطا مواجه شد.");
-					console.log(err);
+				if(confirm(`آیا قصد حذف تصویر ${APIData.value.results[i].name} را دارید؟`)){
+					try{
+						await getAPI.delete("images/mapi/v1/"+imgid, {headers: {Authorization: `JWT ${store.state.accessToken}`}});
+					get_imgs(current.value);
+					}catch(err){
+						alert("حذف با خطا مواجه شد.");
+						console.log(err);
+					}
 				}
 			}
 
-			const route = useRoute();
 			watch(
-				()=> route.query.page,
+				()=> props.page,
 				()=> {
 					set_current();
-					get_imgs(current.value);
 				}
 			)
 			return{APIData, rm, get_imgs, current}

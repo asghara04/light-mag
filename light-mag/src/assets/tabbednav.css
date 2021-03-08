@@ -12,7 +12,7 @@ div#tabbednav button.tab-head{
 	cursor: pointer;
 	border-radius: 12px 12px 0 0;
 	padding: 0.7% 1%;
-	transition: 2s;
+	transition: 0.2s;
 }
 div#tabbednav button.tab-head.active{
 	background-color: #b6e3ff!important;

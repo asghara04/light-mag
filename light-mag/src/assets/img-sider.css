@@ -5,11 +5,15 @@ div.img-sider{
 	flex-wrap: nowrap;
 	overflow-y: hidden;
 	overflow-x: auto;
+	margin: auto;
 }
-div.img-sider a{
-	max-width: 45%;
-	max-height: 45%;
-}
-div.img-sider *{
+div.img-sider > *{
 	flex: 0 0 auto;
+}
+div.img-sider .side{
+	flex-basis: 50%;
+}
+div.img-sider .side .side-img{
+	min-width: 75%;
+	min-height: 75%;
 }

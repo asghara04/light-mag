@@ -74,5 +74,5 @@ class MinArticleSerializer(serializers.Serializer):
 	image = ImageSerializer(read_only=True)
 	description = serializers.CharField(read_only=True, max_length=200)
 	publish_date = serializers.DateTimeField(read_only=True)
-	status = serializers.CharField(read_only=True, max_length=8)
+	# status = serializers.CharField(read_only=True, max_length=8)
 	author = MinUserSerializer(read_only=True)
