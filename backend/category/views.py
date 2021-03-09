@@ -102,7 +102,8 @@ class SubsCatCatView(APIView, PaginationMixin):
 class SubCatView(APIView):
 	def getter(self, cat, sub):
 		try:
-			return SubCat.objects.get(category=cat, slug=sub)
+			category = Category.objects.get(slug=cat)
+			return category.subcats.get(slug=sub)
 		except:
 			raise Http404
 

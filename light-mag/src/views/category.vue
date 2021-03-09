@@ -1,14 +1,14 @@
 <template>
 	<topslider/>
-	<div v-if="APIData.image&&APIData.slug==this.$route.params.catslug" id="page" class="page">
+	<div v-if="APIData.slug==this.$route.params.catslug" id="page" class="page">
 		<div class="right page-content">
-			<router-view :key="this.$route.params.subcatname" :id="APIData.id"/>
+			<router-view :key="this.$route.params.catslug"/>
 			<span>
 				<router-link to="/" rel="مجله نور">صفحه اصلی</router-link> > <router-link :to="{name: 'category', params: {catslug: APIData.slug}}">{{APIData.name}}</router-link>
 			</span>
 			<article class="page-halfer">
 				<div class="half img-sider">
-					<router-link :to="{name: 'category', params: {catslug: APIData.slug}}" :rel="APIData.name" class="side">
+					<router-link v-if="APIData.image" :to="{name: 'category', params: {catslug: APIData.slug}}" :rel="APIData.name" class="side">
 						<img :src="APIData.image.image" :alt="APIData.image.alt" :name="APIData.image.name" class="side-img">
 					</router-link>
 					<h2><router-link :to="{name: 'category', params:{catslug: APIData.slug}}">{{APIData.name}}</router-link></h2>

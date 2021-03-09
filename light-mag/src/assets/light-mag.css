@@ -1,15 +1,17 @@
 @font-face{
 	font-family: "ISR";
-	src: url("./fonts/ISR.eot"), url("./fonts/ISR.woff") format("woff"), url("./fonts/ISR.ttf") format("ttf");
-	font-style: normal;
-	font-weight: normal;
+	src: url("./fonts/ISR.eot");
+	src: url("./fonts/ISR.eot?#iefix") format("embedded-opentype"),
+	url("./fonts/ISR.woff2") format("woff2"),
+	url("./fonts/ISR.woff") format("woff"),
+	url("./fonts/ISR.woff") format("woff");
 }
 *{
 	margin: 0;
 	padding: 0;
 	outline: none;
 	box-sizing: border-box;
-	font-family: "ISR";
+	font-family: "ISR", sans-serif;
 }
 body{
 	direction: rtl;
