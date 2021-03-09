@@ -9,6 +9,14 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.pagination import PageNumberPagination
 from lightmag.pagination import PaginationMixin
 
+nameUniqueError = {"name":["تصویر دیگری با همین نام وجود دارد."]}
+
+def unqiue_name(name):
+	for image in Image.objects.all():
+		if name==image.name:
+			return False
+	return True
+
 class ImagesView(APIView, PaginationMixin):
 	permission_classes = (IsAdminUser,)
 	pagination_class = PageNumberPagination()
@@ -23,8 +31,10 @@ class ImagesView(APIView, PaginationMixin):
 	def post(self, request):
 		serializer = ImageSerializer(data=request.data, context={"request":request})
 		if serializer.is_valid():
-			serializer.save()
-			return Response(serializer.data, status=status.HTTP_201_CREATED)
+			if unqiue_name(request.data['name']):
+				serializer.save()
+				return Response(serializer.data, status=status.HTTP_201_CREATED)
+			return Response(nameUniqueError, status=status.HTTP_400_BAD_REQUEST)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

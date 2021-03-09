@@ -52,23 +52,24 @@
 						}
 					}catch(err){
 						if(err.response.status===400){
+
 							if(err.response.data.image){
 								for(var i=0;i<err.response.data.image.length;i++){
 									errs.value.image.push(err.response.data.image[i]);
 								}
-							}else if(err.response.data.alt){
+							}
+							if(err.response.data.alt){
 								for(var n=0;n<err.response.data.alt.length;n++){
 									errs.value.alt.push(err.response.data.alt[n]);
 								}
-							}else if(err.response.data.name){
+							}
+							if(err.response.data.name){
 								for(var e=0;e<err.response.data.name.length;e++){
 									errs.value.name.push(err.response.data.name[e])
 								}
-							}else{
-								errs.value.image = [];
-								errs.value.alt = [];
-								errs.value.name = [];
-								console.log(err);
+							}
+							if(!err.response.data.image&&!err.response.data.image&&!err.response.alert.alt){
+								console.log(err)
 								alert("خطایی رخ داد. لطفا دوباره امتحان کنید.");
 							}
 						}else{
@@ -79,12 +80,12 @@
 					if(!alt.value){
 						errs.value.alt = ["آلترناتیو تصویر را وارد کنید."];
 					}else if(alt.value.length>25){
-						errs.value.alt = ["آلترناتیو تصویر باید کمتر از ۲۵ حرف باشد. اکنون "+alt.value.length+" تا است."];
+						errs.value.alt = ["آلترناتیو تصویر باید حداکثر ۲۵ حرف باشد. اکنون "+alt.value.length+" تا است."];
 					}
 					if(!name.value){
 						errs.value.name = ["نام تصویر را وارد کنید."];
 					}else if(name.value.length>25){
-						errs.value.name = ["نام تصویر باید کمتر از ۲۵ حرف باشد. اکنون "+name.value.length+" تا است."];
+						errs.value.name = ["نام تصویر باید حداکثر ۲۵ حرف باشد. اکنون "+name.value.length+" تا است."];
 					}
 					if(!image.value){
 						errs.value.image = ["باید تصویری انتخاب کنید!"];

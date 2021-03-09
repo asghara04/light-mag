@@ -12,7 +12,6 @@ class Category(models.Model):
 		ordering = ("-id",)
 
 
-
 class SubCat(models.Model):
 	category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="subcats")
 	image = models.ForeignKey(Image, on_delete=models.SET_NULL, null=True)

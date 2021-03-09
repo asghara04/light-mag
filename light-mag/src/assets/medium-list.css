@@ -53,3 +53,7 @@ article.art h2{
 		transform: scale(1.02);
 	}
 }
+.medium-list.selecting .art.selected{
+	border-radius: 5px;
+	border: 4px solid #004c8d;
+}

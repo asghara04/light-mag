@@ -6,8 +6,8 @@ class ImageSerializer(serializers.Serializer):
 	id = serializers.IntegerField(read_only=True)
 	image = serializers.ImageField()
 	alt = serializers.CharField(max_length=25)
-	name = serializers.CharField(max_length=25, validators=[UniqueValidator(queryset=Image.objects.all(), message="نام وارد شده قبلا اسفتاه شده است."),])#check the fucking thing!!!
-	
+	name = serializers.CharField(max_length=25)
+
 	def create(self, validated_data):
 		return Image.objects.create(**validated_data)
 	def update(self, instance, validated_data):

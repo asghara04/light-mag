@@ -24,6 +24,10 @@ form.form .sub-button{
 	border-radius: 5px;
 	background-color: #004c8d;
 	color: #ededed;
+	cursor: pointer;
+}
+form.form .sub-button:hover{
+	background-color: #003c7d;
 }
 @media(max-width: 750px){
 	form.form{

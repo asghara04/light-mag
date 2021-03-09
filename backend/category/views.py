@@ -8,6 +8,7 @@ from rest_framework.pagination import PageNumberPagination
 from lightmag.pagination import PaginationMixin
 from rest_framework.renderers import JSONRenderer
 
+errs = {'name':[],'slug':[]}
 
 class AllCatsView(APIView):
 	def get(self, request):
@@ -15,6 +16,17 @@ class AllCatsView(APIView):
 		serializer = AllCategorySerializer(cats, many=True, context={"request":request})
 		return Response(serializer.data, status=status.HTTP_200_OK)
 
+def unique_cat_name(name):
+	for cat in Category.objects.all():
+		if name==cat.name:
+			return False
+	return True
+
+def unique_cat_slug(slug):
+	for cat in Category.objects.all():
+		if slug==cat.slug:
+			return False
+	return True
 
 class CategoriesView(APIView, PaginationMixin):
 	pagination_class = PageNumberPagination()
@@ -29,8 +41,15 @@ class CategoriesView(APIView, PaginationMixin):
 	def post(self, request):
 		serializer = CategorySerializer(data=request.data, partial=True, context={"request":request})
 		if serializer.is_valid():
-			serializer.save()
-			return Response(serializer.data, status=status.HTTP_201_CREATED)
+			if unique_cat_name(request.data['name']) and unique_cat_slug(request.data['slug']):
+				serializer.save()
+				return Response(serializer.data, status=status.HTTP_201_CREATED)
+			if not unique_cat_name(request.data['name']):
+				errs['name'] = ["دسته دیگری با همین نام وجود دارد."]
+			if not unique_cat_slug(request.data['slug']):
+				errs['slug'] = ["دسته دیگری با همین اسلاگ وجود دارد."]
+			return Response(errs, status=status.HTTP_400_BAD_REQUEST)
+
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
