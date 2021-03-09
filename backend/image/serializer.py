@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Image
+from rest_framework.validators import UniqueValidator
 
 class ImageSerializer(serializers.Serializer):
 	id = serializers.IntegerField(read_only=True)
