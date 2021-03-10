@@ -84,6 +84,16 @@ class CategoryView(APIView):
 		return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+def uniqueSubCatName(catname,name):
+	for cat in Category.objects.get(name=catname).subcats.all():
+		if cat.name==name:
+			return False
+	return True
+def uniqueSubCatSlug(catname,slug):
+	for cat in Category.objects.get(name=catname).subcats.all():
+		if cat.slug==slug:
+			return False
+	return True
 
 class SubsCatCatView(APIView, PaginationMixin):
 	pagination_class = PageNumberPagination()
@@ -96,8 +106,18 @@ class SubsCatCatView(APIView, PaginationMixin):
 			serializer = SubCatSerializer(subcats, many=True, context={"request":request})
 		return Response(data=serializer.data, status=status.HTTP_200_OK)
 
-	# post
-
+	def post(self, request, pk):
+		serializer = SubCatSerializer(data=request.data, partial=True, context={"request":request})
+		if serializer.is_valid():
+			if uniqueSubCatName(request.data['category'],request.data['name']) and uniqueSubCatSlug(request.data['category'],request.data['slug']):
+				serializer.save()
+				return Response(serializer.data, status=status.HTTP_201_CREATED)
+			if not uniqueSubCatName(request.data['category'],request.data['name']):
+				errs['name'] = ['زیر دسته دیگری با همین نام در این دسته وجود دارد.']
+			if not uniqueSubCatSlug(request.data['category'],request.data['slug']):
+				errs['slug'] = ['زیر دسته دیگری با همین اسلاگ در این دسته وجود دارد.']
+			return Response(errs, status=status.HTTP_400_BAD_REQUEST)
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class SubCatView(APIView):
 	def getter(self, cat, sub):

@@ -48,13 +48,10 @@
 			get_cat(props.catslug)
 
 			const route = useRoute()
-
 			watch(
 				()=> route.params.catslug,
 				newSlug => {
-					if(route.name=="category"){
-						get_cat(newSlug)
-					}
+					get_cat(newSlug);
 				}
 			)
 

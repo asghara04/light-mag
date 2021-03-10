@@ -8,16 +8,18 @@
 		</div>
 	</nav>
 	<aside id="highsidebar" :class="{'open-side':user&&showmenu&&largescreen,'close-side':user&&!showmenu&&largescreen,'open':user&&showmenu&&smallscreen}">
-		<router-link :to="{name: 'admin-panel'}" class="text-icon link-like"><img src="../assets/imgs/dashboard.svg"><span>داشبورد</span></router-link>
-		<router-link to="/LM-admin/categories" class="text-icon link-like"><img src="../assets/imgs/cats.svg"><span>دسته ها</span></router-link>
-		<router-link to="/LM-admin/articles" class="text-icon link-like"><img src="../assets/imgs/article.svg"><span>نوشته ها</span></router-link>
-		<router-link to="/LM-admin/comments" class="text-icon link-like"><img src="../assets/imgs/comment.svg"><span>کامنت ها</span></router-link>
-		<router-link to="/LM-admin/tags" class="text-icon link-like"><img src="../assets/imgs/tag.svg"><span>تگ ها</span></router-link>
-		<router-link to="/LM-admin/images" class="text-icon link-like"><img src="../assets/imgs/image.svg"><span>تصاویر</span></router-link>
-		<router-link to='/LM-admin/users' class="text-icon link-like"><img src="../assets/imgs/group.svg"><span>کاربران</span></router-link>
-		<a class="text-icon link-like" target="_blank" href="https://light-mag.ir/games"><img src="../assets/imgs/game.svg"><span>گیم ها</span></a>
-		<router-link to='/LM-admin/settings' class="text-icon link-like"><img src="../assets/imgs/settings.svg"><span>تنظیمات</span></router-link>
-		<a href="https://light-mag.ir" class="text-icon link-like" target="_blank"><img src="../assets/imgs/webpage.svg"><span>نمایش اپ</span></a>
+		<ul>
+			<li id="dashboard-li"><router-link :to="{name: 'admin-panel'}" class="text-icon link-like"><img src="../assets/imgs/dashboard.svg"><span>داشبورد</span></router-link></li>
+			<li id="categories-li"><img v-if="showmenu" @click="liopener('categories-li')" class="left-float" src="../assets/imgs/down.svg"><router-link to="/LM-admin/categories" class="text-icon link-like"><img src="../assets/imgs/category.svg"><span>دسته ها</span></router-link><ul v-if="showmenu"><li><router-link to="/LM-admin/add/subcat" class="text-icon link-like"><img src="../assets/imgs/cats.svg"><span>زیردسته جدید</span></router-link></li><li><router-link to="/LM-admin/add/category" class="text-icon link-like"><img src="../assets/imgs/add.svg"><span>اضافه کردن</span></router-link></li></ul></li>
+			<li id="articles-li"><img v-if="showmenu" @click="liopener('articles-li')" class="left-float" src="../assets/imgs/down.svg"><router-link to="/LM-admin/articles" class="text-icon link-like"><img src="../assets/imgs/article.svg"><span>نوشته ها</span></router-link></li>
+			<li id="comments-li"><img v-if="showmenu" @click="liopener('comments-li')" class="left-float" src="../assets/imgs/down.svg"><router-link to="/LM-admin/comments" class="text-icon link-like"><img src="../assets/imgs/comment.svg"><span>کامنت ها</span></router-link></li>
+			<li id="tags-li"><img v-if="showmenu" @click="liopener('tags-li')" class="left-float" src="../assets/imgs/down.svg"><router-link to="/LM-admin/tags" class="text-icon link-like"><img src="../assets/imgs/tag.svg"><span>تگ ها</span></router-link></li>
+			<li id="images-li"><img v-if="showmenu" @click="liopener('images-li')" class="left-float" src="../assets/imgs/down.svg"><router-link to="/LM-admin/images" class="text-icon link-like"><img src="../assets/imgs/image.svg"><span>تصاویر</span></router-link><ul v-if="showmenu"><li><router-link to="/LM-admin/add/image" class="text-icon link-like"><img src="../assets/imgs/add.svg"><span>اضافه کردن</span></router-link></li></ul></li>
+			<li id="users-li"><img v-if="showmenu" @click="liopener('users-li')" class="left-float" src="../assets/imgs/down.svg"><router-link to='/LM-admin/users' class="text-icon link-like"><img src="../assets/imgs/group.svg"><span>کاربران</span></router-link></li>
+			<li><a class="text-icon link-like" target="_blank" href="https://light-mag.ir/games"><img src="../assets/imgs/game.svg"><span>گیم ها</span></a></li>
+			<li><router-link to='/LM-admin/settings' class="text-icon link-like"><img src="../assets/imgs/settings.svg"><span>تنظیمات</span></router-link></li>
+			<li><a href="https://light-mag.ir" class="text-icon link-like" target="_blank"><img src="../assets/imgs/webpage.svg"><span>نمایش اپ</span></a></li>
+		</ul>
 	</aside>
 </template>
 <script>
@@ -65,14 +67,20 @@
 					document.getElementById("app").classList = "sidenav-medium";
 				}				
 			}
-
 			function exit(){
 				if(smallscreen.value){
 					showmenu.value = false;
 				}
 			}
-
-			return{user, menu, exit, showmenu, largescreen, smallscreen}
+			function liopener(id){
+				const li = document.getElementById(id)
+				if(li.classList!=''){
+					li.classList = '';
+				}else{
+					li.classList = 'openli';
+				}
+			}
+			return{user, menu, exit, showmenu, largescreen, smallscreen, liopener}
 		}
 	};
 </script>

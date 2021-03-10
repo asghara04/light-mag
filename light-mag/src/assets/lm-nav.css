@@ -3,7 +3,7 @@ nav#topnav.lm-nav{
 }
 aside#highsidebar{
 	position: fixed;
-	background-color: #131313;
+	background-color: #090909;
 	right: 0;
 	color: #ededed;
 	white-space: nowrap;
@@ -16,15 +16,29 @@ aside#highsidebar{
 aside#highsidebar *{
 	padding: 1% 0;
 }
-aside#highsidebar .router-link-exact-active{
+aside#highsidebar > ul > li > .router-link-exact-active{
 	border-right: 5px solid #004c8d;
 	border-bottom: 2px solid #004c8d;
 }
-aside#highsidebar a.link-like.text-icon span{
+aside#highsidebar ul li a.link-like.text-icon span{
 	flex: 0.5;
 }
 div#app.sidenav-medium > *{
 	transition: 0.2s!important;
+}
+aside#highsidebar > ul > li > ul{
+	display: none;
+	background: #252525;
+}
+aside#highsidebar > ul > li.openli > ul, aside#highsidebar > ul > li:hover > ul{
+	display: block;
+}
+aside#highsidebar > ul > li.openli > ul > li:hover, aside#highsidebar > ul > li:hover > ul > li:hover, aside#highsidebar > ul > li.openli > ul > li > .router-link-exact-active{
+	background-color: #202020!important;
+}
+.left-float{
+	float: left;
+	padding: 2%!important;
 }
 @media(min-width: 775px){
 	aside#highsidebar.open-side{
@@ -40,7 +54,7 @@ div#app.sidenav-medium > *{
 	aside#highsidebar.close-side{
 		width: 5%;
 	}
-	aside#highsidebar.close-side > a > span{
+	aside#highsidebar.close-side ul li > a > span{
 		display: none;
 	}
 	aside#highsidebar.close-side > *{
@@ -61,12 +75,12 @@ div#app.sidenav-medium > *{
 	aside#highsidebar.open{
 		right: 0;
 	}
-	aside#highsidebar a.link-like.text-icon span{
+	aside#highsidebar ul li a.link-like.text-icon span{
 		flex: 0.3;
 	}
 }
 @media(max-width: 340px){
-	aside#highsidebar a.link-like.text-icon span{
+	aside#highsidebar ul li a.link-like.text-icon span{
 		flex: 0.6;
 	}
 }

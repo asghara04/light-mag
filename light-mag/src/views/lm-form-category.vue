@@ -1,5 +1,5 @@
 <template>
-	<h2>دسته جدید</h2>
+	<h2 class="cen">دسته جدید</h2>
 	<form class="form" @submit.prevent="sub()">
 		<label for="image">تصویر دسته: </label>
 		<span v-if="errs.image!=false"><p v-for="(err,i) in errs.image" :key="i" class="red-text">* {{err}}</p></span>
@@ -20,7 +20,7 @@
 	import {getAPI} from '@/axios.js';
 	import {useRouter} from 'vue-router';
 	export default{
-		name: "lm-add-category",
+		name: "LmFormCategory",
 		setup(){
 			const image = ref(null);
 			const name = ref(null);
@@ -34,6 +34,9 @@
 			const store = useStore();
 			const router = useRouter();
 			async function sub(){
+				errs.value.image = [];
+				errs.value.name = [];
+				errs.value.slug = [];
 				if(image.value&&image.value.length<=25&&name.value&&name.value.length<=25&&slug.value&&slug.value.length<=25){
 					try{
 						const res = await getAPI.post("categories/api/v1/", {
@@ -73,19 +76,19 @@
 					}
 				}else{
 					if(!image.value){
-						errs.value.image.push("لطفا تصویری انتخاب کنید.");
+						errs.value.image = ["لطفا تصویری انتخاب کنید."];
 					}else if(image.value.length>25){
-						errs.value.image.push("لطفا تصویر معتبری انتخاب کنید.");
+						errs.value.image = ["لطفا تصویر معتبری انتخاب کنید."];
 					}
 					if(!name.value){
-						errs.value.name.push("لطفا نام دسته را وارد کنید.");
+						errs.value.name = ["لطفا نام دسته را وارد کنید."];
 					}else if(name.value.length>25){
-						errs.value.name.push("نام تصویر باید حداکثر ۲۵ حرف باشد. اکنون "+name.value.length+" تا است.")
+						errs.value.name = ["نام تصویر باید حداکثر ۲۵ حرف باشد. اکنون "+name.value.length+" تا است."]
 					}
 					if(!slug.value){
-						errs.value.slug.push("لطفا اسلاگ دسته را وارد کنید.")
+						errs.value.slug = ["لطفا اسلاگ دسته را وارد کنید."]
 					}else if(slug.value.length>25){
-						errs.value.slug.push("اسلاگ تصویر باید حداکثر ۲۵ حرف باشد. اکنون "+name.value.length+" تا است.")
+						errs.value.slug = ["اسلاگ تصویر باید حداکثر ۲۵ حرف باشد. اکنون "+name.value.length+" تا است."]
 					}
 				}
 			}

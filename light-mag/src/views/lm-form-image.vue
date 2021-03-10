@@ -1,5 +1,5 @@
 <template>
-	<h2>تصویر جدید</h2>
+	<h2 class="cen">تصویر جدید</h2>
 	<form class="form" enctype="multipart/form-data" @submit.prevent="sub">
 		<img src="hi">
 		<label for="image">تصویر: </label>
@@ -20,7 +20,7 @@
 	import {useStore} from 'vuex';
 	import {useRouter} from 'vue-router';
 	export default{
-		name: "LmAddImage",
+		name: "LmFormImage",
 		setup(){
 			const image = ref(null);
 			const name = ref(null);
@@ -52,7 +52,6 @@
 						}
 					}catch(err){
 						if(err.response.status===400){
-
 							if(err.response.data.image){
 								for(var i=0;i<err.response.data.image.length;i++){
 									errs.value.image.push(err.response.data.image[i]);
@@ -78,17 +77,17 @@
 					}
 				}else{
 					if(!alt.value){
-						errs.value.alt = ["آلترناتیو تصویر را وارد کنید."];
+						errs.value.alt.push("آلترناتیو تصویر را وارد کنید.");
 					}else if(alt.value.length>25){
-						errs.value.alt = ["آلترناتیو تصویر باید حداکثر ۲۵ حرف باشد. اکنون "+alt.value.length+" تا است."];
+						errs.value.alt.push("آلترناتیو تصویر باید حداکثر ۲۵ حرف باشد. اکنون "+alt.value.length+" تا است.");
 					}
 					if(!name.value){
-						errs.value.name = ["نام تصویر را وارد کنید."];
+						errs.value.name.push("نام تصویر را وارد کنید.");
 					}else if(name.value.length>25){
-						errs.value.name = ["نام تصویر باید حداکثر ۲۵ حرف باشد. اکنون "+name.value.length+" تا است."];
+						errs.value.name.push("نام تصویر باید حداکثر ۲۵ حرف باشد. اکنون "+name.value.length+" تا است.");
 					}
 					if(!image.value){
-						errs.value.image = ["باید تصویری انتخاب کنید!"];
+						errs.value.image.push("باید تصویری انتخاب کنید!");
 					}
 				}
 			}

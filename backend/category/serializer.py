@@ -6,16 +6,15 @@ from image.models import Image
 
 class SubCatSerializer(serializers.Serializer):
 	id = serializers.IntegerField(read_only=True)
-	category = serializers.StringRelatedField()
+	category = serializers.SlugRelatedField(slug_field='name', queryset=Category.objects.all())
 	image = ImageSerializer()
 	name = serializers.CharField(max_length=25)
 	slug = serializers.SlugField(max_length=25)
 
 	def validate_image(self, value):
 		return get_object_or_404(Image, name=value["name"])
-
 	def create(self, validated_data):
-		return SubCat.Object.Create(**validated_data)
+		return SubCat.objects.create(**validated_data)
 	def update(self, instance, validated_data):
 		instance.category = validated_data.get("category", instance.category)
 		instance.image = validated_data.get("image", instance.image)
@@ -31,7 +30,6 @@ class AllCategorySerializer(serializers.Serializer):
 	name = serializers.CharField(read_only=True,max_length=25)
 	slug = serializers.SlugField(max_length=25, read_only=True)
 	subcats = SubCatSerializer(many=True, read_only=True)
-
 
 class CategorySerializer(serializers.Serializer):
 	id = serializers.IntegerField(read_only=True)

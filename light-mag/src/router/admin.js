@@ -35,16 +35,22 @@ const routes = [
 		children:[
 			{
 				path: "image",
-				name: "lm-add-image",
+				name: "lm-form-image",
 				meta:{requiresAuth: true},
-				component: () => import("@/views/lm-add-image.vue")
+				component: () => import("@/views/lm-form-image.vue")
 			},
 			{
 				path: "category",
-				name: "lm-add-category",
+				name: "lm-form-category",
 				meta:{requiresAuth:true},
-				component: ()=>import("@/views/lm-add-category.vue")
-			}
+				component: ()=>import("@/views/lm-form-category.vue")
+			},
+			{
+				path: "subcat",
+				name: "lm-form-subcat",
+				meta:{requiresAuth:true},
+				component: ()=>import("@/views/lm-form-subcat.vue")
+			},
 		]
 	},
 	{
@@ -60,6 +66,14 @@ const routes = [
 		name: "lm-categories",
 		component: () => import("@/views/lm-categories.vue"),
 		props: route => ({page: parseInt(route.query.page)}),
+		meta:{
+			requiresAuth: true
+		}
+	},
+	{
+		path: "/LM-admin/categories/:slug",
+		name: "lm-category",
+		component: () => import("@/views/lm-category.vue"),
 		meta:{
 			requiresAuth: true
 		}

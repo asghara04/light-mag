@@ -60,6 +60,7 @@
 				img.value = name;
 			}
 			async function subback(){
+				document.body.classList.add("freeze");
 				emit('selected',img.value);
 				if(img.value){
 					imgs.value = [];

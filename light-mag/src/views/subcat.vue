@@ -18,43 +18,42 @@
 	</div>
 </template>
 <script>
+	import {ref,watch} from 'vue';
+	import {useRoute} from 'vue-router';
+	import {getAPI} from '@/axios.js';
+	import tabbednav from '@/components/tabbednav.vue';
+	export default{
+		name: "Subcat",
+		props: ['catslug', "subcatname"],
+		setup(props){
+			const subcat = ref({});
 
-	// import {ref,watch} from 'vue';
-	// import {useRoute} from 'vue-router';
-	// import {getAPI} from '@/axios.js';
-	// import tabbednav from '@/components/tabbednav.vue';
-	// export default{
-	// 	name: "Subcat",
-	// 	props: ['catslug', "subcatname"],
-	// 	setup(props){
-	// 		const subcat = ref({});
+			async function get_subcat(slug,subslug){
+				try{
+					const res = await getAPI.get('categories/sub/api/v1/'+slug+'/'+subslug);
+					subcat.value = res.data
+				}catch(err){
+					console.log(err)
+				}
+			}
+			get_subcat(props.catslug,props.subcatname)
 
-	// 		async function get_subcat(slug,subslug){
-	// 			try{
-	// 				console.log(props.catslug)
-	// 				const res = await getAPI.get('categories/sub/api/v1/'+slug+'/'+subslug);
-	// 				subcat.value = res.data
-	// 			}catch(err){
-	// 				console.log(err)
-	// 			}
-	// 		}
-	// 		get_subcat(props.catslug,props.subcatname)
+			const route = useRoute();
+			watch(
+				()=> route.params.subcatname,
+				(newSubcatname) => {
+					if(route.params.catslug===props.catslug&&newSubcatname){
+						get_subcat(props.catslug,newSubcatname)
+					}
+				}
+			)
 
-	// 		const route = useRoute();
-	// 		watch(
-	// 			()=> route.params.catslug,
-	// 			()=> route.params.subcatname,
-	// 			(newCatslug,newSubcatname) => {
-	// 					get_subcat(newCatslug,newSubcatname)
-	// 			}
-	// 		)
-
-	// 		return{subcat}
-	// 	},
-	// 	components:{
-	// 		tabbednav
-	// 	}
-	// };
+			return{subcat}
+		},
+		components:{
+			tabbednav
+		}
+	};
 </script>
 <style>
 	@import '../assets/page-halfer.css';
