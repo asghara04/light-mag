@@ -71,7 +71,7 @@
 				}
 			}
 			function pagination(elem,end){
-				let bottom = (elem.innerHeight+elem.pageYOffset)>=(document.body.offsetHeight-20);
+				let bottom = (elem.innerHeight+elem.pageYOffset)>=(document.body.offsetHeight-20)&&(elem.innerHeight+elem.pageYOffset)==(document.body.offsetHeight);
 				if(end&&bottom===true){
 					get_subcats(end);
 				}

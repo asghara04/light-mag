@@ -1,10 +1,10 @@
 <template>
 	<div class="overlay" @click="close()" v-if="imgs!=false"></div>
-	<p align="center" class="data-field link-like" @click.prevent="get_imgs()">انتخاب تصویر</p>
-	<div v-if="imgs!=false" class="center-all">
+	<p align="center" class="data-field link-like" @click.prevent="get_imgs(endpoint)">انتخاب تصویر</p>
+	<div v-if="imgs!=false" ref="paginate" @scroll="pagination(endpoint)" class="center-all">
 		<button @click="close()" class="closer"><img src="../assets/imgs/exit.svg" alt="بستن"></button>
-		<div class="medium-list selecting" v-if="imgs.results">
-			<article v-for="(img,i) in imgs.results" @click="select(i,img.name)" :key="i" class="art" :class="{'selected':img.select}">
+		<div class="medium-list selecting" v-if="imgs">
+			<article v-for="(img,i) in imgs" @click="select(i,img.name)" :key="i" class="art" :class="{'selected':img.select}">
 				<h2>{{img.name}}</h2>
 				<img :src="img.image" :alt="img.alt">
 			</article>
@@ -30,18 +30,20 @@
 		},
 		setup(props,{emit}){
 			const imgs = ref([]);
-			const current = ref(1);
 			const store = useStore();
 			const img = ref(null);
-			async function get_imgs(){
+			const endpoint = ref("images/mapi/v1/?page=1");
+			const cuont = ref(null);
+			const paginate = ref(null);
+			async function get_imgs(end){
 				try{
-					const res = await getAPI.get("images/mapi/v1/?page="+current.value, {headers: {Authorization: `JWT ${store.state.accessToken}`}});
+					const res = await getAPI.get(end, {headers: {Authorization: `JWT ${store.state.accessToken}`}});
 					for(var i=0;i<res.data.results.length;i++){
-						if(!res.data.results[i].select){
-							res.data.results[i]["select"] = false;
-						}
+						res.data.results[i]['select'] = false;
+						imgs.value.push(res.data.results[i]);
 					}
-					imgs.value = res.data;
+					cuont.value = res.data.count;
+					endpoint.value = res.data.next;
 					document.body.classList.add("freeze");
 				}catch(err){
 					alert("خطایی رخ داد.");
@@ -53,10 +55,10 @@
 				document.body.classList.remove("freeze");
 			}
 			async function select(i,name){
-				for(var n=0;n<imgs.value.results.length;n++){
-					imgs.value.results[n].select = false;
+				for(var n=0;n<imgs.value.length;n++){
+					imgs.value[n].select = false;
 				}
-				imgs.value.results[i].select = true;
+				imgs.value.[i].select = true;
 				img.value = name;
 			}
 			async function subback(){
@@ -66,8 +68,13 @@
 					imgs.value = [];
 				}
 			}
-
-			return{imgs,get_imgs,select,close,subback}
+			function pagination(end){
+				let bottom = (paginate.value.scrollTop+paginate.value.clientHeight-20===paginate.value.scrollHeight-20);
+				if(end&&bottom===true){
+					get_imgs(end);
+				}
+			}
+			return{imgs,get_imgs,select,close,subback,pagination,paginate,endpoint}
 		}
 	};
 </script>
