@@ -77,17 +77,17 @@
 							}
 							if(err.response.data.image){
 								for(var n=0;n<err.response.data.image.length;n++){
-									errs.value.image.push(err.response.data.image[i]);
+									errs.value.image.push(err.response.data.image[n]);
 								}
 							}
 							if(err.response.data.name){
 								for(var x=0;x<err.response.data.name.length;x++){
-									errs.value.name.push(err.response.data.name[i]);
+									errs.value.name.push(err.response.data.name[x]);
 								}
 							}
 							if(err.response.data.slug){
 								for(var y=0;y<err.response.data.slug.length;y++){
-									errs.value.name.push(err.response.data.slug[i]);
+									errs.value.slug.push(err.response.data.slug[y]);
 								}
 							}
 							console.log(err.response.data);

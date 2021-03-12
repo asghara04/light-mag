@@ -7,11 +7,11 @@
 			</div>
 			<hr v-else>
 			<p class="like-h2" v-if="subcats!=false">زیردسته ها</p>
-			<button v-if="subcats==false" @click="get_subcats()" class="lm-link lm-blue">نمایش زیردسته ها</button>
+			<a v-if="subcats==false&&endpoint" @click="get_subcats(endpoint)" class="link-like">نمایش زیردسته ها</a>
 			<div v-if="subcats!=false">
-				<p class="link-like">کل: {{subcats.count}}</p>
-				<div class="medium-list">
-					<article v-for="(sub,i) in subcats.results" :key="i" :id="sub.slug" class="art">
+				<p class="link-like">کل: {{count}}</p>
+				<div id="scrollpagination" class="medium-list">
+					<article v-for="(sub,i) in subcats" :key="i" :id="sub.slug" class="art">
 						<h2>{{sub.name}}</h2>
 						<img v-if="sub.image" :src="sub.image.image" :alt="sub.image.alt" :name="sub.name">
 					</article>
@@ -31,11 +31,12 @@
 			const route = useRoute();
 			const store = useStore();
 			const APIData = computed(() => store.state.APIData);
-
+			const endpoint = ref(null);
 			async function get_cat(slug){
 				try{
 					const res = await getAPI.get("categories/api/v1/"+slug, {headers:{Authorization: `JWT ${store.state.accessToken}`}});
 					store.state.APIData = res.data;
+					endpoint.value = "categories/subs/api/v1/"+APIData.value.id+'/?page=1';
 				}catch(err){
 					alert("خطایی رخ داد.")
 					console.log(err)
@@ -51,18 +52,31 @@
 					}
 				}
 			)
-
 			const subcats = ref([]);
-			async function get_subcats(){
-				try{
-					const res = await getAPI.get("categories/subs/api/v1/"+APIData.value.id,{headers: {Authorization: `JWT ${store.state.accessToken}`}});
-					subcats.value = res.data;
-				}catch(err){
-					console.log(err);
+			const count = ref(null);
+			
+			async function get_subcats(end){
+				if(endpoint.value!=false){
+					try{
+						const res = await getAPI.get(end,{headers: {Authorization: `JWT ${store.state.accessToken}`}});
+						for(var i=0;i<res.data.results.length;i++){
+							subcats.value.push(res.data.results[i]);
+						}
+						count.value = res.data.count;
+						endpoint.value = res.data.next;
+						window.addEventListener("scroll",()=>{pagination(window,endpoint.value);})
+					}catch(err){
+						console.log(err.response);
+					}
 				}
 			}
-
-			return{APIData,get_subcats,subcats}
+			function pagination(elem,end){
+				let bottom = (elem.innerHeight+elem.pageYOffset)>=(document.body.offsetHeight-20);
+				if(end&&bottom===true){
+					get_subcats(end);
+				}
+			}
+			return{APIData,get_subcats,subcats,count,endpoint}
 		}
 	};
 </script>
