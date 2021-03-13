@@ -17,11 +17,11 @@
 					</div>
 					<div class="page">
 						<div v-if="APIData.bio">
-							<span class="blue-text">بایوگرافی: </span> {{APIData.bio}}
+							<span class="blue-text">بایوگرافی: </span><p class="pre-formatted">{{APIData.bio}}</p>
 						</div>
 						<div v-if="APIData.about">
-							<span class="blue-text">درباره: </span> {{APIData.about}}
-						</div>					
+							<span class="blue-text">درباره: </span><p class="pre-formatted">{{APIData.about}}</p>
+						</div>
 					</div>
 				</div>
 			</div>

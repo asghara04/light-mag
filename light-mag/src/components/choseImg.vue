@@ -69,7 +69,7 @@
 				}
 			}
 			function pagination(end){
-				let bottom = (paginate.value.scrollTop+paginate.value.clientHeight-20===paginate.value.scrollHeight-20);
+				let bottom = (paginate.value.scrollTop+paginate.value.offsetHeight-20===paginate.value.scrollHeight-20);
 				if(end&&bottom===true){
 					get_imgs(end);
 				}

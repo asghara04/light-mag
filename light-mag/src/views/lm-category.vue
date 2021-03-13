@@ -8,7 +8,7 @@
 			<hr v-else>
 			<p class="like-h2" v-if="subcats!=false">زیردسته ها</p>
 			<a v-if="subcats==false&&endpoint" @click="get_subcats(endpoint)" class="link-like">نمایش زیردسته ها</a>
-			<div v-if="subcats!=false">
+			<div v-if="subcats!=false" ref="paginate">
 				<p class="link-like">کل: {{count}}</p>
 				<div id="scrollpagination" class="medium-list">
 					<article v-for="(sub,i) in subcats" :key="i" :id="sub.slug" class="art">
@@ -32,6 +32,7 @@
 			const store = useStore();
 			const APIData = computed(() => store.state.APIData);
 			const endpoint = ref(null);
+			const paginate = ref(null);
 			async function get_cat(slug){
 				try{
 					const res = await getAPI.get("categories/api/v1/"+slug, {headers:{Authorization: `JWT ${store.state.accessToken}`}});
@@ -54,7 +55,6 @@
 			)
 			const subcats = ref([]);
 			const count = ref(null);
-			
 			async function get_subcats(end){
 				if(endpoint.value!=false){
 					try{
@@ -71,12 +71,12 @@
 				}
 			}
 			function pagination(elem,end){
-				let bottom = (elem.innerHeight+elem.pageYOffset)>=(document.body.offsetHeight-20)&&(elem.innerHeight+elem.pageYOffset)==(document.body.offsetHeight);
+				let bottom = (window.scrollY+window.innerHeight)>=(paginate.value.offsetTop+paginate.value.offsetHeight-20)&&(window.scrollY+window.innerHeight)<(paginate.value.offsetTop+paginate.value.offsetHeight);
 				if(end&&bottom===true){
 					get_subcats(end);
 				}
 			}
-			return{APIData,get_subcats,subcats,count,endpoint}
+			return{APIData,get_subcats,subcats,count,paginate,endpoint}
 		}
 	};
 </script>

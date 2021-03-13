@@ -27,6 +27,8 @@
 	position: absolute;
 	margin: 0.8% 0 0 0;
 	display: none;
+	overflow: auto;
+	white-space: nowrap;
 	background-color: #007590;
 }
 .uli:hover .itemul{
@@ -36,8 +38,7 @@
 	width: 120px;
 	padding: 10px;
 	float: none;
-	display: list-item;
-	position: relative;
+	display: block;
 }
 .iuli:hover{
 	background-color: #4792c9;

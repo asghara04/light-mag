@@ -1,6 +1,8 @@
 div.spcial-list article.article{
 	background-color: #ededed;
 	transition: .2s;
+	margin: 0 0 1.5% 0;
+	padding: .5% 1.5%;
 }
 div.spcial-list article.article:hover{
 	transform: scale(1.02);
@@ -31,7 +33,7 @@ div.spcial-list article.article.yay-sider .sider img{
 @media(max-width: 650px){
 	div.spcial-list article.article{
 		padding: 1%;
-		margin: 2.5% 0;
+		margin: 0 0 2.5% 0;
 	}
 	div.spcial-list article.article div h2{
 		text-align: center;

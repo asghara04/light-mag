@@ -10,7 +10,7 @@
 			<div v-if="APIData.image" class="art-pic">
 				<img :src="APIData.image.image" :name="APIData.image.name" :alt="APIData.image.alt">
 			</div>
-			<p class="body">
+			<p class="body pre-formatted">
 				{{APIData.body}}
 			</p>
 
