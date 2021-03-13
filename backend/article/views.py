@@ -11,7 +11,7 @@ from rest_framework.renderers import JSONRenderer
 
 class ArticlesView(APIView, PaginationMixin):
 	pagination_class = PageNumberPagination()
-
+	renderer_classes = (JSONRenderer,)
 	def get(self, request):
 		arts = Article.published.all()
 		page = self.paginate_queryset(arts)
@@ -23,7 +23,6 @@ class ArticlesView(APIView, PaginationMixin):
 		return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-
 class ArticlesCountView(APIView):
 	renderer_classes = (JSONRenderer,)
 	def get(self, request, format=None):
@@ -32,8 +31,16 @@ class ArticlesCountView(APIView):
 		return Response(content, status=status.HTTP_200_OK)
 
 
+class LastArticlesView(APIView):
+	renderer_classes = (JSONRenderer,)
+	def get(self,request,format=None):
+		arts = Article.published.all()[:6]
+		serializer = MinArticleSerializer(arts, many=True, context={"request":request})
+		return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 class ArticleView(APIView):
+	renderer_classes = (JSONRenderer,)
 	def get_art(self, slug):
 		try:
 			return Article.published.get(slug=slug)
@@ -46,9 +53,9 @@ class ArticleView(APIView):
 		return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-
 class MArticlesView(APIView):
 	permission_classes = (IsAdminUser,)
+	renderer_classes = (JSONRenderer,)
 	def get(self, request):
 		arts = Article.objects.all()
 		serializer = MinArticleSerializer(arts, many=True, context={"request":request})
@@ -61,9 +68,9 @@ class MArticlesView(APIView):
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
 class MArticleView(APIView):
 	permission_classes = (IsAdminUser,)
+	renderer_classes = (JSONRenderer,)
 	def get_art(self, pk):
 		try:
 			return Article.objects.get(id=pk)
@@ -86,8 +93,10 @@ class MArticleView(APIView):
 		art.delete()
 		return Response(status=status.HTTP_204_NO_CONTENT)
 
+
 class CatArticlesView(APIView, PaginationMixin):
 	pagination_class = PageNumberPagination()
+	renderer_classes = (JSONRenderer,)
 	def get(self, request, pk):
 		arts = Article.published.filter(category=pk)
 		page = self.paginate_queryset(arts)
@@ -97,8 +106,10 @@ class CatArticlesView(APIView, PaginationMixin):
 			serializer = MinArticleSerializer(arts, many=True, context={"request":request})
 		return Response(serializer.data, status=status.HTTP_200_OK)
 
+
 class SubCatArticlesView(APIView, PaginationMixin):
-	pagination_class = PageNumberPagination()
+	pagination_class = PageNumberPagination();
+	renderer_classes = (JSONRenderer,)
 	def get(self, request, pk):
 		arts = Article.published.filter(subcat=pk)
 		page = self.paginate_queryset(arts)
@@ -108,3 +119,11 @@ class SubCatArticlesView(APIView, PaginationMixin):
 			serializer = MinArticleSerializer(arts, many=True, context={"request":request})
 
 		return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class MostComArticleView(APIView):
+	renderer_classes = (JSONRenderer,)
+	def get(self,request,format=None):
+		arts = Article.published.filter(category__name="email")
+		serializer = MinArticleSerializer(arts, many=True, context={"request":request})
+		return Response(serializer.data,status=status.HTTP_200_OK)

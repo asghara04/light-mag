@@ -35,6 +35,7 @@
 			const endpoint = ref("images/mapi/v1/?page=1");
 			const cuont = ref(null);
 			const paginate = ref(null);
+			let more = false;
 			async function get_imgs(end){
 				try{
 					const res = await getAPI.get(end, {headers: {Authorization: `JWT ${store.state.accessToken}`}});
@@ -44,6 +45,7 @@
 					}
 					cuont.value = res.data.count;
 					endpoint.value = res.data.next;
+					more = true;
 					document.body.classList.add("freeze");
 				}catch(err){
 					alert("خطایی رخ داد.");
@@ -52,6 +54,7 @@
 			}
 			async function close(){
 				imgs.value = [];
+				endpoint.value = "images/mapi/v1/?page=1";
 				document.body.classList.remove("freeze");
 			}
 			async function select(i,name){
@@ -60,6 +63,7 @@
 				}
 				imgs.value.[i].select = true;
 				img.value = name;
+				endpoint.value = "images/mapi/v1/?page=1";
 			}
 			async function subback(){
 				document.body.classList.remove("freeze");
@@ -70,8 +74,9 @@
 			}
 			function pagination(end){
 				let bottom = (paginate.value.scrollTop+paginate.value.offsetHeight-20===paginate.value.scrollHeight-20);
-				if(end&&bottom===true){
-					get_imgs(end);
+				if(more&&end&&endpoint.value===end&&bottom===true){
+					more = false;
+					return get_imgs(end);
 				}
 			}
 			return{imgs,get_imgs,select,close,subback,pagination,paginate,endpoint}

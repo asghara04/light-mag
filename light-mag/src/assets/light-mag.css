@@ -54,6 +54,9 @@ img{
 .block{
 	display: block!important;
 }
+.pre-formatted{
+	white-space: pre-wrap;
+}
 .imgbutton{
 	cursor: pointer;
 	background: transparent;

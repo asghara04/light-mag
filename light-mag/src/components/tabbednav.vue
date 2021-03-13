@@ -50,6 +50,7 @@
 					data.value[i] = {active: datas.value[i].active, data: datas.value[i].api_data, link: links.value[i]}
 				}
 			}
+			let more = false;
 			async function get_data(i){
 				try{
 					const res = await getAPI.get(datas.value[i].endpoint);
@@ -61,8 +62,9 @@
 					}
 					datas.value[i].active = true;
 					datas.value[i].endpoint = res.data.next;
+					more = true;
 					set_data();
-					window.addEventListener("scroll",()=>{pagination(datas.value[i].endpoint,i);})
+					window.addEventListener("scroll",()=>{if(datas.value[i].endpoint!=null){pagination(datas.value[i].endpoint,i);}})
 				}catch(err){
 					console.log(err);
 				}
@@ -71,7 +73,8 @@
 
 			async function pagination(end,i){
 				let bottom = ((window.scrollY+window.innerHeight)>=(paginate.value.offsetTop+paginate.value.offsetHeight-20)&&(window.scrollY+window.innerHeight)<(paginate.value.offsetTop+paginate.value.offsetHeight));
-				if(end&&bottom===true){
+				if(more&&end&&bottom===true){
+					more = false;
 					get_data(i);
 				}
 			}

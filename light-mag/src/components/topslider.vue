@@ -1,9 +1,6 @@
 <template>
 	<div v-if="arts" id="topslider">
-		<!--
-		a short hight manual slider in all page who remainds popular articles! 4- and sort by the 6 reachest comments
-		-->
-		<article v-for="art in arts.results" :key="art.id" class="topslide">
+		<article v-for="art in arts" :key="art.id" class="topslide">
 			<router-link :name="art.title" :rel="art.title" :to="{name: 'article',params: {artslug: art.slug}}">
 				<img v-if="art.image" :rel="art.image.name" :src="art.image.image" :name="art.image.name" :alt="art.image.alt">
 				<h3 class="centered-top-slide">{{art.title}}</h3>
@@ -15,7 +12,6 @@
 		</article>
 	</div>
 </template>
-
 <script>
 	import {getAPI} from '@/axios.js';
 	import {ref} from 'vue';
@@ -23,19 +19,18 @@
 		name: "topslider",
 		setup(){
 			const arts = ref(null);
-
-			function get_arts(){
-				getAPI.get('articles/api/v1/')
-				.then(res=> arts.value = res.data)
-				.catch(err=> console.log(err))
-			}
-			get_arts()
-
+			async function get_arts(){
+				try{
+					const res = await getAPI.get("articles/most/api/v1/comment/");
+					arts.value = res.data
+				}catch(err){
+					console.log(err)
+				}
+			}get_arts()
 			return{arts}
 		}
 	};
 </script>
-
 <style>
 	@import '../assets/slider.css';
 </style>

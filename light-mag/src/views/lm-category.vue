@@ -55,8 +55,9 @@
 			)
 			const subcats = ref([]);
 			const count = ref(null);
+			let more = false;
 			async function get_subcats(end){
-				if(endpoint.value!=false){
+				if(endpoint.value&&end){
 					try{
 						const res = await getAPI.get(end,{headers: {Authorization: `JWT ${store.state.accessToken}`}});
 						for(var i=0;i<res.data.results.length;i++){
@@ -64,15 +65,17 @@
 						}
 						count.value = res.data.count;
 						endpoint.value = res.data.next;
-						window.addEventListener("scroll",()=>{pagination(window,endpoint.value);})
+						more = true
+						window.addEventListener('scroll',()=>pagination(endpoint.value));
 					}catch(err){
 						console.log(err.response);
 					}
 				}
 			}
-			function pagination(elem,end){
+			function pagination(end){
 				let bottom = (window.scrollY+window.innerHeight)>=(paginate.value.offsetTop+paginate.value.offsetHeight-20)&&(window.scrollY+window.innerHeight)<(paginate.value.offsetTop+paginate.value.offsetHeight);
-				if(end&&bottom===true){
+				if(more&&end&&end===endpoint.value&&bottom===true){
+					more = false;
 					get_subcats(end);
 				}
 			}

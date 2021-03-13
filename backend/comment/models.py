@@ -21,7 +21,7 @@ class UnRead(models.Manager):
 
 
 class Comment(models.Model):
-	article = models.ForeignKey(Article, on_delete=models.CASCADE)
+	article = models.ForeignKey(Article, on_delete=models.CASCADE,related_name="comments")
 	name = models.CharField(max_length=30)
 	email = models.EmailField(max_length=30)
 	date = models.DateTimeField(auto_now_add=True)

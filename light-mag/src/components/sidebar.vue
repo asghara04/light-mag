@@ -1,6 +1,12 @@
 <template>
 	<aside id="sidebar">
-		<p v-if="art_count">کل نوشته ها: {{art_count.count}}</p>
+		<p v-if="art_count>=0">کل نوشته ها: {{art_count}}</p>
+		<div v-if="last_arts">
+			<div v-for="art in last_arts" :key="art.id">
+				<router-link v-if="art.image" :to="{name: 'article',params:{artslug: art.slug}}"><img :src="art.image.image" :alt="art.image.alt" :name="art.image.name"></router-link>
+				<h3><router-link :to="{name: 'article',params:{artslug: art.slug}}">{{art.title}}</router-link></h3>
+			</div>
+		</div>
 		<hr>
 		<h3 class="down-name"><router-link class="text-icon" name='لایت مگ' to="/"><img src="../assets/imgs/light.svg" alt="LM" name="مجله نور">مجله نور</router-link></h3>
 	</aside>
@@ -13,15 +19,26 @@
 		name: "sidebar",
 		setup(){
 			const art_count = ref(null);
-
-			function art_counter(){
-				getAPI.get("articles/api/v1/count/")
-				.then(res => art_count.value = res.data)
-				.catch(err => console.log(err))
+			async function art_counter(){
+				try{
+					const res = await getAPI.get('articles/api/v1/count/')
+					art_count.value = res.data.count;
+				}catch(err){
+					alert('متاسفیم خطایی رخ داد.')
+				}
 			}
 			art_counter()
-
-			return{art_count}
+			const last_arts = ref(null);
+			async function get_last_arts(){
+				try{
+					const res = await getAPI.get("articles/api/v1/lasts/");
+					last_arts.value = res.data;
+				}catch(err){
+					alert('متاسفیم خطایی رخ داد.')
+				}
+			}
+			get_last_arts();
+			return{art_count,last_arts}
 		}
 	};
 </script>
