@@ -11,9 +11,14 @@ from lightmag.pagination import PaginationMixin
 
 nameUniqueError = {"name":["تصویر دیگری با همین نام وجود دارد."]}
 
-def unqiue_name(name):
+def unqiue_names(name):
 	for image in Image.objects.all():
 		if name==image.name:
+			return False
+	return True
+def unqiue_name(name,pk):
+	for image in Image.objects.all():
+		if name==image.name and pk!=image.id:
 			return False
 	return True
 
@@ -32,7 +37,7 @@ class ImagesView(APIView, PaginationMixin):
 	def post(self, request):
 		serializer = ImageSerializer(data=request.data, context={"request":request})
 		if serializer.is_valid():
-			if unqiue_name(request.data['name']):
+			if unqiue_names(request.data['name']):
 				serializer.save()
 				return Response(serializer.data, status=status.HTTP_201_CREATED)
 			return Response(nameUniqueError, status=status.HTTP_400_BAD_REQUEST)
@@ -64,8 +69,10 @@ class ImageView(APIView):
 		image = self.get_img(pk)
 		serializer = ImageSerializer(image, request.data, partial=True, context={"request":request})
 		if serializer.is_valid():
-			serializer.save()
-			return Response(serializer.data, status=status.HTTP_200_OK)
+			if request.data['name'] and unqiue_name(request.data['name'],image.id):
+				serializer.save()
+				return Response(serializer.data, status=status.HTTP_200_OK)
+			return Response(nameUniqueError,status=status.HTTP_400_BAD_REQUEST)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 	def delete(self, request, pk):
 		image = self.get_img(pk)
