@@ -1,6 +1,7 @@
 <template>
 	<h2 class="cen">زیردسته جدید</h2>
 	<form @submit.prevent="sub()" class="form">
+		<div v-if="imgAddress" class="form-img-div"><img :src="imgAddress"></div>
 		<label for="image">تصویر: </label>
 		<span v-if="errs.image!=false"><p class="red-text" v-for="(err,i) in errs.image" :key="i">* {{err}}</p></span>
 		<choseImg @selected="set_img"/>
@@ -25,7 +26,7 @@
 	import choseImg from '@/components/choseImg.vue';
 	import {useRouter} from 'vue-router';
 	export default{
-		name: "LmFormSubcat",
+		name: "LmAddSubcat",
 		setup(){
 			const category = ref(null);
 			const image = ref(null);
@@ -43,9 +44,11 @@
 				}
 			}
 			get_cats()
-			function set_img(name){
+			const imgAddress = ref(null);
+			function set_img(name,address){
 				if(name.length<=25){
 					image.value = name;
+					imgAddress.value = address;
 				}
 			}
 			const router = useRouter();
@@ -119,7 +122,7 @@
 					}
 				}
 			}
-			return{category,set_img,name,slug,cats,sub,errs}
+			return{category,set_img,name,slug,cats,sub,errs,imgAddress}
 		},
 		components:{choseImg}
 	};

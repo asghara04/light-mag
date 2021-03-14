@@ -19,8 +19,10 @@
 	export default{
 		name: "ChoseImg",
 		emits: {
-			selected: (name) => {
-				if(!name||name.length>25){
+			selected: (name,address) => {
+				if(!name||name.length>25||!address){
+					console.log(name)
+					console.log(address)
 					alert("لطفا ابتدا تصیوری انتخاب کنید.");
 					return false;
 				}else{
@@ -32,6 +34,7 @@
 			const imgs = ref([]);
 			const store = useStore();
 			const img = ref(null);
+			const imgadd = ref(null);
 			const endpoint = ref("images/mapi/v1/?page=1");
 			const cuont = ref(null);
 			const paginate = ref(null);
@@ -63,11 +66,12 @@
 				}
 				imgs.value.[i].select = true;
 				img.value = name;
+				imgadd.value = imgs.value[i].image;
 				endpoint.value = "images/mapi/v1/?page=1";
 			}
 			async function subback(){
 				document.body.classList.remove("freeze");
-				emit('selected',img.value);
+				emit('selected',img.value,imgadd.value);
 				if(img.value){
 					imgs.value = [];
 				}

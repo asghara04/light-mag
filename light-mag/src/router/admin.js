@@ -64,6 +64,13 @@ const routes = [
 				props: true,
 				name: "change-image",
 				component:()=>import("@/views/lm-change-image.vue")
+			},
+			{
+				path: "category/:catslug",
+				meta: {requiresAuth:true},
+				props: true,
+				name: "change-category",
+				component:()=>import('@/views/lm-change-category')
 			}
 		]
 	},

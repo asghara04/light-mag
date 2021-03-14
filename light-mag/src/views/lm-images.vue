@@ -62,7 +62,7 @@
 			}
 
 			async function rm(imgid, i){
-				if(confirm(`آیا قصد حذف تصویر ${APIData.value.results[i].name} را دارید؟`)){
+				if(confirm(`آیا قصد حذف تصویر ${APIData.value.results[i].name} را دارید؟\nاگر تصویر را حذف کنید تمام مدل های مرتط از جمله مقالات،دسته ها،... بدون تصویر میشوند.`)){
 					try{
 						await getAPI.delete("images/mapi/v1/"+imgid, {headers: {Authorization: `JWT ${store.state.accessToken}`}});
 					get_imgs(current.value);

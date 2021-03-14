@@ -1,7 +1,6 @@
 <template>
 	<h2 class="cen">تصویر جدید</h2>
 	<form class="form" enctype="multipart/form-data" @submit.prevent="sub">
-		<!-- <div class="form-img-div"><img v-if="imgAddress" :src="imgAddress"></div> -->
 		<label for="image">تصویر: </label>
 		<span v-if="errs.image!=false"><p v-for="(err, i) in errs.image" class="red-text" :key="i">* {{err}}</p></span>
 		<input type="file" name="image" @change.prevent="image_selected" accept="image/png, image/jpeg, image/gif" class="data-field" required="">
@@ -20,7 +19,7 @@
 	import {useStore} from 'vuex';
 	import {useRouter} from 'vue-router';
 	export default{
-		name: "LmFormImage",
+		name: "LmAddImage",
 		setup(){
 			const image = ref(null);
 			const name = ref(null);

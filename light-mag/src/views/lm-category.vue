@@ -17,6 +17,10 @@
 					</article>
 				</div>
 			</div>
+			<div class="page-halfer">
+				<router-link :to="{name: 'change-category',params:{catslug: APIData.slug}}" class="half lm-link lm-green text-icon"><img src="../assets/imgs/edit.svg">تغییر</router-link>
+				<a class="text-icon half lm-link lm-red" @click.prevent="rm()"><img src="../assets/imgs/delete.svg">حذف</a>
+			</div>
 		</div>
 	</div>
 </template>
@@ -24,7 +28,7 @@
 	import {computed,watch,ref} from 'vue';
 	import {getAPI} from '@/axios.js';
 	import {useStore} from 'vuex';
-	import {useRoute} from 'vue-router';
+	import {useRoute,useRouter} from 'vue-router';
 	export default{
 		name: "LmCategory",
 		setup(){
@@ -79,11 +83,29 @@
 					get_subcats(end);
 				}
 			}
-			return{APIData,get_subcats,subcats,count,paginate,endpoint}
+			const router = useRouter();
+			async function rm(){
+				if(confirm(`آیا قصد حذف دسته ${APIData.value.name} را دارید؟\nاگر دسته را پاک کنید تمام زیردسته ها پاک و تمام مقلات این دسته بدون دسته میشوند.`)){
+					try{
+						const res = await getAPI.delete("categories/api/v1/"+APIData.value.slug, {headers: {Authorization: `JWT ${store.state.accessToken}`}});
+						if(res.status===204){
+							router.push({name: "lm-categories"})
+						}else{
+							console.log(res.data)
+							alert('حذف با خطا مواجه شد.')
+						}
+					}catch(err){
+						console.log(err);
+					}
+				}
+			}
+			return{APIData,get_subcats,subcats,count,paginate,endpoint,rm}
 		}
 	};
 </script>
 <style>
 	@import '../assets/light-mag.css';
 	@import '../assets/medium-list.css';
+	@import '../assets/page-halfer.css';
+	@import '../assets/lm-page.css';
 </style>

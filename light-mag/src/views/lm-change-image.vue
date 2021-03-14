@@ -1,6 +1,6 @@
-<template v-if="APIData">
-	<h2 class="cen">تغییر تصویر</h2>
-	<form class="form" enctype="multipart/form-data" @submit.prevent="sub(id)">
+<template>
+	<h2 class="cen" v-if="name">تغییر تصویر {{name}}</h2>
+	<form v-if="name&&alt" class="form" enctype="multipart/form-data" @submit.prevent="sub(id)">
 		<div v-if="imgAddress" class="form-img-div"><img :src="imgAddress"></div>
 		<label for="image">تصویر: </label>
 		<span v-if="errs.image!=false"><p v-for="(err, i) in errs.image" class="red-text" :key="i">* {{err}}</p></span>

@@ -15,7 +15,7 @@
 					<h2>{{cat.name}}</h2>
 					<img v-if="cat.image" :src="cat.image.image" :alt="cat.image.alt" :name="cat.image.name">
 					<div class="page-halfer">
-						<a class="text-icon half lm-link lm-green"><img src="../assets/imgs/edit.svg">تغییر</a>
+						<router-link :to="{name: 'change-category',params:{catslug:cat.slug}}" class="text-icon half lm-link lm-green"><img src="../assets/imgs/edit.svg">تغییر</router-link>
 						<router-link class="link-like" :to="{name: 'lm-category', params:{slug: cat.slug}}">نمایش</router-link>
 						<a class="text-icon half lm-link lm-red" @click.prevent="rm(cat.slug,i)"><img src="../assets/imgs/delete.svg">حذف</a>
 					</div>
@@ -63,10 +63,15 @@
 			}
 
 			async function rm(catslug, i){
-				if(confirm(`آیا قصد حذف دسته ${APIData.value.results[i].name} را دارید؟`)){
+				if(confirm(`آیا قصد حذف دسته ${APIData.value.results[i].name} را دارید؟\nاگر دسته را پاک کنید تمام زیردسته ها پاک و تمام مقلات این دسته بدون دسته میشوند.`)){
 					try{
-						await getAPI.delete("categories/api/v1/"+catslug, {headers: {Authorization: `JWT ${store.state.accessToken}`}});
-						get_cats(current.value);
+						const res = await getAPI.delete("categories/api/v1/"+catslug, {headers: {Authorization: `JWT ${store.state.accessToken}`}});
+						if(res.status===204){
+							get_cats(current.value)
+						}else{
+							console.log(res.data)
+							alert('حذف با خطا مواجه شد.')
+						}
 					}catch(err){
 						console.log(err);
 					}

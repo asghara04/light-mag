@@ -1,6 +1,7 @@
 <template>
 	<h2 class="cen">دسته جدید</h2>
 	<form class="form" @submit.prevent="sub()">
+		<div v-if="imgAddress" class="form-img-div"><img :src="imgAddress"></div>
 		<label for="image">تصویر دسته: </label>
 		<span v-if="errs.image!=false"><p v-for="(err,i) in errs.image" :key="i" class="red-text">* {{err}}</p></span>
 		<ChoseImg @selected="set_img"/>
@@ -20,15 +21,17 @@
 	import {getAPI} from '@/axios.js';
 	import {useRouter} from 'vue-router';
 	export default{
-		name: "LmFormCategory",
+		name: "LmAddCategory",
 		setup(){
 			const image = ref(null);
 			const name = ref(null);
 			const slug = ref(null);
 			const errs = ref({'image':[],'name':[],'slug':[]});
-			function set_img(name){
+			const imgAddress = ref(null);
+			function set_img(name,address){
 				if(name.length<=25){
 					image.value = name;
+					imgAddress.value = address;
 				}
 			}
 			const store = useStore();
@@ -93,7 +96,7 @@
 				}
 			}
 
-			return{name,slug,set_img,sub,errs}
+			return{name,slug,set_img,sub,errs,imgAddress}
 		},
 		components:{
 			ChoseImg
