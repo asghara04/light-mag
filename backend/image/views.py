@@ -20,6 +20,7 @@ def unqiue_name(name):
 class ImagesView(APIView, PaginationMixin):
 	permission_classes = (IsAdminUser,)
 	pagination_class = PageNumberPagination()
+	renderer_classes = (JSONRenderer,)
 	def get(self, request):
 		images = Image.objects.all()
 		page = self.paginate_queryset(images)
@@ -49,6 +50,7 @@ class ImagesCountView(APIView):
 
 class ImageView(APIView):
 	permission_classes = (IsAdminUser,)
+	renderer_classes = (JSONRenderer,)
 	def get_img(self, pk):
 		try:
 			return Image.objects.get(id=pk)

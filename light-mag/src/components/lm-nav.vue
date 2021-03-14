@@ -16,7 +16,6 @@
 			<li id="tags-li"><img v-if="showmenu" @click="liopener('tags-li')" class="left-float" src="../assets/imgs/down.svg"><router-link to="/LM-admin/tags" class="text-icon link-like"><img src="../assets/imgs/tag.svg"><span>تگ ها</span></router-link></li>
 			<li id="images-li"><img v-if="showmenu" @click="liopener('images-li')" class="left-float" src="../assets/imgs/down.svg"><router-link to="/LM-admin/images" class="text-icon link-like"><img src="../assets/imgs/image.svg"><span>تصاویر</span></router-link><ul v-if="showmenu"><li><router-link to="/LM-admin/add/image" class="text-icon link-like"><img src="../assets/imgs/add.svg"><span>اضافه کردن</span></router-link></li></ul></li>
 			<li id="users-li"><img v-if="showmenu" @click="liopener('users-li')" class="left-float" src="../assets/imgs/down.svg"><router-link to='/LM-admin/users' class="text-icon link-like"><img src="../assets/imgs/group.svg"><span>کاربران</span></router-link></li>
-			<li><a class="text-icon link-like" target="_blank" href="https://light-mag.ir/games"><img src="../assets/imgs/game.svg"><span>گیم ها</span></a></li>
 			<li><router-link to='/LM-admin/settings' class="text-icon link-like"><img src="../assets/imgs/settings.svg"><span>تنظیمات</span></router-link></li>
 			<li><a href="https://light-mag.ir" class="text-icon link-like" target="_blank"><img src="../assets/imgs/webpage.svg"><span>نمایش اپ</span></a></li>
 		</ul>

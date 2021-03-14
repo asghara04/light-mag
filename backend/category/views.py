@@ -11,6 +11,7 @@ from rest_framework.renderers import JSONRenderer
 errs = {'name':[],'slug':[]}
 
 class AllCatsView(APIView):
+	renderer_classes = (JSONRenderer,)
 	def get(self, request):
 		cats = Category.objects.all()
 		serializer = AllCategorySerializer(cats, many=True, context={"request":request})
@@ -29,6 +30,7 @@ def unique_cat_slug(slug):
 	return True
 
 class CategoriesView(APIView, PaginationMixin):
+	renderer_classes = (JSONRenderer,)
 	pagination_class = PageNumberPagination()
 	def get(self, request):
 		cats = Category.objects.all()
@@ -62,6 +64,7 @@ class CategoriesCountView(APIView):
 
 
 class CategoryView(APIView):
+	renderer_classes = (JSONRenderer,)
 	def get_cat(self, slug):
 		try:
 			return Category.objects.get(slug=slug)
@@ -96,6 +99,7 @@ def uniqueSubCatSlug(catname,slug):
 	return True
 
 class SubsCatCatView(APIView, PaginationMixin):
+	renderer_classes = (JSONRenderer,)
 	pagination_class = PageNumberPagination()
 	def get(self, request, pk):
 		subcats = SubCat.objects.filter(category=pk)
@@ -120,6 +124,7 @@ class SubsCatCatView(APIView, PaginationMixin):
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class SubCatView(APIView):
+	renderer_classes = (JSONRenderer,)
 	def getter(self, cat, sub):
 		try:
 			category = Category.objects.get(slug=cat)

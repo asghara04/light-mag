@@ -9,7 +9,6 @@
 				<li>hellll</li>
 				<li v-for="cat in categories" :key="cat.id"><router-link :to="{name: 'category',params:{catslug: cat.slug}}">{{cat.name}}</router-link></li>
 			</span>
-			<li><router-link to="/games" class="li-icon ed-color"><img src="../assets/imgs/game.svg">گیم ها</router-link></li>
 			<li v-if="user"><a href="https://admin.light-mag.ir" target="_blank">پنل</a></li>
 		</ul>
 		<div v-if="smallscreen" @click="exit()" id="topsmalluloverlay"></div>

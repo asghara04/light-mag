@@ -5,9 +5,10 @@ from .models import User
 from .serializer import UserSerializer, MUserSerializer
 from rest_framework.permissions import IsAdminUser
 from django.http import Http404
-
+from rest_framework.renderers import JSONRenderer
 
 class UserView(APIView):
+	renderer_classes = (JSONRenderer,)
 	def get_user(self, uname):
 		try:
 			return User.objects.get(username=uname)
@@ -21,6 +22,7 @@ class UserView(APIView):
 
 
 class MUsersView(APIView):
+	renderer_classes = (JSONRenderer,)
 	permission_classes = (IsAdminUser,)
 	def get(self, request):
 		users = User.objects.all()
@@ -37,6 +39,7 @@ class MUsersView(APIView):
 
 class MUserView(APIView):
 	permission_classes = (IsAdminUser,)
+	renderer_classes = (JSONRenderer,)
 	def get_user(self, pk):
 		try:
 			return User.objects.get(id=pk)

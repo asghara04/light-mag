@@ -3,8 +3,11 @@ from image.models import Image
 from category.models import Category, SubCat
 from user.models import User
 from tag.models import Tag
+import jdatetime
 
-
+def set_jdatetime(gdate):
+	jdatetime.set_locale("fa_IR")
+	return jdatetime.datetime.fromgregorian(year=gdate.year,month=gdate.month,day=gdate.day,hour=gdate.hour,minute=gdate.minute,second=gdate.second).strftime("%d %B %Y, %H:%M")
 
 class Published(models.Manager):
 	def get_queryset(self):
@@ -28,6 +31,11 @@ class Article(models.Model):
 
 	objects = models.Manager()
 	published = Published()
+
+	def jpub_date(self):
+		return set_jdatetime(self.publish_date)
+	def jdate(self):
+		return set_jdatetime(self.date)
 
 	def __str__(self):
 		return self.slug

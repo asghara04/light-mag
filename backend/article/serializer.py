@@ -8,8 +8,6 @@ from image.models import Image
 from category.models import Category, SubCat
 from tag.serializer import TagSerializer
 
-
-
 class ArticleSerializer(serializers.Serializer):
 	id = serializers.IntegerField(read_only=True)
 	title = serializers.CharField(read_only=True, max_length=80)
@@ -17,13 +15,11 @@ class ArticleSerializer(serializers.Serializer):
 	image = ImageSerializer(read_only=True)
 	description = serializers.CharField(read_only=True, max_length=200)
 	body = serializers.CharField(read_only=True, max_length=2048)
-	publish_date = serializers.DateTimeField(read_only=True)
+	jpub_date = serializers.DateTimeField(read_only=True)
 	category = CategorySerializer(read_only=True)
 	subcat = SubCatSerializer(read_only=True)
 	tags = TagSerializer(many=True, read_only=True)
 	author = MinUserSerializer(read_only=True)
-
-
 
 
 class MArticleSerializer(serializers.Serializer):
@@ -33,8 +29,8 @@ class MArticleSerializer(serializers.Serializer):
 	image = ImageSerializer(allow_null=True)
 	description = serializers.CharField(max_length=200)
 	body = serializers.CharField(max_length=2048)
-	date = serializers.DateTimeField(read_only=True)
-	publish_date = serializers.DateTimeField(read_only=True)
+	jdate = serializers.DateTimeField(read_only=True)
+	jpub_date = serializers.DateTimeField(read_only=True)
 	category = CategorySerializer(allow_null=True)
 	subcat = SubCatSerializer(allow_null=True)
 	tags = TagSerializer(many=True, read_only=True)
@@ -65,14 +61,12 @@ class MArticleSerializer(serializers.Serializer):
 		return instance
 
 
-
-
 class MinArticleSerializer(serializers.Serializer):
 	id = serializers.IntegerField(read_only=True)
 	title = serializers.CharField(read_only=True, max_length=80)
 	slug = serializers.SlugField(read_only=True, max_length=80)
 	image = ImageSerializer(read_only=True)
 	description = serializers.CharField(read_only=True, max_length=200)
-	publish_date = serializers.DateTimeField(read_only=True)
+	jpub_date = serializers.DateTimeField(read_only=True)
 	# status = serializers.CharField(read_only=True, max_length=8)
 	author = MinUserSerializer(read_only=True)

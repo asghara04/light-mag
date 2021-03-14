@@ -6,8 +6,6 @@ from django.shortcuts import get_object_or_404
 from image.models import Image
 from category.models import Category
 
-
-
 class UserSerializer(serializers.Serializer):
 	id = serializers.IntegerField(read_only=True)
 	username = serializers.CharField(max_length=30)
@@ -20,8 +18,7 @@ class UserSerializer(serializers.Serializer):
 	instagram_link = serializers.URLField(max_length=35)
 	facebook_link = serializers.URLField(max_length=35)
 	github_link = serializers.URLField(max_length=35)
-	birthday = serializers.DateField()
-
+	jbirth = serializers.DateField(read_only=True)
 
 
 class MUserSerializer(serializers.Serializer):
@@ -31,8 +28,8 @@ class MUserSerializer(serializers.Serializer):
 	username = serializers.SlugField(max_length=30)
 	name = serializers.CharField(max_length=35)
 	prof_picture = ImageSerializer(allow_null=True)
-	join_date = serializers.DateField(read_only=True)
-	last_login = serializers.DateField(read_only=True)
+	jjoin = serializers.DateField(read_only=True)
+	jlast = serializers.DateField(read_only=True)
 	is_active = serializers.BooleanField(default=True)
 	is_staff = serializers.BooleanField(default=False)
 	pubmail = serializers.EmailField(max_length=30)
@@ -42,7 +39,7 @@ class MUserSerializer(serializers.Serializer):
 	instagram_link = serializers.URLField(max_length=35, allow_null=True)
 	facebook_link = serializers.URLField(max_length=35, allow_null=True)
 	github_link = serializers.URLField(max_length=35, allow_null=True)
-	birthday = serializers.DateField(allow_null=True)
+	jbirth = serializers.DateField(allow_null=True)
 
 	def validate_prof_pucture(self, value):
 		return get_object_or_404(Imagd,  name=value["name"])
@@ -71,9 +68,7 @@ class MUserSerializer(serializers.Serializer):
 		instance.birthday = validated_data.get("birthday", instance.birthday)
 		instance.save()
 		return inatance
-	
-	
-	
+
 
 class MinUserSerializer(serializers.Serializer):
 	username = serializers.SlugField(max_length=30, read_only=True)

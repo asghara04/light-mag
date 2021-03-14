@@ -6,10 +6,11 @@ from .serializer import CommentSerializer, MCommentSerializer, ReplySerializer, 
 from django.http import Http404
 from rest_framework.permissions import IsAdminUser
 from rest_framework.permissions import AllowAny
-
+from rest_framework.renderers import JSONRenderer
 
 class ACommentsView(APIView):
 	permission_classes = (AllowAny,)
+	renderer_classes = (JSONRenderer,)
 	def get(self, request, pk):
 		comments = Comment.published.filter(article=pk)
 		serializer = CommentSerializer(comments, many=True)
@@ -25,6 +26,7 @@ class ACommentsView(APIView):
 
 class CRepliesView(APIView):
 	permission_classes = (AllowAny,)
+	renderer_classes = (JSONRenderer,)
 	def get(self, request, pk):
 		replies = Reply.published.filter(comment=pk)
 		serializer = ReplySerializer(replies, many=True)

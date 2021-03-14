@@ -5,7 +5,7 @@
 				<h1><router-link :to="{name: 'Home'}">مجله نور</router-link></h1>
 				<h2>لایت مگ, مجله ای برای تازش با نور!</h2>
 			</div>
-			<div class="add">#addddddddddddddddddd</div>
+			<div class="add"></div>
 		</div>
 
 		<nav v-if="cats">

@@ -10,7 +10,7 @@
 							<h2><router-link :rel="article.title" :name='article.title' :to="'/article/'+article.slug">{{article.title}}</router-link></h2>
 							<hr>
 							<p class="pre-formatted">{{article.description}} - <router-link :to="'/article/'+article.slug">ادامه...</router-link></p>
-							<div class="page-halfer"><p class="half"><span class="blue-text">انتشار: </span>{{article.publish_date}}</p><p class="half"><span class="blue-text">نویسنده: </span>{{article.author.name}}</p></div>
+							<div class="page-halfer"><p class="half text-icon"><img src="../assets/imgs/clock.svg">{{article.jpub_date}}</p><p class="half text-icon"><img src="../assets/imgs/user.svg">{{article.author.name}}</p></div>
 						</div>
 					</article>
 				</div>
