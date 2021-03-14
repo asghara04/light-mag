@@ -28,29 +28,43 @@ const routes = [
 	{
 		path: '/LM-admin/add',
 		name: "add",
-		component: () => import("@/views/lm-add.vue"),
+		component: () => import("@/views/lm-form.vue"),
 		meta:{
 			requiresAuth: true
 		},
 		children:[
 			{
 				path: "image",
-				name: "lm-form-image",
 				meta:{requiresAuth: true},
-				component: () => import("@/views/lm-form-image.vue")
+				component: () => import("@/views/lm-add-image.vue")
 			},
 			{
 				path: "category",
-				name: "lm-form-category",
 				meta:{requiresAuth:true},
-				component: ()=>import("@/views/lm-form-category.vue")
+				component: ()=>import("@/views/lm-add-category.vue")
 			},
 			{
 				path: "subcat",
-				name: "lm-form-subcat",
 				meta:{requiresAuth:true},
-				component: ()=>import("@/views/lm-form-subcat.vue")
+				component: ()=>import("@/views/lm-add-subcat.vue")
 			},
+		]
+	},
+	{
+		path: "/LM-admin/change",
+		name: "change",
+		component: ()=>import("@/views/lm-form.vue"),
+		meta:{
+			requiresAuth: true
+		},
+		children:[
+			{
+				path: "image/:id",
+				meta:{requiresAuth:true},
+				props: true,
+				name: "change-image",
+				component:()=>import("@/views/lm-change-image.vue")
+			}
 		]
 	},
 	{

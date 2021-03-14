@@ -15,7 +15,7 @@
 					<h2>{{img.name}}</h2>
 					<img :src="img.image">
 					<div class="page-halfer">
-						<a class="text-icon half lm-link lm-green"><img src="../assets/imgs/edit.svg">تغییر</a>
+						<router-link :to="'/LM-admin/change/image/'+img.id" class="text-icon half lm-link lm-green"><img src="../assets/imgs/edit.svg">تغییر</router-link>
 						<a class="text-icon half lm-link lm-red" @click.prevent="rm(img.id, i)"><img src="../assets/imgs/delete.svg">حذف</a>
 					</div>
 				</article>

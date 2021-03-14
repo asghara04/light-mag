@@ -15,9 +15,9 @@
 					<h2>{{cat.name}}</h2>
 					<img v-if="cat.image" :src="cat.image.image" :alt="cat.image.alt" :name="cat.image.name">
 					<div class="page-halfer">
-						<a class="text-icon half lm-link lm-green"><img src="../assets/imgs/delete.svg">تغییر</a>
+						<a class="text-icon half lm-link lm-green"><img src="../assets/imgs/edit.svg">تغییر</a>
 						<router-link class="link-like" :to="{name: 'lm-category', params:{slug: cat.slug}}">نمایش</router-link>
-						<a class="text-icon half lm-link lm-red" @click.prevent="rm(cat.slug,i)"><img src="../assets/imgs/edit.svg">حذف</a>
+						<a class="text-icon half lm-link lm-red" @click.prevent="rm(cat.slug,i)"><img src="../assets/imgs/delete.svg">حذف</a>
 					</div>
 				</article>
 			</div>

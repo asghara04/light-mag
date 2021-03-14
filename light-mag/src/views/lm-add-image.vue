@@ -1,7 +1,7 @@
 <template>
 	<h2 class="cen">تصویر جدید</h2>
 	<form class="form" enctype="multipart/form-data" @submit.prevent="sub">
-		<img src="hi">
+		<!-- <div class="form-img-div"><img v-if="imgAddress" :src="imgAddress"></div> -->
 		<label for="image">تصویر: </label>
 		<span v-if="errs.image!=false"><p v-for="(err, i) in errs.image" class="red-text" :key="i">* {{err}}</p></span>
 		<input type="file" name="image" @change.prevent="image_selected" accept="image/png, image/jpeg, image/gif" class="data-field" required="">
@@ -31,6 +31,8 @@
 			function image_selected(e){
 				if(e.target.files&&(e.target.files[0]['type']==='image/jpeg'||e.target.files[0]['type']==='image/png'||e.target.files[0]['type']==='image/gif')){
 					image.value = e.target.files[0]
+				}else{
+					errs.value.image = ["لطفا تصویر معتبری انتخاب کنید."];
 				}
 			}
 			const store = useStore();
@@ -67,7 +69,7 @@
 									errs.value.name.push(err.response.data.name[e])
 								}
 							}
-							if(!err.response.data.image&&!err.response.data.image&&!err.response.alert.alt){
+							if(!err.response.data.image&&!err.response.data.alt&&!err.response.data.name){
 								console.log(err)
 								alert("خطایی رخ داد. لطفا دوباره امتحان کنید.");
 							}
@@ -91,7 +93,6 @@
 					}
 				}
 			}
-
 			return{image, name, alt, image_selected, sub, errs}
 		}
 	};

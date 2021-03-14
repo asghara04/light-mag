@@ -3,6 +3,12 @@ form.form{
 	background: #dddddd;
 	border-radius: 6px;
 }
+form.form div.form-img-div{
+	max-width: 60%;
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+}
 form.form .data-field{
 	width: 100%;
 	padding:  0.5%;
