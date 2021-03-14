@@ -1,8 +1,8 @@
 <template>
 	<aside id="sidebar">
-		<p v-if="art_count>=0">کل نوشته ها: {{art_count}}</p>
+		<p v-if="art_count" class="count">کل نوشته ها: {{art_count}}</p>
 		<div v-if="last_arts">
-			<div v-for="art in last_arts" :key="art.id">
+			<div v-for="art in last_arts" :key="art.id" class="siders">
 				<router-link v-if="art.image" :to="{name: 'article',params:{artslug: art.slug}}"><img :src="art.image.image" :alt="art.image.alt" :name="art.image.name"></router-link>
 				<h3><router-link :to="{name: 'article',params:{artslug: art.slug}}">{{art.title}}</router-link></h3>
 			</div>
@@ -11,7 +11,6 @@
 		<h3 class="down-name"><router-link class="text-icon" name='لایت مگ' to="/"><img src="../assets/imgs/light.svg" alt="LM" name="مجله نور">مجله نور</router-link></h3>
 	</aside>
 </template>
-
 <script>
 	import {ref} from 'vue';
 	import {getAPI} from '@/axios.js';
@@ -42,7 +41,6 @@
 		}
 	};
 </script>
-
 <style>
 	@import '../assets/sidebar.css';
 </style>

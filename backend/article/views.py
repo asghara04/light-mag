@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.pagination import PageNumberPagination
 from lightmag.pagination import PaginationMixin
 from rest_framework.renderers import JSONRenderer
+from django.db.models import Count,Q
 
 class ArticlesView(APIView, PaginationMixin):
 	pagination_class = PageNumberPagination()
@@ -124,6 +125,6 @@ class SubCatArticlesView(APIView, PaginationMixin):
 class MostComArticleView(APIView):
 	renderer_classes = (JSONRenderer,)
 	def get(self,request,format=None):
-		arts = Article.published.filter(category__name="email")
+		arts = Article.published.annotate(coms=Count('comments',filter=Q(comments__status=True,comments__personal=False))).order_by('-coms')[:6]
 		serializer = MinArticleSerializer(arts, many=True, context={"request":request})
 		return Response(serializer.data,status=status.HTTP_200_OK)
