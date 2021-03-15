@@ -44,6 +44,6 @@ class CategorySerializer(serializers.Serializer):
 	def update(self, instance, validated_data):
 		instance.image = validated_data.get('image', instance.image)
 		instance.name = validated_data.get("name", instance.name)
-		instance.slug = validated_data.get("slug", instane.slug)
+		instance.slug = validated_data.get("slug", instance.slug)
 		instance.save()
 		return instance
