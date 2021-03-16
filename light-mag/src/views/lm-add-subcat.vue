@@ -31,7 +31,7 @@
 			const category = ref(null);
 			const image = ref(null);
 			const name = ref(null);
-			const slug = ref(null)
+			const slug = ref(null);
 			const cats = ref([]);
 			const store = useStore();
 			const errs = ref({"category":[],"image":[],"name":[],"slug":[]})
@@ -66,7 +66,7 @@
 							slug: slug.value
 						}, {headers: {Authorization: `JWT ${store.state.accessToken}`}});
 						if(res.status===201){
-							router.push("/LM-admin/categories");
+							router.push({name: "lm-category",params:{slug:cats.value[category.value].slug}});
 						}else{
 							console.log(res);
 							alert('خطایی رخ داد به ادمین اطلاع دهید یا کنسول را چک کنید.');

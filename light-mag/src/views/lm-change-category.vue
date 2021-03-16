@@ -1,6 +1,6 @@
 <template>
 	<h2 class="cen">تغییر دسته {{name}}</h2>
-	<form class="form" @submit.prevent="sub(catslug)">
+	<form class="form" @submit.prevent="sub(catslug)" v-if="catslug">
 		<div v-if="imgAddress" class="form-img-div"><img :src="imgAddress"></div>
 		<label for="image">تصویر دسته: </label>
 		<span v-if="errs.image!=false"><p v-for="(err,i) in errs.image" :key="i" class="red-text">* {{err}}</p></span>

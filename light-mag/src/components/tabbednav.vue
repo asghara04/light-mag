@@ -19,7 +19,7 @@
 	</div>
 </template>
 <script>
-	import {ref} from 'vue';
+	import {ref,onBeforeUnmount} from 'vue';
 	import {getAPI} from '@/axios.js';
 	export default{
 		name: "Tabbednav",
@@ -31,20 +31,19 @@
 			const data = ref([]);
 			const links = ref();
 			const paginate = ref(null);
+			const activet = ref(0);
 			async function set_props(){
 				tabheads.value = props.ths.split("|");
 				endpoints.value = props.ps.split("|");
 				links.value = props.ls.split("|");
 			}
-			set_props()
-
+			set_props();
 			function set_datas(){
 				for(var i=0;i<tabheads.value.length;i++){
 					datas.value.push({title: tabheads.value[i], endpoint: endpoints.value[i], active: false, api_data: []})
 				}
 			}
-			set_datas()
-
+			set_datas();
 			function set_data(){
 				for(var i=0;i<tabheads.value.length;i++){
 					data.value[i] = {active: datas.value[i].active, data: datas.value[i].api_data, link: links.value[i]}
@@ -63,22 +62,26 @@
 					datas.value[i].active = true;
 					datas.value[i].endpoint = res.data.next;
 					more = true;
+					activet.value = i;
 					set_data();
-					window.addEventListener("scroll",()=>{if(datas.value[i].endpoint!=null){pagination(datas.value[i].endpoint,i);}})
+					window.addEventListener("scroll",pagination);
 				}catch(err){
 					console.log(err);
 				}
 			}
-			get_data(0);
-
-			async function pagination(end,i){
-				let bottom = ((window.scrollY+window.innerHeight)>=(paginate.value.offsetTop+paginate.value.offsetHeight-20)&&(window.scrollY+window.innerHeight)<(paginate.value.offsetTop+paginate.value.offsetHeight));
-				if(more&&end&&bottom===true){
-					more = false;
-					get_data(i);
+			get_data(activet.value);
+			function pagination(){
+				if(paginate.value){
+					let bottom = ((window.scrollY+window.innerHeight)>=(paginate.value.offsetTop+paginate.value.offsetHeight-20)&&(window.scrollY+window.innerHeight)<(paginate.value.offsetTop+paginate.value.offsetHeight));
+					if(more&&datas.value[activet.value].endpoint&&bottom===true){
+						more = false;
+						get_data(activet.value);
+					}
 				}
 			}
-
+			onBeforeUnmount(()=>{
+				window.removeEventListener('scroll', pagination);
+			});
 			return{data,tabheads,links,get_data,paginate}
 		}
 	};

@@ -71,6 +71,13 @@ const routes = [
 				props: true,
 				name: "change-category",
 				component:()=>import('@/views/lm-change-category')
+			},
+			{
+				path:"subcat/:cat/:sub",
+				meta: {requiresAuth:true},
+				props: true,
+				name: "change-subcat",
+				component:()=>import("@/views/lm-change-subcat.vue")
 			}
 		]
 	},
