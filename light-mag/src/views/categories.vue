@@ -16,6 +16,7 @@
 	import pagination from '@/components/pagination.vue';
 	import {ref,computed,watch} from 'vue';
 	import {useStore} from 'vuex';
+	import {useRoute} from 'vue-router';
 	export default{
 		name: "categories",
 		components:{
@@ -48,14 +49,15 @@
 					console.log(err)
 				}
 			}
-
+			const route = useRoute();
 			watch(
 				() => props.page,
-				() => {
-					set_current();
+				newPage => {
+					if(route.name==="categories"&&newPage){						
+						set_current();
+					}
 				}
 			)
-
 			return{APIData ,current}
 		}
 	};

@@ -11,6 +11,7 @@ article.topslide{
 	background-color: #ededed;
 	transition: 0.2s;
 	text-align: center;
+	flex-shrink: 0;
 }
 div#topslider article.topslide:hover{
 	transform: scale(1.06);

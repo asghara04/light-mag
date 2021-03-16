@@ -2,6 +2,7 @@ div.third-part{
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
+	padding: 2.5% 1.5%;
 }
 div.third-part div.third-one{
 	flex-basis: 31%;

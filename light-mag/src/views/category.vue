@@ -39,22 +39,24 @@
 		setup(props){
 			const store = useStore();
 			const APIData = computed(()=> store.state.APIData);
-
 			async function get_cat(slug){
-				await getAPI.get("categories/api/v1/"+slug)
-				.then(res => store.state.APIData = res.data)
-				.catch(err => console.log(err))
+				try{
+					const res = await getAPI.get("categories/api/v1/"+slug);
+					store.state.APIData = res.data;
+				}catch(err){
+					console.log(err);
+				}
 			}
 			get_cat(props.catslug)
-
 			const route = useRoute()
 			watch(
 				()=> route.params.catslug,
 				newSlug => {
-					get_cat(newSlug);
+					if(route.name==="category"){
+						get_cat(newSlug);
+					}
 				}
 			)
-
 			return {APIData}
 		}
 	};

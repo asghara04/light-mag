@@ -11,8 +11,12 @@ div#tabbednav button.tab-head{
 	font-size: 18px;
 	cursor: pointer;
 	border-radius: 12px 12px 0 0;
+	border-bottom: 2px solid #dedede!important;
 	padding: 0.7% 1%;
 	transition: 0.2s;
+}
+div.tab-body{
+	background: transparent;
 }
 div#tabbednav button.tab-head.active{
 	background-color: #b6e3ff!important;

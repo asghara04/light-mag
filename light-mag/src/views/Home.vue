@@ -27,6 +27,7 @@
 	import topslider from '@/components/topslider.vue';
 	import sidebar from '@/components/sidebar.vue';
 	import pagination from '@/components/pagination.vue';
+	import  {useRoute} from 'vue-router';
 	export default{
 		name: 'Home',
 		props: ["page"],
@@ -57,11 +58,13 @@
 					console.log(err);
 				}
 			}
-
+			const route = useRoute();
 			watch(
 				() => props.page,
 				() => {
-					set_current();
+					if(route.name==="Home"){
+						set_current();
+					}
 				}
 			)
 

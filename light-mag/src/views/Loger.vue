@@ -44,7 +44,6 @@
 					passfield.type = "text";
 				}
 			}
-			
 			function login(){
 				errs.value.email = [];
 				errs.value.password = [];

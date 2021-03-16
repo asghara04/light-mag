@@ -42,12 +42,11 @@
 			watch(
 				()=> route.params.subcatname,
 				(newSubcatname) => {
-					if(route.params.catslug===props.catslug&&newSubcatname){
+					if(route.name==="subcat"&&route.params.catslug===props.catslug&&newSubcatname){
 						get_subcat(props.catslug,newSubcatname)
 					}
 				}
 			)
-
 			return{subcat}
 		},
 		components:{

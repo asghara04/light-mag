@@ -6,17 +6,17 @@
 	flex-flow: wrap;
 }
 article.art{
-	flex-basis: 23.5%;
+	flex-basis: 22%;
+	background: #ededed;
 	transition: .3s;
 	margin: 2% 0;
 }
 article.art:hover{
-	transform: scale(1.075);
+	transform: scale(1.065);
 }
 article.art img{
-	height: 70%;
-	width: 100%;
-	background-color: #ededed;
+	max-height: 80%;
+	max-width: 100%;
 }
 article.art h2{
 	background-color: #ededed;
@@ -37,12 +37,15 @@ article.art h2{
 		transform: scale(1.05);
 	}
 	article.art h2{
-		font-size: 23px;
+		font-size: 22px;
 	}
 }
 @media(max-width: 500px){
 	article.art{
 		flex-basis: 90%;
+	}
+	article.art h2{
+		font-size: 20px
 	}
 }
 @media(max-width: 350px){

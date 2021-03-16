@@ -5,19 +5,22 @@
 				<router-link to="/" rel="مجله نور">صفحه اصلی</router-link> > <span>کاربران</span> > <router-link :to="{name: 'userprofile', params:{username: APIData.username}}">{{APIData.name}}</router-link>
 			</span>
 			<div class="third-part">
-				<div class="third-one dashed">
-					<img :src="APIData.prof_picture.image" :alt="APIData.prof_picture.alt" :name="APIData.prof_picture.name">
+				<div class="third-one">
+					<img v-if="APIData.prof_picture" :src="APIData.prof_picture.image" :alt="APIData.prof_picture.alt" :name="APIData.prof_picture.name">
 					<p><span class="blue-text">نام: </span>{{APIData.name}}</p>
 					<p v-if="APIData.pubmail"><span class="blue-text">ایمیل: </span><a class="link-like" :href="'mailto:'+APIData.pubmail" target="_blank" :rel="'ایمیل '+APIData.name">{{APIData.pubmail}}</a></p>
+					<div class="cen">
+						<a href="#" class="cen">مقالات {{APIData.name}}</a>
+					</div>
 				</div>
-				<div class="third-two dashed">
-					<div class="page-halfer">
-						<p v-if="APIData.birthday" class="half"><span class="blue-text">تاریخ تولد: </span>{{APIData.birthday}}</p>
-						<p v-if="APIData.favorite_cat" class="half"><span class="blue-text">دسته موردعلاقه: </span><router-link :to="{name: 'category', params: {catslug: APIData.favorite_cat.slug}}" :rel="APIData.favorite_cat.name" class="link-like">{{APIData.favorite_cat.name}}</router-link></p>					
+				<div class="third-two">
+					<div v-if="APIData.jbirth||APIData.favorite_cat" class="page-halfer">
+						<p v-if="APIData.jbirth" class="half"><span class="blue-text">تاریخ تولد: </span>{{APIData.jbirth}}</p>
+						<p v-if="APIData.favorite_cat" class="half"><span class="blue-text">دسته موردعلاقه: </span><router-link :to="{name: 'category', params: {catslug: APIData.favorite_cat.slug}}" :rel="APIData.favorite_cat.name" class="link-like">{{APIData.favorite_cat.name}}</router-link></p>
 					</div>
 					<div class="page">
 						<div v-if="APIData.bio">
-							<span class="blue-text">بایوگرافی: </span><p class="pre-formatted">{{APIData.bio}}</p>
+							<span class="blue-text">بایوگرافی: </span><p class="pre-formatted">{{APIData.bio}}</p><!-- <p class="pre-formatted">{{APIData.bio}}</p> -->
 						</div>
 						<div v-if="APIData.about">
 							<span class="blue-text">درباره: </span><p class="pre-formatted">{{APIData.about}}</p>
@@ -25,7 +28,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="dashed" align="center">
+			<div align="center">
 				<p class="like-h2">ارتباط</p>
 				<div class="small-medium-list">
 					<a class="item" target="_blank" :href="APIData.instagram_link"><img src="../assets/imgs/instagram.png" alt="اینستاگرام"></a>

@@ -1,6 +1,6 @@
 <template>
 	<div v-if="data[0]" id="tabbednav">
-		<button v-for="(tab, index) in data" :key="tab.active" @click="get_data(index)" class='tab-head' :class="{'active':tab.active}">{{tabheads[index]}}</button>
+		<button v-for="(tab, i) in data" :key="tab.active" @click="reset_call(i)" class='tab-head' :class="{'active':tab.active}">{{tabheads[i]}}</button>
 	</div>
 	<div class="tab-body" v-for="(tab,i) in data" :key="i">
 		<div v-if='tab.active!=false' ref="paginate">
@@ -21,6 +21,7 @@
 <script>
 	import {ref,onBeforeUnmount} from 'vue';
 	import {getAPI} from '@/axios.js';
+	import {useRouter} from 'vue-router';
 	export default{
 		name: "Tabbednav",
 		props:["ths", "ps", "ls"],
@@ -49,24 +50,34 @@
 					data.value[i] = {active: datas.value[i].active, data: datas.value[i].api_data, link: links.value[i]}
 				}
 			}
+			function reset_call(i){
+				datas.value[i].endpoint = endpoints.value[i];
+				datas.value[i].api_data = [];
+				return get_data(i);
+			}
+			const router = useRouter();
 			let more = false;
 			async function get_data(i){
-				try{
-					const res = await getAPI.get(datas.value[i].endpoint);
-					for(var n=0;n<res.data.results.length;n++){
-						datas.value[i].api_data.push(res.data.results[n]);
+				if(datas.value[i].endpoint){
+					try{
+						const res = await getAPI.get(datas.value[i].endpoint);
+						for(var n=0;n<res.data.results.length;n++){
+							datas.value[i].api_data.push(res.data.results[n]);
+						}
+						for(var x=0;x<tabheads.value.length;x++){
+							datas.value[x].active = false;
+						}
+						datas.value[i].active = true;
+						datas.value[i].endpoint = res.data.next;
+						more = true;
+						activet.value = i;
+						set_data();
+						window.addEventListener("scroll",pagination);
+					}catch(err){
+						console.log(datas.value[i].endpoint)
 					}
-					for(var x=0;x<tabheads.value.length;x++){
-						datas.value[x].active = false;
-					}
-					datas.value[i].active = true;
-					datas.value[i].endpoint = res.data.next;
-					more = true;
-					activet.value = i;
-					set_data();
-					window.addEventListener("scroll",pagination);
-				}catch(err){
-					console.log(err);
+				}else{
+					router.go();
 				}
 			}
 			get_data(activet.value);
@@ -82,7 +93,7 @@
 			onBeforeUnmount(()=>{
 				window.removeEventListener('scroll', pagination);
 			});
-			return{data,tabheads,links,get_data,paginate}
+			return{data,tabheads,links,get_data,paginate,reset_call}
 		}
 	};
 </script>

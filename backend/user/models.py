@@ -44,7 +44,7 @@ class User(AbstractBaseUser):
 	email = models.EmailField(max_length=30, unique=True)
 	username = models.CharField(max_length=30, unique=True)
 	name = models.CharField(max_length=35)
-	prof_picture = models.ForeignKey(Image, on_delete=models.SET_NULL, null=True)#may i have to make it blank
+	prof_picture = models.ForeignKey(Image, on_delete=models.SET_NULL, null=True)
 	join_date = models.DateField(auto_now_add=True)
 	last_login = models.DateField(auto_now=True)
 	is_active = models.BooleanField(default=True)
@@ -65,9 +65,9 @@ class User(AbstractBaseUser):
 
 	def jjoin(self):
 		return set_jdate(self.join_date)
-	def jlast(slef):
+	def jlast(self):
 		return set_jdate(self.last_login)
-	def jbirth(slef):
+	def jbirth(self):
 		return set_jdate(self.birthday)
 	def __str__(self):
 		return self.username

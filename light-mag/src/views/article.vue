@@ -3,9 +3,7 @@
 	<topslider></topslider>
 	<div id="page" class="page">
 		<article class="right page-content" v-if="APIData">
-			<span>
-				<router-link to="/" name="لایت مگ" rel="لایت مگ">صفحه اصلی</router-link> > <span v-if="APIData.category"><router-link :to="'/categories/'+APIData.category.slug" :rel="APIData.category.name">{{APIData.category.name}}</router-link> > </span><span v-if="APIData.subcat"><span v-if="!APIData.category">{{APIData.subcat.category}} > </span><router-link :to="'/categories/'+APIData.category.slug+'/'+APIData.subcat.slug" :rel="APIData.subcat.name">{{APIData.subcat.name}}</router-link> > </span><router-link :to="'/article/'+APIData.slug">{{APIData.title}}</router-link>
-			</span>
+			<span><router-link to="/" name="لایت مگ" rel="لایت مگ">صفحه اصلی</router-link> <span v-if="APIData.category">> <router-link :to="{name: 'category',params:{catslug: APIData.category.slug}}">{{APIData.category.name}}</router-link> > </span><span v-if="APIData.subcat"><span v-if="APIData.category"><router-link :to="{name: 'subcat',params:{catslug:APIData.category.slug,subcatname:APIData.subcat.slug}}">{{APIData.subcat.name}}</router-link></span><span v-else>> {{APIData.subcat.name}}</span></span></span>
 			<h1 class="art-h"><router-link :to="'/article/'+APIData.slug">{{APIData.title}}</router-link></h1>
 			<div v-if="APIData.image" class="art-pic">
 				<img :src="APIData.image.image" :name="APIData.image.name" :alt="APIData.image.alt">
