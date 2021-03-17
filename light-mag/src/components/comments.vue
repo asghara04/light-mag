@@ -6,12 +6,12 @@
 			<time class="s-size">{{com.jdate}}</time>
 			<p class="message">{{com.message}}</p>
 			<!-- <p class="red-text">پاسخ دادن</p>    component    -->
-			<div v-if="com.reps">
+			<!-- <div v-if="com.reps">
 				<p v-if="!replies" @click.prevent="get_reps(com.id,i)" class=" cen link-like">{{com.reps}} پاسخ، نمایش</p>
 				<div v-else>
 					
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </template>
@@ -27,21 +27,24 @@
 				try{
 					const res = await getAPI.get("comments/api/v1/"+props.id);
 					comments.value = res.data.results;
-					for(var i=0;i<comments.value.length;i++){
-						comments.value[i]['replies'] = [];// sould be a {}
-					}
+					// for(var i=0;i<comments.value.length;i++){
+					// 	comments.value[i]['replies'] = {
+					// 		next: null,
+					// 		reps: []
+					// 	};
+					// }
 				}catch(err){
 					console.log(err)
 				}
 			}
-			async function get_reps(pk,i){
-				try{
-					const res = await getAPI.get("comments/reply/api/v1/"+pk);
-					comments.value[i].replies = res.data.results;
-				}catch(err){
-					console.log(err)
-				}
-			}
+			// async function get_reps(pk,i){
+			// 	try{
+			// 		const res = await getAPI.get("comments/reply/api/v1/"+pk);
+			// 		comments.value[i].replies = res.data.results;
+			// 	}catch(err){
+			// 		console.log(err)
+			// 	}
+			// }
 			return{get_coms,comments}
 		}
 	};

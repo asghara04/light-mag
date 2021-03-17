@@ -12,7 +12,7 @@ from rest_framework.pagination import PageNumberPagination
 
 class ACommentsView(APIView,PaginationMixin):
 	permission_classes = (AllowAny,)
-	renderer_classes = (JSONRenderer,)
+	# renderer_classes = (JSONRenderer,)
 	pagination_class = PageNumberPagination()
 	def get(self, request, pk):
 		comments = Comment.published.filter(article=pk)

@@ -22,16 +22,19 @@
 				<p v-else class="cen blue-text">هنوز کامنتی ثبت نشده، میتونی اولی باشی :)</p>
 				<p class="like-h2">کامنت جدید:</p>
 				<form class="form" @submit.prevent="commentsub(APIData.id)" method="post">
-					<p v-if="errs.message" class="red-text">* {{errs.message}}</p>
+					<label v-if="focus" for="message">نظر: </label>
+					<span v-if="errs.message!=false"><p v-for="(err,i) in errs.message" :key="i" class="red-text">* {{err}}</p></span>
 					<textarea class="data-field" name="message" placeholder="نظر..." @focus="focused" maxlength="350" v-model="message"></textarea>
-					<p v-if="errs.name" class="red-text">* {{errs.name}}</p>
+					<label v-if="focus" for="name">نام: </label>
+					<span v-if="errs.name!=false"><p v-for="(err,i) in errs.name" :key="i" class="red-text">* {{err}}</p></span>
 					<input v-if="focus" type="text" name="name" placeholder="نام..." class="data-field" maxlength="30" v-model="name">
-					<p v-if="errs.email" class="red-text">* {{errs.email}}</p>
+					<label v-if="focus" for="email">ایمیل: </label>
+					<span v-if="errs.email!=false"><p v-for="(err,i) in errs.email" :key="i" class="red-text">* {{err}}</p></span>
 					<input v-if="focus" type="email" name="email" maxlength="30" class="data-field" placeholder="ایمیل..." v-model="email">
 					<label v-if="focus" for="personal">ارسال خصوصی:</label>
-					<input v-if="focus" type="checkbox" name="personal" v-model="personal">
-					<br>
-					<button class="sub-button">ثبت</button>
+					<span v-if="errs.personal!=false"><p v-for="(err,i) in errs.personal" :key="i" class="red-text">* {{err}}</p></span>
+					<input v-if="focus" type="checkbox" class="data-field" name="personal" v-model="personal">
+					<button v-if="focus" class="sub-button">ثبت</button>
 				</form>
 			</div>
 		</div>
@@ -60,10 +63,13 @@
 			const APIData = computed(()=>store.state.APIData);
 			const route = useRoute();
 
-			function get_art(slug){
-				getAPI.get("articles/api/v1/"+slug)
-				.then(res => store.state.APIData = res.data)
-				.catch(err => console.log(err))
+			async function get_art(slug){
+				try{
+					const res = await getAPI.get('articles/api/v1/'+slug)
+					store.state.APIData = res.data;
+				}catch(err){
+					console.log(err)
+				}
 			}
 			get_art(props.artslug)
 
@@ -72,50 +78,82 @@
 			const email = ref(null);
 			const message = ref(null);
 			const personal = ref(false);
-			const errs = ref({});
+			const errs = ref({'name':[],'email':[],'message':[],'personal':[]});
 
 			function focused(){
 				if(!focus.value){
 					focus.value = true;					
 				}
 			}
-			function commentsub(artid){
-				if(!name.value||!email.value||!message.value||name.value.length>30||email.value.length>30||message.value.length>350){
-					if(!name.value){
-						errs.value['name'] = "لطفا نام را وارد کنید.";
-					}else if(name.value.length>30){
-						errs.value['name'] = "نام وارد شده بیش از حداکثرمقدا است.";
-					}
-					if(!email.value){
-						errs.value['email'] = "لطفا ایمیل را وارد کنید."
-					}else if(email.value.length>30){
-						errs.value['email'] = "ایمیل وارد شده بیش از حداکثرمقدا است.";
-					}
-					if(!message.value){
-						errs.value['message'] = "لطفا کامنت را وارد کنید.";
-					}else if(message.value.length>350){
-						errs.value['message'] = "کامنت وارد شده بیش از حداکثرمقدا است.";
-					}
-				}else{
-					getAPI.post("comments/api/v1/"+artid+'/', {
-						name: name.value,
-						email: email.value,
-						message: message.value,
-						personal: personal.value
-					})
-					.then((res)=> {
+			async function commentsub(artid){
+				errs.value.name = [];
+				errs.value.email = [];
+				errs.value.message = [];
+				errs.value.personal = [];
+				focus.value = true;
+				if(name.value&&name.value.length<=30&&email.value&&email.value.length<=30&&message.value&&message.value.length<=350){
+					try{
+						const res = await getAPI.post("comments/api/v1/"+artid+'/',{
+							article: artid,
+							name: name.value,
+							email: email.value,
+							message: message.value,
+							personal: personal.value
+						})
 						if(res.status===201){
-							alert("نظرتون با موفقیت ثبت شد.\nپس از تایید نمایش داده میشود.");
-							name.value = '';
-							email.value = '';
-							message.value = '';
-							personal.value = false;
+							alert(res.data.message)
+							name.value = null;
+							email.value = null;
+							message.value = null;
+							personal.value = null;
+							focus.value = false;
 						}else{
 							console.log(res)
 						}
-					})
-					.catch((err) => {console.log(err);alert("خطایی رخ داد! لطفا دوباره امتحان کنید.")})
-				}
+					}catch(err){
+						if(err.response.status===400){
+							if(err.response.data.name){
+								for(var i=0;i<err.response.data.name.length;i++){
+									errs.value.name.push(err.response.data.name[i])
+								}
+							}
+							if(err.response.data.email){
+								for(var x=0;x<err.response.data.email.length;x++){
+									errs.value.email.push(err.response.data.email[x])
+								}
+							}
+							if(err.response.data.message){
+								for(var y=0;y<err.response.data.message.length;y++){
+									errs.value.message.push(err.response.data.message[y])
+								}
+							}
+							if(err.response.data.personal){
+								for(var z=0;z<err.response.data.personal.length;z++){
+									errs.value.personal.push(err.response.data.personal[z])
+								}
+							}
+						}else{
+							alert('خطایی رخ داد، لطفا دوباره امتحان کنید.')
+						}
+					}
+				}else{
+					alert(false)
+					if(!message.value){
+						errs.value.message.push('لطفا کامنتتون رو وارد کنید.');
+					}else if(message.value.length>350){
+						errs.value.message.push('حداکثر طول کامنت 350 است، اکنون '+message.value.length+' وارد شده است.');
+					}
+					if(!name.value){
+						errs.value.name.push('لطفا نام تون رو وارد کنید.');
+					}else if(name.value.length>30){
+						errs.value.name.push('حداکثر طول نام 30 است، اکنون '+name.value.length+' وارد شده است.');
+					}
+					if(!email.value){
+						errs.value.email.push('لطفا ایمیل تون رو وارد کنید.');
+					}else if(email.value.length>30){
+						errs.value.email.push('حداکثر طول ایمیل 30 است، اکنون '+email.value.length+' وارد شده است.');
+					}
+				}	
 			}
 
 			watch(
