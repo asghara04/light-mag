@@ -37,6 +37,9 @@ class Article(models.Model):
 	def jdate(self):
 		return set_jdatetime(self.date)
 
+	def coms(self):
+		return self.comments.filter(status=True).count()
+	
 	def __str__(self):
 		return self.slug
 	class Meta:

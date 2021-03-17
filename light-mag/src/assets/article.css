@@ -1,13 +1,14 @@
-div#page.page article.page-content.right{
+div#page.page article{
 	padding: 2%;
+	border-radius: 4px;
 }
-div#page.page article.page-content.right .art-h{
+div#page.page article .art-h{
 	padding: 1% 0;
 }
-div#page.page article.page-content.right .art-h a{
+div#page.page article .art-h a{
 	color: #000000;
 }
-div#page.page article.page-content.right .art-h{
+div#page.page article .art-h{
 	text-align: center;
 }
 .art-pic{
@@ -18,4 +19,9 @@ div#page.page article.page-content.right .art-h{
 }
 .body{
 	padding: 0.5% 1.5%;
+}
+div#page.page .comments{
+	margin: 1% 0;
+	border-radius: 6px;
+	padding: 1%;
 }

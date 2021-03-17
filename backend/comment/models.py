@@ -33,6 +33,10 @@ class Comment(models.Model):
 	unread = UnRead()
 	def jdate(self):
 		return set_jdatetime(self.date)
+
+	def reps(self):
+		return self.replies.filter(status=True).count()
+
 	def __str__(self):
 		return str(self.id)
 	class Meta:
@@ -40,7 +44,7 @@ class Comment(models.Model):
 
 
 class Reply(models.Model):
-	comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+	comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="replies")
 	name = models.CharField(max_length=30)
 	email = models.EmailField(max_length=30)
 	date = models.DateTimeField(auto_now_add=True)

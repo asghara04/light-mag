@@ -64,9 +64,6 @@ img{
 .freeze{
 	overflow: hidden;
 }
-.page-content{
-	background-color: #ededed;
-}
 .center-parent{
 	display: flex;
 	align-items: center;
@@ -116,5 +113,5 @@ img{
 	text-align: center;
 }
 .ed-bk{
-	background: #ededed!important;
+	background: #ededed;
 }

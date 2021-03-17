@@ -12,4 +12,4 @@ this project not complited yet but im working on it and i make it public on gith
 * html/css
 ----
 
-## i kinda think Light-mag isn't a good name so if you have better idea for its name please please tell me or even change it on repository, thanks
+## i kinda think Light-mag isn't a good name so if you have better idea please let me, thanks

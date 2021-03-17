@@ -2,39 +2,40 @@
 	<div>
 	<topslider></topslider>
 	<div id="page" class="page">
-		<article class="right page-content" v-if="APIData">
-			<span><router-link to="/" name="لایت مگ" rel="لایت مگ">صفحه اصلی</router-link> <span v-if="APIData.category">> <router-link :to="{name: 'category',params:{catslug: APIData.category.slug}}">{{APIData.category.name}}</router-link> > </span><span v-if="APIData.subcat"><span v-if="APIData.category"><router-link :to="{name: 'subcat',params:{catslug:APIData.category.slug,subcatname:APIData.subcat.slug}}">{{APIData.subcat.name}}</router-link></span><span v-else>> {{APIData.subcat.name}}</span></span></span>
-			<h1 class="art-h"><router-link :to="'/article/'+APIData.slug">{{APIData.title}}</router-link></h1>
-			<div v-if="APIData.image" class="art-pic">
-				<img :src="APIData.image.image" :name="APIData.image.name" :alt="APIData.image.alt">
-			</div>
-			<p class="body pre-formatted">
-				{{APIData.body}}
-			</p>
+		<div class="right">
+			<article class="ed-bk" v-if="APIData">
+				<span><router-link to="/" name="لایت مگ" rel="لایت مگ">صفحه اصلی</router-link> <span v-if="APIData.category">> <router-link :to="{name: 'category',params:{catslug: APIData.category.slug}}">{{APIData.category.name}}</router-link> > </span><span v-if="APIData.subcat"><span v-if="APIData.category"><router-link :to="{name: 'subcat',params:{catslug:APIData.category.slug,subcatname:APIData.subcat.slug}}">{{APIData.subcat.name}}</router-link></span><span v-else>> {{APIData.subcat.name}}</span></span></span>
+				<h1 class="art-h"><router-link :to="'/article/'+APIData.slug">{{APIData.title}}</router-link></h1>
+				<div v-if="APIData.image" class="art-pic">
+					<img :src="APIData.image.image" :name="APIData.image.name" :alt="APIData.image.alt">
+				</div>
+				<p class="body pre-formatted">
+					{{APIData.body}}
+				</p>
 
-			<hr>
-				<router-link v-if="APIData.author" :to="{name: 'userprofile', params: {username: APIData.author.username}}">{{APIData.author.name}}</router-link>
-			<hr>
-
-			<div id="comments">
-				<!-- other comments -->
-					<p class="like-h2">کامنت جدید:</p>
-					<form class="form" @submit.prevent="commentsub(APIData.id)" method="post">
-						<p v-if="errs.message" class="red-text">* {{errs.message}}</p>
-						<textarea class="data-field" name="message" placeholder="نظر..." @focus="focused" maxlength="350" v-model="message"></textarea>
-						<p v-if="errs.name" class="red-text">* {{errs.name}}</p>
-						<input v-if="focus" type="text" name="name" placeholder="نام..." class="data-field" maxlength="30" v-model="name">
-						<p v-if="errs.email" class="red-text">* {{errs.email}}</p>
-						<input v-if="focus" type="email" name="email" maxlength="30" class="data-field" placeholder="ایمیل..." v-model="email">
-						<label v-if="focus" for="personal">ارسال خصوصی:</label>
-						<input v-if="focus" type="checkbox" name="personal" v-model="personal">
-						<br>
-						<button class="sub-button">ثبت</button>
-					</form>
+				<hr>
+					<router-link v-if="APIData.author" :to="{name: 'userprofile', params: {username: APIData.author.username}}">{{APIData.author.name}}</router-link>
+				<!-- related article like a card slider or like movie websites top -->
+			</article>
+			<div class="ed-bk comments">
+				<comments v-if="APIData.coms" :key="artslug" :id="APIData.id"/>
+				<p v-else class="cen blue-text">هنوز کامنتی ثبت نشده، میتونی اولی باشی :)</p>
+				<p class="like-h2">کامنت جدید:</p>
+				<form class="form" @submit.prevent="commentsub(APIData.id)" method="post">
+					<p v-if="errs.message" class="red-text">* {{errs.message}}</p>
+					<textarea class="data-field" name="message" placeholder="نظر..." @focus="focused" maxlength="350" v-model="message"></textarea>
+					<p v-if="errs.name" class="red-text">* {{errs.name}}</p>
+					<input v-if="focus" type="text" name="name" placeholder="نام..." class="data-field" maxlength="30" v-model="name">
+					<p v-if="errs.email" class="red-text">* {{errs.email}}</p>
+					<input v-if="focus" type="email" name="email" maxlength="30" class="data-field" placeholder="ایمیل..." v-model="email">
+					<label v-if="focus" for="personal">ارسال خصوصی:</label>
+					<input v-if="focus" type="checkbox" name="personal" v-model="personal">
+					<br>
+					<button class="sub-button">ثبت</button>
+				</form>
 			</div>
-			<!-- related article like a card slider or like movie websites top -->
-		</article>
-		<sidebar></sidebar>
+		</div>
+		<sidebar/>
 	</div>
 </div>
 </template>
@@ -45,11 +46,13 @@
 	import {ref,computed,watch} from 'vue';
 	import {useStore} from 'vuex';
 	import {useRoute} from 'vue-router';
+	import comments from '@/components/comments.vue';
 	export default{
 		name: "Article",
 		components:{
 			sidebar,
-			topslider
+			topslider,
+			comments
 		},
 		props:["artslug"],
 		setup(props){

@@ -19,6 +19,7 @@ class ArticleSerializer(serializers.Serializer):
 	category = CategorySerializer(read_only=True)
 	subcat = SubCatSerializer(read_only=True)
 	tags = TagSerializer(many=True, read_only=True)
+	coms = serializers.IntegerField(read_only=True)
 	author = MinUserSerializer(read_only=True)
 
 
@@ -35,6 +36,7 @@ class MArticleSerializer(serializers.Serializer):
 	subcat = SubCatSerializer(allow_null=True)
 	tags = TagSerializer(many=True, read_only=True)
 	status = serializers.CharField(max_length=8)
+	coms = serializers.IntegerField(read_only=True)
 	author = MinUserSerializer()
 	
 	def validate_image(self, value):
@@ -68,5 +70,5 @@ class MinArticleSerializer(serializers.Serializer):
 	image = ImageSerializer(read_only=True)
 	description = serializers.CharField(read_only=True, max_length=200)
 	jpub_date = serializers.DateTimeField(read_only=True)
-	# status = serializers.CharField(read_only=True, max_length=8)
 	author = MinUserSerializer(read_only=True)
+	coms = serializers.IntegerField(read_only=True)

@@ -1,0 +1,20 @@
+.com-box{
+	background-color: #dddddd;
+	border-radius: 5px;
+	padding: 0.5%;
+}
+div.com{
+	border-right: 3px solid #757575;
+	margin: 0 0.5% 0 0;
+	padding: 0.5%;
+	border-bottom: 1px dashed #121212;
+}
+div.com .s-size{
+	font-size: 16px; 
+}
+div.com .message{
+	margin: 0 1% 0 0;
+}
+div.com .sub{
+	margin: 0 5% 0 0;
+}
