@@ -78,6 +78,10 @@ img{
 .link-like{
 	color: #2060fd;
 }
+*::selection{
+	background-color: #309ccd;
+	color: #ededed;
+}
 .link-like:hover{
 	color: #004c8d;
 	text-decoration: underline;

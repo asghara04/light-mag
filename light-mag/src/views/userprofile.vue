@@ -28,13 +28,13 @@
 					</div>
 				</div>
 			</div>
-			<div align="center">
+			<div align="center" v-if="APIData.instagram_link||APIData.facebook_link||APIData.github_link||APIData.pubmail">
 				<p class="like-h2">ارتباط</p>
 				<div class="small-medium-list">
-					<a class="item" target="_blank" :href="APIData.instagram_link"><img src="../assets/imgs/instagram.png" alt="اینستاگرام"></a>
-					<a :href="APIData.facebook_link" class="item" target="_blank"><img src="../assets/imgs/facebook.png"></a>
-					<a :href="APIData.github_link" class="item" target="_blank"><img src="../assets/imgs/github.png" alt="گیت هاب"></a>
-					<a :href="'mailto:'+APIData.pubmail" class="item" target="_blank"><img src="../assets/imgs/email.png" alt="ایمیل"></a>
+					<a v-if="APIData.instagram_link" class="item" target="_blank" :href="APIData.instagram_link"><img src="../assets/imgs/instagram.png" alt="اینستاگرام"></a>
+					<a v-if="APIData.facebook_link" :href="APIData.facebook_link" class="item" target="_blank"><img src="../assets/imgs/facebook.png"></a>
+					<a v-if="APIData.github_link" :href="APIData.github_link" class="item" target="_blank"><img src="../assets/imgs/github.png" alt="گیت هاب"></a>
+					<a v-if="APIData.pubmail" :href="'mailto:'+APIData.pubmail" class="item" target="_blank"><img src="../assets/imgs/email.png" alt="ایمیل"></a>
 				</div>
 			</div>
 		</div>
@@ -67,7 +67,9 @@
 			watch(
 				()=> route.params.username,
 				newUsername=>{
-					get_user(newUsername);
+					if(route.name==="userprofile"){
+						get_user(newUsername);
+					}
 				}
 			)
 

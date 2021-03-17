@@ -6,7 +6,9 @@ import jdatetime
 
 def set_jdate(gdate):
 	jdatetime.set_locale("fa_IR")
-	return jdatetime.datetime.fromgregorian(year=gdate.year,month=gdate.month,day=gdate.day).strftime("%A, %d %B %Y")
+	if gdate:
+		return jdatetime.datetime.fromgregorian(year=gdate.year,month=gdate.month,day=gdate.day).strftime("%A, %d %B %Y")
+	return None
 
 class UserManager(BaseUserManager):
 	def create_user(self, email, username, name, password=None):

@@ -39,10 +39,8 @@ class MUserSerializer(serializers.Serializer):
 	instagram_link = serializers.URLField(max_length=35, allow_null=True)
 	facebook_link = serializers.URLField(max_length=35, allow_null=True)
 	github_link = serializers.URLField(max_length=35, allow_null=True)
-	jbirth = serializers.DateField(allow_null=True)
-	join_date = serializers.DateField(write_only=True)
-	last_login = serializers.DateField(write_only=True)
-	birthday = serializers.DateField(write_only=True)
+	jbirth = serializers.DateField(allow_null=True,read_only=True)
+	birthday = serializers.DateField(write_only=True,allow_null=True)
 
 	def validate_prof_pucture(self, value):
 		return get_object_or_404(Imagd,  name=value["name"])
