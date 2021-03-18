@@ -11,12 +11,12 @@ div.spcial-list article.article:hover{
 div.spcial-list article.article.yay-sider .sider{
 	text-align: center;
 }
-div.spcial-list article.article.yay-sider .sider img{
+/*div.spcial-list article.article.yay-sider .sider img{
 	max-width: 100%;
 	max-height: 100%;
 	min-width: 80%;
 	min-height: 80%;
-}
+}*/
 @media(min-width: 650px){
 	div.spcial-list article.article.yay-sider{
 		display: flex;

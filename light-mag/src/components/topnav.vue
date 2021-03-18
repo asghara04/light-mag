@@ -14,8 +14,8 @@
 		<div v-if="smallscreen" @click="exit()" id="topsmalluloverlay"></div>
 
 		<img v-if="avragescreen||smallscreen" class="imgbutton" src="../assets/imgs/search.svg" @click.prevent="search()">
-		<form :class="{'block':showsearch}" id="search-form">
-			<input type="search" required="" maxlength="100" placeholder="جستوجو..." name="search" class="search-field">
+		<form :class="{'block':showsearch}" id="search-form" @submit.prevent="q()">
+			<input type="search" required="" maxlength="100" placeholder="جستوجو..." name="q" class="search-field">
 			<button type="submit" class="search-button"><img src="../assets/imgs/search.svg"></button>	
 		</form>
 	</nav>
@@ -24,6 +24,7 @@
 	import {getAPI} from '@/axios.js';
 	import {ref} from 'vue';
 	import {useStore} from 'vuex';
+	import {useRouter} from 'vue-router';
 	export default{
 		name: "topnav",
 		props:["wich"],
@@ -70,7 +71,10 @@
 				showsearch.value = !showsearch.value;
 				if(showsearch.value){
 					showmenu.value = false;
-					document.getElementById('search-form')['search'].focus();
+					let field = document.getElementById("search-form")['q'];
+					if(field){
+						field.focus();
+					}
 				}
 			}
 			function exit(){
@@ -78,8 +82,14 @@
 				showsearch.value = false;
 				document.body.classList.remove('freeze');
 			}
-
-			return{user, smallscreen, avragescreen, showmenu, showsearch, categories, menu, search, exit}
+			const router = useRouter();
+			function q(){
+				let field = document.getElementById("search-form")['q'];
+				if(field){
+					router.push({name:'search',query:{q:field.value}})
+				}
+			}
+			return{user, smallscreen, avragescreen, showmenu, showsearch, categories, menu, search, exit,q}
 		}
 	};
 </script>

@@ -91,7 +91,8 @@
 				errs.value.message = [];
 				errs.value.personal = [];
 				focus.value = true;
-				if(name.value&&name.value.length<=30&&email.value&&email.value.length<=30&&message.value&&message.value.length<=350){
+				const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+				if(name.value&&name.value.length<=30&&email.value&&email.value.length<=30&&re.test(email.value)&&message.value&&message.value.length<=350){
 					try{
 						const res = await getAPI.post("comments/api/v1/"+artid+'/',{
 							article: artid,
@@ -137,7 +138,6 @@
 						}
 					}
 				}else{
-					alert(false)
 					if(!message.value){
 						errs.value.message.push('لطفا کامنتتون رو وارد کنید.');
 					}else if(message.value.length>350){
@@ -152,6 +152,8 @@
 						errs.value.email.push('لطفا ایمیل تون رو وارد کنید.');
 					}else if(email.value.length>30){
 						errs.value.email.push('حداکثر طول ایمیل 30 است، اکنون '+email.value.length+' وارد شده است.');
+					}else if(!re.test(email.value)){
+						errs.value.email.push('لطفا ایمیل معتبری وارد کنید.');
 					}
 				}	
 			}

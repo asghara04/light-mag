@@ -40,11 +40,14 @@
 }
 .search-button{
 	float: left;
-	background-color: #0094a7;
+	background-color: #0097a7;
 	border: none;
 	border-radius: 5px 0 0 5px;
 	padding: 0 8px;
 	height: 100%;
+}
+.search-button:hover{
+	background-color: #006978;
 }
 div#topdiv{
 	white-space: nowrap;

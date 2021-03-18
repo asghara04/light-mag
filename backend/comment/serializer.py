@@ -7,6 +7,7 @@ class CommentSerializer(serializers.Serializer):
 	id = serializers.IntegerField(read_only=True)
 	article = serializers.PrimaryKeyRelatedField(queryset=Article.published.all())
 	name = serializers.CharField(max_length=30)
+	email = serializers.EmailField(max_length=30,write_only=True)
 	jdate = serializers.DateTimeField(read_only=True)
 	message = serializers.CharField(max_length=350)
 	reps = serializers.IntegerField(read_only=True)
@@ -42,6 +43,7 @@ class MCommentSerializer(serializers.Serializer):
 class ReplySerializer(serializers.Serializer):
 	comment = serializers.PrimaryKeyRelatedField(queryset=Comment.published.all())
 	name = serializers.CharField(max_length=30)
+	email = serializers.EmailField(max_length=30,write_only=True)
 	jdate = serializers.DateTimeField(read_only=True)
 	message = serializers.CharField(max_length=250)
 

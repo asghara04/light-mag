@@ -10,7 +10,7 @@
 							<h2><router-link :rel="article.title" :name='article.title' :to="'/article/'+article.slug">{{article.title}}</router-link></h2>
 							<hr>
 							<p class="pre-formatted">{{article.description}} - <router-link :to="'/article/'+article.slug">ادامه...</router-link></p>
-							<div class="page-halfer"><p class="half text-icon"><img src="../assets/imgs/clock.svg">{{article.jpub_date}}</p><p class="half text-icon"><img src="../assets/imgs/user.svg">{{article.author.name}}</p></div><p class="half text-icon"><img src="../assets/imgs/coms.svg">{{article.coms}}</p>
+							<div class="page-halfer"><p class="half text-icon"><img src="../assets/imgs/clock.svg">{{article.jpub_date}}</p><p class="half text-icon"><img class="mar" src="../assets/imgs/coms.svg">{{article.coms}}</p></div><p class="half icon-t"><img v-if="article.author.prof_picture" :src="article.author.prof_picture.image" :alt="article.author.prof_picture.alt"><img v-else src="../assets/imgs/user.svg">{{article.author.name}}</p>
 						</div>
 					</article>
 				</div>

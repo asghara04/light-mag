@@ -5,7 +5,7 @@
 			<h4>{{com.name}}</h4>
 			<time class="s-size">{{com.jdate}}</time>
 			<p class="message">{{com.message}}</p>
-			<!-- <p class="red-text">پاسخ دادن</p>    component    -->
+			<Addrep :key="id" :id="com.id"/>
 			<div v-if="com.reps">
 				<p v-if="com.replies.reps==false" @click.prevent="get_reps(i)" class="link-like">{{com.reps}} پاسخ، نمایش</p>
 				<div v-else v-for="(rep,i) in com.replies.reps" :key="i" class="sub">
@@ -23,6 +23,7 @@
 	import {getAPI} from'@/axios.js';
 	import {onMounted} from 'vue';
 	import {useRoute} from 'vue-router';
+	import Addrep from '@/components/add-rep.vue';
 	export default{
 		name: "Comments",
 		props:['id'],
@@ -74,7 +75,8 @@
 			}
 			onMounted(()=>window.removeEventListener('scroll',CaP))
 			return{get_coms,comments,endpoint,paginate,get_reps}
-		}
+		},
+		components:{Addrep}
 	};
 </script>
 <style>

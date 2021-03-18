@@ -4,11 +4,12 @@
 	</div>
 	<div class="tab-body" v-for="(tab,i) in data" :key="i">
 		<div v-if='tab.active!=false' ref="paginate">
+			<p>کل  :</p>
 			<div v-if="tab.data!=false" class="medium-list">
 				<article v-for="art in tab.data" :key="art.id" class="art">
 					<router-link :to="tab.link+art.slug">
 						<h2>{{art.name}}{{art.title}}</h2>
-						<img :src="art.image.image" :alt="art.image.alt" :name="art.image.art">
+						<img v-if="art.image" :src="art.image.image" :alt="art.image.alt" :name="art.image.art">
 					</router-link>
 				</article>
 			</div>
@@ -40,13 +41,13 @@
 			}
 			set_props();
 			function set_datas(){
-				for(var i=0;i<tabheads.value.length;i++){
+				for(var i=0;i<endpoints.value.length;i++){
 					datas.value.push({title: tabheads.value[i], endpoint: endpoints.value[i], active: false, api_data: []})
 				}
 			}
 			set_datas();
 			function set_data(){
-				for(var i=0;i<tabheads.value.length;i++){
+				for(var i=0;i<endpoints.value.length;i++){
 					data.value[i] = {active: datas.value[i].active, data: datas.value[i].api_data, link: links.value[i]}
 				}
 			}
@@ -64,7 +65,7 @@
 						for(var n=0;n<res.data.results.length;n++){
 							datas.value[i].api_data.push(res.data.results[n]);
 						}
-						for(var x=0;x<tabheads.value.length;x++){
+						for(var x=0;x<endpoints.value.length;x++){
 							datas.value[x].active = false;
 						}
 						datas.value[i].active = true;

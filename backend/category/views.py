@@ -51,7 +51,11 @@ class CategoriesView(APIView, PaginationMixin):
 	renderer_classes = (JSONRenderer,)
 	pagination_class = PageNumberPagination()
 	def get(self, request):
-		cats = Category.objects.all()
+		if not request.GET.get('q'):
+			cats = Category.objects.all()
+		else:
+			q = request.GET.get('q')
+			cats = Category.objects.filter(name__icontains=q).order_by("name")
 		page = self.paginate_queryset(cats)
 		if page is not None:
 			serializer = self.get_paginated_response(CategorySerializer(page, many=True, context={"request":request}).data)

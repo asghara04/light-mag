@@ -1,7 +1,8 @@
 .menuul{
-	background-color: #0D47A1;
+	background-color: #0d47a1;
 	white-space: nowrap;
 	overflow: auto;
+	z-index: 10;
 }
 .uli{
 	display: inline-block;
@@ -29,7 +30,8 @@
 	display: none;
 	overflow: auto;
 	white-space: nowrap;
-	background-color: #007590;
+	background-color: #0277bd;
+	z-index: 10;
 }
 .uli:hover .itemul{
 	display: block;

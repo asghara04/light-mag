@@ -15,7 +15,7 @@
 }
 body{
 	direction: rtl;
-	background-color: #d1def2;
+	background-color: #e0e0e0;
 	font-size: 20px;
 }
 a{
@@ -36,11 +36,26 @@ img{
 	align-items: center;
 	justify-content: center;
 }
+.text-icon img.mar{
+	margin: 15%!important;
+}
 .li-icon{
 	vertical-align: middle;
 }
 .li-icon img{
 	float: right;
+}
+.icon-t{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.icon-t img{
+	width: 34px;
+	height: 34px;
+	margin: 0 1%;
+	border: 0.5px solid #121212;
+	border-radius: 90%;
 }
 .blue-text{
 	color: #004c8d;

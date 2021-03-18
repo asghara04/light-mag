@@ -1,7 +1,7 @@
 <template>
 	<topslider/>
 	<div v-if="APIData.slug==this.$route.params.catslug" id="page" class="page">
-		<div class="right page-content">
+		<div class="right ed-bk">
 			<router-view :key="this.$route.params.catslug"/>
 			<span>
 				<router-link to="/" rel="مجله نور">صفحه اصلی</router-link> > <router-link :to="{name: 'category', params: {catslug: APIData.slug}}">{{APIData.name}}</router-link>

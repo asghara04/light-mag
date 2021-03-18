@@ -19,9 +19,9 @@ div.tab-body{
 	background: transparent;
 }
 div#tabbednav button.tab-head.active{
-	background-color: #b6e3ff!important;
+	background-color: #cfd8dc!important;
 	border-bottom: 4px solid #4d82cb!important;
 }
 div#tabbednav button.tab-head:hover{
-	background-color: #b6e3ff!important;
+	background-color: #cfd8dc!important;
 }
