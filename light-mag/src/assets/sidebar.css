@@ -25,6 +25,9 @@ aside#sidebar div.siders{
 	border-radius: 6px;
 	margin: 0 0 1% 0;
 }
+aside#sidebar div.siders:last-child{
+	border: none;
+}
 aside#sidebar div.siders a{
 	flex-shrink: 0;
 	flex-basis: 25%;

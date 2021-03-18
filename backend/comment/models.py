@@ -8,7 +8,7 @@ class CPublished(models.Manager):
 
 class RPublished(models.Manager):
 	def get_queryset(self):
-		return super(CPublished, self).get_queryset().filter(status=True)
+		return super(RPublished, self).get_queryset().filter(status=True)
 
 class UnRead(models.Manager):
 	def get_queryset(self):

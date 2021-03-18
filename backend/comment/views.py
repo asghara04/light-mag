@@ -12,7 +12,7 @@ from rest_framework.pagination import PageNumberPagination
 
 class ACommentsView(APIView,PaginationMixin):
 	permission_classes = (AllowAny,)
-	# renderer_classes = (JSONRenderer,)
+	renderer_classes = (JSONRenderer,)
 	pagination_class = PageNumberPagination()
 	def get(self, request, pk):
 		comments = Comment.published.filter(article=pk)
@@ -33,11 +33,12 @@ class ACommentsView(APIView,PaginationMixin):
 class CRepliesView(APIView,PaginationMixin):
 	permission_classes = (AllowAny,)
 	renderer_classes = (JSONRenderer,)
+	pagination_class = PageNumberPagination()
 	def get(self, request, pk):
 		replies = Reply.published.filter(comment=pk)
 		page = self.paginate_queryset(replies)
 		if page is not None:
-			serializer = self.get_paginated_response(ReplySerializer(page,many=True))
+			serializer = self.get_paginated_response(ReplySerializer(page,many=True).data)
 		else:
 			serializer = ReplySerializer(replies,many=True)
 		return Response(serializer.data,status=status.HTTP_200_OK)
