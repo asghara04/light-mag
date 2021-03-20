@@ -51,11 +51,13 @@ class CategoriesView(APIView, PaginationMixin):
 	renderer_classes = (JSONRenderer,)
 	pagination_class = PageNumberPagination()
 	def get(self, request):
-		if not request.GET.get('q'):
+		if request.GET.get('q') is None:
 			cats = Category.objects.all()
-		else:
+		elif request.GET.get("q"):
 			q = request.GET.get('q')
 			cats = Category.objects.filter(name__icontains=q).order_by("name")
+		else:
+			return Response({"message":"لطفا کلمه ای ربای جستوجو وارد کنید."},status=status.HTTP_400_BAD_REQUEST)
 		page = self.paginate_queryset(cats)
 		if page is not None:
 			serializer = self.get_paginated_response(CategorySerializer(page, many=True, context={"request":request}).data)

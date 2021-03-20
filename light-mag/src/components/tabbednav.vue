@@ -4,7 +4,7 @@
 	</div>
 	<div class="tab-body" v-for="(tab,i) in data" :key="i">
 		<div v-if='tab.active!=false' ref="paginate">
-			<p>کل  :</p>
+			<p>کل: {{tab.count}}</p>
 			<div v-if="tab.data!=false" class="medium-list">
 				<article v-for="art in tab.data" :key="art.id" class="art">
 					<router-link :to="tab.link+art.slug">
@@ -42,13 +42,13 @@
 			set_props();
 			function set_datas(){
 				for(var i=0;i<endpoints.value.length;i++){
-					datas.value.push({title: tabheads.value[i], endpoint: endpoints.value[i], active: false, api_data: []})
+					datas.value.push({title: tabheads.value[i], endpoint: endpoints.value[i], active: false, api_data: [],count: 0})
 				}
 			}
 			set_datas();
 			function set_data(){
 				for(var i=0;i<endpoints.value.length;i++){
-					data.value[i] = {active: datas.value[i].active, data: datas.value[i].api_data, link: links.value[i]}
+					data.value[i] = {active: datas.value[i].active, data: datas.value[i].api_data, link: links.value[i],count: datas.value[i].count}
 				}
 			}
 			function reset_call(i){
@@ -70,6 +70,7 @@
 						}
 						datas.value[i].active = true;
 						datas.value[i].endpoint = res.data.next;
+						datas.value[i].count = res.data.count;
 						more = true;
 						activet.value = i;
 						set_data();

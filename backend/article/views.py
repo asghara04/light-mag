@@ -14,11 +14,14 @@ class ArticlesView(APIView, PaginationMixin):
 	pagination_class = PageNumberPagination()
 	renderer_classes = (JSONRenderer,)
 	def get(self, request):
-		if not request.GET.get('q'):
+		print(request.GET.get('q'))
+		if request.GET.get('q') is None:
 			arts = Article.published.all()
-		else:
+		elif request.GET.get('q'):
 			q = request.GET.get('q')
 			arts = Article.published.filter(Q(title__icontains=q) | (Q(description__icontains=q) & Q(body__icontains=q))).order_by("title")
+		else:
+			return Response({"message":"لطفا کلمه ای برای جستوجو وارد کنید."},status=status.HTTP_400_BAD_REQUEST)
 		page = self.paginate_queryset(arts)
 		if page is not None:
 			serializer = self.get_paginated_response(MinArticleSerializer(page, many=True, context={"request":request}).data)

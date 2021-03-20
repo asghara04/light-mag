@@ -130,3 +130,9 @@ img{
 .ed-bk{
 	background: #ededed;
 }
+.part{
+	margin: 1% 0;
+	padding: 1%;
+	background-color: #ededed;
+	border-radius: 6px;
+}

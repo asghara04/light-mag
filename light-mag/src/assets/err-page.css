@@ -1,0 +1,30 @@
+.err-code{
+	text-align: center;
+}
+.err-description{
+	text-align: center;
+}
+@media(min-width: 950px){
+	.err-code{
+		font-size: 220px;
+	}
+	.err-description{
+		font-size: 28px;
+	}
+}
+@media(max-width: 950px){
+	.err-code{
+		font-size: 170px;
+	}
+	.err-description{
+		font-size: 22px;
+	}
+}
+@media(max-width: 450px){
+	.err-code{
+		font-size: 110px;
+	}
+	.err-description{
+		font-size: 20px;
+	}
+}

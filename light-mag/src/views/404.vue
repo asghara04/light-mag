@@ -1,5 +1,6 @@
 <template>
-	<h1>404</h1>
+	<p class="err-code">404</p>
+	<p class="err-description">اوه! صفحه مورد نظرتون وجود نداره، <router-link to="/">صفحه اصلی</router-link></p>
 </template>
 <script>
 	export default{
@@ -7,7 +8,5 @@
 	};
 </script>
 <style>
-	h1{
-		color: red;
-	}
+	@import '../assets/err-page.css';
 </style>
