@@ -18,10 +18,11 @@ export default {
 		Lheader,
 		lmnav
 	},
-	methods:{
-		wich(){
+	setup(){
+		function wich(){
 			return window.location.host.split('.')[0]
 		}
+		return{wich}
 	}
 };
 </script>

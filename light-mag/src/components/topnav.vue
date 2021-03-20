@@ -1,15 +1,13 @@
 <template>
 	<nav id="topnav" :class="{'smallopenul':showmenu&&smallscreen}">
 		<img v-if="smallscreen" src="../assets/imgs/menu.svg" class="imgbutton" id="menu-icon" @click="menu()">
-		<h1><router-link to="/" class="text-icon ed-color" name="مجله نور"><img src="../assets/imgs/light.svg">مجله نور</router-link></h1>
+		<h1><router-link to="/" class="text-icon ed-color" name="لایت مگ"><img src="../assets/imgs/light.svg">لایت مگ</router-link></h1>
 		<ul id="topul">
-			<li><router-link to="/" name="مجله نور" class="li-icon ed-color"><img src="../assets/imgs/home.svg">صفحه اصلی</router-link></li>
-			<li><router-link to="/categories" class="li-icon ed-color"  name="مجله نور"><img src="../assets/imgs/cats.svg">موضوعات</router-link></li>
-			<span v-if="smallscreen">
-				<li>hellll</li>
-				<li v-for="cat in categories" :key="cat.id"><router-link :to="{name: 'category',params:{catslug: cat.slug}}">{{cat.name}}</router-link></li>
-			</span>
-			<li v-if="user"><a href="https://admin.light-mag.ir" target="_blank">پنل</a></li>
+			<li><router-link to="/" name="لایت مگ" class="li-icon ed-color"><img src="../assets/imgs/home.svg">صفحه اصلی</router-link></li>
+			<li><router-link to="/categories" class="li-icon ed-color"  name="لایت مگ"><img src="../assets/imgs/cats.svg">موضوعات</router-link></li>
+			<div v-if="smallscreen">
+				<li v-for="cat in categories" :key="cat.id"><router-link :to="{name: 'category',params:{catslug: cat.slug}}" class="li-icon ed-color"><img v-if="cat.image" :src="cat.image.image" :alt="cat.image.alt" :name="cat.image.name">{{cat.name}}</router-link></li>
+			</div>
 		</ul>
 		<div v-if="smallscreen" @click="exit()" id="topsmalluloverlay"></div>
 
@@ -23,14 +21,11 @@
 <script>
 	import {getAPI} from '@/axios.js';
 	import {ref} from 'vue';
-	import {useStore} from 'vuex';
 	import {useRouter} from 'vue-router';
 	export default{
 		name: "topnav",
 		props:["wich"],
 		setup(){
-			const store = useStore();
-			const user = store.getters.logedIn||false;
 			const smallscreen = ref(window.innerWidth<475||false);
 			const avragescreen = ref((window.innerWidth>475&&window.innerWidth<775)||false);
 			const showmenu = ref(false);
@@ -89,7 +84,7 @@
 					router.push({name:'search',query:{q:field.value}})
 				}
 			}
-			return{user,smallscreen,avragescreen,showmenu,showsearch,categories,menu,search,exit,q}
+			return{smallscreen,avragescreen,showmenu,showsearch,categories,menu,search,exit,q}
 		}
 	};
 </script>

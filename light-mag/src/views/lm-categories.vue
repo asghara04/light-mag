@@ -1,4 +1,5 @@
 <template>
+	<lmNav/>
 	<div class="page">
 		<div class="page-content lm-page" v-if="APIData">
 			<div class="lm-page-head">
@@ -30,6 +31,7 @@
 	import {useStore} from 'vuex';
 	import {getAPI} from '@/axios.js';
 	import pagination from '@/components/pagination.vue';
+	import lmNav from '@/components/lm-nav.vue';
 	export default{
 		name: "lm-articles",
 		props: {"page":Number},
@@ -88,6 +90,7 @@
 			return{APIData, current, get_cats, rm}
 		},
 		components:{
+			lmNav,
 			pagination
 		}
 	};

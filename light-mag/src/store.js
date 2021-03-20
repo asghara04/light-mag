@@ -5,19 +5,18 @@ const store = createStore({
 	state:{
 		APIData: '',
 		accessToken: localStorage.getItem('access_token')||null,
-		refreshToken: localStorage.getItem('refresh_token')||null
+		refreshToken: localStorage.getItem('refresh_token')||null,
+		loged: false
 	},
 	getters:{
 		logedIn(state){
-			return state.accessToken != null//bug!'fix it later, its easy.'
+			return state.loged;
 		},
-		async errChceck(end){
-			try{
-				await axiosBase.get(end);
-				return true;
-			}catch(err){
-				return err.response.status;
-			}
+		Access(state){
+			return state.accessToken;
+		},
+		Refresh(state){
+			return state.refreshToken;
 		}
 	},
 	mutations:{
@@ -33,57 +32,83 @@ const store = createStore({
 		destroyToken(state){
 			state.accessToken = null
 			state.refreshToken = null
+		},
+		updateLoged(state, r){
+			state.loged = r||false;
 		}
 	},
 	actions:{
-		RefreshToken(context){
+		RefreshToken({commit,getters,dispatch}){
 			return new Promise((resolve, reject)=>{
-				axiosBase.post("/users/auth/refresh_token/", {token: context.state.refreshToken})
+				axiosBase.post("/users/auth/refresh_token/", {token: getters.refreshToken})
 				.then(response => {
 					console.log("new access successfully created.")
-					context.commit("updateAccess", response.data.token)
+					commit("updateAccess", response.data.token)
 					resolve(response)
 				})
 				.catch(err => {
-					context.dispatch("logoutUser");
+					dispatch("logoutUser");
 					reject(err);
 				})
 			})
 		},
-		loginUser(context, credentials){
+		loginUser({commit}, credentials){
 			return new Promise((resolve, reject)=> {
 				axiosBase.post("users/auth/obtain_token/", {
 					email: credentials.email,
 					password: credentials.password
 				})
 				.then(response => {
-					context.commit("updateLocalStorage", {access: response.data.token, refresh: response.data.token})
-					resolve(response)
+					commit("updateLocalStorage", {access: response.data.token, refresh: response.data.token});
+					commit("updateLoged",true);
+					resolve(response);
 				})
 				.catch(err => {
 					reject(err)
 				})
 			})
 		},
-		logoutUser(context){
-			if(context.getters.logedIn){
+		logoutUser({commit,getters}){
+			if(getters.logedIn){
 				return new Promise((resolve, reject)=> {
 					axiosBase.post("rest_auth/mapi/")//bug!'fix it later, its easy.'
 					.then(res=>{
 						localStorage.removeItem('access_token');
 						localStorage.removeItem('refresh_token');
-						context.commit("destroyToken");
+						commit("destroyToken");
 						window.location.reload();
 						resolve(res);
 					})
 					.catch(err=>{
 						localStorage.removeItem("access_token");
 						localStorage.removeItem("refresh_token");
-						context.commit("destroyToken");
+						commit("destroyToken");
 						window.location.reload();
 						reject(err);
 					})
+					.finalli(()=>{
+						commit("updateLoged",false);
+					})
 				})
+			}
+		},
+		isUser({commit,getters}){
+			if(getters.Access){
+				return new Promise((resolve,reject)=>{
+					axiosBase.post("users/auth/verify_token/",{token: getters.Access,})
+					.then(res=>{
+						commit('updateLoged',true);
+						resolve(res);
+					})
+					.catch(err=>{
+						console.log(err);
+						console.log(err.response);
+						commit('updateLoged',false);
+						reject(err);
+					})
+				})
+			}else{
+				commit('updateLoged',false);
 			}
 		}
 	}

@@ -5,7 +5,7 @@
 			<router-link to="/contact">ارتباط</router-link>
 			<p>توسعه دهنده و برنامه نویس <strong>اصغر اله</strong></p>
 		</div>
-		<p>&#169; <strong>مجله نور</strong> 2021</p>
+		<p>&#169; <strong>لایت مگ</strong> 2021</p>
 	</footer>
 </template>
 

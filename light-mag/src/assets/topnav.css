@@ -15,10 +15,6 @@
 	overflow: auto;
 	white-space: nowrap;
 }
-#topul > *{
-	display: inline-block;
-	padding: 0.3% 1%;
-}
 #topul .router-link-exact-active{
 	text-decoration: underline;
 }
@@ -60,6 +56,12 @@ div#topdiv > *{
 	margin: 0 1%;
 	color: #ededed;
 }
+@media(min-width: 475px){
+	#topul > *{
+		display: inline-block;
+		padding: 0.3% 1%;
+	}
+}
 @media(max-width: 775px){
 	#topul li{
 		font-size: 18px;
@@ -91,10 +93,9 @@ div#topdiv > *{
 	#topul{
 		position: fixed;
 		top: 0;
-		right: 0;
 		width: 70%;
 		right: -100%;
-		z-index: 2;
+		z-index: 10;
 		transition: .3s;
 		height: 100%;
 		overflow: auto;

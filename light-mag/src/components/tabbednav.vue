@@ -4,7 +4,7 @@
 	</div>
 	<div class="tab-body" v-for="(tab,i) in data" :key="i">
 		<div v-if='tab.active!=false' ref="paginate">
-			<p>کل: {{tab.count}}</p>
+			<p v-if="tab.count">کل: {{tab.count}}</p>
 			<div v-if="tab.data!=false" class="medium-list">
 				<article v-for="art in tab.data" :key="art.id" class="art">
 					<router-link :to="tab.link+art.slug">

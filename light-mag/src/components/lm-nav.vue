@@ -7,7 +7,7 @@
 			<img class="imgbutton" src="../assets/imgs/next.svg" onclick="window.history.forward()" alt='قبل'>
 		</div>
 	</nav>
-	<aside id="highsidebar" :class="{'open-side':user&&showmenu&&largescreen,'close-side':user&&!showmenu&&largescreen,'open':user&&showmenu&&smallscreen}">
+	<aside id="highsidebar" :class="{'open-side':showmenu&&largescreen,'close-side':!showmenu&&largescreen,'open':showmenu&&smallscreen}">
 		<ul>
 			<li id="dashboard-li"><router-link :to="{name: 'admin-panel'}" class="text-icon link-like"><img src="../assets/imgs/dashboard.svg"><span>داشبورد</span></router-link></li>
 			<li id="categories-li"><img v-if="showmenu" @click="liopener('categories-li')" class="left-float" src="../assets/imgs/down.svg"><router-link to="/LM-admin/categories" class="text-icon link-like"><img src="../assets/imgs/category.svg"><span>دسته ها</span></router-link><ul v-if="showmenu"><li><router-link to="/LM-admin/add/subcat" class="text-icon link-like"><img src="../assets/imgs/cats.svg"><span>زیردسته جدید</span></router-link></li><li><router-link to="/LM-admin/add/category" class="text-icon link-like"><img src="../assets/imgs/add.svg"><span>اضافه کردن</span></router-link></li></ul></li>
@@ -23,12 +23,9 @@
 </template>
 <script>
 	import {ref} from 'vue';
-	import {useStore} from 'vuex';
 	export default{
 		name: "lm-nav",
 		setup(){
-			const store = useStore();
-			const user = store.getters.logedIn||false;
 			const showmenu = ref(true);
 			const largescreen = ref(window.innerWidth>775);
 			const smallscreen = ref(window.innerWidth<=775);
@@ -79,7 +76,7 @@
 					li.classList = 'openli';
 				}
 			}
-			return{user, menu, exit, showmenu, largescreen, smallscreen, liopener}
+			return{menu, exit, showmenu, largescreen, smallscreen, liopener}
 		}
 	};
 </script>

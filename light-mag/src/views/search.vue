@@ -4,7 +4,7 @@
 			<div class="search-div ed-bk">
 				<h2 class="cen">جستوجو در لایت مگ</h2>
 				<form class="q-form">
-					<input type="search" name="q" class="q-field" maxlength="100" required="" v-model="q">
+					<input type="search" name="q" class="q-field" maxlength="100" autofocus="" v-model="q">
 					<button class="q-button"><img src="../assets/imgs/search.svg"></button>
 				</form>
 			</div>
@@ -14,12 +14,14 @@
 		</div>
 		<sidebar/>
 	</div>
+	<topslider/>
 </template>
 <script>
 	import sidebar from '@/components/sidebar.vue';
 	import {ref,watch} from 'vue';
 	import {useRoute} from 'vue-router';
 	import tabbednav from '@/components/tabbednav.vue';
+	import topslider from '@/components/topslider.vue';
 	export default{
 		name: "Search",
 		setup(){
@@ -36,7 +38,7 @@
 			)
 			return{q}
 		},
-		components:{sidebar,tabbednav}
+		components:{sidebar,tabbednav,topslider}
 	};
 </script>
 <style>

@@ -19,14 +19,6 @@ const routes = [
 		}
 	},
 	{
-		path: '/',
-		name: 'nothing',
-		meta:{
-			requiresAuth: true,
-			requiresUnAuth: true
-		}
-	},
-	{
 		path: '/LM-admin/add',
 		name: "add",
 		component: () => import("@/views/lm-form.vue"),
@@ -155,21 +147,27 @@ const arouter = createRouter({
 	routes
 })
 
-arouter.beforeEach((to, from, next) => {
+arouter.beforeEach((to, from, next)=>{
 	if(to.matched.some(record => record.meta.requiresAuth)){
-		if(!store.getters.logedIn){
-			next({name: 'Login'});
-		}else{
-			next();
-		}
+		store.dispatch('isUser')
+		.finally(()=>{
+			if(!store.getters.logedIn){
+				next({name: 'Login'})
+			}else{
+				next();
+			}
+		})
 	}else if(to.matched.some(record => record.meta.requiresUnAuth)){
-		if(store.getters.logedIn){
-			next({name: "admin-panel"});
-		}else{
-			next();
-		}
+		store.dispatch("isUser")
+		.finally(()=>{
+			if(store.getters.logedIn){
+				next({name: "admin-panel"})
+			}else{
+				next();
+			}
+		})
 	}else{
-		next()
+		next();
 	}
 })
 
