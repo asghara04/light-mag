@@ -1,4 +1,5 @@
 import {createRouter,createWebHistory} from 'vue-router';
+import store from '@/store.js';
 
 const routes = [
 	{
@@ -152,6 +153,24 @@ const routes = [
 const arouter = createRouter({
 	history: createWebHistory(),
 	routes
+})
+
+arouter.beforeEach((to, from, next) => {
+	if(to.matched.some(record => record.meta.requiresAuth)){
+		if(!store.getters.logedIn){
+			next({name: 'Login'});
+		}else{
+			next();
+		}
+	}else if(to.matched.some(record => record.meta.requiresUnAuth)){
+		if(store.getters.logedIn){
+			next({name: "admin-panel"});
+		}else{
+			next();
+		}
+	}else{
+		next()
+	}
 })
 
 export default arouter

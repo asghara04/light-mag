@@ -10,6 +10,14 @@ const store = createStore({
 	getters:{
 		logedIn(state){
 			return state.accessToken != null//bug!'fix it later, its easy.'
+		},
+		async errChceck(end){
+			try{
+				await axiosBase.get(end);
+				return true;
+			}catch(err){
+				return err.response.status;
+			}
 		}
 	},
 	mutations:{

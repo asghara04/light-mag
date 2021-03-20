@@ -11,23 +11,6 @@ function routes(){
 		routes = router;
 	}else if(parts.length<=len&&parts[0]==="admin"){
 		routes = arouter;
-		routes.beforeEach((to, from, next) => {
-			if(to.matched.some(record => record.meta.requiresAuth)){
-				if(!store.getters.logedIn){
-					next({name: 'Login'});
-				}else{
-					next();
-				}
-			}else if(to.matched.some(record => record.meta.requiresUnAuth)){
-				if(store.getters.logedIn){
-					next({name: "admin-panel"});
-				}else{
-					next();
-				}
-			}else{
-				next()
-			}
-		})
 	}
 	return routes
 }

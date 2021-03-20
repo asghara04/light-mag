@@ -63,6 +63,9 @@ aside#sidebar div.siders h3{
 	#page{
 		padding: 1%;
 	}
+	aside#sidebar{
+		margin: 5% 0 0 0;
+	}
 	aside#sidebar div.siders h3{
 		font-size: 15px;
 	}
