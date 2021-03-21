@@ -29,7 +29,6 @@
 			const showmenu = ref(true);
 			const largescreen = ref(window.innerWidth>775);
 			const smallscreen = ref(window.innerWidth<=775);
-
 			function resize(){
 				if(window.innerWidth>1050){
 					showmenu.value = true;
@@ -50,7 +49,6 @@
 			}
 			resize()
 			window.addEventListener('resize', resize);
-
 			function menu(){
 				showmenu.value = !showmenu.value;
 				if(showmenu.value&&window.innerWidth>775){

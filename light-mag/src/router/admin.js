@@ -3,6 +3,13 @@ import store from '@/store.js';
 
 const routes = [
 	{
+		path: '/',
+		meta:{
+			requiresAuth: true
+		},
+		redirect: {name: "admin-panel"}
+	},
+	{
 		path: "/login",
 		name: "Login",
 		component: () => import("@/views/Loger.vue"),

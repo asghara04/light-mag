@@ -101,8 +101,6 @@ const store = createStore({
 						resolve(res);
 					})
 					.catch(err=>{
-						console.log(err);
-						console.log(err.response);
 						commit('updateLoged',false);
 						reject(err);
 					})
