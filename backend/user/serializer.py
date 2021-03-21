@@ -42,8 +42,8 @@ class MUserSerializer(serializers.Serializer):
 	jbirth = serializers.DateField(allow_null=True,read_only=True)
 	birthday = serializers.DateField(write_only=True,allow_null=True)
 
-	def validate_prof_pucture(self, value):
-		return get_object_or_404(Imagd,  name=value["name"])
+	def validate_prof_picture(self, value):
+		return get_object_or_404(Image,  name=value["name"])
 	def validate_favorite_cat(self, value):
 		return get_object_or_404(Category, name=value["name"])
 	def create(self, validated_data):

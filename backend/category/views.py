@@ -155,7 +155,7 @@ class SubsCatCatView(APIView, PaginationMixin):
 
 from rest_framework.permissions import AllowAny
 class SubCatView(APIView):
-	# renderer_classes = (JSONRenderer,)
+	renderer_classes = (JSONRenderer,)
 	permission_classes = (AllowAny,)
 	def getter(self, cat, sub):
 		try:

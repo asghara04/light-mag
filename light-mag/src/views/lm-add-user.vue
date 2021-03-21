@@ -156,9 +156,87 @@
 							alert("خطایی ره داد، کنسول را چک کنید.")
 						}
 					}catch(err){
-						console.log(err.response.status);
-						console.log(err.response);
-						console.log(err);
+						if(err.response.status===400){
+							if(err.response.data.email!=false){
+								for(var a=0;a<err.response.data.email.length;a++){
+									errs.value.email.push(err.response.data.email[a]);
+								}
+							}
+							if(err.response.data.password!=false){
+								for(var b=0;b<err.response.data.password.length;b++){
+									errs.value.password.push(err.response.data.password[b]);
+								}
+							}
+							if(err.response.data.username!=false){
+								for(var c=0;c<err.response.data.username.length;c++){
+									errs.value.username.push(err.response.data.username[c]);
+								}
+							}
+							if(err.response.data.name!=false){
+								for(var d=0;d<err.response.data.name.length;d++){
+									errs.value.name.push(err.response.data.name[d]);
+								}
+							}
+							if(err.response.data.prof_picture!=false){
+								for(var e=0;e<err.response.data.prof_picture.length;e++){
+									errs.value.prof_picture.push(err.response.data.prof_picture[e]);
+								}
+							}
+							if(err.response.data.is_active!=false){
+								for(var f=0;f<err.response.data.is_active.length;f++){
+									errs.value.is_active.push(err.response.data.is_active[f]);
+								}
+							}
+							if(err.response.data.is_staff!=false){
+								for(var g=0;g<err.response.data.is_staff.length;g++){
+									errs.value.is_staff.push(err.response.data.is_staff[g]);
+								}
+							}
+							if(err.response.data.pubmail!=false){
+								for(var h=0;h<err.response.data.pubmail.length;h++){
+									errs.value.pubmail.push(err.response.data.pubmail[h]);
+								}
+							}
+							if(err.response.data.bio!=false){
+								for(var i=0;i<err.response.data.bio.length;i++){
+									errs.value.bio.push(err.response.data.bio[i]);
+								}
+							}
+							if(err.response.data.about!=false){
+								for(var j=0;j<err.response.data.about.length;j++){
+									errs.value.about.push(err.response.data.about[j]);
+								}
+							}
+							if(err.response.data.favorite_cat!=false){
+								for(var k=0;k<err.response.data.favorite_cat.length;k++){
+									errs.value.favorite_cat.push(err.response.data.favorite_cat[k]);
+								}
+							}
+							if(err.response.data.instagram_link!=false){
+								for(var l=0;l<err.response.data.instagram_link.length;l++){
+									errs.value.instagram_link.push(err.response.data.instagram_link[l]);
+								}
+							}
+							if(err.response.data.facebook_link!=false){
+								for(var m=0;m<err.response.data.facebook_link.length;m++){
+									errs.value.facebook_link.push(err.response.data.facebook_link[m]);
+								}
+							}
+							if(err.response.data.github_link!=false){
+								for(var n=0;n<err.response.data.github_link.length;n++){
+									errs.value.github_link.push(err.response.data.github_link[n]);
+								}
+							}
+							if(err.response.data.birthday!=false){
+								for(var o=0;o<err.response.data.birthday.length;o++){
+									errs.value.birthday.push(err.response.data.birthday[o]);
+								}
+							}
+						}else{
+							alert("خطایی رخ داد. لطفا کنسول را چک کنید.");
+						}
+						console.log(err)
+						console.log(err.response)
 					}
 				}else{
 					if(!email.value){

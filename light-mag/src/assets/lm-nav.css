@@ -36,10 +36,6 @@ aside#highsidebar > ul > li.openli > ul, aside#highsidebar > ul > li:hover > ul{
 aside#highsidebar > ul > li.openli > ul > li:hover, aside#highsidebar > ul > li:hover > ul > li:hover, aside#highsidebar > ul > li.openli > ul > li > .router-link-exact-active{
 	background-color: #202020!important;
 }
-.left-float{
-	float: left;
-	padding: 2%!important;
-}
 @media(min-width: 775px){
 	aside#highsidebar.open-side{
 		width: 18%;

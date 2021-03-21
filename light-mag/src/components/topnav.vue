@@ -6,7 +6,7 @@
 			<li><router-link to="/" name="لایت مگ" class="li-icon ed-color"><img src="../assets/imgs/home.svg">صفحه اصلی</router-link></li>
 			<li><router-link to="/categories" class="li-icon ed-color"  name="لایت مگ"><img src="../assets/imgs/cats.svg">موضوعات</router-link></li>
 			<div v-if="smallscreen">
-				<li v-for="cat in categories" :key="cat.id"><router-link :to="{name: 'category',params:{catslug: cat.slug}}" class="li-icon ed-color"><img v-if="cat.image" :src="cat.image.image" :alt="cat.image.alt" :name="cat.image.name">{{cat.name}}</router-link></li>
+				<li v-for="cat in categories" :key="cat.id" :id="cat.name+'-cat'"><img src="../assets/imgs/down.svg" v-if="cat.subcats!=false" class="left-float" @click="liopener(cat.name+'-cat')"><router-link :to="{name: 'category',params:{catslug: cat.slug}}" class="li-icon ed-color"><img v-if="cat.image" :src="cat.image.image" :alt="cat.image.alt" :name="cat.image.name">{{cat.name}}</router-link><ul v-if="cat.subcats!=false"><li v-for="sub in cat.subcats" :key="sub.id"><router-link class="ed-color" :to="{name:'subcat',params:{catslug: cat.slug,subcatname:sub.slug}}">{{sub.name}}</router-link></li></ul></li>
 			</div>
 		</ul>
 		<div v-if="smallscreen" @click="exit()" id="topsmalluloverlay"></div>
@@ -84,7 +84,15 @@
 					router.push({name:'search',query:{q:field.value}})
 				}
 			}
-			return{smallscreen,avragescreen,showmenu,showsearch,categories,menu,search,exit,q}
+			function liopener(id){
+				const li = document.getElementById(id);
+				if(li.classList!=''){
+					li.classList = '';
+				}else{
+					li.classList = 'openli';
+				}
+			}
+			return{smallscreen,avragescreen,showmenu,showsearch,categories,menu,search,exit,q,liopener}
 		}
 	};
 </script>

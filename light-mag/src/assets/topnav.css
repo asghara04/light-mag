@@ -7,7 +7,7 @@
 	position: sticky;
 	top: 0;
 	right: 0;
-	z-index: 2;
+	z-index: 99;
 	align-items: center;
 }
 #topul{
@@ -18,7 +18,7 @@
 #topul .router-link-exact-active{
 	text-decoration: underline;
 }
-#topul li:hover{
+#topul > li:hover{
 	background-color: #5d99c6;
 	transition: .4s;
 	border-radius: 6px;
@@ -93,7 +93,7 @@ div#topdiv > *{
 	#topul{
 		position: fixed;
 		top: 0;
-		width: 70%;
+		width: 80%;
 		right: -100%;
 		z-index: 10;
 		transition: .3s;
@@ -135,6 +135,17 @@ div#topdiv > *{
 	}
 	.search-field{
 		font-size: 16px;
+	}
+	#topul > div > li > ul{
+		display: none;
+		background-color: #306b80;
+		border-radius: 3px;
+	}
+	#topul > div > li:hover > ul,#topul > div > li.openli > ul{
+		display: block!important;
+	}
+	#topul > div > li > ul > li{
+		border-radius: ;
 	}
 }
 @media(max-width: 160px){

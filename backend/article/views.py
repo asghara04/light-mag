@@ -14,7 +14,6 @@ class ArticlesView(APIView, PaginationMixin):
 	pagination_class = PageNumberPagination()
 	renderer_classes = (JSONRenderer,)
 	def get(self, request):
-		print(request.GET.get('q'))
 		if request.GET.get('q') is None:
 			arts = Article.published.all()
 		elif request.GET.get('q'):

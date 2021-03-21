@@ -4,3 +4,11 @@ footer#footer{
 	padding: 1%;
 	margin: 1% 0 0 0;
 }
+@media(max-width: 750px){
+	footer#footer div.footer-details{
+		font-size: 16.5px;
+	}
+	footer#footer .name{
+		font-size: 16.5px;
+	}
+}

@@ -3,7 +3,7 @@
 	<Lheader v-if="wich()!=='admin'"/>
 	<lmnav :key="this.$store.getters.logedIn" v-if="wich()==='admin'&&this.$store.getters.logedIn"/>
 	<router-view/>
-	<Lfooter :wich="wich()"/>
+	<Lfooter :key="wich()" :wich="wich()"/>
 </template>
 <script>
 import topnav from '@/components/topnav.vue';
