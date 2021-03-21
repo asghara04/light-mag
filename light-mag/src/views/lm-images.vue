@@ -1,6 +1,6 @@
 <template>
 	<div class="page">
-		<div v-if="APIData" class="page-content lm-page">
+		<div v-if="APIData" class="ed-bk lm-page">
 			<div class="lm-page-head">
 				<h2>تصاویر</h2>
 				<router-link to="/LM-admin/add/image" class="text-icon lm-link lm-blue"><img src="../assets/imgs/add.svg"> جدید</router-link>

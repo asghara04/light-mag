@@ -5,7 +5,8 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 0 1% 0 3%;
+	padding: 1%;
+	margin: 0 0 1% 0;
 }
 .lm-link{
 	border-radius: 6px;

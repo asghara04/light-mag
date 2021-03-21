@@ -48,6 +48,11 @@ const routes = [
 				meta:{requiresAuth:true},
 				component: ()=>import("@/views/lm-add-subcat.vue")
 			},
+			{
+				path: "user",
+				meta:{requiresAuth:true},
+				component: ()=>import("@/views/lm-add-user.vue")
+			}
 		]
 	},
 	{

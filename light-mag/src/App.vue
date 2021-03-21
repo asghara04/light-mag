@@ -1,7 +1,7 @@
 <template>
 	<topnav v-if="wich()!=='admin'"/>
 	<Lheader v-if="wich()!=='admin'"/>
-	<lmnav v-if="wich()==='admin'&&this.$store.state.logedIn"/>
+	<lmnav :key="this.$store.getters.logedIn" v-if="wich()==='admin'&&this.$store.getters.logedIn"/>
 	<router-view/>
 	<Lfooter :wich="wich()"/>
 </template>

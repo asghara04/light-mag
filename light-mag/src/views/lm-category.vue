@@ -1,6 +1,6 @@
 <template>
 	<div v-if="APIData" class="page">
-		<div class="page-content lm-page cen">
+		<div class="ed-bk lm-page cen">
 			<h1>{{APIData.name}}</h1>
 			<div v-if="APIData.image" class="art-pic">
 				<img :src="APIData.image.image" :alt="APIData.image.alt" :name="APIData.image.name">

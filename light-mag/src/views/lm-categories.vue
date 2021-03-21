@@ -1,7 +1,6 @@
 <template>
-	<lmNav/>
 	<div class="page">
-		<div class="page-content lm-page" v-if="APIData">
+		<div class="ed-bk lm-page" v-if="APIData">
 			<div class="lm-page-head">
 				<h2>دسته ها</h2>
 				<router-link to="/LM-admin/add/category" class="text-icon lm-link lm-blue"><img src="../assets/imgs/add.svg">جدید</router-link>
@@ -31,7 +30,6 @@
 	import {useStore} from 'vuex';
 	import {getAPI} from '@/axios.js';
 	import pagination from '@/components/pagination.vue';
-	import lmNav from '@/components/lm-nav.vue';
 	export default{
 		name: "lm-articles",
 		props: {"page":Number},
@@ -90,7 +88,6 @@
 			return{APIData, current, get_cats, rm}
 		},
 		components:{
-			lmNav,
 			pagination
 		}
 	};
