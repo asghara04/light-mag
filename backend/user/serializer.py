@@ -24,7 +24,7 @@ class UserSerializer(serializers.Serializer):
 class MUserSerializer(serializers.Serializer):
 	id = serializers.IntegerField(read_only=True)
 	email = serializers.EmailField(max_length=30)
-	password = serializers.CharField(write_only=True)
+	password = serializers.CharField()
 	username = serializers.SlugField(max_length=30)
 	prof_picture = ImageSerializer()
 	name = serializers.CharField(max_length=35)
@@ -40,7 +40,7 @@ class MUserSerializer(serializers.Serializer):
 	facebook_link = serializers.URLField(max_length=35, allow_null=True)
 	github_link = serializers.URLField(max_length=35, allow_null=True)
 	jbirth = serializers.DateField(allow_null=True,read_only=True)
-	birthday = serializers.DateField(write_only=True,allow_null=True)
+	birthday = serializers.DateField(allow_null=True)
 
 	def validate_prof_picture(self, value):
 		return get_object_or_404(Image,  name=value["name"])
