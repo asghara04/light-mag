@@ -5,13 +5,19 @@ from .models import Tag
 from .serializer import TagSerializer
 from django.http import Http404
 from rest_framework.permissions import IsAdminUser
+from rest_framework.pagination import PageNumberPagination
+from lightmag.pagination import PaginationMixin
 
-
-class TagsView(APIView):
+class TagsView(APIView,PaginationMixin):
+	pagination_class = PageNumberPagination()
 	permiasion_classes = (IsAdminUser,)
 	def get(self, request):
 		tags = Tag.objects.all()
-		serializer = TagSerializer(tags, many=True)
+		page = self.paginate_queryset(tags)
+		if page is not None:
+			serializer = self.get_paginated_response(TagSerializer(page,many=True))
+		else:
+			serializer = TagSerializer(tags, many=True)
 		return Response(serializer.data, status=status.HTTP_200_OK)
 	def post(self, request):
 		serializer = TagSerializer(data=request.data)
@@ -21,9 +27,7 @@ class TagsView(APIView):
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
 class TagView(APIView):
-	permission_classes =(IsAdminUser,)
 	def get_tag(self, pk):
 		try:
 			return Tag.objects.get(id=pk)

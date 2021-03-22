@@ -8,7 +8,7 @@ from category.models import Category
 
 class UserSerializer(serializers.Serializer):
 	id = serializers.IntegerField(read_only=True)
-	username = serializers.CharField(max_length=30)
+	username = serializers.SlugField(max_length=30)
 	name = serializers.CharField(max_length=35 )
 	prof_picture = ImageSerializer()
 	pubmail = serializers.EmailField(max_length=30)

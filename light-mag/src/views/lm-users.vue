@@ -18,7 +18,7 @@
 							<p><span class="blue-text">نام کاربری: </span>{{user.username}}</p>
 						</details>
 						<div class="page-halfer">
-							<router-link :to="'#'" class="text-icon half lm-link lm-green"><img src="../assets/imgs/edit.svg">تغییر</router-link>
+							<router-link :to="{name: 'change-user',params:{usern: user.username}}" class="text-icon half lm-link lm-green"><img src="../assets/imgs/edit.svg">تغییر</router-link>
 							<a class="text-icon half lm-link lm-red" @click.prevent="rm(user.id, i)"><img src="../assets/imgs/delete.svg">حذف</a>
 						</div>
 					</div>
