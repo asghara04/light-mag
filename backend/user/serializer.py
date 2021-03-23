@@ -72,6 +72,6 @@ class MUserSerializer(serializers.Serializer):
 
 
 class MinUserSerializer(serializers.Serializer):
-	username = serializers.SlugField(max_length=30, read_only=True)
-	name = serializers.CharField(max_length=35, read_only=True)
+	username = serializers.SlugField(max_length=30)
+	name = serializers.CharField(max_length=35)
 	prof_picture = ImageSerializer(read_only=True)

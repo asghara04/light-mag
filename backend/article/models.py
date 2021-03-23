@@ -25,7 +25,7 @@ class Article(models.Model):
 	publish_date = models.DateTimeField(auto_now=True)
 	category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
 	subcat = models.ForeignKey(SubCat, on_delete=models.SET_NULL, null=True, blank=True)
-	tags = models.ManyToManyField(Tag, blank=True)
+	tags = models.ManyToManyField(Tag, blank=True, related_name="tags")
 	status = models.CharField(max_length=8, choices=STATUSES)
 	author = models.ForeignKey(User, on_delete=models.SET_DEFAULT,related_name='author',default="asghar")
 

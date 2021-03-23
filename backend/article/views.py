@@ -60,12 +60,17 @@ class ArticleView(APIView):
 		return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class MArticlesView(APIView):
+class MArticlesView(APIView,PaginationMixin):
+	pagination_class = PageNumberPagination()
 	permission_classes = (IsAdminUser,)
 	renderer_classes = (JSONRenderer,)
 	def get(self, request):
 		arts = Article.objects.all()
-		serializer = MinArticleSerializer(arts, many=True, context={"request":request})
+		page = self.paginate_queryset(arts)
+		if page is not None:
+			serializer = self.get_paginated_response(MinArticleSerializer(arts,many=True,context={"request":request}).data)
+		else:
+			serializer = MinArticleSerializer(arts, many=True, context={"request":request})
 		return Response(serializer.data, status=status.HTTP_200_OK)
 	def post(self, request):
 		serializer = MArticleSerializer(data=request.data, partial=True, context={"request":request})

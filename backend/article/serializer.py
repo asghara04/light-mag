@@ -7,6 +7,9 @@ from django.shortcuts import get_object_or_404
 from image.models import Image
 from category.models import Category, SubCat
 from tag.serializer import TagSerializer
+from tag.models import Tag
+from user.models import User
+from django.http import Http404
 
 class ArticleSerializer(serializers.Serializer):
 	id = serializers.IntegerField(read_only=True)
@@ -34,11 +37,10 @@ class MArticleSerializer(serializers.Serializer):
 	jpub_date = serializers.DateTimeField(read_only=True)
 	category = CategorySerializer(allow_null=True)
 	subcat = SubCatSerializer(allow_null=True)
-	tags = TagSerializer(many=True, read_only=True)
+	tags = TagSerializer(many=True)
 	status = serializers.CharField(max_length=8)
 	coms = serializers.IntegerField(read_only=True)
 	author = MinUserSerializer()
-	
 	def validate_image(self, value):
 		return get_object_or_404(Image, name=value["name"])
 	def validate_category(self, value):
@@ -48,7 +50,17 @@ class MArticleSerializer(serializers.Serializer):
 	def validate_author(self, value):
 		return get_object_or_404(User, username=value["username"])
 	def create(self, validated_data):
-		return Article.objects.create(**validated_data)
+		for i in range(len(validated_data['tags'])):
+			try:
+				validated_data['tags'][i] = Tag.objects.get(slug=validated_data['tags'][i]['slug'],name=validated_data['tags'][i]['name'])
+			except Tag.DoesNotExist:
+				validated_data['tags'][i] = Tag.objects.create(slug=validated_data['tags'][i]['slug'],name=validated_data['tags'][i]['name'])
+			except:
+				raise Http404
+		ts = validated_data.pop("tags")
+		article = Article.objects.create(**validated_data)
+		article.tags.set(ts)
+		return article
 	def update(self, inatance, validated_data):
 		instance.title = validated_data.get("title", instance.title)
 		instance.slug = validated_data.get("slug", instance.slug)

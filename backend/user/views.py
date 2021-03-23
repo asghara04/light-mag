@@ -26,23 +26,26 @@ class UserView(APIView):
 errs = {"email":[],"username":[],"pubmail":[]}
 
 def unique_email(email,pk=False):
-	if not pk:
-		for user in User.objects.all():
-			if user.email==email:
-				return False
-		return True
-def unqiue_username(username,pk=False):
-	if not pk:
-		for user in User.objects.all():
-			if user.username==username:
-				return False
-		return True
+	for user in User.objects.all():
+		if user.email==email and not pk:
+			return False
+		elif user.email==email and pk and pk!=user.id:
+			return False
+	return True
+def unique_username(username,pk=False):
+	for user in User.objects.all():
+		if user.username==username and not pk:
+			return False
+		elif user.username==username and pk and pk!=user.id:
+			return False
+	return True
 def unique_pubmail(pub,pk=False):
-	if not pk:
-		for user in User.objects.all():
-			if user.pubmail==pub:
-				return False
-		return True
+	for user in User.objects.all():
+		if user.pubmail==pub and not pk:
+			return False
+		elif user.pubmail==pub and pk and pk!=user.id:
+			return False
+	return True
 
 class MUsersView(APIView,PaginationMixin):
 	renderer_classes = (JSONRenderer,)
@@ -59,12 +62,12 @@ class MUsersView(APIView,PaginationMixin):
 	def post(self, request):
 		serializer = MUserSerializer(data=request.data, partial=True, context={"request":request})
 		if serializer.is_valid():
-			if unique_email(request.data['email']) and unqiue_username(request.data['username']) and (('pubmail' in request.data and unique_pubmail(request.data['pubmail'])) or not 'pubmail' in request.data):
+			if unique_email(request.data['email']) and unique_username(request.data['username']) and (('pubmail' in request.data and unique_pubmail(request.data['pubmail'])) or not 'pubmail' in request.data):
 				serializer.save()
 				return Response({"message":"کاربر جدید با موفقیت ثبت شد."}, status=status.HTTP_201_CREATED)
 			if not unique_email(request.data['email']):
 				errs['email'] = ['کاربر دیگری با همین ایمیل وجود دارد.']
-			if not unqiue_username(request.data['username']):
+			if not unique_username(request.data['username']):
 				errs['username'] = ['کاربر دیگری با همین نام کاربری وجود دارد.']
 			if 'pubmail' in request.data and unique_pubmail(request.data['pubmail']):
 				errs['pubmail'] = ['کاربر دیگری با همین ایمیل عمومی وجود دارد.']
@@ -90,8 +93,16 @@ class MUserView(APIView):
 		user = self.get_user(uname)
 		serializer = MUserSerializer(user, request.data, partial=True, context={"request":request})
 		if serializer.is_valid():
-			serializer.save()
-			return Response(serializer.data, status=status.HTTP_200_OK)
+			if (not 'email' in request.data or('email' in request.data and unique_email(request.data['email'],user.id))) and (not 'username' in request.data or ('username' is request.data and unique_username(request.data['username'],username.id))) and (not 'pubmail' in request.data or ('pubmail' in request.data and unique_pubmail(request.data['pubmail'],user.id))):
+				serializer.save()
+				return Response(serializer.data, status=status.HTTP_200_OK)
+			if 'email' in request.data and unique_email(request.data['email'],user.id):
+				errs['email'] = ['کاربر دیگری با همین ایمیل وجود دارد!']
+			if 'username' in request.data and unique_username(request.data['username'],user.id):
+				errs['username'] = ['کاربر دیگری با همین نام کاربری وجود دارد!']
+			if 'pubmail' in request.data and unique_pubmail(request.data['pubmail'],user.id):
+				errs['pubmail'] = ['کاربر دیگری با همین ایمیل عمومی وجود دارد!']
+			return Response(errs,status=status.HTTP_400_BAD_REQUEST)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 	def delete(self, request, uname):
 		user = self.get_user(uname)

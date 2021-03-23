@@ -5,7 +5,7 @@ from .models import Tag
 class TagSerializer(serializers.Serializer):
 	id = serializers.IntegerField(read_only=True)
 	name = serializers.CharField(max_length=25)
-	slug = serializers.SlugField(max_length=25)
+	slug = serializers.CharField(max_length=25)
 	
 	def create(self, validated_data):
 		return Tag.objects.create(**validated_data)
