@@ -27,23 +27,17 @@ errs = {"email":[],"username":[],"pubmail":[]}
 
 def unique_email(email,pk=False):
 	for user in User.objects.all():
-		if user.email==email and not pk:
-			return False
-		elif user.email==email and pk and pk!=user.id:
+		if (not pk and user.email==email) or (pk and user.email==email!=None and user.id!=pk):
 			return False
 	return True
 def unique_username(username,pk=False):
 	for user in User.objects.all():
-		if user.username==username and not pk:
-			return False
-		elif user.username==username and pk and pk!=user.id:
+		if (not pk and user.username==username) or (pk and user.id!=pk and user.username==username!=None):
 			return False
 	return True
 def unique_pubmail(pub,pk=False):
 	for user in User.objects.all():
-		if user.pubmail==pub and not pk:
-			return False
-		elif user.pubmail==pub and pk and pk!=user.id:
+		if (not pk and user.pubmail==pub) or (pk and user.id!=pk and user.pubmail==pub!=None):
 			return False
 	return True
 
@@ -69,7 +63,7 @@ class MUsersView(APIView,PaginationMixin):
 				errs['email'] = ['کاربر دیگری با همین ایمیل وجود دارد.']
 			if not unique_username(request.data['username']):
 				errs['username'] = ['کاربر دیگری با همین نام کاربری وجود دارد.']
-			if 'pubmail' in request.data and unique_pubmail(request.data['pubmail']):
+			if 'pubmail' in request.data and not unique_pubmail(request.data['pubmail']):
 				errs['pubmail'] = ['کاربر دیگری با همین ایمیل عمومی وجود دارد.']
 			return Response(errs,status=status.HTTP_400_BAD_REQUEST)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -93,14 +87,14 @@ class MUserView(APIView):
 		user = self.get_user(uname)
 		serializer = MUserSerializer(user, request.data, partial=True, context={"request":request})
 		if serializer.is_valid():
-			if (not 'email' in request.data or('email' in request.data and unique_email(request.data['email'],user.id))) and (not 'username' in request.data or ('username' is request.data and unique_username(request.data['username'],username.id))) and (not 'pubmail' in request.data or ('pubmail' in request.data and unique_pubmail(request.data['pubmail'],user.id))):
+			if (not 'email' in request.data or('email' in request.data and unique_email(request.data['email'],user.id))) and (not 'username' in request.data or ('username' in request.data and unique_username(request.data['username'],user.id))) and (not 'pubmail' in request.data or ('pubmail' in request.data and unique_pubmail(request.data['pubmail'],user.id))):
 				serializer.save()
 				return Response(serializer.data, status=status.HTTP_200_OK)
-			if 'email' in request.data and unique_email(request.data['email'],user.id):
+			if 'email' in request.data and not unique_email(request.data['email'],user.id):
 				errs['email'] = ['کاربر دیگری با همین ایمیل وجود دارد!']
-			if 'username' in request.data and unique_username(request.data['username'],user.id):
+			if 'username' in request.data and not unique_username(request.data['username'],user.id):
 				errs['username'] = ['کاربر دیگری با همین نام کاربری وجود دارد!']
-			if 'pubmail' in request.data and unique_pubmail(request.data['pubmail'],user.id):
+			if 'pubmail' in request.data and not unique_pubmail(request.data['pubmail'],user.id):
 				errs['pubmail'] = ['کاربر دیگری با همین ایمیل عمومی وجود دارد!']
 			return Response(errs,status=status.HTTP_400_BAD_REQUEST)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

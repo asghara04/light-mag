@@ -172,14 +172,14 @@ class SubCatView(APIView):
 		subcat = self.getter(cat,sub)
 		serializer = SubCatSerializer(subcat,request.data,partial=True,context={"request":request})
 		if serializer.is_valid() and ('category' in request.data or 'image' in request.data or 'name' in request.data or 'slug' in request.data):
-				if (not 'name' in request.data or ('name' in request.data and ((not 'category' in request.data and uniqueSubCatName(subcat.category,request.data['name'],subcat.id)) or ('category' in request.data and uniqueSubCatName(request.data['category'],request.data['name'],subcat.id))))) and (not 'slug' in request.data or ('slug' in request.data and ((not 'category' in request.data and uniqueSubCatSlug(subcat.category,request.data['slug'],subcat.id)) or ('category' in request.data and uniqueSubCatSlug(request.data['category'],request.data['slug'],subcat.id))))):
-					serializer.save();
-					return Response(serializer.data,status=status.HTTP_200_OK)
-				if 'name' in request.data and ((not 'category' in request.data and uniqueSubCatName(subcat.category,request.data['name'],subcat.id)) or ('category' in request.data and uniqueSubCatName(request.data['category'],request.data['name'],subcat.id))):
-					errs['name'] = ["زیردسته دیگری با همین نام در این دسته وجود دارد."]
-				if 'slug' in request.data and ((not 'category' in request.data and uniqueSubCatSlug(subcat.category,request.data['slug'],subcat.id)) or ('category' in request.data and uniqueSubCatSlug(request.data['category'],request.data['slug'],subcat.id))):
-					errs['slug'] = ["زیردسته دیگری با همین اسلاگ در این دسته وجود دارد."]
-				return Response(errs,status=status.HTTP_400_BAD_REQUEST)
+			if (not 'name' in request.data or ('name' in request.data and ((not 'category' in request.data and uniqueSubCatName(subcat.category,request.data['name'],subcat.id)) or ('category' in request.data and uniqueSubCatName(request.data['category'],request.data['name'],subcat.id))))) and (not 'slug' in request.data or ('slug' in request.data and ((not 'category' in request.data and uniqueSubCatSlug(subcat.category,request.data['slug'],subcat.id)) or ('category' in request.data and uniqueSubCatSlug(request.data['category'],request.data['slug'],subcat.id))))):
+				serializer.save();
+				return Response(serializer.data,status=status.HTTP_200_OK)
+			if 'name' in request.data and ((not 'category' in request.data and uniqueSubCatName(subcat.category,request.data['name'],subcat.id)) or ('category' in request.data and uniqueSubCatName(request.data['category'],request.data['name'],subcat.id))):
+				errs['name'] = ["زیردسته دیگری با همین نام در این دسته وجود دارد."]
+			if 'slug' in request.data and ((not 'category' in request.data and uniqueSubCatSlug(subcat.category,request.data['slug'],subcat.id)) or ('category' in request.data and uniqueSubCatSlug(request.data['category'],request.data['slug'],subcat.id))):
+				errs['slug'] = ["زیردسته دیگری با همین اسلاگ در این دسته وجود دارد."]
+			return Response(errs,status=status.HTTP_400_BAD_REQUEST)
 		return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 	def delete(self,request,cat,sub):
 		subcat = self.getter(cat,sub)

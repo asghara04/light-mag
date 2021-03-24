@@ -55,20 +55,20 @@ class MUserSerializer(serializers.Serializer):
 		instance.email = validated_data.get("email", instance.email)
 		instance.password = validated_data.get("password", instance.password)
 		instance.username = validated_data.get("username", instance.username)
-		inatance.name = validated_data.get("name", instance.name)
+		instance.name = validated_data.get("name", instance.name)
 		instance.prof_picture = validated_data.get("prof_picture", instance.prof_picture)
 		instance.is_active = validated_data.get("is_active", instance.is_active)
 		instance.is_staff = validated_data.get("is_staff", instance.is_staff)
-		inatance.pubmail = validated_data.get("pubmail", instance.pubmail)
+		instance.pubmail = validated_data.get("pubmail", instance.pubmail)
 		instance.bio = validated_data.get("bio", instance.bio)
 		instance.about = validated_data.get("about", instance.about)
-		inatance.favorite_cat = validated_data.get("favorite_cat", instance.favorite_cat)
+		instance.favorite_cat = validated_data.get("favorite_cat", instance.favorite_cat)
 		instance.instagram_link = validated_data.get("instagram_link", instance.instagram_link)
 		instance.facebook_link = validated_data.get("facebook_link", instance.facebook_link)
 		instance.github_link = validated_data.get("github_link", instance.github_link)
 		instance.birthday = validated_data.get("birthday", instance.birthday)
 		instance.save()
-		return inatance
+		return instance
 
 
 class MinUserSerializer(serializers.Serializer):
