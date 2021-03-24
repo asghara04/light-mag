@@ -17,7 +17,7 @@ class UserManager(BaseUserManager):
 		elif not username:
 			raise ValueError("Enter an username please")
 		elif not name:
-			raise ValueError("Enter A name please")
+			raise ValueError("Enter a name please")
 
 		user = self.model(email = self.normalize_email(email), username = username, name = name)
 		user.set_password(password)
@@ -41,6 +41,10 @@ class UserManager(BaseUserManager):
 		return user
 
 
+class ActiveUser(models.Manager):
+	def get_queryset(self):
+		return super(ActiveUser,self).get_queryset().filter(is_active=True,is_staff=True)
+
 
 class User(AbstractBaseUser):
 	email = models.EmailField(max_length=30, unique=True)
@@ -61,6 +65,7 @@ class User(AbstractBaseUser):
 	birthday  = models.DateField(blank=True, null=True)
 
 	objects = UserManager()
+	actives = ActiveUser()
 
 	USERNAME_FIELD = "email"
 	REQUIRED_FIELDS = ("username", "name")

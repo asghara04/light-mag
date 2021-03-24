@@ -5,12 +5,12 @@ from .models import Tag
 from .serializer import TagSerializer
 from django.http import Http404
 from rest_framework.permissions import IsAdminUser
-from rest_framework.pagination import PageNumberPagination
 from lightmag.pagination import PaginationMixin
+from rest_framework.pagination import PageNumberPagination
 
 class TagsView(APIView,PaginationMixin):
+	permission_classes = (IsAdminUser,)
 	pagination_class = PageNumberPagination()
-	permiasion_classes = (IsAdminUser,)
 	def get(self, request):
 		tags = Tag.objects.all()
 		page = self.paginate_queryset(tags)

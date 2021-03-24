@@ -13,11 +13,11 @@ from django.http import Http404
 
 class ArticleSerializer(serializers.Serializer):
 	id = serializers.IntegerField(read_only=True)
-	title = serializers.CharField(read_only=True, max_length=80)
-	slug = serializers.CharField(read_only=True, max_length=80)
+	title = serializers.CharField(read_only=True, max_length=120)
+	slug = serializers.CharField(read_only=True, max_length=120)
 	image = ImageSerializer(read_only=True)
 	description = serializers.CharField(read_only=True, max_length=200)
-	body = serializers.CharField(read_only=True, max_length=36000)
+	body = serializers.CharField(read_only=True, max_length=360000)
 	jpub_date = serializers.DateTimeField(read_only=True)
 	category = CategorySerializer(read_only=True)
 	subcat = SubCatSerializer(read_only=True)
@@ -28,11 +28,11 @@ class ArticleSerializer(serializers.Serializer):
 
 class MArticleSerializer(serializers.Serializer):
 	id = serializers.IntegerField(read_only=True)
-	title = serializers.CharField(max_length=80)
-	slug = serializers.SlugField(max_length=80)
+	title = serializers.CharField(max_length=120)
+	slug = serializers.SlugField(max_length=120)
 	image = ImageSerializer(allow_null=True)
 	description = serializers.CharField(max_length=200)
-	body = serializers.CharField(max_length=36000)
+	body = serializers.CharField(max_length=360000)
 	jdate = serializers.DateTimeField(read_only=True)
 	jpub_date = serializers.DateTimeField(read_only=True)
 	category = CategorySerializer(allow_null=True)
@@ -79,8 +79,8 @@ class MArticleSerializer(serializers.Serializer):
 
 class MinArticleSerializer(serializers.Serializer):
 	id = serializers.IntegerField(read_only=True)
-	title = serializers.CharField(read_only=True, max_length=80)
-	slug = serializers.SlugField(read_only=True, max_length=80)
+	title = serializers.CharField(read_only=True, max_length=120)
+	slug = serializers.SlugField(read_only=True, max_length=120)
 	image = ImageSerializer(read_only=True)
 	description = serializers.CharField(read_only=True, max_length=200)
 	jpub_date = serializers.DateTimeField(read_only=True)

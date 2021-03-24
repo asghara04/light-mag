@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import User
-from .serializer import UserSerializer, MUserSerializer
+from .serializer import UserSerializer, MUserSerializer, MinUserSerializer
 from rest_framework.permissions import IsAdminUser
 from django.http import Http404
 from rest_framework.renderers import JSONRenderer
@@ -102,3 +102,11 @@ class MUserView(APIView):
 		user = self.get_user(uname)
 		user.delete()
 		return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class ActUsersView(APIView):
+	permission_classes = (IsAdminUser,)
+	def get(self, request):
+		users = User.actives.all()
+		serializer = MinUserSerializer(users,many=True)
+		return Response(serializer.data,status=status.HTTP_200_OK)

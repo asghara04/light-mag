@@ -9,10 +9,7 @@
 				<div v-if="APIData.image" class="art-pic">
 					<img :src="APIData.image.image" :name="APIData.image.name" :alt="APIData.image.alt">
 				</div>
-				<p class="body pre-formatted">
-					{{APIData.body}}
-				</p>
-
+				<div v-html="APIData.body" class="body pre-formatted"></div>
 				<hr>
 					<router-link v-if="APIData.author" :to="{name: 'userprofile', params: {username: APIData.author.username}}">{{APIData.author.name}}</router-link>
 				<!-- related article like a card slider or like movie websites top -->
