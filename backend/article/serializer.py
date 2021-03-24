@@ -47,16 +47,18 @@ class MArticleSerializer(serializers.Serializer):
 		return get_object_or_404(Category, name=value["name"])
 	def validate_SubCat(self, value):
 		return get_object_or_404(SubCat, name=value["name"])
+	def validate_tags(self,value):
+		for i in range(len(value)):
+			try:
+				value[i] = Tag.objects.get(slug=value[i]['slug'],name=value[i]['name'])
+			except Tag.DoesNotExist:
+				value[i] = Tag.objects.create(slug=value[i]['slug'],name=value[i]['name'])
+			except:
+				raise Http404
+		return value
 	def validate_author(self, value):
 		return get_object_or_404(User, username=value["username"])
 	def create(self, validated_data):
-		for i in range(len(validated_data['tags'])):
-			try:
-				validated_data['tags'][i] = Tag.objects.get(slug=validated_data['tags'][i]['slug'],name=validated_data['tags'][i]['name'])
-			except Tag.DoesNotExist:
-				validated_data['tags'][i] = Tag.objects.create(slug=validated_data['tags'][i]['slug'],name=validated_data['tags'][i]['name'])
-			except:
-				raise Http404
 		ts = validated_data.pop("tags")
 		article = Article.objects.create(**validated_data)
 		article.tags.set(ts)

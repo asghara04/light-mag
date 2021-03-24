@@ -52,6 +52,11 @@ const routes = [
 				path: "user",
 				meta:{requiresAuth:true},
 				component: ()=>import("@/views/lm-add-user.vue")
+			},
+			{
+				path: "article",
+				meta:{requiresAuth:true},
+				component:()=>import("@/views/lm-add-article.vue")
 			}
 		]
 	},

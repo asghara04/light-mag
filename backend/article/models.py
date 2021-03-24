@@ -16,7 +16,7 @@ class Published(models.Manager):
 
 class Article(models.Model):
 	STATUSES = (("عمومی", "عمومی"), ("پیشنویس", "پیشنویس"))
-	title = models.CharField(max_length=80)
+	title = models.CharField(max_length=80,unique=True)
 	slug = models.SlugField(max_length=80, unique=True)
 	image = models.ForeignKey(Image, on_delete=models.SET_NULL, null=True, blank=True)
 	description = models.TextField(max_length=200)
