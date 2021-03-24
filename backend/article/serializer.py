@@ -37,7 +37,7 @@ class MArticleSerializer(serializers.Serializer):
 	jpub_date = serializers.DateTimeField(read_only=True)
 	category = CategorySerializer(allow_null=True)
 	subcat = SubCatSerializer(allow_null=True)
-	tags = TagSerializer(many=True)
+	tags = TagSerializer(many=True,allow_null=True)
 	status = serializers.CharField(max_length=8)
 	coms = serializers.IntegerField(read_only=True)
 	author = MinUserSerializer()
@@ -45,7 +45,7 @@ class MArticleSerializer(serializers.Serializer):
 		return get_object_or_404(Image, name=value["name"])
 	def validate_category(self, value):
 		return get_object_or_404(Category, name=value["name"])
-	def validate_SubCat(self, value):
+	def validate_subcat(self, value):
 		return get_object_or_404(SubCat, name=value["name"])
 	def validate_tags(self,value):
 		for i in range(len(value)):
@@ -59,9 +59,12 @@ class MArticleSerializer(serializers.Serializer):
 	def validate_author(self, value):
 		return get_object_or_404(User, username=value["username"])
 	def create(self, validated_data):
-		ts = validated_data.pop("tags")
-		article = Article.objects.create(**validated_data)
-		article.tags.set(ts)
+		if 'tags' in validated_data:
+			ts = validated_data.pop("tags")
+			article = Article.objects.create(**validated_data)
+			article.tags.set(ts)
+		else:
+			article = Article.objects.create(**validated_data)
 		return article
 	def update(self, inatance, validated_data):
 		instance.title = validated_data.get("title", instance.title)

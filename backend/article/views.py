@@ -4,7 +4,7 @@ from rest_framework import status
 from django.http import Http404
 from .models import Article
 from .serializer import ArticleSerializer, MArticleSerializer, MinArticleSerializer
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser,AllowAny
 from rest_framework.pagination import PageNumberPagination
 from lightmag.pagination import PaginationMixin
 from rest_framework.renderers import JSONRenderer
@@ -59,10 +59,22 @@ class ArticleView(APIView):
 		serializer = ArticleSerializer(art, context={"request":request})
 		return Response(serializer.data, status=status.HTTP_200_OK)
 
+errs = {'title':[],'slug':[]}
+def uniqueTitle(title,pk=False):
+	for art in Article.objects.all():
+		if(not pk and art.title==title) or (pk and art.id!=pk and art.title==title):
+			return False
+	return True
+def uniqueSlug(slug,pk=False):
+	for art in Article.objects.all():
+		if(not pk and art.slug==slug) or (pk and art.id!=pk and art.slug==slug):
+			return False
+	return True
+
 
 class MArticlesView(APIView,PaginationMixin):
 	pagination_class = PageNumberPagination()
-	permission_classes = (IsAdminUser,)
+	permission_classes = (AllowAny,)
 	renderer_classes = (JSONRenderer,)
 	def get(self, request):
 		arts = Article.objects.all()
@@ -75,8 +87,14 @@ class MArticlesView(APIView,PaginationMixin):
 	def post(self, request):
 		serializer = MArticleSerializer(data=request.data, partial=True, context={"request":request})
 		if serializer.is_valid():
-			serializer.save()
-			return Response(serializer.data, status=status.HTTP_201_CREATED)
+			if uniqueTitle(request.data['title']) and uniqueSlug(request.data['slug']):
+				serializer.save()
+				return Response(serializer.data, status=status.HTTP_201_CREATED)
+			if not uniqueTitle(request.data['title']):
+				errs['title'] = ['مقاله دیگری هم با همین عنوان وجود دارد.']
+			if not uniqueSlug(request.data['slug']):
+				errs['slug'] = ['مقاله دیگری هم با همین اسلاگ وجود دارد.']
+			return Response(errs,status=status.HTTP_400_BAD_REQUEST)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
