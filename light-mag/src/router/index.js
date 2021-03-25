@@ -41,8 +41,8 @@ const routes = [
 	{
 		path: "/tags/:tagslug",
 		name: "tag-page",
-		component: ()=>import("@/views/tag-page.vue"),
-		props: true
+		props: true,
+		component: ()=>import("@/views/tag-page.vue")
 	},
 	{
 		path: "/user/:username/profile",

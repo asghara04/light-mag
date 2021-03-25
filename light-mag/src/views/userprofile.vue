@@ -1,7 +1,7 @@
 <template>
 	<div v-if="APIData.username===this.$route.params.username" id="page" class="page">
-		<div class="right page-content">
-			<span>
+		<div class="right">
+			<span class="ed-bk">
 				<router-link to="/" rel="مجله نور">صفحه اصلی</router-link> > <span>کاربران</span> > <router-link :to="{name: 'userprofile', params:{username: APIData.username}}">{{APIData.name}}</router-link>
 			</span>
 			<div class="third-part">

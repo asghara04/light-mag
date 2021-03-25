@@ -28,24 +28,24 @@ class TagsView(APIView,PaginationMixin):
 
 
 class TagView(APIView):
-	def get_tag(self, pk):
+	def get_tag(self, slug):
 		try:
-			return Tag.objects.get(id=pk)
+			return Tag.objects.get(slug=slug)
 		except:
 			raise Http404
 	
-	def get(self, request, pk):
-		tag = self.get_tag(pk)
+	def get(self, request, slug):
+		tag = self.get_tag(slug)
 		serializer = TagSerializer(tag)
-		return Response(serializers.data, status=status.HTTP_200_OK)
-	def put(self, request, pk):
-		tag = self.get_tag(pk)
+		return Response(serializer.data, status=status.HTTP_200_OK)
+	def put(self, request, slug):
+		tag = self.get_tag(slug)
 		serializer = TagSerializer(tag, request.data)
 		if serializer.is_valid():
 			serializer.save()
 			return Response(serializer.data, status=status.HTTP_200_OK)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-	def delete(self, request, pk):
-		tag = self.get_tag(pk)
+	def delete(self, request, slug):
+		tag = self.get_tag(slug)
 		tag.delete()
 		return Response(status=status.HTTP_204_NO_CONTENT)

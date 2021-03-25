@@ -1,5 +1,4 @@
 <template>
-	<div>
 	<topslider></topslider>
 	<div id="page" class="page">
 		<div class="right">
@@ -9,9 +8,19 @@
 				<div v-if="APIData.image" class="art-pic">
 					<img :src="APIData.image.image" :name="APIData.image.name" :alt="APIData.image.alt">
 				</div>
-				<div v-html="APIData.body" class="body pre-formatted"></div>
-				<hr>
-					<router-link v-if="APIData.author" :to="{name: 'userprofile', params: {username: APIData.author.username}}">{{APIData.author.name}}</router-link>
+				<div v-html="APIData.body"></div>
+				<div class="art-detail">
+					<div v-if="APIData.category">
+						<p><span class="blue-text">دسته: </span><router-link :to="{name:'category',params:{catslug: APIData.category.slug}}" class="link-like">{{APIData.category.name}}</router-link></p>
+						<p v-if="APIData.subcat"><span class="blue-text">زیردسته: </span><router-link :to="{name:'subcat',params:{catslug:APIData.category.slug,subcatname:APIData.subcat.slug}}" class="link-like">{{APIData.subcat.name}}</router-link></p>
+					</div>
+					<div v-if="!APIData.category&&APIData.subcat">
+						<p><span class="blue-text">دسته: </span>{{APIData.subcat.category}}</p>
+						<p><span class="blue-text">زیردسته: </span>{{APIData.subcat.name}}</p>
+					</div>
+					<p><span class="blue-text">تاریخ انتشار: </span>{{APIData.jpub_date}}</p>
+					<p><span class="blue-text">نویسنده: </span><router-link class="icon-t link-like" :to="{name:'userprofile',params:{username:APIData.author.username}}"><img :src="APIData.author.prof_picture.image" :alt="APIData.author.prof_picture.alt" :name="APIData.author.prof_picture.name">{{APIData.author.name}}</router-link></p>
+				</div>
 				<!-- related article like a card slider or like movie websites top -->
 			</article>
 			<div class="ed-bk comments">
@@ -40,7 +49,6 @@
 		</div>
 		<sidebar/>
 	</div>
-</div>
 </template>
 <script>
 	import topslider from '@/components/topslider.vue';

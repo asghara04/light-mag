@@ -50,6 +50,9 @@ img{
 	align-items: center;
 	justify-content: center;
 }
+.inline{
+	display: inline;
+}
 .left-float{
 	float: left;
 	padding: 2%!important;

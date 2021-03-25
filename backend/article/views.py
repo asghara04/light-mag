@@ -9,6 +9,7 @@ from rest_framework.pagination import PageNumberPagination
 from lightmag.pagination import PaginationMixin
 from rest_framework.renderers import JSONRenderer
 from django.db.models import Count,Q
+from tag.models import Tag
 
 class ArticlesView(APIView, PaginationMixin):
 	pagination_class = PageNumberPagination()
@@ -156,4 +157,23 @@ class MostComArticleView(APIView):
 	def get(self,request,format=None):
 		arts = Article.published.annotate(coms=Count('comments',filter=Q(comments__status=True,comments__personal=False))).order_by('-coms')[:6]
 		serializer = MinArticleSerializer(arts, many=True, context={"request":request})
+		return Response(serializer.data,status=status.HTTP_200_OK)
+
+class TagArtsView(APIView,PaginationMixin):
+	# renderer_classes = (JSONRenderer,)
+	pagination_class = PageNumberPagination()
+	def getter(self,tag):
+		try:
+			return Tag.objects.get(slug=tag)
+		except:
+			raise Http404
+	def get(self,request,tag,format=None):
+		print("ooooooooooooooooooooooooooooooo")
+		tag = self.getter(tag)
+		arts = Article.published.filter(tags__in=[tag])
+		page = self.paginate_queryset(arts)
+		if page is not None:
+			serializer = self.get_paginated_response(MinArticleSerializer(page,many=True,context={"request":request}).data)
+		else:
+			serializer = MinArticleSerializer(arts,many=True,context={"request":request})
 		return Response(serializer.data,status=status.HTTP_200_OK)
