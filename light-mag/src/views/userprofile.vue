@@ -9,8 +9,9 @@
 					<img v-if="APIData.prof_picture" :src="APIData.prof_picture.image" :alt="APIData.prof_picture.alt" :name="APIData.prof_picture.name">
 					<p><span class="blue-text">نام: </span>{{APIData.name}}</p>
 					<p v-if="APIData.pubmail"><span class="blue-text">ایمیل: </span><a class="link-like" :href="'mailto:'+APIData.pubmail" target="_blank" :rel="'ایمیل '+APIData.name">{{APIData.pubmail}}</a></p>
+					<p v-if="APIData.pubartcount"><span class="blue-text">تعداد مقالات: </span>{{APIData.pubartcount}}</p>
 					<div class="cen">
-						<a href="#" class="cen">مقالات {{APIData.name}}</a>
+						<router-link v-if="APIData.pubartcount" :to="{name:'user-posts',params:{username:APIData.username}}">مقالات {{APIData.name}}</router-link>
 					</div>
 				</div>
 				<div class="third-two">

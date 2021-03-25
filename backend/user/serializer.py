@@ -19,6 +19,7 @@ class UserSerializer(serializers.Serializer):
 	facebook_link = serializers.URLField(max_length=35)
 	github_link = serializers.URLField(max_length=35)
 	jbirth = serializers.DateField(read_only=True)
+	pubartcount = serializers.IntegerField(read_only=True)
 
 
 class MUserSerializer(serializers.Serializer):
@@ -41,6 +42,7 @@ class MUserSerializer(serializers.Serializer):
 	github_link = serializers.URLField(max_length=35, allow_null=True)
 	jbirth = serializers.DateField(allow_null=True,read_only=True)
 	birthday = serializers.DateField(allow_null=True)
+	artcount = serializers.IntegerField(read_only=True)
 
 	def validate_prof_picture(self, value):
 		return get_object_or_404(Image,  name=value["name"])

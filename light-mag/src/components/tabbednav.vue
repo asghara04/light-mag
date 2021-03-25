@@ -76,7 +76,7 @@
 						set_data();
 						window.addEventListener("scroll",pagination);
 					}catch(err){
-						console.log(datas.value[i].endpoint)
+						console.log(err);
 					}
 				}else{
 					router.go();

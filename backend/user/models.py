@@ -76,6 +76,10 @@ class User(AbstractBaseUser):
 		return set_jdate(self.last_login)
 	def jbirth(self):
 		return set_jdate(self.birthday)
+	def pubartcount(self):
+		return self.arts.filter(status="عمومی").count()
+	def artcount(self):
+		return self.arts.all().count()
 	def __str__(self):
 		return self.username
 	def has_perm(self,  perm, obj=None):

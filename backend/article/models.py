@@ -27,7 +27,7 @@ class Article(models.Model):
 	subcat = models.ForeignKey(SubCat, on_delete=models.SET_NULL, null=True, blank=True)
 	tags = models.ManyToManyField(Tag, blank=True)
 	status = models.CharField(max_length=8, choices=STATUSES)
-	author = models.ForeignKey(User, on_delete=models.SET_DEFAULT,related_name='author',default="asghar")
+	author = models.ForeignKey(User, on_delete=models.SET_DEFAULT,related_name='arts',default="asghar")
 
 	objects = models.Manager()
 	published = Published()
@@ -39,7 +39,7 @@ class Article(models.Model):
 
 	def coms(self):
 		return self.comments.filter(status=True).count()
-	
+
 	def __str__(self):
 		return self.slug
 	class Meta:

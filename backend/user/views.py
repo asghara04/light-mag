@@ -42,8 +42,8 @@ def unique_pubmail(pub,pk=False):
 	return True
 
 class MUsersView(APIView,PaginationMixin):
-	renderer_classes = (JSONRenderer,)
-	permission_classes = (IsAdminUser,)
+	# renderer_classes = (JSONRenderer,)
+	# permission_classes = (IsAdminUser,)
 	pagination_class = PageNumberPagination()
 	def get(self, request):
 		users = User.objects.all()
