@@ -22,9 +22,9 @@
 						<p><span class="blue-text">نویسنده: </span>{{art.author.name}}</p>
 					</details>
 					<div class="page-halfer">
-						<router-link :to="'#'" class="text-icon half lm-link lm-green"><img src="../assets/imgs/edit.svg">تغییر</router-link>
+						<router-link :to="{name: 'change-article',params:{pk:art.id}}" class="text-icon half lm-link lm-green"><img src="../assets/imgs/edit.svg">تغییر</router-link>
 						<a class="text-icon half lm-link lm-red" @click.prevent="rm(art.id,i)"><img src="../assets/imgs/delete.svg">حذف</a>
-					</div>					
+					</div>
 				</div>
 			</article>
 		</div>

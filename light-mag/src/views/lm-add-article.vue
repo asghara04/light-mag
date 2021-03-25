@@ -26,7 +26,7 @@
 		<label for="subcat">زیردسته: </label>
 		<span v-if="errs.subcat!=false"><p v-for="(err,i) in errs.subcat" :key="i" class="red-text">* {{err}}</p></span>
 		<select name="subcat" class="data-field" v-model="subcat">
-			<option v-for="(sub,i) in subs" :key="i" class="data-field">{{sub.name}}</option>
+			<option v-for="(sub,i) in subs" :key="i">{{sub.name}}</option>
 		</select>
 		<label for="tags">تگ ها: </label>
 		<span v-if="errs.tags!=false"><p v-for="(err,i) in errs.tags" :key="i" class="red-text">* {{err}}</p></span>

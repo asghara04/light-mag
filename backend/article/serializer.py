@@ -66,7 +66,7 @@ class MArticleSerializer(serializers.Serializer):
 		else:
 			article = Article.objects.create(**validated_data)
 		return article
-	def update(self, inatance, validated_data):
+	def update(self, instance, validated_data):
 		instance.title = validated_data.get("title", instance.title)
 		instance.slug = validated_data.get("slug", instance.slug)
 		instance.image = validated_data.get("image", instance.image)
@@ -74,6 +74,9 @@ class MArticleSerializer(serializers.Serializer):
 		instance.body = validated_data.get("body", instance.body)
 		instance.category = validated_data.get("category", instance.category)
 		instance.subcat = validated_data.get("subcat", instance.subcat)
+		if 'tags' in validated_data:
+			ts = validated_data.pop("tags")
+			instance.tags.set(ts)
 		instance.status = validated_data.get("status", instance.status)
 		instance.author = validated_data.get("author", instance.author)
 		instance.save()

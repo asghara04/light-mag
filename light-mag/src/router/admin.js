@@ -39,6 +39,11 @@ const routes = [
 				component: () => import("@/views/lm-add-image.vue")
 			},
 			{
+				path: "article",
+				meta:{requiresAuth:true},
+				component:()=>import("@/views/lm-add-article.vue")
+			},
+			{
 				path: "category",
 				meta:{requiresAuth:true},
 				component: ()=>import("@/views/lm-add-category.vue")
@@ -52,11 +57,6 @@ const routes = [
 				path: "user",
 				meta:{requiresAuth:true},
 				component: ()=>import("@/views/lm-add-user.vue")
-			},
-			{
-				path: "article",
-				meta:{requiresAuth:true},
-				component:()=>import("@/views/lm-add-article.vue")
 			}
 		]
 	},
@@ -74,6 +74,13 @@ const routes = [
 				props: true,
 				name: "change-image",
 				component:()=>import("@/views/lm-change-image.vue")
+			},
+			{
+				path: "article/:pk",
+				meta:{requiresAuth:true},
+				props:true,
+				name:"change-article",
+				component:()=>import("@/views/lm-change-article.vue")
 			},
 			{
 				path: "category/:catslug",

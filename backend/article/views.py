@@ -75,7 +75,7 @@ def uniqueSlug(slug,pk=False):
 
 class MArticlesView(APIView,PaginationMixin):
 	pagination_class = PageNumberPagination()
-	permission_classes = (AllowAny,)
+	permission_classes = (IsAdminUser,)
 	renderer_classes = (JSONRenderer,)
 	def get(self, request):
 		arts = Article.objects.all()
@@ -100,14 +100,14 @@ class MArticlesView(APIView,PaginationMixin):
 
 
 class MArticleView(APIView):
-	permission_classes = (IsAdminUser,)
-	renderer_classes = (JSONRenderer,)
+	permission_classes = (AllowAny,)
+	# renderer_classes = (JSONRenderer,)
 	def get_art(self, pk):
 		try:
 			return Article.objects.get(id=pk)
 		except:
 			raise Http404
-	
+
 	def get(self, request, pk):
 		art = self.get_art(pk)
 		serializer = MArticleSerializer(art, context={"request":request})
