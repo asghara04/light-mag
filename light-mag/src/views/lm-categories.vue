@@ -31,7 +31,7 @@
 	import {getAPI} from '@/axios.js';
 	import pagination from '@/components/pagination.vue';
 	export default{
-		name: "lm-articles",
+		name: "lmCategories",
 		props: {"page":Number},
 		setup(props){
 			const current = ref(1);

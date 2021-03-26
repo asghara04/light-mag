@@ -3,6 +3,6 @@
 </template>
 <script>
 	export default{
-		name: "lm-articles"
+		name: "lmComments"
 	};
 </script>

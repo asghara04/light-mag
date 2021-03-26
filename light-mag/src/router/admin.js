@@ -44,6 +44,11 @@ const routes = [
 				component:()=>import("@/views/lm-add-article.vue")
 			},
 			{
+				path: "tag",
+				meta:{requiresAuth:true},
+				component:()=>import("@/views/lm-add-tag.vue")
+			},
+			{
 				path: "category",
 				meta:{requiresAuth:true},
 				component: ()=>import("@/views/lm-add-category.vue")
@@ -81,6 +86,13 @@ const routes = [
 				props:true,
 				name:"change-article",
 				component:()=>import("@/views/lm-change-article.vue")
+			},
+			{
+				path: "tag/:tagslug",
+				meta:{requiresAuth:true},
+				props: true,
+				name: "change-tag",
+				component:()=>import("@/views/lm-change-tag.vue")
 			},
 			{
 				path: "category/:catslug",

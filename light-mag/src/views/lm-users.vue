@@ -5,9 +5,10 @@
 				<h2>کاربران</h2>
 				<router-link to="/LM-admin/add/user" class="text-icon lm-link lm-blue"><img src="../assets/imgs/add.svg">جدید</router-link>
 			</div>
-			<div class="page-halfer ed-bk">
+			<div class="page-halfer ed-bk" v-if="count">
 				<p class="link-like half">کل: {{count}}</p>
 			</div>
+			<br>
 			<div ref="paginate" class="spcial-list" v-if="APIData!=false">
 				<article class="article" v-for="(user,i) in APIData" :key="i" :class="{'yay-sider':user.prof_picture}">
 					<router-link v-if="user.prof_picture" class="sider" :rel="user.name" :to="'#'"><img :src="user.prof_picture.image" :alt="user.prof_picture.alt" :name="user.prof_picture.name"></router-link>
@@ -35,7 +36,7 @@
 	import {getAPI} from '@/axios.js';
 	import {useStore} from 'vuex';
 	export default{
-		name: "lmArticles",
+		name: "lmUsers",
 		setup(){
 			const store = useStore();
 			const APIData = computed(()=>store.state.APIData);

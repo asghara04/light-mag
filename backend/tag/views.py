@@ -15,7 +15,7 @@ class TagsView(APIView,PaginationMixin):
 		tags = Tag.objects.all()
 		page = self.paginate_queryset(tags)
 		if page is not None:
-			serializer = self.get_paginated_response(TagSerializer(page,many=True))
+			serializer = self.get_paginated_response(TagSerializer(page,many=True).data)
 		else:
 			serializer = TagSerializer(tags, many=True)
 		return Response(serializer.data, status=status.HTTP_200_OK)
