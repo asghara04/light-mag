@@ -52,7 +52,10 @@ class MArticleSerializer(serializers.Serializer):
 			try:
 				value[i] = Tag.objects.get(slug=value[i]['slug'],name=value[i]['name'])
 			except Tag.DoesNotExist:
-				value[i] = Tag.objects.create(slug=value[i]['slug'],name=value[i]['name'])
+				try:
+					value[i] = Tag.objects.create(slug=value[i]['slug'],name=value[i]['name'])
+				except:
+					raise Http404
 			except:
 				raise Http404
 		return value
@@ -92,3 +95,16 @@ class MinArticleSerializer(serializers.Serializer):
 	jpub_date = serializers.DateTimeField(read_only=True)
 	author = MinUserSerializer(read_only=True)
 	coms = serializers.IntegerField(read_only=True)
+
+{
+	"tags":[
+		{
+		"name": "hi",
+		"slug": "hi"
+		},
+		{
+		"name": "tiiip",
+		"slug": "tiiip"
+		}
+	]
+}

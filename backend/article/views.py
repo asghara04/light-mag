@@ -100,8 +100,8 @@ class MArticlesView(APIView,PaginationMixin):
 
 
 class MArticleView(APIView):
-	permission_classes = (AllowAny,)
-	# renderer_classes = (JSONRenderer,)
+	permission_classes = (IsAdminUser,)
+	renderer_classes = (JSONRenderer,)
 	def get_art(self, pk):
 		try:
 			return Article.objects.get(id=pk)
@@ -116,8 +116,14 @@ class MArticleView(APIView):
 		art = self.get_art(pk)
 		serializer = MArticleSerializer(art, request.data, partial=True, context={"request":request})
 		if serializer.is_valid():
-			serializer.save()
-			return Response(serializer.data, status=status.HTTP_200_OK)
+			if (not 'title' in request.data or ('title' in request.data and uniqueTitle(request.data['title'],art.id))) and (not 'slug' in request.data or ('slug' in request.data and uniqueSlug(request.data['slug'],art.id))):
+				serializer.save()
+				return Response(serializer.data, status=status.HTTP_200_OK)
+			if 'title' in request.data and not uniqueTitle(request.data['title'],art.id):
+				errs['title'] = ['مقاله دیگری با همین عنوان وجود دارد.']
+			if 'slug' in request.data and not uniqueSlug(request.data['slug'],art.id):
+				errs['slug'] = ['مقاله دیگری با همین اسلاگ وجود دارد.']
+			return Response(errs,status=status.HTTP_400_BAD_REQUEST)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 	def delete(self, request, pk):
 		art = self.get_art(pk)

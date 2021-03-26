@@ -232,7 +232,7 @@
 					if(subcat.value&&subcat.value.length>25){
 						errs.value.category.push("لطفا زیردسته معتبری انتخاب کنید.");
 					}
-					if(tags.value&&tags.value>250){
+					if(ts.value&&ts.value>250){
 						errs.value.tags.push("تگ های زیادی وارد شده است، لطفا تگ کمتری وارد کنید.");
 					}
 					if(!status.value){
