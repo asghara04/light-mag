@@ -8,6 +8,22 @@ from rest_framework.permissions import IsAdminUser
 from lightmag.pagination import PaginationMixin
 from rest_framework.pagination import PageNumberPagination
 
+
+errs = {'name':[],'slug':[]}
+
+
+def uniqueName(name,pk=False):
+	for tag in Tag.objects.all():
+		if (not pk and tag.name==name) or (pk and tag.id!=pk and tag.name==name):
+			return False
+	return True
+def uniqueSlug(slug,pk=False):
+	for tag in Tag.objects.all():
+		if (not pk and tag.slug==slug) or (pk and tag.id!=pk and tag.slug==slug):
+			return False
+	return True
+
+
 class TagsView(APIView,PaginationMixin):
 	permission_classes = (IsAdminUser,)
 	pagination_class = PageNumberPagination()
@@ -22,8 +38,14 @@ class TagsView(APIView,PaginationMixin):
 	def post(self, request):
 		serializer = TagSerializer(data=request.data)
 		if serializer.is_valid():
-			serializer.save()
-			return Response(serializer.data, status=status.HTTP_201_CREATED)
+			if uniqueName(request.data['name']) and uniqueSlug(request.data['slug']):
+				serializer.save()
+				return Response(serializer.data, status=status.HTTP_201_CREATED)
+			if not uniqueName(request.data['name']):
+				errs['name'] = ["تگ دیگری با همین نام وجود دراد."]
+			if not uniqueSlug(request.data['slug']):
+				errs['slug'] = ["تگ دیگری با همین نام وجوددارد."]
+			return Response(errs,status=status.HTTP_400_BAD_REQUEST)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -42,8 +64,14 @@ class TagView(APIView):
 		tag = self.get_tag(slug)
 		serializer = TagSerializer(tag, request.data)
 		if serializer.is_valid():
-			serializer.save()
-			return Response(serializer.data, status=status.HTTP_200_OK)
+			if uniqueName(request.data['name'],tag.id) and uniqueSlug(request.data['slug'],tag.id):
+				serializer.save()
+				return Response(serializer.data, status=status.HTTP_200_OK)
+			if not uniqueName(request.data['name'],tag.id):
+				errs['name'] = ["تگ دیگری با همین نام وجود دراد."]
+			if not uniqueSlug(request.data['slug'],tag.id):
+				errs['slug'] = ["تگ دیگری با همین نام وجوددارد."]
+			return Response(errs,status=status.HTTP_400_BAD_REQUEST)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 	def delete(self, request, slug):
 		tag = self.get_tag(slug)

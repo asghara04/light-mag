@@ -4,7 +4,7 @@ from rest_framework import status
 from django.http import Http404
 from .models import Article
 from .serializer import ArticleSerializer, MArticleSerializer, MinArticleSerializer
-from rest_framework.permissions import IsAdminUser,AllowAny
+from rest_framework.permissions import IsAdminUser
 from rest_framework.pagination import PageNumberPagination
 from lightmag.pagination import PaginationMixin
 from rest_framework.renderers import JSONRenderer
