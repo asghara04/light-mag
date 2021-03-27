@@ -1,6 +1,6 @@
 <template>
 	<h2 class="cen">تغییر کامنت</h2>
-	<form class="form" @submit.prevent="sub(pk)">
+	<form class="form" @submit.prevent="sub(compk)">
 		<label for="name">نام: </label>
 		<span v-if="errs.name!=false"><p v-for="(err,i) in errs.name" :key="i" class="red-text">* {{err}}</p></span>
 		<input type="text" name="name" class="data-field" required="" v-model="name" maxlength="30">
@@ -26,6 +26,7 @@
 	import {ref} from 'vue';
 	import {useStore} from 'vuex';
 	import {getAPI} from '@/axios.js';
+	import {useRouter} from 'vue-router';
 	export default{
 		name: "lmChangeComment",
 		props: ["compk"],
@@ -37,7 +38,7 @@
 			const status = ref(null);
 			const personal = ref(null);
 			const readed = ref(true);
-			const errs = {'article':[],'name':[],'email':[],"message":[],"status":[],"personal":[],"readed":[]};
+			const errs = ref({'article':[],'name':[],'email':[],"message":[],"status":[],"personal":[],"readed":[]});
 			const store = useStore();
 			async function get_comment(pk){
 				try{
@@ -56,7 +57,82 @@
 				}
 			}
 			get_comment(props.compk)
-			return{name,email,message,status,personal,readed,errs}
+			const router = useRouter();
+			async function sub(pk){
+				errs.value.name = [];
+				errs.value.email = [];
+				errs.value.message = [];
+				errs.value.status = [];
+				errs.value.personal = [];
+				errs.value.readed = [];
+				if(article.value&&name.value&&name.value.length<=30&&email.value&&email.value.length<=30&&message.value&&message.value.length<=350){
+					try{
+						await getAPI.put("comments/mapi/v1/"+pk+'/',{
+							article: article.value,
+							name: name.value,
+							email: email.value,
+							message: message.value,
+							status: status.value,
+							personal: personal.value,
+							readed: readed.value
+						},{headers:{Authorization:`JWT ${store.state.accessToken}`}});
+						router.push({name: 'lm-comments'})
+					}catch(err){
+						console.log(err)
+						if(err.response.status===400){
+							if(err.response.data.name){
+								for(var i=0;i<err.response.data.name.length;i++){
+									errs.value.name.push(err.response.data.name[i]);
+								}
+							}
+							if(err.response.data.email){
+								for(var x=0;x<err.response.data.email.length;x++){
+									errs.value.email.push(err.response.data.email[x]);
+								}
+							}
+							if(err.response.data.message){
+								for(var h=0;h<err.response.data.message.length;h++){
+									errs.value.message.push(err.response.data.message[h]);
+								}
+							}
+							if(err.response.data.status){
+								for(var n=0;n<err.response.data.status.length;n++){
+									errs.value.status.push(err.response.data.status[n])
+								}
+							}
+							if(err.response.data.personal){
+								for(var t=0;t<err.response.data.personal.length;t++){
+									errs.value.personal.push(err.response.data.personal[n])
+								}
+							}
+							if(err.response.data.readed){
+								for(var c=0;c<err.response.data.readed.length;c++){
+									errs.value.readed.push(err.response.data.readed[c])
+								}
+							}
+						}else{
+							alert("somthing went wrong chwck thw console")
+						}
+					}
+				}else{
+					if(!name.value){
+						errs.value.name.push("لطفا نام را وارد کنید.");
+					}else if(name.value.length>30){
+						errs.value.name.push("حداکثر طول نام ۳۰ حرف است، نام وارد شده "+name.value.length+" حرف دارد.");
+					}
+					if(!email.value){
+						errs.value.email.push("لطفا ایمیل را وارد کنید.");
+					}else if(email.value.length>30){
+						errs.value.email.push("حداکثر طول ایمیل ۳۰ حرف است، ایمیل وارد شده "+email.value.length+" حرف دارد.");
+					}
+					if(!message.value){
+						errs.value.message.push("متن را وارد کنید.");
+					}else if(message.value.length>350){
+						errs.value.message.push("حداکثر طول متن ۳۵۰ حرف است، متن وارد شده "+message.value.length+" حرف دارد.");
+					}
+				}
+			}
+			return{name,email,message,status,personal,readed,sub,errs}
 		}
 	};
 </script>

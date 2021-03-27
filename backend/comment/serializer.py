@@ -73,3 +73,5 @@ class MCommentSerializer(serializers.Serializer):
 		instance.personal = validated_data.get("personal", instance.personal)
 		instance.status = validated_data.get("status", instance.status)
 		instance.readed = validated_data.get("readed", instance.readed)
+		instance.save()
+		return instance
