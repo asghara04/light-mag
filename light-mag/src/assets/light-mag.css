@@ -158,3 +158,18 @@ img{
 .tag-like:hover{
 	background-color: #b9b9b9;
 }
+@media(max-width: 950px){
+	p{
+		font-size: 19px;
+	}
+}
+@media(max-width: 650px){
+	p{
+		font-size: 18px;
+	}
+}
+@media(max-width: 550px){
+	p{
+		font-size: 17px;
+	}
+}

@@ -1,14 +1,32 @@
 <template>
-	<div>
-		<p>some text about light-mag's creation.</p>
+	<div class="page" id="page">
+		<div class="right ed-bk">
+			<h2 class="cen">لایت مگ</h2>
+			<p>لایت مگ یه مجله آنلاینه و از شنبه، ۷ فروردین ۱۴۰۰ شروع به فعالیت کرده و کل ایده لایت مگ هم اینه که قالب مقالاتش آموزنده، فان، اخبار جالب،.. باشه. و تو زمینه های مختلف موضوعات زیادی رو پوشش میده از جمله:</p>
+			<ul>
+				<li>فناوری</li>
+				<li>فیلم و سریال</li>
+				<li>توسعه و برنامه نویسی</li>
+				<li>هوش مصنوعی</li>
+				<li>اخبار</li>
+				<li>سرگرمی</li>
+				<li>و...</li>
+			</ul>
+			<p>در صورت درخواست ارتباط با مدیریت به <router-link to="/contact" class="link-like" ref="لایت مگ">این صفحه</router-link> مرجعه کنید.</p>
+		</div>
+		<sidebar/>
 	</div>
+	<topslider/>
 </template>
 
 <script>
+	import topslider from '../components/topslider.vue';
+	import sidebar from '../components/sidebar.vue';
 	export default{
 		name: "about",
-		setup(){
-			
-		}
+		components:{topslider,sidebar}
 	};
 </script>
+<style>
+	@import '../assets/light-mag.css';
+</style>

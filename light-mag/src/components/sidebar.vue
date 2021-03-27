@@ -7,6 +7,9 @@
 				<h3><router-link :to="{name: 'article',params:{artslug: art.slug}}">{{art.title}}</router-link></h3>
 			</div>
 		</div>
+		<div class="cen">
+			<a href="https://linuxstory.ir" target="_blank"><img src="../assets/imgs/add.gif"></a>
+		</div>
 		<hr>
 		<h3 class="down-name"><router-link class="text-icon" name='لایت مگ' to="/" rel="لایت مگ"><img src="../assets/imgs/light.svg" alt="LM" name="لایت مگ">لایت مگ</router-link></h3>
 	</aside>

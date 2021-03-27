@@ -28,7 +28,7 @@
 							<p><span class="blue-text">فعالیت: </span>{{rep.status}}</p>
 							<p><span class="blue-text">پاسخ:‌ </span>{{rep.message}}</p>
 							<div class="page-halfer">
-								<router-link :to="{name: 'change-article',params:{pk:com.id}}" class="text-icon half lm-link lm-green"><img src="../assets/imgs/edit.svg">تغییر</router-link>
+								<router-link :to="{name: 'change-reply',params:{reppk:rep.id}}" class="text-icon half lm-link lm-green"><img src="../assets/imgs/edit.svg">تغییر</router-link>
 								<a class="text-icon half lm-link lm-red" @click.prevent="rep_rm(rep.id,x)"><img src="../assets/imgs/delete.svg">حذف</a>
 							</div>
 							<hr v-if="com.reps+1>i">

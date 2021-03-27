@@ -14,3 +14,13 @@ div.pagination-com .page-active{
 	border: 3px solid #004c8d;
 	transform: scale(1.05);
 }
+@media(max-width: 650px){
+	div.pagination-com *{
+		padding: 1% 2.5%;
+	}
+}
+@media(max-width: 350px){
+	div.pagination-com *{
+		padding: 1% 4%;
+	}
+}

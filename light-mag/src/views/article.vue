@@ -1,5 +1,4 @@
 <template>
-	<topslider></topslider>
 	<div id="page" class="page">
 		<div class="right">
 			<article class="ed-bk" v-if="APIData">
@@ -49,6 +48,7 @@
 		</div>
 		<sidebar/>
 	</div>
+	<topslider/>
 </template>
 <script>
 	import topslider from '@/components/topslider.vue';

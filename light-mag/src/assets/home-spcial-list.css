@@ -35,6 +35,7 @@ div.spcial-list article.article.yay-sider .sider{
 	div.spcial-list article.article{
 		padding: 1%;
 		margin: 0 0 2.5% 0;
+		text-align: center;
 	}
 	div.spcial-list article.article div h2{
 		text-align: center;

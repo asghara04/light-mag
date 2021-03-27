@@ -1,11 +1,18 @@
 <template>
-	<div>
-		<p>some contact way's to light-mag's managment.</p>
+	<div class="page" id="page">
+		<div class="right ed-bk">
+			<p>در صورت درخواست ارتباط با مدیریت لایت مگ میتونید به ایمیل <a href="mailto:asghar3140@gmail.com">asghar3140@gmail.com</a> مراجعه کنید. یا به پروفایل نویسنده ها برید و از راه های ارتباطی استفاده کنید.</p>
+		</div>
+		<sidebar/>
 	</div>
+	<topslider/>
 </template>
 
 <script>
+	import topslider from '@/components/topslider.vue';
+	import sidebar from '@/components/sidebar.vue';
 	export default{
-		name: 'contact'
+		name: 'contact',
+		components:{topslider,sidebar}
 	};
 </script>
