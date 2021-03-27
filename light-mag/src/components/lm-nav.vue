@@ -64,6 +64,7 @@
 			function exit(){
 				if(smallscreen.value){
 					showmenu.value = false;
+					document.body.classList.remove('freeze');
 				}
 			}
 			function liopener(id){

@@ -95,6 +95,20 @@ const routes = [
 				component:()=>import("@/views/lm-change-tag.vue")
 			},
 			{
+				path: "comment/:compk",
+				meta: {requiresAuth:true},
+				props: true,
+				name: "change-comment",
+				component: ()=>import("@/views/lm-change-comment.vue")
+			},
+			{
+				path: "reply/:reppk",
+				meta: {requiresAuth:true},
+				props: true,
+				name: "change-reply",
+				component: ()=>import("@/views/lm-change-reply.vue")
+			},
+			{
 				path: "category/:catslug",
 				meta: {requiresAuth:true},
 				props: true,

@@ -4,8 +4,7 @@ from rest_framework import status
 from .models import Comment, Reply
 from .serializer import CommentSerializer, MCommentSerializer, ReplySerializer, MReplySerializer
 from django.http import Http404
-from rest_framework.permissions import IsAdminUser
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import IsAdminUser,AllowAny
 from rest_framework.renderers import JSONRenderer
 from lightmag.pagination import PaginationMixin
 from rest_framework.pagination import PageNumberPagination
@@ -48,3 +47,63 @@ class CRepliesView(APIView,PaginationMixin):
 			serializer.save()
 			return Response({"message":"پاسختون ثبت شد.\nبزودی نمایش داده میشه."}, status=status.HTTP_201_CREATED)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class McommentsView(APIView,PaginationMixin):
+	pagination_class = PageNumberPagination()
+	renderer_classes = (JSONRenderer,)
+	permission_classes = (IsAdminUser,)
+	def get(self,request):
+		coms = Comment.objects.all()
+		page = self.paginate_queryset(coms)
+		if page is not None:
+			serializer = self.get_paginated_response(MCommentSerializer(page,many=True).data)
+		else:
+			serializer = self.get_paginated_response(MCommentSerializer(coms,many=True))
+		return Response(serializer.data,status=status.HTTP_200_OK)
+
+
+class McommentView(APIView):
+	permission_classes = (IsAdminUser,)
+	def getter(self, pk):
+		try:
+			return Comment.objects.get(id=pk)
+		except:
+			raise Http404
+	def get(self,request,pk):
+		com = self.getter(pk)
+		serializer = MCommentSerializer(com)
+		return Response(serializer.data, status=status.HTTP_200_OK)
+	def put(self, request, pk):
+		com = self.getter(pk)
+		serializer = MCommentSerializer(com, request.data)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data,status=status.HTTP_200_OK)
+		return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+	def delete(self, request, pk):
+		com = self.getter(pk)
+		com.delete()
+		return Response(status=status.HTTP_204_NO_CONTENT)
+
+class MReplyView(APIView):
+	permission_classes = (IsAdminUser,)
+	def getter(self,pk):
+		try:
+			return Reply.objects.get(id=pk)
+		except:
+			raise Http404
+	def get(self, request, pk):
+		com = self.getter(pk)
+		serializer = MReplySerializer(com)
+		return Response(serializer.data,status=status.HTTP_200_OK)
+	def put(self, request, pk):
+		rep = self.getter(pk)
+		serializer = MReplySerializer(rep, request.data)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data,status=status.HTTP_200_OK)
+		return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)			
+	def delete(self, request, pk):
+		rep = self.getter(pk)
+		rep.delete()
+		return Response(status=status.HTTP_204_NO_CONTENT)
