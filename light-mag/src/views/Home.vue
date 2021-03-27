@@ -10,7 +10,7 @@
 							<h2><router-link :rel="article.title" :name='article.title' :to="'/article/'+article.slug">{{article.title}}</router-link></h2>
 							<hr>
 							<p class="pre-formatted">{{article.description}} - <router-link :to="'/article/'+article.slug">ادامه...</router-link></p>
-							<div class="page-halfer"><p class="half text-icon"><img src="../assets/imgs/clock.svg">{{article.jpub_date}}</p><p class="half text-icon"><img class="mar" src="../assets/imgs/coms.svg">{{article.coms}}</p></div><router-link :to="{name: 'userprofile',params:{username: article.author.username}}" class="half icon-t"><img v-if="article.author.prof_picture" :src="article.author.prof_picture.image" :alt="article.author.prof_picture.alt"><img v-else src="../assets/imgs/user.svg">{{article.author.name}}</router-link>
+							<div class="page-halfer"><p class="half text-icon"><img src="../assets/imgs/clock.svg">{{article.jpub_date}}</p><p class="half text-icon"><img class="mar" src="../assets/imgs/coms.svg">{{article.coms}}</p></div><router-link v-if="article.author" :to="{name: 'userprofile',params:{username: article.author.username}}" class="half icon-t"><img v-if="article.author.prof_picture" :src="article.author.prof_picture.image" :alt="article.author.prof_picture.alt"><img v-else src="../assets/imgs/user.svg">{{article.author.name}}</router-link>
 						</div>
 					</article>
 				</div>

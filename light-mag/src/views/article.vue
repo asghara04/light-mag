@@ -17,8 +17,8 @@
 						<p><span class="blue-text">دسته: </span>{{APIData.subcat.category}}</p>
 						<p><span class="blue-text">زیردسته: </span>{{APIData.subcat.name}}</p>
 					</div>
-					<p><span class="blue-text">تاریخ انتشار: </span>{{APIData.jpub_date}}</p>
-					<p><span class="blue-text">نویسنده: </span><router-link class="icon-t link-like" :to="{name:'userprofile',params:{username:APIData.author.username}}"><img :src="APIData.author.prof_picture.image" :alt="APIData.author.prof_picture.alt" :name="APIData.author.prof_picture.name">{{APIData.author.name}}</router-link></p>
+					<p v-if="APIData.jpub_date"><span class="blue-text">تاریخ انتشار: </span>{{APIData.jpub_date}}</p>
+					<p v-if="APIData.author"><span class="blue-text">نویسنده: </span><router-link class="icon-t link-like" :to="{name:'userprofile',params:{username:APIData.author.username}}"><img :src="APIData.author.prof_picture.image" :alt="APIData.author.prof_picture.alt" :name="APIData.author.prof_picture.name">{{APIData.author.name}}</router-link></p>
 				</div>
 				<!-- related article like a card slider or like movie websites top -->
 			</article>
