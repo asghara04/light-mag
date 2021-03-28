@@ -28,17 +28,19 @@
 	position: absolute;
 	margin: 0.8% 0 0 0;
 	display: none;
-	overflow: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
 	white-space: nowrap;
 	background-color: #0277bd;
+	max-height: 55%;
 	z-index: 10;
 }
 .uli:hover .itemul{
 	display: block;
 }
 .iuli{
-	width: 120px;
-	padding: 10px;
+	width: 150px;
+	padding: 5px;
 	float: none;
 	display: block;
 }
