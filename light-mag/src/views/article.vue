@@ -77,7 +77,7 @@
 					store.state.APIData = res.data;
 					document.querySelector("head title").textContent = APIData.value.title+" - لایت مگ";
 					document.querySelector("head meta[name='description']").setAttribute("content",APIData.value.description)
-						document.querySelector("head meta[name='author']").setAttribute("content",APIData.value.author.name);
+					document.querySelector("head meta[name='author']").setAttribute("content",APIData.value.author.name);
 					if(APIData.value.tags!=false){
 						let tags = "";
 						for(var i=0;i<APIData.value.tags.length;i++){
