@@ -28,6 +28,8 @@
 		name: "lmChangeReply",
 		props:['reppk'],
 		setup(props){
+			document.querySelector("head title").textContent = "تغییر پاسخ - لایت مگ";
+			document.querySelector("head meta[name='keywords']").setAttribute("content","noindex, nofollow")
 			const comment = ref(null);
 			const name = ref(null);
 			const email = ref(null);

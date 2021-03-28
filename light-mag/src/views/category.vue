@@ -43,12 +43,16 @@
 				try{
 					const res = await getAPI.get("categories/api/v1/"+slug);
 					store.state.APIData = res.data;
+					document.querySelector("head title").textContent = APIData.value.name+" - لایت مگ";
+					document.querySelector("head meta[name='description']").setAttribute("content","توضیحات درباره دسته "+APIData.value.name)
+					document.querySelector("head meta[name='keywords']").setAttribute("content",APIData.value.name)
+
 				}catch(err){
 					console.log(err);
 				}
 			}
-			get_cat(props.catslug)
-			const route = useRoute()
+			get_cat(props.catslug);
+			const route = useRoute();
 			watch(
 				()=> route.params.catslug,
 				newSlug => {

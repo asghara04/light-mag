@@ -46,6 +46,8 @@
 	export default{
 		name: "lmComments",
 		setup(){
+			document.querySelector("head title").textContent = "تغییر کامنت - لایت مگ";
+			document.querySelector("head meta[name='robots']").setAttribute("content","noindex, nofollow")
 			const store = useStore();
 			const APIData = computed(()=>store.state.APIData);
 			const count = ref(0);

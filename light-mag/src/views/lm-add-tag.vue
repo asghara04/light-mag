@@ -15,6 +15,8 @@
 	export default{
 		name: "lmAddTag",
 		setup(){
+			document.querySelector("head title").textContent = "تگ جدید - لایت مگ";
+			document.querySelector("head meta[name='robots']").setAttribute("content","noindex, nofollow")
 			const name = ref(null);
 			const errs = ref({'name':[]});
 			const store = useStore();

@@ -22,6 +22,9 @@
 		name: "userPosts",
 		props: ['username'],
 		setup(props){
+			document.querySelector("head title").textContent = "نوشته های "+props.username+" - لایت مگ";
+			document.querySelector("head meta[name='description']").setAttribute("content","مقالات نوشته شده توسط "+props.username);
+			document.querySelector("head meta[name='keywords']").setAttribute("content","لایت مگ,مجلع آنلاین,اصغر اله,درباره لایت مگ,لایت مگ مجله آنلاین,"+props.username);
 			const store = useStore()
 			const APIData = computed(()=>store.state.APIData);
 			async function get_user(uname){

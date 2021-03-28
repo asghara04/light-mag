@@ -31,6 +31,8 @@
 		name: "lmChangeComment",
 		props: ["compk"],
 		setup(props){
+			document.querySelector("head title").textContent = "تغییر کامنت - لایت مگ";
+			document.querySelector("head meta[name='robots']").setAttribute("content","noindex, nofollow")
 			const article = ref(null);
 			const name = ref(null);
 			const email = ref(null);

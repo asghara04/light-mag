@@ -39,6 +39,10 @@
 			}
 			set_current();
 
+			document.querySelector("head title").textContent = "موضوعات - لایت مگ";
+			document.querySelector("head meta[name='description']").setAttribute("content","موضوعات لایت م، مجله آنلاین")
+			document.querySelector("head meta[name='keywords']").setAttribute("content","لایت مگ,مجلع آنلاین,موضوعات,دسته ها,درباره لایت مگ,لایت مگ مجله آنلاین")
+
 			const store = useStore();
 			const APIData = computed(() => store.state.APIData);
 			async function get_cats(current){

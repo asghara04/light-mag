@@ -24,7 +24,12 @@
 	import sidebar from '../components/sidebar.vue';
 	export default{
 		name: "about",
-		components:{topslider,sidebar}
+		components:{topslider,sidebar},
+		setup(){
+			document.querySelector("head title").textContent = "لایت مگ - درباره";
+			document.querySelector("head meta[name='description']").setAttribute("content","دربار لایت مگ ،مجله آنلاین")
+			document.querySelector("head meta[name='keywords']").setAttribute("content","لایت مگ,مجلع آنلاین,اصغر اله,درباره لایت مگ,لایت مگ مجله آنلاین")
+		}
 	};
 </script>
 <style>

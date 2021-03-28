@@ -31,7 +31,10 @@
 			async function get_subcat(slug,subslug){
 				try{
 					const res = await getAPI.get('categories/sub/api/v1/'+slug+'/'+subslug);
-					subcat.value = res.data
+					subcat.value = res.data;
+					document.querySelector("head title").textContent = subcat.value.name+" - لایت مگ";
+					document.querySelector("head meta[name='description']").setAttribute("content","زیردسته "+subcat.value.name);
+					document.querySelector("head meta[name='keywords']").setAttribute("content",subcat.value.name);
 				}catch(err){
 					console.log(err)
 				}

@@ -28,6 +28,8 @@
 	export default{
 		name: "LmAddSubcat",
 		setup(){
+			document.querySelector("head title").textContent = "زیردسته جدید - لایت مگ";
+			document.querySelector("head meta[name='robots']").setAttribute("content","noindex, nofollow")
 			const category = ref(null);
 			const image = ref(null);
 			const name = ref(null);

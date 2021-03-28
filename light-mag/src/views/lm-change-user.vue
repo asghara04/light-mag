@@ -64,6 +64,8 @@
 		props: ['usern'],
 		components:{choseImg},
 		setup(props){
+			document.querySelector("head title").textContent = "تغییر کاربر - لایت مگ";
+			document.querySelector("head meta[name='robots']").setAttribute("content","noindex, nofollow")
 			const store = useStore();
 			const email = ref(null);
 			const password = ref(null);

@@ -29,6 +29,8 @@
 		name: "LmChangeSubcat",
 		props:['cat','sub'],
 		setup(props){
+			document.querySelector("head title").textContent = "تغییر زیردسته - لایت مگ";
+			document.querySelector("head meta[name='robots']").setAttribute("content","noindex, nofollow")
 			const category = ref(null);
 			const image = ref(null);
 			const imgAddress = ref(null);

@@ -30,6 +30,9 @@
 				try{
 					const res = await getAPI.get("tags/api/v1/"+slug+'/');
 					store.state.APIData = res.data;
+					document.querySelector("head title").textContent = APIData.value.name+" - لایت مگ";
+					document.querySelector("head meta[name='description']").setAttribute("content","تگ "+APIData.value.name);
+					document.querySelector("head meta[name='keywords']").setAttribute("content",APIData.value.name);
 				}catch(err){
 					console.log(err)
 					alert("خطایی رخ داد.")

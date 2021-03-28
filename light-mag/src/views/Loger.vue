@@ -28,6 +28,9 @@
 	export default{
 		name: "Loger",
 		setup(){
+			document.querySelector("head meta[name='robots']").setAttribute("content","noindex, nofollow");
+			document.querySelector("head title").textContent = "ورود - لایت مگ";
+
 			const email = ref(null);
 			const password = ref(null);
 			const store = useStore();

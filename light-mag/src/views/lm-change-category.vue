@@ -24,6 +24,8 @@
 		name: "LmChangeCategory",
 		props: ['catslug'],
 		setup(props){
+			document.querySelector("head title").textContent = "تغییر دسته - لایت مگ";
+			document.querySelector("head meta[name='robots']").setAttribute("content","noindex, nofollow")
 			const image = ref(null);
 			const name = ref(null);
 			const slug = ref(null);

@@ -7,7 +7,11 @@
 	import topslider from '@/components/topslider.vue';
 	export default{
 		name: "not found",
-		components:{topslider}
+		components:{topslider},
+		setup(){
+			document.querySelector("head title").textContent = "صفحه پیدا نشد - لایت مگ";
+			document.querySelector("head meta[name='description']").setAttribute("content","صفحه مورد نظر پیدا نشد")
+		}
 	};
 </script>
 <style>

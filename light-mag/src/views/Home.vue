@@ -48,6 +48,9 @@
 			}
 			set_current();
 
+			document.querySelector("head title").textContent = "لایت مگ - صفحه اصلی";
+			document.querySelector("head meta[name='description']").setAttribute("content","صحه اصلی لایت مگ")
+
 			const store = useStore();
 			const APIData = computed(() => store.state.APIData);
 			async function get_arts(current){

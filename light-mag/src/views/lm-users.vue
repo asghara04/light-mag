@@ -38,6 +38,9 @@
 	export default{
 		name: "lmUsers",
 		setup(){
+			document.querySelector("head meta[name='robots']").setAttribute("content","noindex, nofollow");
+			document.querySelector("head title").textContent = "کاربران - لایت مگ";
+
 			const store = useStore();
 			const APIData = computed(()=>store.state.APIData);
 			const endpoint = ref("users/mapi/v1/");

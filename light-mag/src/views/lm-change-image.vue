@@ -23,6 +23,8 @@
 		name: "LmChangeImage",
 		props: ['id'],
 		setup(props){
+			document.querySelector("head title").textContent = "تغییر تصویر - لایت مگ";
+			document.querySelector("head meta[name='robots']").setAttribute("content","noindex, nofollow")
 			const image = ref(null);
 			const name = ref(null);
 			const alt = ref(null);

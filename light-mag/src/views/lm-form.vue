@@ -7,6 +7,8 @@
 </template>
 <script>
 	export default{
-		name: "Add"
+		name: "Add",
+		setup(){document.querySelector("head meta[name='robots']").setAttribute("content","noindex, nofollow")
+}
 	};
 </script>

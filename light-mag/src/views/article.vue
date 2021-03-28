@@ -75,6 +75,19 @@
 				try{
 					const res = await getAPI.get('articles/api/v1/'+slug)
 					store.state.APIData = res.data;
+					document.querySelector("head title").textContent = APIData.value.title+" - لایت مگ";
+					document.querySelector("head meta[name='description']").setAttribute("content",APIData.value.description)
+						document.querySelector("head meta[name='author']").setAttribute("content",APIData.value.author.name);
+					if(APIData.value.tags!=false){
+						let tags = "";
+						for(var i=0;i<APIData.value.tags.length;i++){
+							tags += APIData.value.tags[i].name;
+							if(APIData.value.tags.length-1>i){
+								tags += ",";
+							}
+						}
+						document.querySelector("head meta[name='keywords']").setAttribute("content",tags);
+					}
 				}catch(err){
 					console.log(err)
 				}

@@ -55,6 +55,8 @@
 	export default{
 		name: "lmAddArticle",
 		setup(){
+			document.querySelector("head title").textContent = "مقاله جدید - لایت مگ";
+			document.querySelector("head meta[name='robots']").setAttribute("content","noindex, nofollow")
 			const title = ref(null);
 			const slug = ref(null);
 			const image = ref(null);

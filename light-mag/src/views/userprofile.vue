@@ -58,9 +58,18 @@
 			const APIData = computed(()=> store.state.APIData);
 
 			async function get_user(username){
-				await getAPI.get("users/api/v1/"+username+'/')
-				.then(res => store.state.APIData = res.data)
-				.catch(err => console.log(err))
+				try{
+					const res = await getAPI.get("users/api/v1/"+username+'/');
+					store.state.APIData = res.data;
+					document.querySelector("head title").textContent = APIData.value.name+" - لایت مگ";
+					if(APIData.value.about){
+						document.querySelector("head meta[name='description']").setAttribute("content",APIData.value.about);
+					}
+					document.querySelector("head meta[name='keywords']").setAttribute(`${APIData.value.name},${APIData.value.username}`);
+					document.querySelector("head meta[name='author']").setAttribute("content",APIData.value.name);
+				}catch(err){
+					console.log(err);
+				}
 			}
 			get_user(props.username);
 

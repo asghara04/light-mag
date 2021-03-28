@@ -13,6 +13,11 @@
 	import sidebar from '@/components/sidebar.vue';
 	export default{
 		name: 'contact',
-		components:{topslider,sidebar}
+		components:{topslider,sidebar},
+		setup(){
+			document.querySelector("head title").textContent = "ارتباط با لایت مگ";
+			document.querySelector("head meta[name='description']").setAttribute("content","ارتباط با مجله آنلاین لایت مگ")
+			document.querySelector("head meta[name='keywords']").setAttribute("content","لایت مگ,مجلع آنلاین,ارتباط,درباره لایت مگ,لایت مگ مجله آنلاین")
+		}
 	};
 </script>

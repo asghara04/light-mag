@@ -63,6 +63,8 @@
 		name: "lmAddUser",
 		components:{choseImg},
 		setup(){
+			document.querySelector("head title").textContent = "کاربر جدید - لایت مگ";
+			document.querySelector("head meta[name='robots']").setAttribute("content","noindex, nofollow")
 			const email = ref(null);
 			const password = ref(null);
 			const username = ref(null);

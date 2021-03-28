@@ -16,6 +16,8 @@
 		name: "lmChangeTag",
 		props:['tagslug'],
 		setup(props){
+			document.querySelector("head title").textContent = "تغییر تگ - لایت مگ";
+			document.querySelector("head meta[name='robots']").setAttribute("content","noindex, nofollow")
 			const name = ref(null);
 			const store = useStore();
 			const router = useRouter();

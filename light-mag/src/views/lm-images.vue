@@ -33,6 +33,8 @@
 		name: 'lm-images',
 		props: ["page"],
 		setup(props){
+			document.querySelector("head meta[name='robots']").setAttribute("content","noindex, nofollow");
+			document.querySelector("head title").textContent = "تصاویر - لایت مگ";
 			const current = ref(1);
 			const size = ref(10);
 			const store = useStore();

@@ -36,6 +36,7 @@
 	export default{
 		name: "LmCategory",
 		setup(){
+			document.querySelector("head meta[name='robots']").setAttribute("content","noindex, nofollow")
 			const route = useRoute();
 			const store = useStore();
 			const APIData = computed(() => store.state.APIData);
@@ -46,6 +47,7 @@
 					const res = await getAPI.get("categories/api/v1/"+slug, {headers:{Authorization: `JWT ${store.state.accessToken}`}});
 					store.state.APIData = res.data;
 					endpoint.value = "categories/subs/api/v1/"+APIData.value.id+'/?page=1';
+					document.querySelector("head title").textContent = APIData.value.name+" - لایت مگ";
 				}catch(err){
 					alert("خطایی رخ داد.")
 					console.log(err)

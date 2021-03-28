@@ -3,6 +3,10 @@
 </template>
 <script>
 	export default{
-		name: "lmSettings"
+		name: "lmSettings",
+		setup(){
+			document.querySelector("head meta[name='robots']").setAttribute("content","noindex, nofollow");
+			document.querySelector("head title").textContent = "تنظیمات - لایت مگ";
+		}
 	};
 </script>

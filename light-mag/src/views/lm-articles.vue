@@ -37,6 +37,8 @@
 	export default{
 		name: "lm-articles",
 		setup(){
+			document.querySelector("head title").textContent = "مقالات - لایت مگ";
+			document.querySelector("head meta[name='robots']").setAttribute("content","noindex, nofollow")
 			const store = useStore();
 			const APIData = computed(()=>store.state.APIData);
 			const endpoint = ref("articles/mapi/v1/?page=1");

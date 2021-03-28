@@ -34,6 +34,8 @@
 		name: "lmCategories",
 		props: {"page":Number},
 		setup(props){
+			document.querySelector("head title").textContent = "دسته ها - لایت مگ";
+			document.querySelector("head meta[name='robots']").setAttribute("content","noindex, nofollow")
 			const current = ref(1);
 			const size = ref(10);
 			const store = useStore();
