@@ -28,7 +28,7 @@
 		setup(){
 			document.querySelector("head title").textContent = "لایت مگ - درباره";
 			document.querySelector("head meta[name='description']").setAttribute("content","دربار لایت مگ ،مجله آنلاین")
-			document.querySelector("head meta[name='keywords']").setAttribute("content","لایت مگ,مجلع آنلاین,اصغر اله,درباره لایت مگ,لایت مگ مجله آنلاین")
+			document.querySelector("head meta[name='keywords']").setAttribute("content","لایت مگ,مجله آنلاین,اصغر اله,درباره لایت مگ,لایت مگ مجله آنلاین")
 		}
 	};
 </script>

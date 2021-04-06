@@ -30,7 +30,7 @@
 
 			document.querySelector("head title").textContent = "جستوجو - لایت مگ";
 			document.querySelector("head meta[name='description']").setAttribute("content","جستوجو در لایت مگ")
-			document.querySelector("head meta[name='keywords']").setAttribute("content","لایت مگ,مجلع آنلاین,جستوجو,درباره لایت مگ,لایت مگ مجله آنلاین")
+			document.querySelector("head meta[name='keywords']").setAttribute("content","لایت مگ,مجله آنلاین,جستوجو,درباره لایت مگ,لایت مگ مجله آنلاین")
 			watch(
 				()=>route.query.q,
 				newQ=>{

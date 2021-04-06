@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '   8#ues\'|k%}6ZkR9vKUob>MJ_(UPP/f].X&r4bN=#I5tZ{zn2FY\'@F3_B8:"<4A#2#0@pRi?Fw2TLvP5@IQoal?q"Z}ccaff2w\'!+Sr";9|&rn>xT==}$=/LfWVW3c\'G?&,qD:TY>Fq[8/z0b[(uQ\   OgD.|!a,pQ2yckRShF=T^$?IB7Dp3`:R4\'~_:]U?0y+K#ZDSx>]0kP{F/=h6Xlu4)?\';2$P-W0xXaY8X&bl`8(kLQ@=1m~8aOFeZA17pHfzO+&8!~Oc(RLf$eZ*etET>rp~2H!(!#qUM\@}_m%  =*[=)9N&&#o^K(q|l{Ww   yy$BGjlUhNcQjdc1v"#Wd]FuG33T$poE&}D'
+SECRET_KEY = '. }rA\ `Uv @a@ v:GTT`u7w=rxZrUl$h{#T[`SzZmU,2BOq0+DlL@>8|H1G`%t)5OSzf~i9f\    dYj?j?0.WBm$N"dJI1?=^Ya.<23Zk5?b#AHb7Nq!*O+aA%   o$seG:jsmP>.!z{\'sXBKK<`]w0gX$-3_yfP3d`k^Q2i@=psT<L6X~mr$%V1LTG,jUt#H5~r,~TU~"]KA|c1pa/"H:z"+QK{Dlwsq_}F-\']@KzO&Zz+9bxb;p8#?OTi<&+zX9I=bOGns_^}w%T>woo}Am8=|iIUT29>|Gx6)Rw`Go3\jFMU2$\'n[HWJKF+h]BO=]o%/,&-2?6~lH9`X8=\'1!|&k^t.96~VO7GIZ4s|h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -95,15 +95,15 @@ REST_FRAMEWORK = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'mysql.connector.django',
         'NAME': 'lightmagdb',
         'USER': 'asghara04',
         'PASSWORD': 'asghara04 a20041383',
         'HOST': '127.0.0.1',
         'PORT': "3306",
         'OPTIONS': {
-            'charset': 'utf8mb4',
-            'use_unicode': True
+            'use_unicode': True,
+            # 'charset': 'utf8mb4',
         }
     }
 }
