@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from image.models import Image
 from category.models import Category, SubCat
 from user.models import User
@@ -22,7 +23,7 @@ class Article(models.Model):
 	description = models.TextField(max_length=200)
 	body = models.TextField(max_length=360000)
 	date = models.DateTimeField(auto_now_add=True)
-	publish_date = models.DateTimeField(auto_now=True)
+	publish_date = models.DateTimeField(default=timezone.now)
 	category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
 	subcat = models.ForeignKey(SubCat, on_delete=models.SET_NULL, null=True, blank=True)
 	tags = models.ManyToManyField(Tag, blank=True)

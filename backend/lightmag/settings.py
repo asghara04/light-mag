@@ -95,7 +95,7 @@ REST_FRAMEWORK = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql.connector.django',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'lightmagdb',
         'USER': 'asghara04',
         'PASSWORD': 'asghara04 a20041383',
@@ -103,7 +103,6 @@ DATABASES = {
         'PORT': "3306",
         'OPTIONS': {
             'use_unicode': True,
-            # 'charset': 'utf8mb4',
         }
     }
 }
@@ -156,3 +155,5 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': timedelta(hours=1),
     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=2),
 }
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

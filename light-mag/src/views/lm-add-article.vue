@@ -131,7 +131,7 @@
 						if(subcat.value){
 							fd['subcat'] = {name: subcat.value}
 						}
-						if(ts.value!=false){
+						if(ts.value){
 							tags.value = ts.value.split(",");
 							for(var i=0;i<tags.value.length;i++){
 								tags.value[i] = {name: tags.value[i], slug: tags.value[i].replace(" ","-")}
@@ -147,12 +147,12 @@
 					}catch(err){
 						console.log(err)
 						if(err.response.status===400){
-							if(err.response.data.title!=false){
+							if(err.response.data.title){
 								for(var a=0;a<err.response.data.title.length;a++){
 									errs.value.title.push(err.response.data.title[a]);
 								}
 							}
-							if(err.response.data.slug!=false){
+							if(err.response.data.slug){
 								for(var s=0;s<err.response.data.slug.length;s++){
 									errs.value.slug.push(err.response.data.slug[s]);
 								}

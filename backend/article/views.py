@@ -86,6 +86,7 @@ class MArticlesView(APIView,PaginationMixin):
 			serializer = MArticleSerializer(arts,many=True,context={"request":request})
 		return Response(serializer.data,status=status.HTTP_200_OK)
 	def post(self, request):
+		print("hello\a")
 		serializer = MArticleSerializer(data=request.data, partial=True, context={"request":request})
 		if serializer.is_valid():
 			if uniqueTitle(request.data['title']) and uniqueSlug(request.data['slug']):
