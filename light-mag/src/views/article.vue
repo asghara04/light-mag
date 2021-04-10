@@ -22,6 +22,16 @@
 				</div>
 				<!-- related article like a card slider or like movie websites top -->
 			</article>
+			<div v-if="rel_arts!=false" class="ed-bk">
+				<br>
+				<h3 class="cen">مطالب مرتبط</h3>
+				<div class="medium-list">
+					<div v-for="art in rel_arts" :key="art.id" class="art">
+						<h2><router-link :to="{name:'article', params:{artslug: art.slug}}" :name="art.title" :rel="art.title">{{art.title}}</router-link></h2>
+						<router-link :to="{name:'article', params:{artslug: art.slug}}" :name="art.title" :rel="art.title"><img v-if="art.image" :src="art.image.image" :name="art.image.name" :alt="art.image.alt"></router-link>
+					</div>
+				</div>
+			</div>
 			<div class="ed-bk comments">
 				<comments v-if="APIData.coms" :key="artslug" :id="APIData.id"/>
 				<p v-else class="cen blue-text">هنوز کامنتی ثبت نشده، میتونی اولی باشی :)</p>
@@ -88,6 +98,7 @@
 						}
 						document.querySelector("head meta[name='keywords']").setAttribute("content",tags);
 					}
+					get_rels(APIData.value.id)
 				}catch(err){
 					console.log(err)
 				}
@@ -179,6 +190,16 @@
 				}	
 			}
 
+			const rel_arts = ref(false);
+			async function get_rels(id){
+				try{
+					const res = await getAPI.get("articles/related/api/v1/"+id+'/')
+					rel_arts.value = res.data;
+				}catch(err){
+					console.log("مطلب مرتبطی وجوپن دارد.")
+					console.log(err)
+				}
+			}
 			watch(
 				() => route.params.artslug,
 				newSlug => {
@@ -188,11 +209,12 @@
 				}
 			)
 
-			return{APIData, focus, name, email, message, personal, focused, commentsub, errs}
+			return{APIData, focus, name, email, message, personal, focused, commentsub, errs, rel_arts}
 		}
 	};
 </script>
 <style>
 	@import '../assets/article.css';
 	@import '../assets/form.css';
+	@import '../assets/medium-list.css';
 </style>

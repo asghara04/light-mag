@@ -1,7 +1,8 @@
 import axios from 'axios';
 import store from '@/store.js';
 import router from '@/router/index.js';
-const base_url = 'https://ubuntuarchpaperfriendspals-lightmag.ir/';
+// const base_url = 'https://ubuntuarchpaperfriendspals-lightmag.ir/';
+const base_url = 'http://127.0.0.1:8000/';
 const getAPI = axios.create({
 	baseURL: base_url
 })

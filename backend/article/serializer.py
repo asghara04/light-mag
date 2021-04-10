@@ -95,16 +95,3 @@ class MinArticleSerializer(serializers.Serializer):
 	jpub_date = serializers.DateTimeField(read_only=True)
 	author = MinUserSerializer(read_only=True)
 	coms = serializers.IntegerField(read_only=True)
-
-{
-	"tags":[
-		{
-		"name": "hi",
-		"slug": "hi"
-		},
-		{
-		"name": "tiiip",
-		"slug": "tiiip"
-		}
-	]
-}

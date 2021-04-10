@@ -2,8 +2,8 @@
 	<div v-if="APIData" id="categories">
 		<div class="medium-list page">
 			<article v-for="(cat, i) in APIData.results" :key="i" :title="cat.name" class="art">
-				<router-link :to="'/categories/'+cat.slug">
-					<h2>{{cat.name}}</h2>
+				<h2><router-link :to="'/categories/'+cat.slug" :rel="cat.name" :name="cat.name">{{cat.name}}</router-link></h2>
+				<router-link :to="'/categories/'+cat.slug" :rel="cat.name">
 					<img v-if="cat.image" :src="cat.image.image" :name="cat.image.name" :alt="cat.image.alt">
 				</router-link>
 			</article>

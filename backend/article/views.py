@@ -10,6 +10,8 @@ from lightmag.pagination import PaginationMixin
 from rest_framework.renderers import JSONRenderer
 from django.db.models import Count,Q
 from tag.models import Tag
+import operator
+from functools import reduce
 
 class ArticlesView(APIView, PaginationMixin):
 	pagination_class = PageNumberPagination()
@@ -86,7 +88,6 @@ class MArticlesView(APIView,PaginationMixin):
 			serializer = MArticleSerializer(arts,many=True,context={"request":request})
 		return Response(serializer.data,status=status.HTTP_200_OK)
 	def post(self, request):
-		print("hello\a")
 		serializer = MArticleSerializer(data=request.data, partial=True, context={"request":request})
 		if serializer.is_valid():
 			if uniqueTitle(request.data['title']) and uniqueSlug(request.data['slug']):
@@ -195,3 +196,31 @@ class UserArtsView(APIView,PaginationMixin):
 		else:
 			serializer = MinArticleSerializer(arts,many=True,context={"request":request})
 		return Response(serializer.data,status=status.HTTP_200_OK)
+
+
+class RelArts(APIView):
+	renderer_classes = (JSONRenderer,)
+	def getter(self, pk):
+		try:
+			return Article.published.get(id=pk)
+		except:
+			raise Http404
+
+	def get(self, request, pk):
+		art = self.getter(pk)
+		n = 6
+
+		if art.subcat:
+			rel_arts = Article.published.filter(subcat__name=art.subcat.name)[:n]
+		elif art.category:
+			rel_arts = Article.published.filter(category__name=art.category.name)[:n]
+		elif art.tags.count():
+			rel_arts = Article.published.annotate(Count("tags"))[:n]
+		else:
+			title = art.title.split(" ")
+			rel_arts = Article.published.filter(reduce(operator.and_, (Q(title__contains=word) for word in title)))[:n]
+
+		rel_arts = list(filter(lambda i: i.id!=art.id, rel_arts))
+
+		serializer = MinArticleSerializer(rel_arts, many=True, context={"request":request})
+		return Response(serializer.data, status=status.HTTP_200_OK)
