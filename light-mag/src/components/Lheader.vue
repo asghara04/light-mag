@@ -3,7 +3,7 @@
 		<div id="top-header">
 			<div id="lightmag-head">
 				<h1><router-link :to="{name: 'Home'}" rel="لایت مگ" name="لایت مگ">لایت مگ</router-link></h1>
-				<h2>لایت مگ, مجله ای برای تازش با نور!</h2>
+				<h2>توی نور باشیم!</h2>
 			</div>
 			<div class="add"></div>
 		</div>
