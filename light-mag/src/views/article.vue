@@ -1,6 +1,7 @@
 <template>
 	<div id="page" class="page">
 		<div class="right">
+			<div id='mediaad-YPsp'></div>
 			<article class="ed-bk" v-if="APIData">
 				<div><router-link to="/" name="لایت مگ" rel="لایت مگ" class="link-like">صفحه اصلی</router-link> >  <span v-if="APIData.category"><router-link :to="{name: 'category',params:{catslug:APIData.category.slug}}">{{APIData.category.name}}</router-link> > </span><span v-if="APIData.subcat"><span v-if="!APIData.category"><span>{{APIData.subcat.category}}</span> > <span>{{APIData.subcat.name}}</span></span><span v-else><router-link :to="{name:'subcat',params:{catslug:APIData.category.slug,subcatname:APIData.subcat.slug}}">{{APIData.subcat.name}}</router-link></span> > </span><router-link :to="{name:'article',params:{artslug:APIData.slug}}">{{APIData.title}}</router-link></div>
 				<h1 class="art-h"><router-link :to="'/article/'+APIData.slug">{{APIData.title}}</router-link></h1>
@@ -53,7 +54,7 @@
 				</form>
 			</div>
 			<div class="ed-bk tag-island" v-if="APIData.tags!=false">
-				<router-link v-for="(tag,i) in APIData.tags" :key="i" :to="{name: 'tag-page',params:{tagslug: tag.slug}}" class="tag-like">{{tag.name}}</router-link>
+				<router-link v-for="(tag,i) in APIData.tags" :key="i" :to="{name: 'tag-page',params:{tagslug: tag.slug}}" class="tag-like"> {{tag.name}} </router-link>
 			</div>
 		</div>
 		<sidebar/>
@@ -196,7 +197,7 @@
 					const res = await getAPI.get("articles/related/api/v1/"+id+'/')
 					rel_arts.value = res.data;
 				}catch(err){
-					console.log("مطلب مرتبطی وجوپن دارد.")
+					console.log("مطلب مرتبطی وجود دارد.")
 					console.log(err)
 				}
 			}

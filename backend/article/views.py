@@ -204,6 +204,7 @@ class RelArts(APIView):
 		try:
 			return Article.published.get(id=pk)
 		except:
+			print("hollaooooooooooooooooooooo")
 			raise Http404
 
 	def get(self, request, pk):

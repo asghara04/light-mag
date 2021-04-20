@@ -10,6 +10,7 @@
 				<p>{{art.description}}</p>
 			</div>
 		</article>
+		<article class="topslide"><div id='mediaad-swoH'></div></article>
 	</div>
 </template>
 <script>

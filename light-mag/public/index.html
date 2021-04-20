@@ -10,10 +10,27 @@
     <meta name="robots" content="index, follow">
     <meta name="keywords" content="لایت مگ,مجاه آنلاین,مجله,مجله لایت مگ">
     <meta name="author" name="اصغر اله">
+    <script type="text/javascript">
+    (function(){
+        var now = new Date();
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.async = true;
+        var script_address = 'https://cdn.yektanet.com/js/light-mag.ir/native-light-mag.ir-17396.js';
+        script.src = script_address + '?v=' + now.getFullYear().toString() + '0' + now.getMonth() + '0' + now.getDate() + '0' + now.getHours();
+        head.appendChild(script);
+        })();
+        var head = document.getElementsByTagName("head")[0];
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.async=1;
+        script.src = "https://s1.mediaad.org/serve/light-mag.ir/loader.js" ;
+        head.appendChild(script);
+    </script>
   </head>
   <body>
     <noscript>
-      <strong>متاسفایم ولی لایت نگ بدون فعال بودن جاوااسکریپت مرورگرتان پاسخ نمیدهد، لطفا جاوااسکریپت مرورگرتان را فعال کنید.</strong>
+      <strong>متاسفایم ولی لایت مگ بدون فعال بودن جاوااسکریپت مرورگرتان پاسخ نمیدهد، لطفا جاوااسکریپت مرورگرتان را فعال کنید.</strong>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>

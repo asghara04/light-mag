@@ -2,7 +2,7 @@
 	<div id="page" class="page">
 		<div class="right">
 			<div class="search-div ed-bk">
-				<h2 class="cen">جستوجو در لایت مگ</h2>
+				<h2 class="cen">جستجو در لایت مگ</h2>
 				<form class="q-form">
 					<input type="search" name="q" class="q-field" maxlength="100" autofocus="" v-model="q">
 					<button class="q-button"><img src="../assets/imgs/search.svg"></button>
@@ -28,9 +28,9 @@
 			const route = useRoute();
 			const q = ref(route.query.q);
 
-			document.querySelector("head title").textContent = "جستوجو - لایت مگ";
-			document.querySelector("head meta[name='description']").setAttribute("content","جستوجو در لایت مگ")
-			document.querySelector("head meta[name='keywords']").setAttribute("content","لایت مگ,مجله آنلاین,جستوجو,درباره لایت مگ,لایت مگ مجله آنلاین")
+			document.querySelector("head title").textContent = "جستجو - لایت مگ";
+			document.querySelector("head meta[name='description']").setAttribute("content","جستجو در لایت مگ")
+			document.querySelector("head meta[name='keywords']").setAttribute("content","لایت مگ,مجله آنلاین,جستجو,درباره لایت مگ,لایت مگ مجله آنلاین")
 			watch(
 				()=>route.query.q,
 				newQ=>{

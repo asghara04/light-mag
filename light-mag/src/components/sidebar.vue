@@ -6,6 +6,8 @@
 				<router-link v-if="art.image" :to="{name: 'article',params:{artslug: art.slug}}"><img :src="art.image.image" :alt="art.image.alt" :name="art.image.name"></router-link>
 				<h3><router-link :to="{name: 'article',params:{artslug: art.slug}}">{{art.title}}</router-link></h3>
 			</div>
+			<div id='mediaad-HZkZ'></div>
+			<div id="pos-article-display-sticky-23060"></div>
 		</div>
 		<div class="cen">
 			<a href="https://linuxstory.ir" target="_blank"><img src="../assets/imgs/add.gif"></a>

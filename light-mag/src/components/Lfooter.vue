@@ -13,6 +13,7 @@
 			<p>توسعه دهنده و برنامه نویس <strong>اصغر اله</strong></p>
 		</div>
 		<p class="name">&#169; <strong>لایت مگ</strong> 2021</p>
+		<div id='mediaad-wGUw'></div>
 	</footer>
 </template>
 

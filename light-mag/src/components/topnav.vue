@@ -13,7 +13,7 @@
 
 		<img v-if="avragescreen||smallscreen" class="imgbutton" src="../assets/imgs/search.svg" @click.prevent="search()">
 		<form :class="{'block':showsearch}" id="search-form" @submit.prevent="q()">
-			<input type="search" required="" maxlength="100" placeholder="جستوجو..." name="q" class="search-field">
+			<input type="search" required="" maxlength="100" placeholder="جستجو..." name="q" class="search-field">
 			<button type="submit" class="search-button"><img src="../assets/imgs/search.svg"></button>
 		</form>
 	</nav>
