@@ -1,7 +1,6 @@
 <template>
 	<div id="page" class="page">
 		<div class="right">
-			<div id='mediaad-YPsp'></div>
 			<article class="ed-bk" v-if="APIData">
 				<div><router-link to="/" name="لایت مگ" rel="لایت مگ" class="link-like">صفحه اصلی</router-link> >  <span v-if="APIData.category"><router-link :to="{name: 'category',params:{catslug:APIData.category.slug}}">{{APIData.category.name}}</router-link> > </span><span v-if="APIData.subcat"><span v-if="!APIData.category"><span>{{APIData.subcat.category}}</span> > <span>{{APIData.subcat.name}}</span></span><span v-else><router-link :to="{name:'subcat',params:{catslug:APIData.category.slug,subcatname:APIData.subcat.slug}}">{{APIData.subcat.name}}</router-link></span> > </span><router-link :to="{name:'article',params:{artslug:APIData.slug}}">{{APIData.title}}</router-link></div>
 				<h1 class="art-h"><router-link :to="'/article/'+APIData.slug">{{APIData.title}}</router-link></h1>
@@ -33,6 +32,7 @@
 					</div>
 				</div>
 			</div>
+			<div id='mediaad-YPsp'></div>
 			<div class="ed-bk comments">
 				<comments v-if="APIData.coms" :key="artslug" :id="APIData.id"/>
 				<p v-else class="cen blue-text">هنوز کامنتی ثبت نشده، میتونی اولی باشی :)</p>

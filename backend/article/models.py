@@ -21,7 +21,7 @@ class Article(models.Model):
 	slug = models.SlugField(max_length=120, unique=True)
 	image = models.ForeignKey(Image, on_delete=models.SET_NULL, null=True, blank=True)
 	description = models.TextField(max_length=200)
-	body = models.TextField(max_length=360000)
+	body = models.TextField(max_length=999999)
 	date = models.DateTimeField(auto_now_add=True)
 	publish_date = models.DateTimeField(default=timezone.now)
 	category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)

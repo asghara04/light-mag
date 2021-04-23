@@ -5,7 +5,7 @@
 				<h1><router-link :to="{name: 'Home'}" rel="لایت مگ" name="لایت مگ">لایت مگ</router-link></h1>
 				<h2>توی نور باشیم!</h2>
 			</div>
-			<div id='mediaad-kxaI'></div>
+			<div></div>
 		</div>
 
 		<nav v-if="cats">

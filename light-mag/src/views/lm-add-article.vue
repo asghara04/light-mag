@@ -16,8 +16,13 @@
 		<textarea name="description" maxlength="200" class="data-field" v-model="description"></textarea>
 		<label for="body">بدنه: </label>
 		<span v-if="errs.body!=false"><p v-for="(err,i) in errs.body" :key="i" class="red-text">* {{err}}</p></span>
+		
+
 		<!-- tiptap2 later -->
-		<textarea name="body" maxlength="360000" class="data-field" v-model="body"></textarea>
+		<Tiptap v-model="body"/>
+
+
+		<!-- <textarea name="body" maxlength="360000" class="data-field" v-model="body"></textarea> -->
 		<label for="category">دسته: </label>
 		<span v-if="errs.category!=false"><p v-for="(err,i) in errs.category" :key="i" class="red-text">* {{err}}</p></span>
 		<select name="category" class="data-field" v-model="category" size="4" @change.prevent="set_subs()">
@@ -52,8 +57,10 @@
 	import {getAPI} from '@/axios.js';
 	import {useStore} from 'vuex';
 	import {useRouter} from 'vue-router';
+	import Tiptap from '@/components/Tiptap.vue';
 	export default{
 		name: "lmAddArticle",
+		components:{choseImg,Tiptap},
 		setup(){
 			document.querySelector("head title").textContent = "مقاله جدید - لایت مگ";
 			document.querySelector("head meta[name='robots']").setAttribute("content","noindex, nofollow")
@@ -250,8 +257,7 @@
 				}
 			}
 			return{title,slug,set_img,imgAddress,description,body,category,subcat,ts,status,author,errs,cats,set_subs,subs,users,sub}
-		},
-		components:{choseImg}
+		}
 	};
 </script>
 <style>

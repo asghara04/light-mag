@@ -16,7 +16,7 @@
 		<textarea name="description" class="data-field" maxlength="200" required="" v-model="description"></textarea>
 		<label for="body">بدنه: </label>
 		<span v-if="errs.body!=false"><p v-for="(err,i) in errs.body" :key="i" class="red-text">* {{err}}</p></span>
-		<textarea name="body" class="data-field" maxlength="360000" required="" v-model="body"></textarea>
+		<Tiptap v-model='body'/>
 		<label for="category">دسته: </label>
 		<span v-if="errs.category!=false"><p v-for="(err,i) in errs.category" :key="i" class="red-text">* {{err}}</p></span>
 		<select name="category" class="data-field" v-model="category" size="4" @change.prevent="set_subs()">
@@ -51,10 +51,11 @@
 	import {useStore} from 'vuex';
 	import {useRoute,useRouter} from 'vue-router';
 	import choseImg from '@/components/choseImg.vue';
+	import Tiptap from '@/components/Tiptap.vue';
 	export default{
 		name:"lmChangeArticle",
 		props: ['pk'],
-		components:{choseImg},
+		components:{choseImg,Tiptap},
 		setup(props){
 			document.querySelector("head title").textContent = "تغییر مقاله - لایت مگ";
 			document.querySelector("head meta[name='robots']").setAttribute("content","noindex, nofollow")
