@@ -5,6 +5,7 @@ class Category(models.Model):
 	image = models.ForeignKey(Image, on_delete=models.SET_NULL, null=True)
 	name = models.CharField(max_length=25, unique=True)
 	slug = models.SlugField(max_length=25, unique=True)
+	description = models.TextField(max_length=135, blank=True, null=True)
 
 	def __str__(self):
 		return self.name
@@ -17,6 +18,8 @@ class SubCat(models.Model):
 	image = models.ForeignKey(Image, on_delete=models.SET_NULL, null=True)
 	name = models.CharField(max_length=25)
 	slug = models.SlugField(max_length=25)
+	description = models.TextField(max_length=135, blank=True, null=True)
+
 
 	unique_together = ("categpry", "name")
 

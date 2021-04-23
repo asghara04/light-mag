@@ -30,6 +30,8 @@ class Article(models.Model):
 	status = models.CharField(max_length=8, choices=STATUSES)
 	author = models.ForeignKey(User, on_delete=models.SET_DEFAULT,related_name='arts',default="asghar")
 
+	read_time_m = models.IntegerField(default=3)
+
 	objects = models.Manager()
 	published = Published()
 

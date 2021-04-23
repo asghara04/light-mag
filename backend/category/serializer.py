@@ -11,6 +11,9 @@ class SubCatSerializer(serializers.Serializer):
 	name = serializers.CharField(max_length=25)
 	slug = serializers.SlugField(max_length=25)
 
+	# read_only setted becouse i cannot change the front-end forms yet
+	description = serializers.CharField(max_length=135, allow_null=True, read_only=True)
+
 	def validate_image(self, value):
 		return get_object_or_404(Image, name=value["name"])
 	def create(self, validated_data):
@@ -36,6 +39,9 @@ class CategorySerializer(serializers.Serializer):
 	image = ImageSerializer()
 	name = serializers.CharField(max_length=25)
 	slug = serializers.SlugField(max_length=25)
+
+	# read_only setted becouse i cannot change the front-end forms yet
+	description = serializers.CharField(max_length=135, allow_null=True, read_only=True)
 
 	def validate_image(self, value):
 		return get_object_or_404(Image, name=value['name'])

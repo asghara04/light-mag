@@ -25,6 +25,8 @@ class ArticleSerializer(serializers.Serializer):
 	coms = serializers.IntegerField(read_only=True)
 	author = MinUserSerializer(read_only=True)
 
+	read_time_m = serializers.IntegerField(read_only=True)
+
 
 class MArticleSerializer(serializers.Serializer):
 	id = serializers.IntegerField(read_only=True)
