@@ -1,5 +1,5 @@
 .DS_Store
-/old-light-mag
+old-light-mag/
 ./old-light-mag
-./backend/media
-./lightmag/node_modules
+backend/media/
+lightmag/node_modules/
