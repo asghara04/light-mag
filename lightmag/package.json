@@ -31,5 +31,5 @@
     "eslint-plugin-vue": "^7.0.0-0",
     "vue-jest": "^5.0.0-0"
   },
-  "description": "An Ionic project"
+  "description": "Light Magazine, an online magazine app"
 }
