@@ -1,3 +1,4 @@
 .DS_Store
-./light-mag/node_modules
+./old-light-mag/
 ./backend/media/
+./lightmag/node_modules/

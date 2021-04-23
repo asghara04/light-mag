@@ -1,0 +1,7 @@
+{
+  "name": "lightmag",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
