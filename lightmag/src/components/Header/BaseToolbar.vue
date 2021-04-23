@@ -15,9 +15,10 @@
 	</ion-toolbar>
 </template>
 <script>
+	import {defineComponent} from 'vue';
 	import {IonToolbar, IonTitle, IonButtons, IonButton, IonIcon} from '@ionic/vue';
 
-	export default{
+	export default defineComponent({
 		name: "BaseToolbar",
 		props: ["PageTitle"],
 		components:{
@@ -27,5 +28,5 @@
 			IonButton,
 			IonIcon
 		}
-	};
+	});
 </script>
