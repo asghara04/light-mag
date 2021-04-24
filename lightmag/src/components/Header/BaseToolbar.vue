@@ -1,22 +1,26 @@
 <template>
 	<ion-toolbar>
-		<ion-buttons slot="start">
+		<ion-buttons :collapse="true" slot="start">
 			<ion-button>
-				<ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+				<ion-icon slot="icon-only" :icon="menu"></ion-icon>
 			</ion-button>
 		</ion-buttons>
-		<ion-title>لایت مگ</ion-title>
-		<ion-Title v-if="PageTitle" size="small">{{PageTitle}}</ion-Title>
-		<ion-buttons slot="end">
+		<ion-title>
+			LM Light Mag
+		</ion-title>
+		<ion-img></ion-img>
+		<ion-title v-if="PageTitle" size="small">{{PageTitle}}</ion-title>
+		<ion-buttons :collapse="true" slot="end">
 			<ion-button>
-				<ion-icon slot="icon-only" name="search-outline"></ion-icon>
+				<ion-icon slot="icon-only" :icon="search"></ion-icon>
 			</ion-button>
 		</ion-buttons>
 	</ion-toolbar>
 </template>
 <script>
 	import {defineComponent} from 'vue';
-	import {IonToolbar, IonTitle, IonButtons, IonButton, IonIcon} from '@ionic/vue';
+	import {IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, IonImg} from '@ionic/vue';
+	import {menu, search} from 'ionicons/icons';
 
 	export default defineComponent({
 		name: "BaseToolbar",
@@ -26,7 +30,14 @@
 			IonTitle,
 			IonButtons,
 			IonButton,
-			IonIcon
+			IonIcon,
+			IonImg
+		},
+		setup(){
+			return{
+				menu,
+				search
+			}
 		}
 	});
 </script>

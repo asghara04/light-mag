@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Light Magazine</string>
+    <string name="title_activity_main">Light Magazine</string>
+    <string name="package_name">ir.LightMag.LightMagazine</string>
+    <string name="custom_url_scheme">ir.LightMag.LightMagazine</string>
+</resources>

@@ -10,13 +10,14 @@
 	import {defineComponent} from 'vue';
 	import {IonPage, IonContent} from '@ionic/vue';
 	import BaseHeader from '../Header/BaseHeader.vue';
+
 	export default defineComponent({
 		name: "BaseLayout",
 		props: ["PageTitle"],
 		components:{
 			IonPage,
 			BaseHeader,
-			IonContent
+			IonContent,
 		}
 	});
 </script>
