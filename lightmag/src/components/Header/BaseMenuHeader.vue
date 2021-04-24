@@ -1,18 +1,18 @@
 <template>
 	<ion-header>
-		<base-toolbar :PageTitle="PageTitle"></base-toolbar>
+		<base-menu-toolbar></base-menu-toolbar>
 	</ion-header>
 </template>
 <script>
 	import {defineComponent} from 'vue';
 	import {IonHeader} from '@ionic/vue';
-	import BaseToolbar from '../Toolbar/BaseToolbar.vue';
+	import BaseMenuToolbar from '../Toolbar/BaseMenuToolbar.vue';
+
 	export default defineComponent({
-		name: "BaseHeader",
-		props: ["PageTitle"],
+		name: "BaseMenuHeader",
 		components:{
 			IonHeader,
-			BaseToolbar
+			BaseMenuToolbar
 		}
 	});
 </script>

@@ -6,10 +6,10 @@
 					<ion-col size-xs="12" size-lg="6">
 						<ion-card color="secondary" desabled="true">
 
-							<ion-img src="../../public/assets/icon/favicon.png"></ion-img>
+							<ion-img src="../../public/assets/icon/favicon.png" alt="not found"></ion-img>
 
-							<ion-card-subtitle>subtitle</ion-card-subtitle>
 							<ion-card-title>title</ion-card-title>
+							<ion-card-subtitle>subtitle</ion-card-subtitle>
 
 							<ion-card-content>
 								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -70,7 +70,7 @@
 </template>
 <script>
 	import {defineComponent} from 'vue';
-	import {IonGrid, IonRow, IonCol, IonCard, IonCardSubtitle, IonCardTitle, IonCardContent, IonIcon, IonLabel, IonImg} from '@ionic/vue';
+	import {IonGrid, IonRow, IonCol, IonCard, IonItem, IonCardSubtitle, IonCardTitle, IonCardContent, IonIcon, IonLabel, IonImg, IonButton} from '@ionic/vue';
 	import {map, wifi, wine} from 'ionicons/icons';
 	export default defineComponent({
 		name: "HomePage",
@@ -83,8 +83,10 @@
 			IonCardTitle,
 			IonCardContent,
 			IonIcon,
+			IonItem,
 			IonLabel,
-			IonImg
+			IonImg,
+			IonButton
 		},
 		setup(){
 			return{

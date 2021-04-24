@@ -1,0 +1,30 @@
+<template>
+	<ion-toolbar>
+		<start-base-toolbar></start-base-toolbar>
+
+		<ion-title>
+			<img alt="LM" name="Light Magazine" src="../../../public/assets/icon/lightmag.svg">
+			Light Mag
+		</ion-title>
+		<ion-title v-if="PageTitle" size="small">{{PageTitle}}</ion-title>
+
+		<end-base-toolbar></end-base-toolbar>
+	</ion-toolbar>
+</template>
+<script>
+	import {defineComponent} from 'vue';
+	import {IonToolbar, IonTitle} from '@ionic/vue';
+	import StartBaseToolbar from './StartBaseToolbar.vue';
+	import EndBaseToolbar from './EndBaseToolbar.vue';
+
+	export default defineComponent({
+		name: "BaseToolbar",
+		props: ["PageTitle"],
+		components:{
+			IonToolbar,
+			StartBaseToolbar,
+			IonTitle,
+			EndBaseToolbar
+		}
+	});
+</script>
