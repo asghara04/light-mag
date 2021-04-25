@@ -8,7 +8,7 @@
 					<ion-item>Home Page</ion-item>
 					<ion-item>Categories</ion-item>
 					<ion-item>all categories with their subcats</ion-item>
-					<u-i-tool-items></u-i-tool-items>
+					<theme-button></theme-button>
 				</ion-list>
 			</ion-content>
 
@@ -19,7 +19,7 @@
 	import {defineComponent} from 'vue';
 	import {IonMenu, IonContent, IonList, IonItem, menuController} from '@ionic/vue';
 	import BaseMenuHeader from '../Header/BaseMenuHeader.vue';
-	import UIToolItems from '../Tools/UIToolItems.vue';
+	import ThemeButton from '../Buttons/ThemeButton.vue';
 
 	export default defineComponent({
 		name: "BaseSideMenu",
@@ -29,7 +29,7 @@
 			IonContent,
 			IonList,
 			IonItem,
-			UIToolItems,
+			ThemeButton,
 		},
 		setup(){
 			function openBaseMenu(){

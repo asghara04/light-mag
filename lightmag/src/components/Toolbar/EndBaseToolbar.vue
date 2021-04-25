@@ -1,26 +1,18 @@
 <template>
 	<ion-buttons slot="end">
-		<ion-button>
-			<ion-icon slot="icon-only" :icon="search"></ion-icon>
-		</ion-button>
+		<open-search-modal-button></open-search-modal-button>
 	</ion-buttons>
 </template>
 <script>
 	import {defineComponent} from 'vue';
-	import {IonButtons, IonButton, IonIcon} from '@ionic/vue';
-	import {search} from 'ionicons/icons';
+	import {IonButtons} from '@ionic/vue';
+	import OpenSearchModalButton from '../Buttons/OpenSearchModalButton.vue';
 
 	export default defineComponent({
 		name: "EndBaseToolbar",
 		components:{
 			IonButtons,
-			IonButton,
-			IonIcon
+			OpenSearchModalButton
 		},
-		setup(){
-			return{
-				search
-			}
-		}
 	});
 </script>
