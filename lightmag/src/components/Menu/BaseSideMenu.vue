@@ -1,24 +1,25 @@
 <template>
-	<ion-menu side="start" menu-id="baseMenu" content-id="main">
-		<base-menu-header></base-menu-header>
+		<ion-menu side="start" type="overlay" menu-id="baseMenu" content-id="baseMenu">
+			<base-menu-header></base-menu-header>
 
-		<!-- should be refactor when wanna use really -->
-		<ion-content>
-			<ion-list>
-				<ion-item>Home Page</ion-item>
-				<ion-item>Categories</ion-item>
-				<ion-item>all categories with their subcats</ion-item>
-				<ion-item>Tuggle Dark/Light Theme</ion-item>
-			</ion-list>
-		</ion-content>
+			<!-- should be refactor when wanna use really -->
+			<ion-content>
+				<ion-list>
+					<ion-item>Home Page</ion-item>
+					<ion-item>Categories</ion-item>
+					<ion-item>all categories with their subcats</ion-item>
+					<u-i-tool-items></u-i-tool-items>
+				</ion-list>
+			</ion-content>
 
-	</ion-menu>
-	<ion-router-outlet id="main"></ion-router-outlet>
+		</ion-menu>
+
 </template>
 <script>
 	import {defineComponent} from 'vue';
-	import {IonMenu, IonContent, IonList, IonItem, menuController, IonRouterOutlet} from '@ionic/vue';
+	import {IonMenu, IonContent, IonList, IonItem, menuController} from '@ionic/vue';
 	import BaseMenuHeader from '../Header/BaseMenuHeader.vue';
+	import UIToolItems from '../Tools/UIToolItems.vue';
 
 	export default defineComponent({
 		name: "BaseSideMenu",
@@ -26,9 +27,9 @@
 			IonMenu,
 			BaseMenuHeader,
 			IonContent,
-			IonItem,
 			IonList,
-			IonRouterOutlet
+			IonItem,
+			UIToolItems,
 		},
 		setup(){
 			function openBaseMenu(){

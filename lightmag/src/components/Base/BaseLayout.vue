@@ -1,7 +1,6 @@
 <template>
-	<ion-page>
+	<ion-page content-id="main">
 		<base-header :PageTitle="PageTitle"></base-header>
-		<base-side-menu></base-side-menu>
 		<ion-content>
 			<slot name="main-content"></slot>
 		</ion-content>
@@ -11,7 +10,6 @@
 	import {defineComponent} from 'vue';
 	import {IonPage, IonContent} from '@ionic/vue';
 	import BaseHeader from '../Header/BaseHeader.vue';
-	import BaseSideMenu from '../Menu/BaseSideMenu.vue';
 
 	export default defineComponent({
 		name: "BaseLayout",
@@ -19,8 +17,7 @@
 		components:{
 			IonPage,
 			BaseHeader,
-			IonContent,
-			BaseSideMenu
+			IonContent
 		}
 	});
 </script>

@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 
 /* Components */
 import App from './App.vue'
+import BaseApp from './components/Base/BaseApp.vue';
 import BaseLayout from './components/Base/BaseLayout.vue';
 
 import router from './router';
@@ -31,7 +32,8 @@ import './theme/lightmag.css';
 const app = createApp(App)
   .use(IonicVue)
   .use(router);
-
+/* unlocal components! */
+app.component("base-app", BaseApp);
 app.component('base-layout', BaseLayout);
 
 router.isReady().then(() => {
