@@ -1,6 +1,6 @@
 <template>
 	<ion-page content-id="main">
-		<base-header :PageTitle="PageTitle"></base-header>
+		<base-header :PageTitle="PageTitle" :BackLink="BackLink"></base-header>
 		<ion-content>
 			<slot name="main-content"></slot>
 		</ion-content>
@@ -13,7 +13,7 @@
 
 	export default defineComponent({
 		name: "BaseLayout",
-		props: ["PageTitle"],
+		props:["PageTitle", "BackLink"],
 		components:{
 			IonPage,
 			BaseHeader,

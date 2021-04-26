@@ -8,10 +8,15 @@ const routes = [
 		component: HomePage
 	},
 	{
+		path: "/categories",
+		name: "Categories",
+		// component
+	},
+	{
 		path: "/about",
 		name: "About",
 		component: ()=>import("@/pages/AboutPage.vue")
-	}
+	},
 ]
 
 const router = createRouter({

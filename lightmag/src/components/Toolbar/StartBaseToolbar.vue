@@ -1,17 +1,18 @@
 <template>
 	<ion-buttons slot="start">
-			<ion-menu-button menu="baseMenu"></ion-menu-button>
+		<ion-back-button :default-href="BackLink"></ion-back-button>
 	</ion-buttons>
 </template>
 <script>
 	import {defineComponent} from "vue";
-	import {IonButtons, IonMenuButton} from '@ionic/vue';
+	import {IonButtons, IonBackButton} from '@ionic/vue';
 
 	export default defineComponent({
 		name: "StartBaseToolbarButtons",
+		props:["BackLink"],
 		components:{
 			IonButtons,
-			IonMenuButton
+			IonBackButton
 		}
 	});
 </script>

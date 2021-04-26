@@ -12,7 +12,7 @@
 		name: "BaseMenuHeader",
 		components:{
 			IonHeader,
-			BaseMenuToolbar
+			BaseMenuToolbar,
 		}
 	});
 </script>

@@ -1,6 +1,6 @@
 <template>
 	<ion-toolbar>
-		<start-base-toolbar></start-base-toolbar>
+		<start-base-toolbar :BackLink="BackLink"></start-base-toolbar>
 
 		<ion-title>
 			<img alt="LM" name="Light Magazine" src="../../../public/assets/icon/lightmag.svg">
@@ -19,7 +19,7 @@
 
 	export default defineComponent({
 		name: "BaseToolbar",
-		props: ["PageTitle"],
+		props: ["PageTitle", "BackLink"],
 		components:{
 			IonToolbar,
 			StartBaseToolbar,
