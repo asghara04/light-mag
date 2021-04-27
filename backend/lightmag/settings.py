@@ -52,6 +52,8 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://light-mag.ir:8080",
     "http://admin.light-mag.ir:8080",
+    "http://localhost:8100",
+    "http://127.0.0.1:8100"
 ]
 
 ROOT_URLCONF = 'lightmag.urls'

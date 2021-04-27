@@ -4,19 +4,14 @@ from image.models import Image
 from category.models import Category, SubCat
 from user.models import User
 from tag.models import Tag
-import jdatetime
-
-def set_jdatetime(gdate):
-	jdatetime.set_locale("fa_IR")
-	return jdatetime.datetime.fromgregorian(year=gdate.year,month=gdate.month,day=gdate.day,hour=gdate.hour,minute=gdate.minute,second=gdate.second).strftime("%d %B %Y, %H:%M")
 
 class Published(models.Manager):
 	def get_queryset(self):
-		return super(Published, self).get_queryset().filter(status="عمومی")
+		return super(Published, self).get_queryset().filter(status="public")
 
 
 class Article(models.Model):
-	STATUSES = (("عمومی", "عمومی"), ("پیشنویس", "پیشنویس"))
+	STATUSES = (("public", "public"), ("draft", "draft"))
 	title = models.CharField(max_length=120,unique=True)
 	slug = models.SlugField(max_length=120, unique=True)
 	image = models.ForeignKey(Image, on_delete=models.SET_NULL, null=True, blank=True)
@@ -34,11 +29,6 @@ class Article(models.Model):
 
 	objects = models.Manager()
 	published = Published()
-
-	def jpub_date(self):
-		return set_jdatetime(self.publish_date)
-	def jdate(self):
-		return set_jdatetime(self.date)
 
 	def coms(self):
 		return self.comments.filter(status=True).count()

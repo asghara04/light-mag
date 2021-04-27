@@ -42,8 +42,8 @@ def unique_pubmail(pub,pk=False):
 	return True
 
 class MUsersView(APIView,PaginationMixin):
-	# renderer_classes = (JSONRenderer,)
-	# permission_classes = (IsAdminUser,)
+	renderer_classes = (JSONRenderer,)
+	permission_classes = (IsAdminUser,)
 	pagination_class = PageNumberPagination()
 	def get(self, request):
 		users = User.objects.all()
@@ -58,13 +58,13 @@ class MUsersView(APIView,PaginationMixin):
 		if serializer.is_valid():
 			if unique_email(request.data['email']) and unique_username(request.data['username']) and (('pubmail' in request.data and unique_pubmail(request.data['pubmail'])) or not 'pubmail' in request.data):
 				serializer.save()
-				return Response({"message":"کاربر جدید با موفقیت ثبت شد."}, status=status.HTTP_201_CREATED)
+				return Response({"message":"new user successfully saved."}, status=status.HTTP_201_CREATED)
 			if not unique_email(request.data['email']):
-				errs['email'] = ['کاربر دیگری با همین ایمیل وجود دارد.']
+				errs['email'] = ['there is another user with same name.']
 			if not unique_username(request.data['username']):
-				errs['username'] = ['کاربر دیگری با همین نام کاربری وجود دارد.']
+				errs['username'] = ['there is another user with same username.']
 			if 'pubmail' in request.data and not unique_pubmail(request.data['pubmail']):
-				errs['pubmail'] = ['کاربر دیگری با همین ایمیل عمومی وجود دارد.']
+				errs['pubmail'] = ['there is another user with same public email.']
 			return Response(errs,status=status.HTTP_400_BAD_REQUEST)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -91,11 +91,11 @@ class MUserView(APIView):
 				serializer.save()
 				return Response(serializer.data, status=status.HTTP_200_OK)
 			if 'email' in request.data and not unique_email(request.data['email'],user.id):
-				errs['email'] = ['کاربر دیگری با همین ایمیل وجود دارد!']
+				errs['email'] = ['there is another user with same email.']
 			if 'username' in request.data and not unique_username(request.data['username'],user.id):
-				errs['username'] = ['کاربر دیگری با همین نام کاربری وجود دارد!']
+				errs['username'] = ['there is another user with same username.']
 			if 'pubmail' in request.data and not unique_pubmail(request.data['pubmail'],user.id):
-				errs['pubmail'] = ['کاربر دیگری با همین ایمیل عمومی وجود دارد!']
+				errs['pubmail'] = ['there is another user with same pubmail.']
 			return Response(errs,status=status.HTTP_400_BAD_REQUEST)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 	def delete(self, request, uname):

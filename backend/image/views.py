@@ -9,7 +9,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.pagination import PageNumberPagination
 from lightmag.pagination import PaginationMixin
 
-nameUniqueError = {"name":["تصویر دیگری با همین نام وجود دارد."]}
+nameUniqueError = {"name":["there is another image with same name."]}
 
 def unqiue_names(name):
 	for image in Image.objects.all():

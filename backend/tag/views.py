@@ -42,9 +42,9 @@ class TagsView(APIView,PaginationMixin):
 				serializer.save()
 				return Response(serializer.data, status=status.HTTP_201_CREATED)
 			if not uniqueName(request.data['name']):
-				errs['name'] = ["تگ دیگری با همین نام وجود دراد."]
+				errs['name'] = ["there is another tag with same name."]
 			if not uniqueSlug(request.data['slug']):
-				errs['slug'] = ["تگ دیگری با همین نام وجوددارد."]
+				errs['slug'] = ["there is another tag with same slug."]
 			return Response(errs,status=status.HTTP_400_BAD_REQUEST)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -68,9 +68,9 @@ class TagView(APIView):
 				serializer.save()
 				return Response(serializer.data, status=status.HTTP_200_OK)
 			if not uniqueName(request.data['name'],tag.id):
-				errs['name'] = ["تگ دیگری با همین نام وجود دراد."]
+				errs['name'] = ["there is another tag with same name."]
 			if not uniqueSlug(request.data['slug'],tag.id):
-				errs['slug'] = ["تگ دیگری با همین نام وجوددارد."]
+				errs['slug'] = ["there is another tag with same slug."]
 			return Response(errs,status=status.HTTP_400_BAD_REQUEST)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 	def delete(self, request, slug):

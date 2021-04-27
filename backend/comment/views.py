@@ -25,7 +25,7 @@ class ACommentsView(APIView,PaginationMixin):
 		serializer = CommentSerializer(data=request.data)
 		if serializer.is_valid():
 			serializer.save()
-			return Response({"message":"نظرتون ثبت شد.\nبزودی نمایش داده میشه."}, status=status.HTTP_201_CREATED)
+			return Response({"message":"your comment submitted successfully.\nit'll public after approved."}, status=status.HTTP_201_CREATED)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -45,7 +45,7 @@ class CRepliesView(APIView,PaginationMixin):
 		serializer = ReplySerializer(data=request.data)
 		if serializer.is_valid():
 			serializer.save()
-			return Response({"message":"پاسختون ثبت شد.\nبزودی نمایش داده میشه."}, status=status.HTTP_201_CREATED)
+			return Response({"message":"your reply submitted successfully.\nit'll be public after approved."}, status=status.HTTP_201_CREATED)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class McommentsView(APIView,PaginationMixin):

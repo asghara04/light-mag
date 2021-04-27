@@ -2,13 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from image.models import Image
 from category.models import Category
-import jdatetime
-
-def set_jdate(gdate):
-	jdatetime.set_locale("fa_IR")
-	if gdate:
-		return jdatetime.datetime.fromgregorian(year=gdate.year,month=gdate.month,day=gdate.day).strftime("%A, %d %B %Y")
-	return None
 
 class UserManager(BaseUserManager):
 	def create_user(self, email, username, name, password=None):
@@ -70,14 +63,8 @@ class User(AbstractBaseUser):
 	USERNAME_FIELD = "email"
 	REQUIRED_FIELDS = ("username", "name")
 
-	def jjoin(self):
-		return set_jdate(self.join_date)
-	def jlast(self):
-		return set_jdate(self.last_login)
-	def jbirth(self):
-		return set_jdate(self.birthday)
 	def pubartcount(self):
-		return self.arts.filter(status="عمومی").count()
+		return self.arts.filter(status="public").count()
 	def artcount(self):
 		return self.arts.all().count()
 	def __str__(self):

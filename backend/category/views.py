@@ -57,7 +57,7 @@ class CategoriesView(APIView, PaginationMixin):
 			q = request.GET.get('q')
 			cats = Category.objects.filter(name__icontains=q).order_by("name")
 		else:
-			return Response({"message":"لطفا کلمه ای ربای جستوجو وارد کنید."},status=status.HTTP_400_BAD_REQUEST)
+			return Response({"message":"Enter somthing to search please."},status=status.HTTP_400_BAD_REQUEST)
 		page = self.paginate_queryset(cats)
 		if page is not None:
 			serializer = self.get_paginated_response(CategorySerializer(page, many=True, context={"request":request}).data)
@@ -71,9 +71,9 @@ class CategoriesView(APIView, PaginationMixin):
 				serializer.save()
 				return Response(serializer.data, status=status.HTTP_201_CREATED)
 			if not unique_cat_name(request.data['name']):
-				errs['name'] = ["دسته دیگری با همین نام وجود دارد."]
+				errs['name'] = ["there is another category with same name."]
 			if not unique_cat_slug(request.data['slug']):
-				errs['slug'] = ["دسته دیگری با همین اسلاگ وجود دارد."]
+				errs['slug'] = ["there is another category with same slug."]
 			return Response(errs, status=status.HTTP_400_BAD_REQUEST)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -105,9 +105,9 @@ class CategoryView(APIView):
 				serializer.save()
 				return Response(serializer.data, status=status.HTTP_200_OK)
 			if 'name' in request.data and not unique_cat_name(request.data['name'],category.id):
-				errs['name'] = ["دسته دیگری با همین نام وجود دارد."]
+				errs['name'] = ["there is another category with same name."]
 			if 'slug' in request.data and not unique_cat_slug(request.data['slug'],category.id):
-				errs['slug'] = ["دسته دیگری با همین اسلگ وجود دارد."]
+				errs['slug'] = ["there is another category with same slug."]
 			return Response(errs,status=status.HTTP_400_BAD_REQUEST)
 		return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
 	def delete(self, request, slug):
@@ -146,9 +146,9 @@ class SubsCatCatView(APIView, PaginationMixin):
 				serializer.save()
 				return Response(serializer.data, status=status.HTTP_201_CREATED)
 			if not uniqueSubCatName(request.data['category'],request.data['name']):
-				errs['name'] = ['زیر دسته دیگری با همین نام در این دسته وجود دارد.']
+				errs['name'] = ['there is another subcategory with same name.']
 			if not uniqueSubCatSlug(request.data['category'],request.data['slug']):
-				errs['slug'] = ['زیر دسته دیگری با همین اسلاگ در این دسته وجود دارد.']
+				errs['slug'] = ['there is another subcategory with same slug.']
 			return Response(errs, status=status.HTTP_400_BAD_REQUEST)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -176,9 +176,9 @@ class SubCatView(APIView):
 				serializer.save();
 				return Response(serializer.data,status=status.HTTP_200_OK)
 			if 'name' in request.data and ((not 'category' in request.data and uniqueSubCatName(subcat.category,request.data['name'],subcat.id)) or ('category' in request.data and uniqueSubCatName(request.data['category'],request.data['name'],subcat.id))):
-				errs['name'] = ["زیردسته دیگری با همین نام در این دسته وجود دارد."]
+				errs['name'] = ["there is another subcategory with same name."]
 			if 'slug' in request.data and ((not 'category' in request.data and uniqueSubCatSlug(subcat.category,request.data['slug'],subcat.id)) or ('category' in request.data and uniqueSubCatSlug(request.data['category'],request.data['slug'],subcat.id))):
-				errs['slug'] = ["زیردسته دیگری با همین اسلاگ در این دسته وجود دارد."]
+				errs['slug'] = ["there is another subcategory with same name."]
 			return Response(errs,status=status.HTTP_400_BAD_REQUEST)
 		return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 	def delete(self,request,cat,sub):

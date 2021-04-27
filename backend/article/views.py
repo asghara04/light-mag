@@ -23,7 +23,7 @@ class ArticlesView(APIView, PaginationMixin):
 			q = request.GET.get('q')
 			arts = Article.published.filter(Q(title__icontains=q) | (Q(description__icontains=q) & Q(body__icontains=q))).order_by("title")
 		else:
-			return Response({"message":"لطفا کلمه ای برای جستوجو وارد کنید."},status=status.HTTP_400_BAD_REQUEST)
+			return Response({"message":"Enter somthing to search please."},status=status.HTTP_400_BAD_REQUEST)
 		page = self.paginate_queryset(arts)
 		if page is not None:
 			serializer = self.get_paginated_response(MinArticleSerializer(page, many=True, context={"request":request}).data)
@@ -94,9 +94,9 @@ class MArticlesView(APIView,PaginationMixin):
 				serializer.save()
 				return Response(serializer.data, status=status.HTTP_201_CREATED)
 			if not uniqueTitle(request.data['title']):
-				errs['title'] = ['مقاله دیگری هم با همین عنوان وجود دارد.']
+				errs['title'] = ['there is another article with same title.']
 			if not uniqueSlug(request.data['slug']):
-				errs['slug'] = ['مقاله دیگری هم با همین اسلاگ وجود دارد.']
+				errs['slug'] = ['there is another article with same slug.']
 			return Response(errs,status=status.HTTP_400_BAD_REQUEST)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -122,9 +122,9 @@ class MArticleView(APIView):
 				serializer.save()
 				return Response(serializer.data, status=status.HTTP_200_OK)
 			if 'title' in request.data and not uniqueTitle(request.data['title'],art.id):
-				errs['title'] = ['مقاله دیگری با همین عنوان وجود دارد.']
+				errs['title'] = ['there is another article with same title.']
 			if 'slug' in request.data and not uniqueSlug(request.data['slug'],art.id):
-				errs['slug'] = ['مقاله دیگری با همین اسلاگ وجود دارد.']
+				errs['slug'] = ['there is another article with same slug.']
 			return Response(errs,status=status.HTTP_400_BAD_REQUEST)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 	def delete(self, request, pk):
@@ -189,7 +189,7 @@ class UserArtsView(APIView,PaginationMixin):
 	pagination_class = PageNumberPagination()
 	renderer_classes = (JSONRenderer,)
 	def get(self,request,uname):
-		arts = Article.objects.filter(author__username=uname)
+		arts = Article.published.filter(author__username=uname)
 		page = self.paginate_queryset(arts)
 		if page is not None:
 			serializer = self.get_paginated_response(MinArticleSerializer(page,many=True,context={"request":request}).data)
@@ -204,7 +204,6 @@ class RelArts(APIView):
 		try:
 			return Article.published.get(id=pk)
 		except:
-			print("hollaooooooooooooooooooooo")
 			raise Http404
 
 	def get(self, request, pk):

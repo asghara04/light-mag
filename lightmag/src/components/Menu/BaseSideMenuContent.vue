@@ -1,9 +1,13 @@
 <template>
 	<ion-content>
+		<!-- side menu content start slot -->
 		<slot name="start"></slot>
-		<!-- ion-item's with router-link are not clickable should add button, find better way -->
+
+		<!-- side menu base content -->
 		<side-menu-base-list></side-menu-base-list>
 		<side-menu-other-list></side-menu-other-list>
+
+		<!-- side menu content end slot -->
 		<slot name="end"></slot>
 	</ion-content>
 </template>

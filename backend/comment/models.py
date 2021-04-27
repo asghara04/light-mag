@@ -1,6 +1,5 @@
 from django.db import models
 from article.models import Article
-import jdatetime
 
 class CPublished(models.Manager):
 	def get_queryset(self):
@@ -13,10 +12,6 @@ class RPublished(models.Manager):
 class UnRead(models.Manager):
 	def get_queryset(self):
 		return super(UnRead, self).get_queryset().filter(readed=False)
-
-def set_jdatetime(gdate):
-	jdatetime.set_locale("fa_IR")
-	return jdatetime.datetime.fromgregorian(year=gdate.year,month=gdate.month,day=gdate.day,hour=gdate.hour,minute=gdate.minute).strftime("%d %B %Y, %H:%M")
 
 class Comment(models.Model):
 	article = models.ForeignKey(Article, on_delete=models.CASCADE,related_name="comments")
@@ -31,8 +26,6 @@ class Comment(models.Model):
 	objects = models.Manager()
 	published = CPublished()
 	unread = UnRead()
-	def jdate(self):
-		return set_jdatetime(self.date)
 
 	def reps(self):
 		return self.replies.filter(status=True).count()
@@ -55,7 +48,6 @@ class Reply(models.Model):
 	objects = models.Manager()
 	published = RPublished()
 	unread = UnRead()
-	def jdate(self):
-		return set_jdatetime(self.date)
+
 	def __str__(self):
 		return str(self.id)
