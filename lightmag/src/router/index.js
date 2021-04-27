@@ -4,19 +4,24 @@ import HomePage from '@/pages/HomePage.vue';
 const routes = [
 	{
 		path: '/',
-		name: 'Home',
+		name: 'HomePage',
 		component: HomePage
 	},
 	{
 		path: "/categories",
-		name: "Categories",
+		name: "CategoriesPage",
 		// component
 	},
 	{
 		path: "/about",
-		name: "About",
+		name: "AboutPage",
 		component: ()=>import("@/pages/AboutPage.vue")
 	},
+	{
+		path: "/contact",
+		name: "ContactPage",
+		// component
+	}
 ]
 
 const router = createRouter({

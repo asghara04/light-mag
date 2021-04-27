@@ -1,7 +1,7 @@
 <template>
 	<ion-list>
 		<ion-menu-toggle>
-			<ion-item router-link="/" button>
+			<ion-item router-link="/" router-direction="root" button>
 				<ion-icon slot="start" :icon="home"></ion-icon>
 				<ion-label>
 					<h2>Home</h2>

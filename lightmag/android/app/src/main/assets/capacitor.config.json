@@ -2,5 +2,6 @@
   "appId": "ir.LightMag.LightMagazine",
   "appName": "Light Magazine",
   "webDir": "dist",
-  "npmClient": "npm"
+  "npmClient": "npm",
+  "linuxAndroidStudioPath": "/snap/bin/android-studio"
 }
