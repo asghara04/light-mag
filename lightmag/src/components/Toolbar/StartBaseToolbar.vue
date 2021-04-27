@@ -1,6 +1,6 @@
 <template>
 	<ion-buttons slot="start">
-		<ion-back-button :default-href="BackLink"></ion-back-button>
+		<ion-back-button v-if="BackLink" :default-href="BackLink"></ion-back-button>
 	</ion-buttons>
 </template>
 <script>
@@ -9,7 +9,12 @@
 
 	export default defineComponent({
 		name: "StartBaseToolbarButtons",
-		props:["BackLink"],
+		props:{
+			BackLink:{
+				type: String,
+				required: false
+			},
+		},
 		components:{
 			IonButtons,
 			IonBackButton

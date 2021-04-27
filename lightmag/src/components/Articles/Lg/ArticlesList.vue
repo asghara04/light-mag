@@ -68,7 +68,7 @@
 
 			<ion-col size="6">
 				<ion-card>
-				<ion-item href="#">
+				<ion-item router-link="#" class="ion-activated" button>
 					<ion-icon name="menu-sharp" slot="start"></ion-icon>
 					<ion-label>Wifi</ion-label>
 				</ion-item>

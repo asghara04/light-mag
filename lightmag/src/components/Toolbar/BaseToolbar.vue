@@ -1,9 +1,9 @@
 <template>
 	<ion-toolbar>
 		<start-base-toolbar :BackLink="BackLink"></start-base-toolbar>
-
+		
 		<ion-title>
-			<img alt="LM" name="Light Magazine" src="../../../public/assets/icon/lightmag.svg">
+			<ion-icon src="assets/icon/lightmag.svg"></ion-icon>
 			Light Mag
 		</ion-title>
 		<ion-title v-if="PageTitle" size="small">{{PageTitle}}</ion-title>
@@ -13,7 +13,7 @@
 </template>
 <script>
 	import {defineComponent} from 'vue';
-	import {IonToolbar, IonTitle} from '@ionic/vue';
+	import {IonToolbar, IonTitle, IonIcon} from '@ionic/vue';
 	import StartBaseToolbar from './StartBaseToolbar.vue';
 	import EndBaseToolbar from './EndBaseToolbar.vue';
 
@@ -24,6 +24,7 @@
 			IonToolbar,
 			StartBaseToolbar,
 			IonTitle,
+			IonIcon,
 			EndBaseToolbar
 		}
 	});

@@ -1,6 +1,7 @@
 <template>
 	<ion-content>
 		<slot name="start"></slot>
+		<!-- ion-item's with router-link are not clickable should add button, find better way -->
 		<side-menu-base-list></side-menu-base-list>
 		<side-menu-other-list></side-menu-other-list>
 		<slot name="end"></slot>

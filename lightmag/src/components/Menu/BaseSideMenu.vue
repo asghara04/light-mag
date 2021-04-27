@@ -1,5 +1,5 @@
 <template>
-	<ion-menu side="start" type="overlay" menu-id="baseMenu" content-id="baseMenu">
+	<ion-menu type="overlay" menu-id="baseMenu" content-id="baseMenu">
 		<base-menu-header></base-menu-header>
 		<base-side-menu-content></base-side-menu-content>
 	</ion-menu>
