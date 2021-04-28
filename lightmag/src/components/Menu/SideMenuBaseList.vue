@@ -1,13 +1,18 @@
 <template>
 	<ion-list>
 		<ion-menu-toggle>
-			<ion-item router-link="/" router-direction="root" button>
+			<ion-item router-link="/" lines="none" router-direction="root" button>
 				<ion-icon slot="start" :icon="home"></ion-icon>
 				<ion-label>
 					<h2>Home</h2>
 				</ion-label>
 			</ion-item>
-			<ion-item>Categories</ion-item>
+			<ion-item lines="none" button>
+				Categories
+			</ion-item>
+			<ion-item lines="full" button>
+				Search
+			</ion-item>
 		</ion-menu-toggle>
 	</ion-list>
 </template>

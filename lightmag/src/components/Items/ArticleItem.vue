@@ -1,5 +1,5 @@
 <template>
-	<ion-item lines="none" v-if="article">
+	<ion-item lines="full" v-if="article">
 		<ion-thumbnail slot="start" v-if="article.image">
 			<ion-img size="large" :src="article.image.image" :alt="article.image.alt"></ion-img>
 		</ion-thumbnail>
@@ -13,7 +13,7 @@
 	import {IonItem, IonThumbnail, IonImg, IonLabel} from '@ionic/vue';
 
 	export default defineComponent({
-		name: "ArticleListItem",
+		name: "ArticleItem",
 		props:{
 			article:{
 				required: true

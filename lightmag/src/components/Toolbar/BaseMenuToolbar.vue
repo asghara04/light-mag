@@ -1,10 +1,10 @@
 <template>
-	<ion-toolbar>
+	<ion-toolbar color="primary">
 		<ion-title>
 			<ion-icon src="assets/icon/lightmag.svg"></ion-icon>
 			Light Magazine
 		</ion-title>
-		<ion-note class="ion-margin ion-padding">Learning To gether :)</ion-note>
+		<ion-note color="medium" class="ion-margin ion-padding">Learning To gether :)</ion-note>
 	</ion-toolbar>
 </template>
 <script>

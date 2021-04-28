@@ -97,3 +97,5 @@ class MinArticleSerializer(serializers.Serializer):
 	publish_date = serializers.DateTimeField(read_only=True)
 	author = MinUserSerializer(read_only=True)
 	coms = serializers.IntegerField(read_only=True)
+
+	read_time_m = serializers.IntegerField(read_only=True)

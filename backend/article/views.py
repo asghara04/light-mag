@@ -163,7 +163,7 @@ class SubCatArticlesView(APIView, PaginationMixin):
 class MostComArticleView(APIView):
 	renderer_classes = (JSONRenderer,)
 	def get(self,request,format=None):
-		arts = Article.published.annotate(coms=Count('comments',filter=Q(comments__status=True,comments__personal=False))).order_by('-coms')[:6]
+		arts = Article.published.annotate(coms=Count('comments',filter=Q(comments__status=True,comments__personal=False))).order_by('-coms')[:7]
 		serializer = MinArticleSerializer(arts, many=True, context={"request":request})
 		return Response(serializer.data,status=status.HTTP_200_OK)
 

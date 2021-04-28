@@ -1,7 +1,16 @@
-/* ion-grid no padding in small screen */
+ /*ion-grid no padding in small screen */
 .ion-grid-no-padding-md-sm-xs-screen{
 	--ion-grid-padding-md: 0;
 	--ion-grid-padding-sm: 0;
 	--ion-grid-padding-xs: 0;
 }
 
+
+
+/* ion-col equal height */
+@media(min-width: 576px){
+	.ion-col-full-height{
+		display: flex;
+		align-items: stretch;
+	}
+}

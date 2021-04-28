@@ -5,7 +5,7 @@
 			<base-side-menu></base-side-menu>
 		</slot>
 
-		<ion-router-outlet id="baseMenu"></ion-router-outlet>
+		<ion-router-outlet :key="$route.fullPath" id="baseMenu"></ion-router-outlet>
 	</ion-split-pane>
 </template>
 <script>

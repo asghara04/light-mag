@@ -1,5 +1,5 @@
 <template>
-	<ion-searchbar show-cancel-button="never" :clear-icon="status"></ion-searchbar>
+	<ion-searchbar show-cancel-button="never" color="secondary" :clear-icon="status"></ion-searchbar>
 </template>
 <script>
 	import {defineComponent} from 'vue';

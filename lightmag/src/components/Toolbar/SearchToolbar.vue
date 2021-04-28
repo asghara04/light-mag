@@ -1,5 +1,5 @@
 <template>
-	<ion-toolbar>
+	<ion-toolbar color="primary">
 		<searchbar status="never"></searchbar>
 
 		<ion-buttons slot="end">

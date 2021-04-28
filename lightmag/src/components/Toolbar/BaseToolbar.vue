@@ -1,7 +1,7 @@
 <template>
-	<ion-toolbar>
+	<ion-toolbar color="tertiary">
 		<start-base-toolbar :BackLink="BackLink"></start-base-toolbar>
-		
+
 		<ion-title>
 			<ion-icon src="assets/icon/lightmag.svg"></ion-icon>
 			Light Mag
