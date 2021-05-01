@@ -1,33 +1,21 @@
 <template>
 	<ion-card>
-		<ion-img :src="article.image.image" :alt="article.image.alt"></ion-img>
+		<ion-img v-if="article.image" :src="article.image.image" :alt="article.image.alt"></ion-img>
 		<ion-card-header>
 			<ion-card-title>{{article.title}}</ion-card-title>
 		</ion-card-header>
+
 		<ion-card-content>
-			<p>{{article.decsription}}</p>
+			<p>{{article.description}}</p>
 		</ion-card-content>
-		<ion-footer>
-			<ion-row>
-				<ion-col>
-					comments
-					{{article.coms}}
-				</ion-col>
-				<ion-col>
-					date
-					{{article.publish_date}}
-				</ion-col>
-				<ion-col>
-					read_time
-					{{article.read_time_m}}
-				</ion-col>
-			</ion-row>
-		</ion-footer>
+
+		<article-card-footer :comments="article.coms" :readTime="article.read_time_m"></article-card-footer>
 	</ion-card>
 </template>
 <script>
 	import {defineComponent} from 'vue';
-	import {IonCard, IonImg, IonCardHeader, IonCardTitle, IonCardContent, IonFooter, IonRow, IonCol} from '@ionic/vue';
+	import {IonCard, IonImg, IonCardHeader, IonCardTitle, IonCardContent} from '@ionic/vue';
+	import ArticleCardFooter from '../Footer/ArticleCardFooter.vue';
 
 	export default defineComponent({
 		name: "ArticleCard",
@@ -43,9 +31,7 @@
 			IonCardHeader,
 			IonCardTitle,
 			IonCardContent,
-			IonFooter,
-			IonRow,
-			IonCol
+			ArticleCardFooter
 		}
 	});
 </script>

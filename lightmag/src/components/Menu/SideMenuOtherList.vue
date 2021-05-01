@@ -28,7 +28,7 @@
 			<ion-icon slot="start" :icon="logoAndroid"></ion-icon>
 			Android App
 		</ion-item>
-		<ion-item download="lightmag">
+		<ion-item lines="full" download="lightmag">
 			<ion-icon slot="start" :icon="logoApple"></ion-icon>
 			IOS App
 		</ion-item>

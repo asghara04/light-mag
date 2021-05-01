@@ -1,6 +1,6 @@
 <template>
-	<ion-grid>
-		<ion-row>
+	<ion-grid class="ion-grid-no-padding-md-sm-xs-screen">
+		<ion-row class="ion-justify-content-center">
 			<article-cols v-bind="$props"></article-cols>
 		</ion-row>
 	</ion-grid>

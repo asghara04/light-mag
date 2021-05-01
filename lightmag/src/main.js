@@ -7,6 +7,9 @@ import BaseLayout from './components/Base/BaseLayout.vue';
 
 import router from './router';
 
+/* store */
+import store from './store/index.js';
+
 import { IonicVue } from '@ionic/vue';
 
 /* Core CSS required for Ionic components to work properly */
@@ -31,8 +34,9 @@ import './theme/lightmag.css';
 
 const app = createApp(App)
   .use(IonicVue)
-  .use(router);
-/* unlocal components! */
+  .use(router)
+  .use(store);
+/* goobal components */
 app.component("base-app", BaseApp);
 app.component('base-layout', BaseLayout);
 

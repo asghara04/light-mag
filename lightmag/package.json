@@ -1,7 +1,7 @@
 {
   "name": "lightmag",
-  "version": "0.0.1",
-  "private": true,
+  "version": "1.0.0",
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -14,10 +14,11 @@
     "@capacitor/core": "^2.4.7",
     "@ionic/vue": "^5.4.0",
     "@ionic/vue-router": "^5.4.0",
-    "axios": ">=0.21.1",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "vue": "^3.0.0-0",
-    "vue-router": "^4.0.0-0"
+    "vue-router": "^4.0.0-0",
+    "vuex": "^4.0.0"
   },
   "devDependencies": {
     "@capacitor/cli": "^2.4.7",
@@ -33,5 +34,6 @@
     "eslint-plugin-vue": "^7.0.0-0",
     "vue-jest": "^5.0.0-0"
   },
-  "description": "Light Magazine is an online magazine about technology world"
+  "description": "Light Magazine is an online magazine about technology world",
+  "author": "Asghar Ale <asghar3140@gmail.com>"
 }

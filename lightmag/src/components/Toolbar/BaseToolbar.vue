@@ -1,5 +1,5 @@
 <template>
-	<ion-toolbar color="tertiary">
+	<ion-toolbar color="primary">
 		<start-base-toolbar :BackLink="BackLink"></start-base-toolbar>
 
 		<ion-title>
