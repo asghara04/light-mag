@@ -11,11 +11,14 @@
 	</base-layout>
 </template>
 <script>
-	import {defineComponent,ref,computed} from 'vue';
-	import ArticleServices from '@/APIService/articles/ArticleServices.js';
+	import {defineComponent,computed} from 'vue';
+
 	import ArticleGrid from '@/components/Grids/ArticleGrid.vue';
 	import PopularArticles from '@/components/Dynamic/PopularArticles.vue';
 	import MainAndSidebar from '@/components/Base/MainAndSidebar.vue';
+
+	import {useStore} from 'vuex';
+	import {FETCH_ARTICLES} from '../store/actions.type.js';
 
 	export default defineComponent({
 		name: "HomePage",
@@ -25,17 +28,10 @@
 			MainAndSidebar
 		},
 		setup(){
-			const data = ref(null);
-			const articles = computed(()=>data.value);
+			const store = useStore();
+			const articles = computed(()=>store.state.home.articles);
 
-			(async function(){
-				try{
-					const res = await ArticleServices.query();
-					data.value = res.data.results;
-				}catch(err){
-					// somthing shall happen to err like alert
-				}
-			})();
+			store.dispatch(`home/${FETCH_ARTICLES}`);
 
 			return{
 				articles
