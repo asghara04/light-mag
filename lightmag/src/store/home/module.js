@@ -9,7 +9,8 @@ import {
 
 // mutation name values
 import {
-	SET_ARTICLES
+	SET_ARTICLES,
+	SET_ERROR
 } from '../mutations.type.js';
 
 // article api services
@@ -23,7 +24,10 @@ const state = {
 	articles: [],
 
 	// holds all articles count
-	articlesCount: 0
+	articlesCount: 0,
+
+	// holds store module error
+	error: null
 }
 
 const getters = {
@@ -32,6 +36,9 @@ const getters = {
 	},
 	articlesCount(state){
 		return state.articlesCount;
+	},
+	error(state){
+		return state.error;
 	}
 }
 
@@ -40,6 +47,9 @@ const mutations = {
 	[SET_ARTICLES](state, data){
 		state.articles = data.results;
 		state.articlesCount = data.count;
+	},
+	[SET_ERROR](state, err){
+		state.error = err;
 	}
 }
 
@@ -48,7 +58,10 @@ const actions = {
 	[FETCH_ARTICLES]({ commit }, ){
 		return ArticleServices.query()
 		.then(res => {
-			commit(SET_ARTICLES, res.data)
+			commit(SET_ARTICLES, res.data);
+		})
+		.catch(err => {
+			commit(SET_ERROR, err);
 		})
 	}
 }

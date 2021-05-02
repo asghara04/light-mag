@@ -7,7 +7,8 @@ const ArticleServices = {
 		return APIService.get("articles/api/v1/")
 		.catch(err => {
 			// now error should get in a ionic alert box
-			alert(err)
+			alert(err);
+			throw new Error(err);
 		})
 		/*
 		the query should have some params to like:
