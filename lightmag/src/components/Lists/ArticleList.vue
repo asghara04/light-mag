@@ -1,16 +1,20 @@
 <template>
-	
+
 </template>
 <script>
 	import {defineComopnent} from 'vue';
 
+	// an computed method should be on "module" property
+	// computed data and store map getters
+	// ---- pagination ----
+
 	export default defineComopnent({
 		name: "ArticleList",
 		props:{
-			type:{
+			module:{
 				type: String,
-				required: false,
-				default: "all"
+				required: true,
+				default: "home"
 			},
 			author:{
 				type: String,
@@ -24,6 +28,12 @@
 				type: String,
 				required: false
 			}
+		},
+		components:{
+
+		},
+		setup(){
+
 		}
 	});
 </script>
