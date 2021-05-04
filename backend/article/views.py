@@ -13,15 +13,65 @@ from tag.models import Tag
 import operator
 from functools import reduce
 
+from django.core.exceptions import FieldError
+
+
+def search_in_articles(q, arts):
+	return arts.filter(Q(title__icontains=q) | (Q(description__icontains=q) & Q(body__icontains=q))).order_by("title")
+
+
+# ---- version 2 Classes and Views ----
+# articles query
+class ArticlesQueryView(APIView, PaginationMixin):
+	pagination_class = PageNumberPagination()
+
+	def get(self, request):
+		# filters
+		filters = dict(request.GET.copy())
+
+		# cutting q
+		if "q" in filters:
+			q = filters.pop("q")
+
+		# setting types
+		for i in filters:
+			try:
+				filters[i] = int(filters[i][-1])
+			except:
+				return Response({"message":"please enter valid filters!"}, status=status.HTTP_400_BAD_REQUEST)
+
+		# query
+		try:
+			articles = Article.published.filter(**filters)
+		except FieldError:
+			articles = Article.published.all()
+		else:
+			return Response({"message":"please enter valid filters!"}, status=status.HTTP_400_BAD_REQUEST)
+
+		# searching in results
+		if "q" in request.GET and q:
+			q = q[-1]
+			articles = search_in_articles(q, articles)
+
+		# serializing the results
+		page = self.paginate_queryset(articles)
+		if page is not None:
+			serializer = self.get_paginated_response(MinArticleSerializer(page, many=True, context={"request":request}).data)
+		else:
+			serializer = MinArticleSerializer(articles, many=True, context={"request":request})
+
+		return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+# ---- version 1 Classes and Views ----
 class ArticlesView(APIView, PaginationMixin):
 	pagination_class = PageNumberPagination()
 	renderer_classes = (JSONRenderer,)
 	def get(self, request):
-		if request.GET.get('q') is None:
-			arts = Article.published.all()
-		elif request.GET.get('q'):
+		arts = Article.published.all()
+		if request.GET.get('q'):
 			q = request.GET.get('q')
-			arts = Article.published.filter(Q(title__icontains=q) | (Q(description__icontains=q) & Q(body__icontains=q))).order_by("title")
+			arts = search_in_articles(q, arts)
 		else:
 			return Response({"message":"Enter somthing to search please."},status=status.HTTP_400_BAD_REQUEST)
 		page = self.paginate_queryset(arts)

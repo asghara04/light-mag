@@ -1,6 +1,30 @@
 from django.urls import path
-from .views import ArticlesView,ArticlesCountView,ArticleView,RelArts,MArticlesView,MArticleView,CatArticlesView,SubCatArticlesView,LastArticlesView,MostComArticleView,TagArtsView,UserArtsView
+
+
+from article.views import (
+
+	# --- version 2 Classes ---
+	ArticlesQueryView,
+
+	# --- version 1 Classes ---
+	ArticlesView,
+	ArticlesCountView,
+	ArticleView,
+	RelArts,
+	MArticlesView,
+	MArticleView,
+	CatArticlesView,
+	SubCatArticlesView,
+	LastArticlesView,
+	MostComArticleView,
+	TagArtsView,
+	UserArtsView
+)
+
 urlpatterns = [
+	# --- version 2 URLs ---
+	path("api/v2/", ArticlesQueryView.as_view()),
+	# --- version 1 URLs ---
 	path("api/v1/", ArticlesView.as_view()),
 	path("api/v1/count/", ArticlesCountView.as_view()),
 	path("api/v1/lasts/", LastArticlesView.as_view()),
