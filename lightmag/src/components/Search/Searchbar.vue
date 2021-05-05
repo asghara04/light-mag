@@ -1,5 +1,5 @@
 <template>
-	<ion-searchbar animated autocorrect="on"></ion-searchbar>
+	<ion-searchbar animated class="search-input" autocorrect="on"></ion-searchbar>
 </template>
 <script>
 	export default{

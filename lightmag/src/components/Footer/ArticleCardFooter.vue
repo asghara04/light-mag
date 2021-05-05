@@ -1,13 +1,13 @@
 <template>
 	<ion-row>
 		<ion-col size="auto">
-			<ion-item>
-				<ion-icon size="small"  :icon="chatbubbles"></ion-icon>
+			<ion-item lines="none">
+				<ion-icon size="small" :icon="chatbubbles"></ion-icon>
 				<ion-label>{{comments}}</ion-label>
 			</ion-item>
 		</ion-col>
 		<ion-col size="auto">
-			<ion-item>
+			<ion-item lines="none">
 				<ion-icon size="small" :icon="time"></ion-icon>
 				<ion-label>{{readTime}}min read</ion-label>
 			</ion-item>

@@ -16,7 +16,7 @@
 			<ion-icon slot="start" :icon="starHalf"></ion-icon>
 			<ion-label>Rate Us</ion-label>
 		</ion-item>
-		<ion-item href="https://myket.ir/app/developer/dev-61611/apps?lang=en" target="_blank" lines="none">
+		<ion-item href="https://myket.ir/developer/dev-61611" target="_blank" lines="none">
 			<ion-icon slot="start" :icon="apps"></ion-icon>
 			<ion-label>Other Apps</ion-label>
 		</ion-item>
@@ -28,7 +28,7 @@
 			<ion-icon slot="start" :icon="logoAndroid"></ion-icon>
 			Android App
 		</ion-item>
-		<ion-item lines="full" download="lightmag">
+		<ion-item lines="none" download="lightmag">
 			<ion-icon slot="start" :icon="logoApple"></ion-icon>
 			IOS App
 		</ion-item>

@@ -1,15 +1,13 @@
 <template>
-	<ion-slides pager="true" v-if="articles" :options="slideOpts">
-		<ion-slide v-for="article in articles" :key="article.id">
-			<ion-card class="ion-text-start">
-				<ion-img v-if="article.image" :src="article.image.image" class="slide-img" :alt="article.image.alt"></ion-img>
+	<ion-slides v-if="articles!=false" :options="slideOpts">
+		<ion-slide v-for="article in articles" :key="article.id" class="ion-slide-main ion-margin-vertical">
+			<ion-card class="ion-slide-main ion-text-capitalize">
+				<ion-img v-if="article.image" style="pointer-events:none" :src="article.image.image"></ion-img>
 				<ion-card-header>
-					<ion-card-subtitle>by {{article.author.name}}</ion-card-subtitle>
-					<ion-card-title>{{article.title}}</ion-card-title>
+					<ion-card-subtitle class="ion-text-start">{{article.author.name}}</ion-card-subtitle>
+					<ion-card-title>{{article.title.substr(0,35)}}</ion-card-title>
 				</ion-card-header>
-				<ion-card-content class="ion-hide-md-down">
-					<p>{{article.description}}</p>
-				</ion-card-content>
+				<article-card-footer :readTime="article.read_time_m" :comments="article.coms"></article-card-footer>
 			</ion-card>
 		</ion-slide>
 	</ion-slides>
@@ -18,19 +16,15 @@
 	import {defineComponent} from 'vue';
 	import {useStore, mapGetters} from 'vuex';
 	import {FETCH_ARTICLES} from '../../store/actions.type.js';
-	import {IonSlides, IonSlide, IonCard, IonImg, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent} from '@ionic/vue';
+	import {IonSlides, IonSlide} from '@ionic/vue';
+	import ArticleCardFooter from '../Footer/ArticleCardFooter.vue';
 
 	export default defineComponent({
 		name: "MostCommentedArticlesSlider",
 		components:{
 			IonSlides,
 			IonSlide,
-			IonCard,
-			IonImg,
-			IonCardTitle,
-			IonCardHeader,
-			IonCardSubtitle,
-			IonCardContent
+			ArticleCardFooter
 		},
 		computed:{
 			...mapGetters("mostCommented", ["articles"])
@@ -40,8 +34,10 @@
 			store.dispatch(`mostCommented/${FETCH_ARTICLES}`);
 
 			const slideOpts = {
-				initialSlide: 1,
-				speed: 500
+				speed: 500,
+				zoom: false,
+				slidesPerView: 'auto',
+				grabCursor: true
 			}
 			return {
 				slideOpts
