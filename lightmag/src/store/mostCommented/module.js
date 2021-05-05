@@ -8,6 +8,8 @@ import {
 
 import ArticleServices from '@/APIService/articles/ArticleServices.js';
 
+const namespaced = true;
+
 const state = {
 	articles: []
 }
@@ -34,6 +36,7 @@ const actions = {
 }
 
 export default{
+	namespaced,
 	state,
 	getters,
 	mutations,

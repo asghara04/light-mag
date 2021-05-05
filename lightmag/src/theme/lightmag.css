@@ -4,3 +4,9 @@
 	--ion-grid-padding-sm: 0;
 	--ion-grid-padding-xs: 0;
 }
+ion-img.slide-img{
+	height: auto;
+	display: block;
+	margin: auto;
+	width: 240px;
+}

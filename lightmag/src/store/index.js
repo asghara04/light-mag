@@ -1,5 +1,6 @@
 import {createStore} from 'vuex';
 import home from './home/module.js';
+import mostCommented from './mostCommented/module.js';
 
 const store = createStore({
 	// state handle the data: mutations
@@ -10,7 +11,8 @@ const store = createStore({
 
 	// we can break our store to each seperate modules and state :)
 	modules:{
-		home
+		home,
+		mostCommented
 	}
 });
 
