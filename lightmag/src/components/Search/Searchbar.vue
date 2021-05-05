@@ -1,21 +1,9 @@
 <template>
-	<ion-searchbar show-cancel-button="never" color="secondary" :clear-icon="status"></ion-searchbar>
+	<ion-searchbar animated autocorrect="on"></ion-searchbar>
 </template>
 <script>
-	import {defineComponent} from 'vue';
-	import {IonSearchbar} from '@ionic/vue';
+	export default{
+		name: "Search",
 
-	export default defineComponent({
-		name: "Searchbar",
-		components:{
-			IonSearchbar
-		},
-		props:{
-			status:{
-				type: String,
-				default: "focus",
-				required: false
-			}
-		}
-	});
+	};
 </script>

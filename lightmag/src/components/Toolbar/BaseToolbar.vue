@@ -6,7 +6,6 @@
 			<ion-icon src="assets/icon/lightmag.svg"></ion-icon>
 			Light Mag
 		</ion-title>
-		<ion-title v-if="PageTitle" size="small">{{PageTitle}}</ion-title>
 
 		<end-base-toolbar></end-base-toolbar>
 	</ion-toolbar>
@@ -19,7 +18,12 @@
 
 	export default defineComponent({
 		name: "BaseToolbar",
-		props: ["PageTitle", "BackLink"],
+		props:{
+			BackLink:{
+				type: String,
+				required: false,
+			}
+		},
 		components:{
 			IonToolbar,
 			StartBaseToolbar,

@@ -1,5 +1,5 @@
 <template>
-	<base-layout PageTitle="About Light Magazine" BackLink="/">
+	<base-layout BackLink="/">
 		<template v-slot:main-content>
 			some about text
 		</template>

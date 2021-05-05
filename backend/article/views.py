@@ -43,10 +43,8 @@ class ArticlesQueryView(APIView, PaginationMixin):
 		# query
 		try:
 			articles = Article.published.filter(**filters)
-		except FieldError:
+		except:
 			articles = Article.published.all()
-		else:
-			return Response({"message":"please enter valid filters!"}, status=status.HTTP_400_BAD_REQUEST)
 
 		# searching in results
 		if "q" in request.GET and q:
@@ -61,6 +59,21 @@ class ArticlesQueryView(APIView, PaginationMixin):
 			serializer = MinArticleSerializer(articles, many=True, context={"request":request})
 
 		return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+# most commented articles from 1 to i
+class MostComArticleViewI(APIView):
+	def get(self, request):
+		# setting i
+		i = request.GET.get("i") or 6
+
+		# query and sorting
+		articles = Article.published.annotate(coms=Count('comments',filter=Q(comments__status=True,comments__personal=False))).order_by('-coms')[:int(i)]
+
+		# serializing
+		serializer = MinArticleSerializer(articles, many=True, context={"request":request})
+
+		return Response(serializer.data,status=status.HTTP_200_OK)
 
 
 # ---- version 1 Classes and Views ----

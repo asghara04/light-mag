@@ -55,7 +55,7 @@ const mutations = {
 
 const actions = {
 	// commit its in context(self in python :))
-	[FETCH_ARTICLES]({ commit }, ){
+	[FETCH_ARTICLES]({ commit }){
 		return ArticleServices.query()
 		.then(res => {
 			commit(SET_ARTICLES, res.data);

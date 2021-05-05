@@ -4,8 +4,8 @@ import APIService from '../index.js';
 const ArticleServices = {
 	query(){
 		// i have=e not create v2 oficialy so it'll be v1 for now
-		return APIService.get("articles/api/v1/")
-		.catch(err => {
+		return APIService.get("articles/api/v2/")
+		.catch((err) => {
 			// now error should get in a ionic alert box
 			alert(err);
 			throw new Error(err);
@@ -22,6 +22,13 @@ const ArticleServices = {
 			// trow new Error(err)
 			// and som how you should make when ever Error object called it shows in a ionic alert :)
 			alert(err);
+		})
+	},
+	MostCommented(count=6){
+		return APIService.get(`articles/most/api/v2/commented/?i=${count}`)
+		.catch((err) => {
+			alert(err);
+			throw new Error(err);
 		})
 	}
 };

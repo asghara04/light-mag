@@ -19,7 +19,10 @@
 			async function openSearchModal(){
 				const search_modal = await modalController
 				.create({
-					component: SearchModal
+					component: SearchModal,
+					componentProps:{
+						swipeToClose: true
+					}
 				})
 				return search_modal.present();
 			}

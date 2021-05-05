@@ -5,6 +5,7 @@ from article.views import (
 
 	# --- version 2 Classes ---
 	ArticlesQueryView,
+	MostComArticleViewI,
 
 	# --- version 1 Classes ---
 	ArticlesView,
@@ -24,6 +25,7 @@ from article.views import (
 urlpatterns = [
 	# --- version 2 URLs ---
 	path("api/v2/", ArticlesQueryView.as_view()),
+	path("most/api/v2/commented/", MostComArticleViewI.as_view()),
 	# --- version 1 URLs ---
 	path("api/v1/", ArticlesView.as_view()),
 	path("api/v1/count/", ArticlesCountView.as_view()),

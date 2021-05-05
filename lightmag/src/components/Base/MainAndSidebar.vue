@@ -1,11 +1,26 @@
 <template>
-	<ion-grid>
+	<ion-grid class="ion-no-padding ion-no-margin">
 		<ion-row>
-			<ion-col size-xs="12" size-lg="10">
+			<ion-col class="ions-padding" size-xs="12" size-lg="10">
 				<slot name="main"></slot>
 			</ion-col>
-			<ion-col size-xs="12" size-lg="2">
+			<ion-col class="ion-padding-horizontal" size-xs="12" size-lg="2">
 				<slot name="sidebar">
+					some long texts about emma sh watson
+					some long texts about emma sh watson
+					some long texts about emma sh watson
+					some long texts about emma sh watson
+					some long texts about emma sh watson
+					some long texts about emma sh watson
+					some long texts about emma sh watson
+					some long texts about emma sh watson
+					some long texts about emma sh watson
+					some long texts about emma sh watson
+					some long texts about emma sh watson
+					some long texts about emma sh watson
+					some long texts about emma sh watson
+					some long texts about emma sh watson
+					some long texts about emma sh watson
 					<sidebar></sidebar>
 				</slot>
 			</ion-col>

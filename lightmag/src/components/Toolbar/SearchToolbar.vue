@@ -1,6 +1,6 @@
 <template>
 	<ion-toolbar color="primary">
-		<searchbar status="never"></searchbar>
+		<searchbar></searchbar>
 
 		<ion-buttons slot="end">
 			<close-modal-button></close-modal-button>
