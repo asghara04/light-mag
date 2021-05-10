@@ -17,6 +17,7 @@
     "axios": ">=0.21.1",
     "core-js": "^3.6.5",
     "vue": "^3.0.0-0",
+    "vue-meta": "^3.0.0-alpha.5",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0"
   },
@@ -26,7 +27,7 @@
     "@vue/cli-plugin-e2e-cypress": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-plugin-unit-jest": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "^4.5.13",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0-0",
     "@vue/test-utils": "^2.0.0-0",
@@ -34,6 +35,6 @@
     "eslint-plugin-vue": "^7.0.0-0",
     "vue-jest": "^5.0.0-0"
   },
-  "description": "Light Magazine is an online magazine about technology world",
+  "description": "Light Magazine covers programming and technology world",
   "author": "Asghar Ale <asghar3140@gmail.com>"
 }

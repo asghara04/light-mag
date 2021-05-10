@@ -1,7 +1,7 @@
 <template>
 	<ion-grid class="ion-no-padding ion-no-margin">
 		<ion-row>
-			<ion-col class="ions-padding" size-xs="12" size-lg="10">
+			<ion-col size-xs="12" size-lg="10">
 				<slot name="main"></slot>
 			</ion-col>
 			<ion-col class="ion-padding-horizontal" size-xs="12" size-lg="2">

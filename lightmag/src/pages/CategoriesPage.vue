@@ -1,6 +1,8 @@
 <template>
-	<base-layout>
-		
+	<base-layout back-link="/">
+		<template #main-content>
+			categories will show here in some card items!
+		</template>
 	</base-layout>
 </template>
 <script>

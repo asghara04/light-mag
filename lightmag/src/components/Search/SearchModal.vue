@@ -3,6 +3,7 @@
 		<search-toolbar></search-toolbar>
 	</ion-header>
 	<ion-content>
+		--- COMMING SOON! ---<br>
 		holla - hello - bunjor - slm
 	</ion-content>
 </template>

@@ -1,26 +1,26 @@
 <template>
 	<ion-list color="light">
 		<ion-menu-toggle>
-			<ion-item router-link="/about" button lines="none">
+			<ion-item detail="false" router-link="/about" button lines="none">
 				<ion-icon slot="start" :icon="people"></ion-icon>
 				<ion-label>About</ion-label>
 			</ion-item>
 		</ion-menu-toggle>
 		<ion-menu-toggle>
-			<ion-item router-link="/contact" button lines="none">
+			<ion-item detail="false" router-link="/contact" button lines="none">
 				<ion-icon slot="start" :icon="call"></ion-icon>
 				<ion-label>Contact</ion-label>
 			</ion-item>
 		</ion-menu-toggle>
-		<ion-item href="https://myket.ir/app/ir.LightMag.LightMagazine" target="_blank" lines="none">
+		<ion-item detail="false" href="https://myket.ir/app/ir.LightMag.LightMagazine" target="_blank" lines="none">
 			<ion-icon slot="start" :icon="starHalf"></ion-icon>
 			<ion-label>Rate Us</ion-label>
 		</ion-item>
-		<ion-item href="https://myket.ir/developer/dev-61611" target="_blank" lines="none">
+		<ion-item detail="false" href="https://myket.ir/developer/dev-61611" target="_blank" lines="none">
 			<ion-icon slot="start" :icon="apps"></ion-icon>
 			<ion-label>Other Apps</ion-label>
 		</ion-item>
-		<ion-item href="https://www.light-mag.ir" target="_blank" lines="none">
+		<ion-item detail="false" href="https://www.light-mag.ir" target="_blank" lines="none">
 			<ion-icon slot="start" :icon="earth"></ion-icon>
 			<ion-label>light-mag.ir</ion-label>
 		</ion-item>

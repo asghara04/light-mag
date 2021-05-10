@@ -20,9 +20,7 @@
 				const search_modal = await modalController
 				.create({
 					component: SearchModal,
-					componentProps:{
-						swipeToClose: true
-					}
+					swipeToClose: true
 				})
 				return search_modal.present();
 			}

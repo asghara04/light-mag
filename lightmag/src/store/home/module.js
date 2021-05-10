@@ -27,7 +27,13 @@ const state = {
 	articlesCount: 0,
 
 	// holds store module error
-	error: null
+	error: null,
+
+	// each page max item count
+	pageSize: 10,
+
+	// all pages
+	allPages: 1
 }
 
 const getters = {
@@ -39,6 +45,9 @@ const getters = {
 	},
 	error(state){
 		return state.error;
+	},
+	allPages(state){
+		return state.allPages;
 	}
 }
 
@@ -47,6 +56,7 @@ const mutations = {
 	[SET_ARTICLES](state, data){
 		state.articles = data.results;
 		state.articlesCount = data.count;
+		state.allPages = parseInt((data.count+state.pageSize-1)/state.pageSize)
 	},
 	[SET_ERROR](state, err){
 		state.error = err;
@@ -55,8 +65,8 @@ const mutations = {
 
 const actions = {
 	// commit its in context(self in python :))
-	[FETCH_ARTICLES]({ commit }){
-		return ArticleServices.query()
+	[FETCH_ARTICLES]({ commit }, page=1){
+		return ArticleServices.query(page)
 		.then(res => {
 			commit(SET_ARTICLES, res.data);
 		})

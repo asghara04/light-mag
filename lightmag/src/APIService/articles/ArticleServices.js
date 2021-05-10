@@ -2,9 +2,8 @@
 import APIService from '../index.js';
 
 const ArticleServices = {
-	query(){
-		// i have=e not create v2 oficialy so it'll be v1 for now
-		return APIService.get("articles/api/v2/")
+	query(page=1){
+		return APIService.get(`articles/api/v2?page=${page}`)
 		.catch((err) => {
 			// now error should get in a ionic alert box
 			alert(err);

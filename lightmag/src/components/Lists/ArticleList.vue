@@ -7,27 +7,24 @@
 		if there was a data before and getting new data got error then we should still show old data for ofline viewing so that how it works
 	-->
 
-	<!-- _-_-__refresh statment__-_-_ -->
-	<!-- _-_-__infintue scroll__-_-_ -->
-
 	<div v-if="articles.length">
 		<article-horizontal-card v-for="article in articles" :key="article.id" :article="article"></article-horizontal-card>
+
+		<pagination :current="page" :module="module" :action="FETCH_ARTICLES"/>
 	</div>
 	<p v-else>
 		sorry, there is nothing to show yet!
 	</p>
 </template>
 <script>
-	import {defineComponent} from 'vue';
+	import {defineComponent, computed} from 'vue';
 	import {useStore, mapGetters} from 'vuex';
-
+	import {useRoute} from 'vue-router';
 	import {FETCH_ARTICLES} from '@/store/actions.type.js';
 
+	// components
 	import ArticleHorizontalCard from '@/components/Cards/ArticleHorizontalCard.vue';
-
-	// an computed method should be on "module" property
-	// computed data and store map getters
-	// ---- pagination ----
+	import Pagination from '@/components/Pagination/Pagination.vue';
 
 	export default defineComponent({
 		name: "ArticleList",
@@ -59,19 +56,23 @@
 			}
 		},
 		components:{
-			ArticleHorizontalCard
+			ArticleHorizontalCard,
+			Pagination
 		},
 		computed:{
 			...mapGetters("home", ["articles", "error"])
 		},
 		setup(props){
 			const store = useStore();
+			const route = useRoute();
+			const page = computed(()=>parseInt(route.query.page)||1);
 
-			/* **--important--:**
-			 there should be an error data statement in each vuex module for handling each module errors its cleaner this way :) instead of this shit below
-			*/
+			store.dispatch(`${props.module}/${FETCH_ARTICLES}`, page.value);
 
-			store.dispatch(`${props.module}/${FETCH_ARTICLES}`);
+			return{
+				FETCH_ARTICLES,
+				page
+			}
 		}
 	});
 </script>

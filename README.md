@@ -1,7 +1,7 @@
 # [Light-mag](https://light-mag.ir)
 i hope you be healthy and awsome :)
 
-* first web demo version: 1.0 [here](https://light-mag.ir)
+* web demo version: 1.0 [here](https://light-mag.ir)
 
 this is a cross platform online magazine application
 
@@ -24,5 +24,6 @@ this is a cross platform online magazine application
 * mysql
 * html/css
 * capacitor
+* ionicons
 ----
-and please let me know if i going wronng somwhere in the project developments, i'll be thankful if you give a start to project💓⭐
+and please let me know if i going wrong somwhere in the project develop, and i'll be thankful if you give a star to project💓⭐
